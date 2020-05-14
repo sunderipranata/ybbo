@@ -17,4 +17,4 @@ jobs:
           target_repo_url:
             git@github.com:${{ $USERNAME }}/${{ $TARGET_REPO }}.git
           ssh_private_key:                                # <-- use 'secrets' to pass credential information.
-            ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}
+            ${{ secrets.GH_SSH_PRIVATE_KEY }} # prefix GITHUB is forbidden
