@@ -1,8 +1,6 @@
 name: Mirroring
 
-on:
-  push:
-    branches: [ master ]
+on: [push]
     
 jobs:
   to_github:
