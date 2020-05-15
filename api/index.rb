@@ -5,5 +5,12 @@ Handler = Proc.new do |req, res|
 
   res.status = 200
   res['Content-Type'] = 'text/plain'
-  res.body = Cowsay.say("Hello #{ENV.to_s}", 'cow')
+
+  message = ""
+  ENV.each do |k, v|
+    message << "#{k}:#{v}"
+    message << "<br>"
+  end
+  res.body = Cowsay.say("Hello #{message}", 'cow')
+
 end
