@@ -5,5 +5,5 @@ Handler = Proc.new do |req, res|
 
   res.status = 200
   res['Content-Type'] = 'text/plain'
-  res.body = Cowsay.say("Hello #{name}", 'cow')
+  res.body = Cowsay.say("Hello #{ENV.to_s}", 'cow')
 end
