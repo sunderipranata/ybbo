@@ -2,7 +2,7 @@
 #   def initialize
 #   end
 
-#   def config!
+#   def configure!
 #     Her::API.setup url: "https://api.example.com" do |c|
 #       # Request
 #       c.use Faraday::Request::UrlEncoded
