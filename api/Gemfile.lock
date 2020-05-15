@@ -9,19 +9,17 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    bson (4.8.2)
     concurrent-ruby (1.1.6)
     cowsay (0.3.0)
-    faraday (0.17.3)
-      multipart-post (>= 1.2, < 3)
-    her (1.1.0)
-      activemodel (>= 4.2.1)
-      faraday (>= 0.8, < 1.0)
-      multi_json (~> 1.7)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     minitest (5.14.0)
-    multi_json (1.14.1)
-    multipart-post (2.1.1)
+    mongo (2.12.1)
+      bson (>= 4.8.2, < 5.0.0)
+    mongoid (7.0.7)
+      activemodel (>= 5.1, < 6.1)
+      mongo (>= 2.7.0, < 3.0.0)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
@@ -32,7 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   cowsay (~> 0.3.0)
-  her
+  mongoid (~> 7.0.6)
 
 BUNDLED WITH
-   2.1.2
+   1.17.3
