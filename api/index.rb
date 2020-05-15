@@ -7,14 +7,7 @@ Handler = Proc.new do |req, res|
   res.status = 200
   res['Content-Type'] = 'text/plain'
 
+  business = Business.create(name: "business ##{Business.count}")
 
-  business = Business.create(name: "asdfasdfasdf #{Business.count}")
-
-  message = ""
-  ENV.each do |k, v|
-    message << "#{k}:#{v}"
-    message << "<br>"
-  end
-  res.body = Cowsay.say("Hello #{Business.count} #{business.name}  #{message}", 'cow')
-
+  res.body = Cowsay.say("Hello! New business entry created. Business count is: #{Business.count}", 'cow')
 end
