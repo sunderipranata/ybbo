@@ -7,9 +7,10 @@ class Business
   def initialize
     Mongoid.configure do |config|
       config.clients.default = {
-      hosts: ["#{ENV['MONGOID_HOST']}"],
-      database: "#{ENV['MONGOID_CLUSTER']}",
-    }
+        hosts: ["#{ENV['MONGOID_HOST']}"],
+        database: "#{ENV['MONGOID_CLUSTER']}",
+      }
+    end
 
     config.log_level = :warn
   end
