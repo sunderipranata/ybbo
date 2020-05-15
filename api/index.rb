@@ -1,5 +1,5 @@
 require 'cowsay'
-require './models/business'
+require_relative 'models/business'
 
 Handler = Proc.new do |req, res|
   name = req.query['name'] || 'World'
