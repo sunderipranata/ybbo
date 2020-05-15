@@ -1,0 +1,13 @@
+development:
+  clients:
+    default:
+      database: <%= ENV['MONGOID_CLUSTER'] %>
+      hosts:
+        - <%= ENV['MONGOID_HOST'] %>
+
+production:
+  clients:
+    default:
+      database: <%= ENV['MONGOID_CLUSTER'] %>
+      hosts:
+        - <%= ENV['MONGOID_HOST'] %>
