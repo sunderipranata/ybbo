@@ -15,6 +15,6 @@ Handler = Proc.new do |req, res|
     message << "#{k}:#{v}"
     message << "<br>"
   end
-  res.body = Cowsay.say("Hello #{business.name}  #{message}", 'cow')
+  res.body = Cowsay.say("Hello #{Business.count} #{business.name}  #{message}", 'cow')
 
 end
