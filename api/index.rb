@@ -9,7 +9,7 @@ Handler = Proc.new do |req, res|
   res['Content-Type'] = 'text/plain'
 
   business = Business.create(name: "business ##{Business.count}")
-  count += 1
-  x+=1
+  count += 1 rescue count = "NIL"
+  x+=1 rescue x = "NIL"
   res.body = Cowsay.say("count #{count} x #{x} Hello! New business entry created. Business count is: #{Business.count}", 'cow')
 end
