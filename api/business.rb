@@ -17,7 +17,7 @@ Handler = Proc.new do |req, res|
       limit = req.query['limit'].to_i || 10
       offset = req.query['offset'] ? BSON::ObjectId(offset).to_time : Time.now
 
-      if id.is_blank?
+      if id.blank?
         business = Business.where(:created_at.lte => offset).limit(limit)
         res.status = 200
         res.body = JSON::Response.paginate(business, res.status)
