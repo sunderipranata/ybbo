@@ -1,5 +1,4 @@
 require 'cowsay'
-#require_relative 'models/business'
 require 'mongoid'
 
 Mongoid.configure do |config|
@@ -22,6 +21,6 @@ Handler = Proc.new do |req, res|
   res['Content-Type'] = 'text/plain'
 
   business = Business.create(name: "business ##{Business.count}")
-  count = count + 1 rescue count = "NIL"
+  count = count + 1
   res.body = Cowsay.say("count #{count} Hello! New business entry created. Business count is: #{Business.count}", 'cow')
 end
