@@ -7,10 +7,16 @@ require_relative '../api_helper/initializers/mongoid'
 require_relative '../api_helper/initializers/response'
 require_relative '../api_helper/initializers/errors'
 
+logger = Logger.new(STDOUT)
+logger.level = Logger::WARN
+logger.debug("Created logger")
+logger.info("Program started")
+logger.warn("Nothing to do!")
 
 Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
   begin
+    logger.info(req.request_method)
     case req.request_method
     when "GET"
       id = req.query['id'] || ""
