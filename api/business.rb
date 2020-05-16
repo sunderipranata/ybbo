@@ -18,11 +18,11 @@ Handler = Proc.new do |req, res|
     when "GET"
       id = req.query['id'] || ""
       limit = req.query['limit'].to_i || 10
-      offset = req.query['offset'] ? BSON::ObjectId(offset).to_time : Time.now
+      offset = req.query['offset'] ? BSON::ObjectId(req.query['offset']).to_time : Time.now
       debugger << "checkpoint 1"
       if id.blank?
         debugger << "checkpoint 2"
-        business = Business.where(:created_at.lte => offset).limit(limit)
+        business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         debugger << "checkpoint 3 #{business.count}"
         res.status = 200
         res.body = JSON::Response.paginate(business, limit, res.status)
@@ -38,7 +38,7 @@ Handler = Proc.new do |req, res|
       res.body = JSON::Response.message("unimplemented", res.status)
     end
   rescue Business::ValidationError => e
-    res.status=422
+    res.status = 422
     res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
   rescue StandardError => e
     res.status = 200

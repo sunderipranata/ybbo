@@ -23,7 +23,8 @@ class Business
   field :anonymous_backers, type: Integer, default: 0
   field :instagram_backers, type: Array
 
-  index({ _id: -1, created_at: -1 }, { background: true, unique: true })
+  index({ _id: -1 }, { background: true, unique: true })
+  index({ created_at: -1 }, { background: true, unique: true })
   index({ location: 1 }, { background: true })
   index({ category: 1 }, { background: true })
 
