@@ -20,7 +20,7 @@ Handler = Proc.new do |req, res|
       if id.blank?
         business = Business.where(:created_at.lte => offset).limit(limit)
         res.status = 200
-        res.body = JSON::Response.paginate(business, res.status)
+        res.body = JSON::Response.paginate(business, limit, res.status)
       else
         business = Business.find_by(id: id)
         res.status = 200
