@@ -1,8 +1,11 @@
 require 'time'
+# models
+require_relative '../api_helper/models/business'
+
+# initializers
 require_relative '../api_helper/initializers/mongoid'
 require_relative '../api_helper/initializers/response'
 require_relative '../api_helper/initializers/errors'
-require_relative '../api_helper/models/business'
 
 
 Handler = Proc.new do |req, res|
