@@ -1,5 +1,8 @@
 {
     "functions": {
-        "api/*.rb"
+        "api/*.rb": {
+            "memory": 1024,
+            "maxDuration": 10
+        }
     }
 }
