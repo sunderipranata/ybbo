@@ -1,5 +1,18 @@
 require 'cowsay'
-require_relative 'models/business'
+#require_relative 'models/business'
+require 'mongoid'
+
+Mongoid.configure do |config|
+  config.clients.default = {
+    uri: "#{ENV['MONGOID_HOST']}",
+  }
+  config.log_level = :warn
+end
+
+class Business
+  include Mongoid::Document
+  field :name, type: String
+end
 
 count = 0
 Handler = Proc.new do |req, res|
