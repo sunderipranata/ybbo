@@ -9,7 +9,7 @@ module JSON
         data: data.to_a,
         meta: {
           http_status: http_status,
-          offset: data.first.id,
+          offset: data.first.id.to_s,
           limit: limit,
           total: data.count
         }
@@ -34,7 +34,7 @@ module JSON
       }.to_json
     end
 
-    def message(msg, error_code, http_status)
+    def error(msg, error_code, http_status)
       {
         message: msg,
         meta: {
