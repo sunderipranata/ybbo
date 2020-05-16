@@ -14,7 +14,14 @@ Handler = Proc.new do |req, res|
     when "GET"
       id = req.query['id'] || ""
       limit = req.query['limit'].to_i || 10
-      offset = req.query['offset'] ? BSON::ObjectId(req.query['offset']).to_time : Time.now
+      offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
+
+      # TODO: add filter by category and location
+      # category = req.query['category'].present? ? req.query['category'] : nil
+      # location = req.query['location'].present? ? req.query['location'] : nil
+      # category_regex=/(?i)\.*#{category}.*\b/
+      # location_regex=/(?i)\.*#{location}.*\b/
+
       if id.blank?
         business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         res.status = 200
