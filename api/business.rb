@@ -33,10 +33,9 @@ Handler = Proc.new do |req, res|
   rescue Business::ValidationError => e
     res.status=422
     res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
+  rescue StandardError => e
+    res.status = 200
+    res['Content-Type'] = 'text/plain'
+    res.body = Cowsay.say("#{req.request_method} resulting in error #{e.message}", 'cow')
   end
-rescue StandardError => e
-  res.status = 200
-  res['Content-Type'] = 'text/plain'
-  res.body = Cowsay.say("#{req.request_method} resulting in error #{e.message}", 'cow')
-end
 end
