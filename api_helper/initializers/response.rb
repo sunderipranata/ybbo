@@ -9,9 +9,9 @@ module JSON
         data: data.to_a,
         meta: {
           http_status: http_status,
-          offset: x.first.id,
+          offset: data.first.id,
           limit: limit,
-          total: x.count
+          total: data.count
         }
       }.to_json
     end
