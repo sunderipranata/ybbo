@@ -7,16 +7,9 @@ require_relative '../api_helper/initializers/mongoid'
 require_relative '../api_helper/initializers/response'
 require_relative '../api_helper/initializers/errors'
 
-logger = Logger.new(STDOUT)
-logger.level = Logger::WARN
-logger.debug("Created logger")
-logger.info("Program started")
-logger.warn("Nothing to do!")
-
 Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
   begin
-    logger.info(req.request_method)
     case req.request_method
     when "GET"
       id = req.query['id'] || ""
@@ -41,4 +34,9 @@ Handler = Proc.new do |req, res|
     res.status=422
     res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
   end
+rescue StandardError => e
+  res.status = 200
+  res['Content-Type'] = 'text/plain'
+  res.body = Cowsay.say("#{req.request_method} resulting in error #{e.message}", 'cow')
+end
 end
