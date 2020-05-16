@@ -1,5 +1,6 @@
 require 'mongoid'
 
+x=0
 Mongoid.configure do |config|
   config.clients.default = {
     uri: "#{ENV['MONGOID_HOST']}",

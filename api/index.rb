@@ -1,6 +1,7 @@
 require 'cowsay'
 require_relative 'models/business'
 
+count = 0
 Handler = Proc.new do |req, res|
   name = req.query['name'] || 'World'
 
@@ -8,6 +9,7 @@ Handler = Proc.new do |req, res|
   res['Content-Type'] = 'text/plain'
 
   business = Business.create(name: "business ##{Business.count}")
-
-  res.body = Cowsay.say("Hello! New business entry created. Business count is: #{Business.count}", 'cow')
+  count += 1
+  x+=1
+  res.body = Cowsay.say("count #{count} x #{x} Hello! New business entry created. Business count is: #{Business.count}", 'cow')
 end
