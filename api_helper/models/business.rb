@@ -25,8 +25,8 @@ class Business
 
   index({ _id: -1 }, { background: true, unique: true })
   index({ created_at: -1 }, { background: true, unique: true })
-  index({ location: 1 }, { background: true })
-  index({ category: 1 }, { background: true })
+  index({ location: 1, created_at: -1 }, { background: true })
+  index({ category: 1, created_at: -1 }, { background: true })
 
   validate :key_existence
 
