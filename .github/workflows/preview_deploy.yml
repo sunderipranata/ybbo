@@ -1,0 +1,17 @@
+name: deploy website preview
+on:
+  push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: amondnet/vercel-action@v19.0.1
+        id: now-deployment
+        with:
+          github-token: ${{ secrets.BOT_TOKEN }}
+          zeit-token: ${{ secrets.ZEIT_TOKEN }}
+      - name: preview-url
+        run: |
+          echo ${{ steps.now-deployment.outputs.preview-url }}
