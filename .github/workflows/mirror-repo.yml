@@ -1,7 +1,7 @@
 name: Mirroring
 
 on: [push]
-    
+
 jobs:
   to_github:
     runs-on: ubuntu-18.04
