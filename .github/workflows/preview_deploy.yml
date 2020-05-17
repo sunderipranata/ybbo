@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v19.0.1
+      - uses: sunderipranata/vercel-action
         id: now-deployment
         with:
           github-token: ${{ secrets.BOT_TOKEN }}
