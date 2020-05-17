@@ -18,7 +18,7 @@ module JSON
 
     def data(data, http_status)
       {
-        data: data.first,
+        data: data,
         meta: {
           http_status: http_status
         }

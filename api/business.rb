@@ -32,7 +32,25 @@ Handler = Proc.new do |req, res|
         res.body = JSON::Response.data(business, res.status)
       end
     when "POST"
-      # do stuff here
+      # do stuff authentication stuffs here
+      # query parameter
+      # Business.new(...).validate!
+
+      # Business.create(name: "Risol pak gembus",
+      # ig_account:"@risolpakgembus",
+      # location:"Kemang, Jakarta Selatan",
+      # category:"Makanan dan Minuman",
+      # description:"risol enak dan murah, 1 hanya 5000 rupiah kalau beli 5 cuma 20000 rupiah, yuk diorder!",
+      # instructions:"Cara mendukung: Pesan makanan ini melalui tokopedia / bukalapak dengan nama username: risolpakgembus, kemudian upload story ig kamu dan mention akun instagram kami: @yukbantubisnis.online",
+      # thumbnail_link:"https=>//drive.google.com/asdfasdf",
+      # assets_link:"https=>//drive.google.com/asdfasdf",
+      # anonymous_backers: 10,
+      # instagram_backers: [
+      #   "@lulu",
+      #   "@lala",
+      #   "@wkwk"
+      # ])
+
       res.status = 200
       res.body = JSON::Response.message("unimplemented", res.status)
     end
