@@ -1,6 +1,7 @@
 name: deploy website preview
 on:
-  push
+  push:
+    branches-ignore: master
 
 jobs:
   deploy:
