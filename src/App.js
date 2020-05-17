@@ -1,18 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Yuk Bantu Bisnis Online - Coming Soon!
-        </p>
-      </header>
-    </div>
-  );
+import { HOME_PATH } from './routes'
+import logo from './logo.svg';
+import './App.scss';
+
+import Home from './routes/Home'
+
+class App extends React.Component {
+  render = () => {
+    const isComingSoon = true
+    if(isComingSoon) {
+      return this.renderComingSoon()
+    } else {
+      return this.routes()
+    }
+  }
+  
+  routes = () => {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path={HOME_PATH} component={Home} />
+        </Switch>
+      </Router>
+    )
+  }
+  
+  renderComingSoon = () => {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Yuk Bantu Bisnis Online - Coming Soon!
+          </p>
+        </header>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
