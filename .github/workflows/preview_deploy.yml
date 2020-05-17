@@ -12,7 +12,8 @@ jobs:
         with:
           github-token: ${{ secrets.BOT_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: -c
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
       - name: preview-url
         run: |
           echo ${{ steps.now-deployment.outputs.preview-url }}
