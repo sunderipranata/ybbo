@@ -12,6 +12,7 @@ jobs:
         with:
           github-token: ${{ secrets.BOT_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: -c
       - name: preview-url
         run: |
           echo ${{ steps.now-deployment.outputs.preview-url }}
