@@ -11,7 +11,7 @@ jobs:
         id: now-deployment
         with:
           github-token: ${{ secrets.BOT_TOKEN }}
-          zeit-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
       - name: preview-url
         run: |
           echo ${{ steps.now-deployment.outputs.preview-url }}
