@@ -1,7 +1,7 @@
 ![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/deploy-preview.yml/badge.svg)
 ![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/deploy-production.yml/badge.svg)
 ![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/mirror-repo.yml/badge.svg)
-![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/nodejs.yml/badge.svg)
+![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/node-ci.yml/badge.svg)
 
 A Project by https://github.com/sahabat-kreatif
 
