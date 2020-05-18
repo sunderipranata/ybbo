@@ -7,7 +7,8 @@ A Project by https://github.com/sahabat-kreatif
 # Deployments
 ### Preview
 The pipeline will automatically deploy preview for every push to **master** OR every **push containing** "**[preview]**" in the commit message. <br><br>
-*ybbobot* will automatically add link on the comment of the deployed commit
+*ybbobot* will automatically add link on the comment of the deployed commit. <br><br>
+Example: ![this commit](https://github.com/sunderipranata/ybbo/pull/12/commits/81b4e882d948d44641934cd3b7e4db836ac740c3)
 
 <br>
 
