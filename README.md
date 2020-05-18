@@ -1,3 +1,8 @@
+![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/deploy-preview.yml/badge.svg)
+![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/deploy-production.yml/badge.svg)
+![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/mirror-repo.yml/badge.svg)
+![](https://github.com/sunderipranata/ybbo/workflows/.github/workflows/node-ci.yml/badge.svg)
+
 A Project by https://github.com/sahabat-kreatif
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
