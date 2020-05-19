@@ -1,6 +1,7 @@
 require 'mongoid'
 require 'hanami/validations'
 require_relative '../initializers/mongoid'
+require 'simple_enum/mongoid'
 
 class Business
   include Mongoid::Document
@@ -20,13 +21,13 @@ class Business
   field :instructions,      type: String
   field :thumbnail_link,    type: String
   field :assets_link,       type: String
-  field :anonymous_backers, type: Integer, default: 0
-  field :instagram_backers, type: Array
+  embeds_many :backers
 
   index({ _id: -1 }, { background: true, unique: true })
   index({ created_at: -1 }, { background: true, unique: true })
   index({ location: 1, created_at: -1 }, { background: true })
   index({ category: 1, created_at: -1 }, { background: true })
+
 
   validate :key_existence
 
@@ -35,4 +36,16 @@ class Business
       raise ValidationError, "#{attr_name} does not exist" if value.blank?
     end
   end
+end
+
+class Backer
+  include Mongoid::Document
+  include SimpleEnum::Mongoid
+
+  as_enum :account_type, instagram: 0, facebook: 1, twitter: 2
+
+  field :username, type: String
+  field :comment, type: String
+
+  embedded_in :business
 end
