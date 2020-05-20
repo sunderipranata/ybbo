@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactGA from 'react-ga';
-import auth from './auth.ts';
-import withPageView from './withPageView'
+import {withPageView} from './withPageView'
 
 import {
   BrowserRouter as Router,

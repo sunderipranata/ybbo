@@ -5,7 +5,7 @@ const trackingId = "UA-78912543-2";
 
 ReactGA.initialize(trackingId);
 
-const withPageView = (WrappedComponent, options = {}) => {
+export const withPageView = (WrappedComponent, options = {}) => {
     const trackPageView = page => {
         ReactGA.set({
             page
