@@ -1,4 +1,8 @@
 import React from 'react';
+import ReactGA from 'react-ga';
+import auth from './auth.ts';
+import withPageView from './withPageView'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,7 +15,9 @@ import './App.scss';
 
 import Home from './routes/Home'
 
+
 class App extends React.Component {
+
   render = () => {
     const isComingSoon = true
     if(isComingSoon) {
@@ -25,7 +31,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path={HOME_PATH} component={Home} />
+          <Route exact path={HOME_PATH} component={withPageView(Home)} />
         </Switch>
       </Router>
     )
