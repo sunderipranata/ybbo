@@ -1,11 +1,4 @@
-require 'time'
-# models
-require_relative '../api_helper/models/business'
-
-# initializers
-require_relative '../api_helper/initializers/mongoid'
-require_relative '../api_helper/initializers/response'
-require_relative '../api_helper/initializers/errors'
+require_relative '../config/load'
 
 Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
@@ -25,31 +18,20 @@ Handler = Proc.new do |req, res|
       if id.blank?
         business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         res.status = 200
-        res.body = JSON::Response.paginate(business, limit, res.status)
+        res.body = JSON::Response::Data.many(business, Serializer::Business::Simple, limit, res.status)
       else
         business = Business.find_by(id: id)
         res.status = 200
-        res.body = JSON::Response.data(business, res.status)
+        res.body = JSON::Response::Data.one(business, Serializer::Business::Detail, res.status)
       end
     when "POST"
       # do stuff authentication stuffs here
       # query parameter
       # Business.new(...).validate!
 
-      # Business.create(name: "Risol pak gembus",
-      # ig_account:"@risolpakgembus",
-      # location:"Kemang, Jakarta Selatan",
-      # category:"Makanan dan Minuman",
-      # description:"risol enak dan murah, 1 hanya 5000 rupiah kalau beli 5 cuma 20000 rupiah, yuk diorder!",
-      # instructions:"Cara mendukung: Pesan makanan ini melalui tokopedia / bukalapak dengan nama username: risolpakgembus, kemudian upload story ig kamu dan mention akun instagram kami: @yukbantubisnis.online",
-      # thumbnail_link:"https=>//drive.google.com/asdfasdf",
-      # assets_link:"https=>//drive.google.com/asdfasdf",
-      # anonymous_backers: 10,
-      # instagram_backers: [
-      #   "@lulu",
-      #   "@lala",
-      #   "@wkwk"
-      # ])
+      # b = Business.create(...)
+      # b.backers.create(...)
+      # b.store_accounts.create(...)
 
       res.status = 200
       res.body = JSON::Response.message("unimplemented", res.status)
