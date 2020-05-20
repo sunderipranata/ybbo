@@ -1,7 +1,5 @@
 source "https://rubygems.org"
 
-ruby "~> 2.5.3"
-
 gem "cowsay", "~> 0.3.0"
 gem 'mongoid', '~> 7.0.6'
 gem 'hanami-validations'
