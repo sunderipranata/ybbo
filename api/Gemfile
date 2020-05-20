@@ -4,4 +4,4 @@ gem "cowsay", "~> 0.3.0"
 gem 'mongoid', '~> 7.0.6'
 gem 'hanami-validations'
 gem 'simple_enum', '~> 2.3.0' , require: 'simple_enum/mongoid'
-gem 'fast_jsonapi', '~> 1.7.2', git: 'https://github.com/fast-jsonapi/fast_jsonapi'
+gem 'fast_jsonapi'
