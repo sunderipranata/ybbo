@@ -3,12 +3,12 @@ import ReactGA from "react-ga";
 
 const trackingId = "UA-78912543-2";
 
-ReactGA.initialize(trackingId);
+ReactGA.initialize(trackingId,{testMode: process.env.NODE_ENV === "test" });
 
 export const withPageView = (WrappedComponent, options = {}) => {
     const trackPageView = page => {
         ReactGA.set({
-            page
+            page,
         });
         ReactGA.pageview(page);
     };
@@ -22,7 +22,7 @@ export const withPageView = (WrappedComponent, options = {}) => {
             const page = props.location.pathname + props.location.search;
             if (page !== state.page) {
                 return {
-                    page
+                    page,
                 };
             }
             return null;
