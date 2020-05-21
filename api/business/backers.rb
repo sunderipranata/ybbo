@@ -3,7 +3,7 @@ require_relative '../../app/config/load'
 Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
   begin
-    business_id = req.query['businessid'] || ""
+    business_id = req.query['business_id'] || ""
     raise MissingParameterError, 'missing business_id' if business_id.blank?
 
     case req.request_method
@@ -17,7 +17,7 @@ Handler = Proc.new do |req, res|
       res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, limit, res.status)
     when "POST"
       res.status = HTTP_STATUS_CREATED
-      res.body = JSON::Response.message("unimplemented, try echo #{req.params}", res.status)
+      res.body = JSON::Response.message("unimplemented, try echo #{req.body}", res.status)
     end
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
