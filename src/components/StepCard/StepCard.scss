@@ -1,0 +1,30 @@
+@import "../../styles/static";
+
+.step__card {
+    background-color: $color-blue-lighter;
+    position: relative;
+    margin: 20px;
+    padding: 16px;
+
+    &--index {
+        position: absolute;
+        margin: 0;
+        left: -16px;
+        top: -16px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    &--title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 4px 0 12px;
+        color: $color-white;
+    }
+
+    &--desc {
+        font-size: 12px;
+        margin: 0;
+        color: $color-white;
+    }
+}
