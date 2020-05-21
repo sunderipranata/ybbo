@@ -12,7 +12,11 @@ class BusinessList extends Component {
   state = {
     hasPrev: false,
     hasNext: true,
-    dropdownIsOpened: false
+    dropdownIsOpened: false,
+    page: {
+      at: 1,
+      total: 1
+    }
   }
 
   showDropdown = () => {

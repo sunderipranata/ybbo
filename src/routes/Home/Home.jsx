@@ -10,13 +10,46 @@ import Footer from '../../components/Footer'
 
 import BusinessService from '../../services/BusinessService'
 
+const PAGE_SIZE_DESKTOP = 3
+
 class Home extends React.Component {
+  state = {
+    businessData: {
+      businesses: [],
+      total: 1
+    }
+  }
 
   componentDidMount = () => {
-    const limit = 3
+    const limit = PAGE_SIZE_DESKTOP
     
     BusinessService.getSimplifiedWithLimitOffset(limit, null, (res) => {
       console.log('home responsee', res)
+      if(res !== null && res.data.meta.http_status === 200) {
+        this.parseBusinessResponse(res.data)
+      }
+
+      //TODO: error handling
+    })
+  }
+
+  parseBusinessResponse = (data) => {
+    const total = data.meta.total
+    const businesses = data.data.map((val, idx) => {
+      return {
+        id: val.id,
+        category: val.attributes.category,
+        location: val.attributes.location,
+        thumbnailUrl: val.attributes.thumbnail_url,
+        backersCount: val.attributes.backers_count
+      }
+    })
+
+    this.setState({
+      businessData: {
+         businesses: businesses,
+         total: total
+      }
     })
   }
 

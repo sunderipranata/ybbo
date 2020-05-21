@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ybbo-1rxicshhu.now.sh/api'
+const BASE_URL = 'https://ybbo-4mh3mzsus.now.sh/api'
 // const BASE_URL = 'https://yukbantubisnis.online/api'
 const BUSINESS_SIMPLIFIED = '/business'
 let BusinessService = {};
