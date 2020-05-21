@@ -15,7 +15,7 @@ module JSON
         options = {}
         options[:meta] = {
           http_status: http_status,
-          offset: object.first.&id.to_s,
+          offset: object.first&.id.to_s,
           limit: limit,
           total: object.count
         }
