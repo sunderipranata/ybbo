@@ -32,5 +32,5 @@ Handler = Proc.new do |req, res|
   # rescue Business::ValidationError => e
   #   res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
   #   res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
-  # end
+  end
 end
