@@ -1,5 +1,8 @@
 class BusinessBackerSerializer
   include FastJsonapi::ObjectSerializer
 
-  attribute :account_type, :username, :comment
+  attributes :account_type, :username, :comment
+  attribute :is_verified do |object|
+    object.verified?
+  end
 end

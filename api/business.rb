@@ -6,7 +6,7 @@ Handler = Proc.new do |req, res|
     case req.request_method
     when "GET"
       id = req.query['id'] || ""
-      limit = req.query['limit'].present? ? req.query['limit'].to_i || 10
+      limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
 
       # TODO: add filter location?
