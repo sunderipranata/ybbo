@@ -14,10 +14,10 @@ Handler = Proc.new do |req, res|
       category = req.query['category'].present? ? req.query['category'] : nil
 
       if id.blank?
-        business = if category.blank?
-          Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+        if category.blank?
+          business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         else
-          Business.where(category: /#{category.downcase}/, :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+          business = Business.where(category: /#{category.downcase}/, :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         end
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.many(business, Serializer::Business::Simple, limit, res.status)

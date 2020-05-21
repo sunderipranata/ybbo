@@ -12,8 +12,6 @@ class Business
 
   CATEGORY = {
     food_and_beverage: 10,
-    food: 20,
-    beverage: 30,
     fashion: 40,
     hobby: 50,
     beauty: 60
