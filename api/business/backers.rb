@@ -23,6 +23,9 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("backer successfully inserted", res.status)
     end
+  rescue ResourceNotFoundError => e
+    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
+    res.body = JSON::Response.error(e.message, RESOURCE_NOT_FOUND, res.status)
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, MISSING_REQUIRED_PARAMETER, res.status)
