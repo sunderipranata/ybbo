@@ -8,3 +8,9 @@ class MissingParameterError < StandardError
     super
   end
 end
+
+class ResourceNotFoundError < StandardError
+  def initialize(msg="resource not found")
+    super
+  end
+end

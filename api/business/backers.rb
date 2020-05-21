@@ -16,8 +16,12 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_OK
       res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, limit, res.status)
     when "POST"
+      username = req.query['username']
+      business = Business.find_by(id: business_id)
+      raise ResourceNotFoundError, 'business not found' if business.blank?
+      business.backers.create(username: username) # todo: create backers validation and raise
       res.status = HTTP_STATUS_CREATED
-      res.body = JSON::Response.message("unimplemented, try echo #{req.body} #{business_id}", res.status)
+      res.body = JSON::Response.message("backer successfully inserted", res.status)
     end
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
@@ -25,8 +29,8 @@ Handler = Proc.new do |req, res|
   rescue BSON::ObjectId::Invalid => e
     res.status = HTTP_STATUS_BAD_REQUEST
     res.body = JSON::Response.error("invalid business_id", INVALID_PARAMETER, res.status)
-  rescue Business::ValidationError => e
-    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
-  end
+  # rescue Business::ValidationError => e
+  #   res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
+  #   res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
+  # end
 end
