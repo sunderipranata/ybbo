@@ -26,8 +26,8 @@ class Footer extends Component {
               <h3 className="footer-title">
                 Follow <small>@YukBantuBisnis.Online</small>
               </h3>
-              <a href="#" className="social-media" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'instagram']}  size="lg" /></a>
-              <a href="#" className="social-media" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
+              <a href="/" className="social-media" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'instagram']}  size="lg" /></a>
+              <a href="/" className="social-media" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
             </div>
           </div>
           <p className="footer-notes">
