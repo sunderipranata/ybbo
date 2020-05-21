@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
@@ -34,11 +34,11 @@ class BusinessList extends Component {
         <Desktop>
           <div className="business__filter">
             <ul className="filter__category">
-              <li><a className="category-item active">Semua</a></li>
-              <li><a className="category-item">Makanan & Minuman</a></li>
-              <li><a className="category-item">Fashion</a></li>
-              <li><a className="category-item">Kecantikan</a></li>
-              <li><a className="category-item">Hobi</a></li>
+              <li><a href="#" className="category-item active">Semua</a></li>
+              <li><a href="#" className="category-item">Makanan & Minuman</a></li>
+              <li><a href="#" className="category-item">Fashion</a></li>
+              <li><a href="#" className="category-item">Kecantikan</a></li>
+              <li><a href="#" className="category-item">Hobi</a></li>
             </ul>
           </div>
         </Desktop>
@@ -66,42 +66,41 @@ class BusinessList extends Component {
             </div>
           </div>
         </Mobile>
-
         <div className="business__content">
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard loading />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard loading />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard loading />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Bali" category="Hobi" backers={20} />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
           </a>
-          <a className="item">
+          <a href="#" className="item">
             <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
           </a>
         </div>
         <div className="business__pagination">
-          <a className={ClassNames('btn__prev', { 'hidden': hasPrev == false})}>
+          <a href="#" className={ClassNames('btn__prev', { 'hidden': hasPrev == false})}>
             Sebelumnya
           </a>
           1 / 5
-          <a className={ClassNames('btn__next', { 'hidden': hasNext == false})}>
+          <a href="#" className={ClassNames('btn__next', { 'hidden': hasNext == false})}>
             Selanjutnya
           </a>
         </div>

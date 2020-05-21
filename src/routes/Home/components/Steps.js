@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
@@ -98,6 +98,7 @@ class Steps extends Component {
                 style={this.getButtonStyles(slideIndex === 0)}
                 onClick={previousSlide}
                 src={IconArrowPrev}
+                alt="Langkah Sebelumnya"
               />
             )}
             renderCenterRightControls={({ nextSlide }) => (
@@ -106,6 +107,7 @@ class Steps extends Component {
                 style={this.getButtonStyles(slideIndex === 3)}
                 onClick={nextSlide}
                 src={IconArrowNext}
+                alt="Langkah Selanjutnya"
               />
             )}
             renderBottomCenterControls={() => (
