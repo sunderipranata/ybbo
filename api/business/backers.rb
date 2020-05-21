@@ -1,4 +1,4 @@
-require_relative '../app/config/load'
+require_relative '../../app/config/load'
 
 Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'

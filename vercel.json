@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/business/:business_id/backers",
+            "source": "api/business/:business_id/backers",
             "destination": "/api/business/backers"
         }
     ],
