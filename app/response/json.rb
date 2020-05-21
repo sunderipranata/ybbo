@@ -3,7 +3,7 @@ module JSON
     module Data
       module_function
 
-      def one
+      def one(object, serializer, http_status)
         options = {}
         options[:meta] = {
           http_status: http_status

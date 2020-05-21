@@ -19,4 +19,5 @@ require_relative '../serializers/business/simple'
 
 # response
 require_relative '../response/json'
-require_relative '../response/errors'
+require_relative '../response/error'
+require_relative '../response/http_status'

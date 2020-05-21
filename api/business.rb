@@ -17,11 +17,11 @@ Handler = Proc.new do |req, res|
 
       if id.blank?
         business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
-        res.status = 200
+        res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.many(business, Serializer::Business::Simple, limit, res.status)
       else
         business = Business.find_by(id: id)
-        res.status = 200
+        res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.one(business, Serializer::Business::Detail, res.status)
       end
     when "POST"
@@ -33,7 +33,7 @@ Handler = Proc.new do |req, res|
       # b.backers.create(...)
       # b.store_accounts.create(...)
 
-      res.status = 200
+      res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("unimplemented", res.status)
     end
   rescue Business::ValidationError => e
