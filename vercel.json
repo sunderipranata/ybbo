@@ -1,4 +1,14 @@
 {
+    "rewrites": [
+        {
+            "source": "api/businesses/:id",
+            "destination": "/api/businesses"
+        },
+        {
+            "source": "api/business/:business_id/backers",
+            "destination": "/api/businesses/backers"
+        }
+    ],
     "github": {
         "enabled": false
     }

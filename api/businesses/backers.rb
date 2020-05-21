@@ -25,13 +25,13 @@ Handler = Proc.new do |req, res|
     end
   rescue ResourceNotFoundError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, RESOURCE_NOT_FOUND, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_RESOURCE_NOT_FOUND, res.status)
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, MISSING_REQUIRED_PARAMETER, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_MISSING_REQUIRED_PARAMETER, res.status)
   rescue BSON::ObjectId::Invalid => e
     res.status = HTTP_STATUS_BAD_REQUEST
-    res.body = JSON::Response.error("invalid business_id", INVALID_PARAMETER, res.status)
+    res.body = JSON::Response.error("invalid business_id", ERROR_INVALID_PARAMETER, res.status)
   # rescue Business::ValidationError => e
   #   res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
   #   res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
