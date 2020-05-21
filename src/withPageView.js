@@ -3,7 +3,7 @@ import ReactGA from "react-ga";
 
 const trackingId = "UA-78912543-2";
 
-ReactGA.initialize(trackingId,{testMode: process.env.NODE_ENV === "test" });
+ReactGA.initialize(trackingId,{testMode: process.env.NODE_ENV === "test", debug: true });
 
 export const withPageView = (WrappedComponent, options = {}) => {
     const trackPageView = page => {
