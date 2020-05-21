@@ -15,9 +15,9 @@ module JSON
         options = {}
         options[:meta] = {
           http_status: http_status,
-          offset: object.first&.id.to_s,
+          offset: object&.first&.id.to_s,
           limit: limit,
-          total: object.count
+          total: object&.count || 0
         }
         serializer.new(object, options).serialized_json
       end
