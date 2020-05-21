@@ -4,7 +4,7 @@ module Serializer
       include FastJsonapi::ObjectSerializer
 
       set_id :id
-      set_type :business
+      set_type :business_simple
 
       attributes :category, :location, :thumbnail_url
       attribute :backers_count do |object|

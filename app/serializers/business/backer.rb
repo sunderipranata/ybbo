@@ -2,8 +2,8 @@ module Serializer
   module Business
     class Backer
       include FastJsonapi::ObjectSerializer
-      # todo
 
+      attribute :account_type, :username, :comment
     end
   end
 end
