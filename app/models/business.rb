@@ -2,6 +2,7 @@ class Business
   include Mongoid::Document
   include Mongoid::Timestamps::Created
   include Mongoid::Attributes::Dynamic
+  include SimpleEnum::Mongoid
 
   class ValidationError < StandardError
     def initialize(msg="no message")
@@ -9,9 +10,15 @@ class Business
     end
   end
 
+  CATEGORY = {
+    food_and_beverage: 10,
+    fashion: 40,
+    hobby: 50,
+    beauty: 60
+  }
+
   field :name,              type: String
   field :location,          type: String
-  field :category,          type: String
   field :description,       type: String
   field :instructions,      type: String
   field :icon_url,          type: String
@@ -19,6 +26,7 @@ class Business
   field :assets_url,        type: String
   field :pictures_url,      type: Array
 
+  as_enum :category, CATEGORY
   has_many :store_accounts, class_name: 'Business::StoreAccount'
   has_many :backers, class_name: 'Business::Backer'
 

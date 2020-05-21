@@ -9,14 +9,16 @@ Handler = Proc.new do |req, res|
       limit = req.query['limit'].to_i || 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
 
-      # TODO: add filter by category and location
-      # category = req.query['category'].present? ? req.query['category'] : nil
+      # TODO: add filter location?
       # location = req.query['location'].present? ? req.query['location'] : nil
-      # category_regex=/(?i)\.*#{category}.*\b/
-      # location_regex=/(?i)\.*#{location}.*\b/
+      category = req.query['category'].present? ? req.query['category'] : nil
 
       if id.blank?
-        business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+        if category.blank?
+          business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+        else
+          business = Business.where(category: /#{category.downcase}/, :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+        end
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.many(business, Serializer::Business::Simple, limit, res.status)
       else
