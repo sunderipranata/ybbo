@@ -1,0 +1,70 @@
+@import "../../styles/static";
+
+header {
+  @media (min-width:$breakpoint-md-min) {
+    width: 750px
+  }
+
+  @media (min-width:$breakpoint-lg-min) {
+    width: 970px
+  }
+
+  @media (min-width:$breakpoint-xl) {
+    width: 1170px;
+  }
+
+  margin: 0 auto;
+  overflow: auto;
+  background: #fff;
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+
+  @media only screen and (max-width: $breakpoint-md-max) {
+    padding: 0;
+  }
+
+
+  .nav-list {
+    float: right;
+    list-style: none;
+    display: table;
+
+    @media only screen and (max-width: $breakpoint-md-max) {
+      padding-inline-start: 0;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin: 16px auto;
+      float: none;
+    }
+
+    li {
+      position: relative;
+      padding: 0 20px;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 16px;
+
+      @media only screen and (max-width: $breakpoint-md-max) {
+        font-size: 12px;
+        padding: 0 8px;
+      }
+
+      .nav__link {
+        color: $color-secondary-text;
+  
+        &.active {
+          font-weight: bold;
+        }
+  
+        &:hover {
+          color: $color-blue;
+        }
+      }
+    }
+  }
+}
