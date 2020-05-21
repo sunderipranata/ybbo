@@ -13,9 +13,10 @@ import BusinessService from '../../services/BusinessService'
 class Home extends React.Component {
 
   componentDidMount = () => {
-    const id = "1"
-    BusinessService.get(id, (result) => {
-      console.log('homeeee: ', result)
+    const limit = 3
+    
+    BusinessService.getSimplifiedWithLimitOffset(limit, null, (res) => {
+      console.log('home responsee', res)
     })
   }
 

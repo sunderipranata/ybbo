@@ -1,11 +1,19 @@
 import axios from 'axios'
 
-// const BASE_URL = 'localhost'
-// const STH_PATH = '/business'
+const BASE_URL = 'https://ybbo-1rxicshhu.now.sh/api'
+// const BASE_URL = 'https://yukbantubisnis.online/api'
+const BUSINESS_SIMPLIFIED = '/business'
 let BusinessService = {};
 
-BusinessService.get = async (id, callback) => {
-  await axios.get('https://jsonplaceholder.typicode.com/todos/1')
+BusinessService.getSimplifiedWithLimitOffset = async (limit, offset, callback) => {
+  const PATH = BASE_URL + BUSINESS_SIMPLIFIED
+  await 
+    axios.get(PATH, {
+      params: {
+        limit: limit,
+        offset: offset
+      }
+    })
     .then((response) => {
       console.log('response', response)
       callback(response)
