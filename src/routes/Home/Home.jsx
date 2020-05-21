@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-
 import { withRouter } from 'react-router-dom'
 import Header from '../../components/Header'
 
@@ -9,7 +8,17 @@ import Steps from './components/Steps'
 import BusinessList from './components/BusinessList'
 import Footer from '../../components/Footer'
 
+import BusinessService from '../../services/BusinessService'
+
 class Home extends React.Component {
+
+  componentDidMount = () => {
+    const id = "1"
+    BusinessService.get(id, (result) => {
+      console.log('homeeee: ', result)
+    })
+  }
+
   render = () => {
     return (
       <Fragment>

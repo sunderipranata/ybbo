@@ -1,11 +1,11 @@
-name: deploy website preview
+name: deploy website preview master
 on:
-  push
+  push:
+    [master]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[preview]')"
     steps:
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v19
