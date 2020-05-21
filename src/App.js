@@ -1,5 +1,5 @@
 import React from 'react';
-import {withPageView} from './withPageView'
+import withPageView from './withPageView'
 
 import {
   BrowserRouter as Router,
@@ -17,7 +17,7 @@ import Home from './routes/Home'
 class App extends React.Component {
 
   render = () => {
-    const isComingSoon = true
+    const isComingSoon = false;
     if(isComingSoon) {
       return this.renderComingSoon()
     } else {
