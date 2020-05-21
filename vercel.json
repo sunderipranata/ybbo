@@ -1,11 +1,11 @@
 {
     "rewrites": [
         {
-            "source": "v1api/businesses/:id",
+            "source": "/api/businesses/:id",
             "destination": "/api/businesses"
         },
         {
-            "source": "v1api/business/:business_id/backers",
+            "source": "/api/businesses/:business_id/backers",
             "destination": "/api/businesses/backers"
         }
     ],
