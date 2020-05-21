@@ -8,6 +8,9 @@ import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
+const PAGE_SIZE_DESKTOP = 3;
+// const PAGE_SIZE_MOBILE = 3;
+
 class BusinessList extends Component {
   state = {
     hasPrev: false,
@@ -17,6 +20,23 @@ class BusinessList extends Component {
       at: 1,
       total: 1
     }
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    const { businessData } = nextProps
+    const totalPage = this.calculateTotalPages(businessData)
+
+    let curPage = {...this.state.page}
+    curPage.total = totalPage
+    this.setState({
+      page: curPage
+    }, () => {
+      console.log('business list state', this.state)
+    })
+  }
+
+  calculateTotalPages = (data) => {
+    return Math.ceil(data.total / PAGE_SIZE_DESKTOP)
   }
 
   showDropdown = () => {

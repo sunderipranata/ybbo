@@ -54,13 +54,16 @@ class Home extends React.Component {
   }
 
   render = () => {
+    const { businessData } = this.state
     return (
       <Fragment>
         <Header />
         <main className="container__home">
           <Hero />
           <Steps />
-          <BusinessList />
+          <BusinessList 
+            businessData = { businessData }
+          />
         </main>
         <Footer />
       </Fragment>
