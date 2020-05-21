@@ -2,3 +2,9 @@ MISSING_REQUIRED_PARAMETER=1000
 INVALID_PARAMETER = 1001
 
 BUSINESS_VALIDATION_ERROR=2000
+
+class MissingParameterError < StandardError
+  def initialize(msg="parameter missing")
+    super
+  end
+end

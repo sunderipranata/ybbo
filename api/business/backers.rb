@@ -4,11 +4,7 @@ Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
   begin
     business_id = req.query['businessid'] || ""
-    if business_id.blank?
-      res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-      res.body = JSON::Response.error("missing business_id", MISSING_REQUIRED_PARAMETER, res.status)
-      return
-    end
+    raise MissingParameterError, 'missing business_id' if business_id.blank?
 
     case req.request_method
     when "GET"
@@ -23,6 +19,9 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("unimplemented", res.status)
     end
+  rescue MissingParameterError => e
+    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
+    res.body = JSON::Response.error(e.message, MISSING_REQUIRED_PARAMETER, res.status)
   rescue BSON::ObjectId::Invalid => e
     res.status = HTTP_STATUS_BAD_REQUEST
     res.body = JSON::Response.error("invalid business_id", INVALID_PARAMETER, res.status)
