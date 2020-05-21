@@ -1,5 +1,5 @@
 import React from 'react';
-import withPageView from './withPageView'
+import {withPageView} from './withPageView'
 
 import {
   BrowserRouter as Router,
