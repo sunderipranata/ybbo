@@ -96,11 +96,11 @@ class BusinessList extends Component {
           </a>
         </div>
         <div className="business__pagination">
-          <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev == false})}>
+          <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev === false})}>
             Sebelumnya
           </a>
           1 / 5
-          <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext == false})}>
+          <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false})}>
             Selanjutnya
           </a>
         </div>

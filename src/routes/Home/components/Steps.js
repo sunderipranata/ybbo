@@ -69,7 +69,7 @@ class Steps extends Component {
               <div className="list__desc">
                 <h3 className={ClassNames('desc__title', {active: detailShown === 3})}>Promosikan di Sosial Media</h3>
                 <p className={ClassNames('desc__content', {active: detailShown === 3})}>
-                  Post gambar atau video yang sudah kamu download dan tag kami <a href="#" target="_blank">@YukBantuBisnis.Online</a>
+                  Post gambar atau video yang sudah kamu download dan tag kami <a href="/" target="_blank">@YukBantuBisnis.Online</a>
                 </p>
               </div>
             </li>
