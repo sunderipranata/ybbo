@@ -8,6 +8,7 @@ class Business::Backer
   field :username, type: String
   field :comment,  type: String
   field :verified, type: Boolean, default: false
+  field :anonym,   type: Boolean, default: false
 
   belongs_to :business, counter_cache: true
 
