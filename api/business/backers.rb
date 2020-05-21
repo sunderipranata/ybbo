@@ -17,7 +17,7 @@ Handler = Proc.new do |req, res|
       res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, limit, res.status)
     when "POST"
       res.status = HTTP_STATUS_CREATED
-      res.body = JSON::Response.message("unimplemented, try echo #{req.body}", res.status)
+      res.body = JSON::Response.message("unimplemented, try echo #{req.body} #{business_id}", res.status)
     end
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
