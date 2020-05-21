@@ -7,10 +7,12 @@ import Hero from './components/Hero'
 import Steps from './components/Steps'
 import BusinessList from './components/BusinessList'
 import Footer from '../../components/Footer'
+import { isMobile } from 'react-device-detect'
 
 import BusinessService from '../../services/BusinessService'
 
-const PAGE_SIZE_DESKTOP = 3
+const PAGE_SIZE_DESKTOP = 6;
+const PAGE_SIZE_MOBILE = 3;
 
 class Home extends React.Component {
   state = {
@@ -21,7 +23,7 @@ class Home extends React.Component {
   }
 
   componentDidMount = () => {
-    const limit = PAGE_SIZE_DESKTOP
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     
     BusinessService.getSimplifiedWithLimitOffset(limit, null, (res) => {
       console.log('home responsee', res)
@@ -54,7 +56,7 @@ class Home extends React.Component {
   }
 
   render = () => {
-    const { businessData } = this.state
+    const { businessData, device } = this.state
     return (
       <Fragment>
         <Header />
@@ -63,6 +65,7 @@ class Home extends React.Component {
           <Steps />
           <BusinessList 
             businessData = { businessData }
+            device = { device }
           />
         </main>
         <Footer />

@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
+import { isMobile } from 'react-device-detect'
 
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
-const PAGE_SIZE_DESKTOP = 3;
-// const PAGE_SIZE_MOBILE = 3;
+const PAGE_SIZE_DESKTOP = 6;
+const PAGE_SIZE_MOBILE = 3;
 
 class BusinessList extends Component {
   state = {
@@ -36,7 +37,8 @@ class BusinessList extends Component {
   }
 
   calculateTotalPages = (data) => {
-    return Math.ceil(data.total / PAGE_SIZE_DESKTOP)
+    const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    return Math.ceil(data.total / size)
   }
 
   showDropdown = () => {
