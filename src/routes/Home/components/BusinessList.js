@@ -23,7 +23,14 @@ class BusinessList extends Component {
     businessData: {
       businesses: [],
       total: 1
-    }
+    },
+    isLoading: true
+  }
+
+  componentWillMount = () => {
+    this.setState({
+      isLoading: true
+    })
   }
 
   componentDidMount = () => {
@@ -32,18 +39,22 @@ class BusinessList extends Component {
 
     this.props.fetchData(limit, offset, (res) => {
       if (res !== null) {
-        this.setState({
+        const businessData = {
           businesses: res.businesses,
           total: res.total
+        }
+        this.setState({
+          businessData: businessData
         }, () => {
           this.updateTotalPages()
+          this.toggleLoading(false)
         })
       }
     })
   }
 
   updateTotalPages = () => {
-    const { total } = this.state
+    const { businessData: { total } } = this.state
     const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const totalPage =  Math.ceil(total / size)
 
@@ -51,8 +62,12 @@ class BusinessList extends Component {
     curPage.total = totalPage
     this.setState({
       page: curPage
-    }, () => {
-      console.log('business list state', this.state)
+    })
+  }
+
+  toggleLoading = (loading) => {
+    this.setState({
+      loading: loading
     })
   }
 
@@ -66,8 +81,58 @@ class BusinessList extends Component {
     document.removeEventListener('click', this.hideDropdown)
   }
 
+  renderLoading = () => {
+    return (
+      <div className="business__content">
+        <a href="/" className="item">
+            <BusinessCard loading />
+          </a>
+          <a href="/" className="item">
+            <BusinessCard loading />
+          </a>
+          <a href="/" className="item">
+            <BusinessCard loading />
+          </a>
+      </div>
+    )
+  }
+
+  renderBusinesses = () => {
+    const { businessData } = this.state
+    const display = businessData.businesses.map((b) => {
+      const backersCount = b.backersCount
+      const category = b.category
+      const id = b.id
+      const location = b.location
+      const thumbnailUrl = b.thumbnailUrl
+
+      return (
+        <a href="/" className="item" key = {id}>
+          <BusinessCard 
+            img = { thumbnailUrl } 
+            title = "Nama Bisnis" 
+            location = { location } 
+            category = { category } 
+            backers = { backersCount } />
+        </a>
+      )
+    })
+
+    return (
+      <div className="business__content">
+        { display }
+      </div>
+    )
+  }
+
   render() {
-    const { hasPrev, hasNext, dropdownIsOpened } = this.state
+    const { 
+      hasPrev, 
+      hasNext, 
+      dropdownIsOpened,
+      loading,
+      page
+    } = this.state
 
     return (
       <section className="home__business">
@@ -107,40 +172,16 @@ class BusinessList extends Component {
             </div>
           </div>
         </Mobile>
-        <div className="business__content">
-          <a href="/" className="item">
-            <BusinessCard loading />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard loading />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard loading />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Bali" category="Hobi" backers={20} />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
-          </a>
-          <a href="/" className="item">
-            <BusinessCard img="https://via.placeholder.com/1600x960" title="Nama Bisnis" location="Jakarta" category="Makanan & Minuman" backers={0} />
-          </a>
-        </div>
+        
+          {
+            loading ? this.renderLoading() : this.renderBusinesses()
+          }
+
         <div className="business__pagination">
           <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev === false })}>
             Sebelumnya
           </a>
-          1 / 5
+          { page.at } / { page.total }
           <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false })}>
             Selanjutnya
           </a>
