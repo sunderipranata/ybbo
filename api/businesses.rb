@@ -40,6 +40,6 @@ Handler = Proc.new do |req, res|
     end
   rescue Business::ValidationError => e
     res.status = 422
-    res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_VALIDATION, res.status)
   end
 end

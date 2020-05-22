@@ -9,7 +9,7 @@ Handler = Proc.new do |req, res|
     case req.request_method
     when "GET"
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
-      offset = req.query['offset'].present? ? BSON::ObjectId(offset).to_time : Time.now
+      offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
       business = Business.find_by(id: business_id)
       backers = business.present? ? business.backers.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit) : nil
 
@@ -25,13 +25,13 @@ Handler = Proc.new do |req, res|
     end
   rescue ResourceNotFoundError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, RESOURCE_NOT_FOUND, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_RESOURCE_NOT_FOUND, res.status)
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, MISSING_REQUIRED_PARAMETER, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_MISSING_REQUIRED_PARAMETER, res.status)
   rescue BSON::ObjectId::Invalid => e
     res.status = HTTP_STATUS_BAD_REQUEST
-    res.body = JSON::Response.error("invalid business_id", INVALID_PARAMETER, res.status)
+    res.body = JSON::Response.error("invalid business_id", ERROR_INVALID_PARAMETER, res.status)
   # rescue Business::ValidationError => e
   #   res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
   #   res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
