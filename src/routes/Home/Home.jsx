@@ -7,30 +7,19 @@ import Hero from './components/Hero'
 import Steps from './components/Steps'
 import BusinessList from './components/BusinessList'
 import Footer from '../../components/Footer'
-import { isMobile } from 'react-device-detect'
 
 import BusinessService from '../../services/BusinessService'
 
-const PAGE_SIZE_DESKTOP = 6;
-const PAGE_SIZE_MOBILE = 3;
-
 class Home extends React.Component {
-  state = {
-    businessData: {
-      businesses: [],
-      total: 1
-    }
-  }
 
-  componentDidMount = () => {
-    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    
-    BusinessService.getSimplifiedWithLimitOffset(limit, null, (res) => {
+  fetchSimplifiedBusiness = (limit, offset, callback) => {
+    BusinessService.getSimplifiedWithLimitOffset(limit, offset, (res) => {
       console.log('home responsee', res)
       if(res !== null && res.data.meta.http_status === 200) {
-        this.parseBusinessResponse(res.data)
+        callback(this.parseBusinessResponse(res.data))
       }
 
+      callback(null)
       //TODO: error handling
     })
   }
@@ -47,16 +36,13 @@ class Home extends React.Component {
       }
     })
 
-    this.setState({
-      businessData: {
-         businesses: businesses,
-         total: total
-      }
-    })
+    return {
+      businesses: businesses,
+      total: total
+    }
   }
 
   render = () => {
-    const { businessData, device } = this.state
     return (
       <Fragment>
         <Header />
@@ -64,8 +50,7 @@ class Home extends React.Component {
           <Hero />
           <Steps />
           <BusinessList 
-            businessData = { businessData }
-            device = { device }
+            fetchData = { this.fetchSimplifiedBusiness }
           />
         </main>
         <Footer />

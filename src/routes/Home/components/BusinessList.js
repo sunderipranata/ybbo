@@ -8,7 +8,6 @@ import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
-
 const PAGE_SIZE_DESKTOP = 6;
 const PAGE_SIZE_MOBILE = 3;
 
@@ -20,7 +19,26 @@ class BusinessList extends Component {
     page: {
       at: 1,
       total: 1
+    },
+    businessData: {
+      businesses: [],
+      total: 1
     }
+  }
+
+  componentDidMount = () => {
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const offset = null
+
+    this.props.fetchData(limit, offset, (res) => {
+      if(res !== null) {
+        this.setState({
+          businesses: res.businesses,
+          total: res.total
+        })
+      }
+    })
+    
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -35,6 +53,7 @@ class BusinessList extends Component {
       console.log('business list state', this.state)
     })
   }
+
 
   calculateTotalPages = (data) => {
     const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
