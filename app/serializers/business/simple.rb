@@ -3,7 +3,7 @@ class BusinessSimpleSerializer
 
   set_id :id
 
-  attributes :category, :location, :thumbnail_url
+  attributes :name, :category, :location, :thumbnail_url
   attribute :backers_count do |object|
     object.backers.count
   end

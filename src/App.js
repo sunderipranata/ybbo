@@ -1,4 +1,6 @@
 import React from 'react';
+import {withPageView} from './withPageView'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,9 +14,11 @@ import './App.scss';
 import Home from './routes/Home'
 import BusinessDetail from './routes/BusinessDetail';
 
+
 class App extends React.Component {
+
   render = () => {
-    const isComingSoon = false
+    const isComingSoon = false;
     if(isComingSoon) {
       return this.renderComingSoon()
     } else {
@@ -26,7 +30,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path={HOME_PATH} component={Home} />
+          <Route exact path={HOME_PATH} component={withPageView(Home)} />
           <Route exact path={BUSINESS_DETAIL_PATH} component={BusinessDetail} />
         </Switch>
       </Router>
