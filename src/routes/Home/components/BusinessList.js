@@ -31,33 +31,29 @@ class BusinessList extends Component {
     const offset = null
 
     this.props.fetchData(limit, offset, (res) => {
-      if(res !== null) {
+      if (res !== null) {
         this.setState({
           businesses: res.businesses,
           total: res.total
+        }, () => {
+          this.updateTotalPages()
         })
       }
     })
-    
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    const { businessData } = nextProps
-    const totalPage = this.calculateTotalPages(businessData)
+  updateTotalPages = () => {
+    const { total } = this.state
+    const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const totalPage =  Math.ceil(total / size)
 
-    let curPage = {...this.state.page}
+    let curPage = { ...this.state.page }
     curPage.total = totalPage
     this.setState({
       page: curPage
     }, () => {
       console.log('business list state', this.state)
     })
-  }
-
-
-  calculateTotalPages = (data) => {
-    const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    return Math.ceil(data.total / size)
   }
 
   showDropdown = () => {
@@ -89,7 +85,7 @@ class BusinessList extends Component {
         </Desktop>
         <Mobile>
           <div className="select-dropdown" onClick={this.showDropdown}>
-            <div className={ClassNames('select-dropdown__content', {'is-open': dropdownIsOpened })}>
+            <div className={ClassNames('select-dropdown__content', { 'is-open': dropdownIsOpened })}>
               <div className="select-dropdown__container">
                 <div className="label-wrapper">
                   <div className="selected-label">
@@ -141,11 +137,11 @@ class BusinessList extends Component {
           </a>
         </div>
         <div className="business__pagination">
-          <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev === false})}>
+          <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev === false })}>
             Sebelumnya
           </a>
           1 / 5
-          <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false})}>
+          <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false })}>
             Selanjutnya
           </a>
         </div>
