@@ -6,6 +6,7 @@ const BUSINESS_SIMPLIFIED = '/businesses'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, callback) => {
+  console.log('service', limit, offset)
   const PATH = BASE_URL + BUSINESS_SIMPLIFIED
   axios.get(PATH, {
     params: {
