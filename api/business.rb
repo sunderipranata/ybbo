@@ -38,7 +38,7 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("unimplemented", res.status)
     end
-  rescue Business::ValidationError => e
+  rescue ActiveModel::ValidationError => e
     res.status = 422
     res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
   end

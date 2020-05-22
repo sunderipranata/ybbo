@@ -4,18 +4,12 @@ class Business
   include Mongoid::Attributes::Dynamic
   include SimpleEnum::Mongoid
 
-  class ValidationError < StandardError
-    def initialize(msg="no message")
-      super
-    end
-  end
-
   CATEGORY = {
     food_and_beverage: 10,
     fashion: 40,
     hobby: 50,
     beauty: 60
-  }
+  }.freeze
 
   field :name,              type: String
   field :location,          type: String
@@ -34,12 +28,6 @@ class Business
   index({ location: 1, created_at: -1 }, { background: true })
   index({ category: 1, created_at: -1 }, { background: true })
 
-
-  validate :key_existence
-
-  def key_existence
-    attributes.each do |attr_name, value|
-      raise ValidationError, "#{attr_name} does not exist" if value.blank?
-    end
-  end
+  validates :name, :location, :description, :instructions, :thumbnail_url, :assets_url, :pictures_url, presence: true
+  validates :thumbnail_url, :assets_url, :pictures_url, format: { with: /https:\/\// }
 end
