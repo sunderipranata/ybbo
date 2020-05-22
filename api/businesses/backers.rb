@@ -9,7 +9,7 @@ Handler = Proc.new do |req, res|
     case req.request_method
     when "GET"
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
-      offset = req.query['offset'].present? ? BSON::ObjectId(offset).to_time : Time.now
+      offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
       business = Business.find_by(id: business_id)
       backers = business.present? ? business.backers.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit) : nil
 
