@@ -32,7 +32,7 @@ class BusinessDetailAbout extends Component {
               { instagram != null &&
                 <tr>
                   <td className="type">Instagram</td>
-                  <td className="value"><a href={"https://www.instagram.com/" + instagram} target="_blank">@{instagram}</a></td>
+                  <td className="value"><a href={"https://www.instagram.com/" + instagram} target="_blank" rel="noopener noreferrer">@{instagram}</a></td>
                 </tr>
               }
               <tr>
@@ -45,7 +45,7 @@ class BusinessDetailAbout extends Component {
               </tr>
               <tr>
                 <td className="type">Tokopedia</td>
-                <td className="value"><a href={"https://www.tokopedia.com/" + tokopedia} target="_blank">@{tokopedia}</a></td>
+                <td className="value"><a href={"https://www.tokopedia.com/" + tokopedia} target="_blank" rel="noopener noreferrer">@{tokopedia}</a></td>
               </tr>
             </table>
             <p className="bd-content__desc">{desc}</p>

@@ -32,4 +32,18 @@
       background-color: #C2C2C2;
       color: #fff;
     }
+}
+
+.btn-link {
+  text-decoration: none;
+  color: #57A3BD;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+  padding: 0;
+  outline: none;
+
+  &:hover {
+    color: #96D5EB;
   }
+}

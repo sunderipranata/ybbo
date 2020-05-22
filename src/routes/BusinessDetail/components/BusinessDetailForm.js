@@ -25,9 +25,9 @@ class BusinessDetailForm extends Component {
         :
         <Fragment>
           <h2 className="bd-content__title">Dukung [Nama Bisnis]</h2>
-          {/* <p className="desc">Belum ada pendukung nih. Yuk jadi yang pertama!</p>
-          <p className="desc">Baru ada <a href="/">50 Pendukung</a> nih. Yuk dukung [nama bisnis]!</p> */}
-          <p className="desc">Sudah ada <a onClick={this.props.scrollToMyRef}>200 Pendukung</a>. Yuk jadi salah satunya!</p>
+          {/* <p className="desc">Belum ada pendukung nih. Yuk jadi yang pertama!</p> */}
+          {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToMyRef}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
+          <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToMyRef}>200 Pendukung</button>. Yuk jadi salah satunya!</p>
           <form className="form">
             <label className="label-input" for="account">Masukkan Akun Sosial Media mu</label>
             <input type="text" id="account" name="account" placeholder="Contoh: @instagram" />
