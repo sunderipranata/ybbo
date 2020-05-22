@@ -115,18 +115,20 @@ class BusinessList extends Component {
 
   renderBusinesses = () => {
     const { businessData } = this.state
+    console.log('business data', businessData)
     const display = businessData.businesses.map((b) => {
       const backersCount = b.backersCount
       const category = b.category
       const id = b.id
       const location = b.location
       const thumbnailUrl = b.thumbnailUrl
+      const name = b.name
 
       return (
         <a href="/" className="item" key = {id}>
           <BusinessCard 
             img = { thumbnailUrl } 
-            title = "Nama Bisnis" 
+            title = { name }
             location = { location } 
             category = { category } 
             backers = { backersCount } />

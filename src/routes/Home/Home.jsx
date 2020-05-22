@@ -29,6 +29,7 @@ class Home extends React.Component {
     const businesses = data.data.map((val, idx) => {
       return {
         id: val.id,
+        name: val.attributes.name,
         category: val.attributes.category,
         location: val.attributes.location,
         thumbnailUrl: val.attributes.thumbnail_url,
