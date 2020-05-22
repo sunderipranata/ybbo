@@ -25,6 +25,6 @@ class Business::Backer
   validate :username_regex
 
   def username_regex
-    errors.add(:username, "instagram username validation failed") if  self.instagram? && self.username !~ /@[0-9a-zA-Z]{3,}/
+    errors.add(:username, "instagram username validation failed") if  self.instagram? && self.username !~ /[0-9a-zA-Z]{3,}/
   end
 end
