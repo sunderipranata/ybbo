@@ -22,7 +22,7 @@ class Business::StoreAccount
 
   belongs_to :business
 
-  index({ username: 1, account_type: -1 }, { unique: true, background: true })
+  index({ username: 1, account_type_cd: -1 }, { unique: true, background: true })
 
   validates :name, :account_type, presence: true
 end

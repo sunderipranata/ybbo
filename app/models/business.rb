@@ -1,7 +1,6 @@
 class Business
   include Mongoid::Document
   include Mongoid::Timestamps::Created
-  include Mongoid::Attributes::Dynamic
   include SimpleEnum::Mongoid
 
   CATEGORY = {
@@ -19,6 +18,7 @@ class Business
   field :thumbnail_url,     type: String
   field :assets_url,        type: String
   field :pictures_url,      type: Array
+  field :backers_count,        type: Fixnum, default: 0
 
   as_enum :category, CATEGORY
   has_many :store_accounts, class_name: 'Business::StoreAccount'
@@ -26,7 +26,7 @@ class Business
 
   index({ created_at: -1 }, { background: true })
   index({ location: 1, created_at: -1 }, { background: true })
-  index({ category: 1, created_at: -1 }, { background: true })
+  index({ category_cd: 1, created_at: -1 }, { background: true })
 
   validates :name, :location, :description, :instructions, :category, :icon_url, :thumbnail_url, :assets_url, :pictures_url, presence: true
   validates :thumbnail_url, :assets_url, :pictures_url, format: { with: /https:\/\// }

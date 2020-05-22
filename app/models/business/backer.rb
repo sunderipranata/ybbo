@@ -17,8 +17,9 @@ class Business::Backer
   field :anonym,   type: Boolean, default: false
 
   belongs_to :business, counter_cache: true
+  # to reset counter, use business.reset_counters(:backers)
 
-  index({ username: 1, account_type: 1 }, { unique: true, background: true })
+  index({ username: 1, account_type_cd: 1 }, { unique: true, background: true })
   index({ category: 1, created_at: -1 }, { background: true })
 
   validates :username, :account_type, presence: true
