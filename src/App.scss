@@ -49,6 +49,23 @@ body {
   color: #060606;
 }
 
+.container {
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width:$breakpoint-md-min) {
+    width: 700px;
+  }
+
+  @media (min-width:$breakpoint-lg-min) {
+    width: 970px;
+  }
+
+  &--mobile {
+    margin-top: 64px;
+  }
+}
+
 .clearfix:after,
 .clearfix:before {
 	content: " ";
@@ -106,8 +123,15 @@ a {
   position: relative;
   cursor: pointer;
   line-height: 0;
+  
+  @media (max-width:$breakpoint-md-max) {
+    cursor: initial;
+  }
 
   .tooltiptext {
+    @media (max-width:$breakpoint-md-max) {
+      display: none;
+    }
     visibility: hidden;
     font-size: 12px;
     width: 200px;
@@ -119,7 +143,7 @@ a {
     box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
     position: absolute;
     z-index: 1;
-    top: 200%;
+    top: 160%;
     left: 50%;
     margin-left: -60px;
 
@@ -138,6 +162,14 @@ a {
   &:hover {
     .tooltiptext {
       visibility: visible;
+
+      @media (max-width:$breakpoint-md-max) {
+        display: none;
+      }
     }
   }
+}
+
+.divider {
+  border: 4px solid #f3f4f5;
 }

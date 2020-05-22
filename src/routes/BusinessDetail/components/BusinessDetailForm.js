@@ -1,14 +1,24 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import Responsive from 'react-responsive'
+
 import Loader from '../../../components/Loader'
+
+const Desktop = props => <Responsive {...props} minWidth={768} />
+const Mobile = props => <Responsive {...props} maxWidth={767} />
 
 class BusinessDetailForm extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
-    scrollToMyRef: PropTypes.func
+    scrollToBackers: PropTypes.func
+  }
+
+  state = {
+    isError: false
   }
 
   render() {
+    const { isError } = this.state
     const { isLoading } = this.props
 
     return (
@@ -24,13 +34,14 @@ class BusinessDetailForm extends Component {
         </Fragment>
         :
         <Fragment>
-          <h2 className="bd-content__title">Dukung [Nama Bisnis]</h2>
+          <Desktop><h2 className="bd-content__title">Dukung [Nama Bisnis]</h2></Desktop>
           {/* <p className="desc">Belum ada pendukung nih. Yuk jadi yang pertama!</p> */}
-          {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToMyRef}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
-          <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToMyRef}>200 Pendukung</button>. Yuk jadi salah satunya!</p>
+          {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToBackers}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
+          <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>200 Pendukung</button>. Yuk jadi salah satunya!</p>
           <form className="form">
             <label className="label-input" for="account">Masukkan Akun Sosial Media mu</label>
             <input type="text" id="account" name="account" placeholder="Contoh: @instagram" />
+            { isError && <p className="label-error">error messsage</p>}
             <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
               <input type="checkbox" />
               <span class="checkmark" />

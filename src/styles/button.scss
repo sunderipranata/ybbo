@@ -42,8 +42,11 @@
   font-size: 14px;
   padding: 0;
   outline: none;
+  background: $color-white;
 
-  &:hover {
-    color: #96D5EB;
+  @media (min-width:$breakpoint-md-min) {
+    &:hover {
+      color: #96D5EB;
+    }
   }
 }

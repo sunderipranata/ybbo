@@ -4,6 +4,20 @@ import PropTypes from 'prop-types'
 import { SRLWrapper } from 'simple-react-lightbox'
 import Loader from '../../../components/Loader'
 
+const options = {
+  buttons: {
+    showDownloadButton: false,
+    showThumbnailsButton: false,
+    showAutoplayButton: false,
+  },
+  settings: {
+    overlayColor: 'rgba(255,255,255, 0.88)'
+  },
+  caption: {
+    captionColor: "#060606"
+  }
+}
+
 class BusinessDetailGallery extends Component {
   static propTypes = {
     isLoading: PropTypes.bool
@@ -28,7 +42,7 @@ class BusinessDetailGallery extends Component {
              </li>
            </ul>
           :
-          <SRLWrapper>
+          <SRLWrapper options={options}>
             <ul className="bd-content__gallery">
               <li>
                 <a href="https://www.simple-react-lightbox.dev/docs/gallery/unsplash18.jpg" data-attribute="SRL">

@@ -55,52 +55,54 @@ class BusinessDetailBackers extends Component {
             <Fragment>
               <ul className="bd-content__backers">
                 <li>
-                  <div className="backers-title">
-                    <p>Anonim telah mendaftar untuk mendukung</p>
-                  </div>
+                  <p className="backers-title">Anonim telah mendaftar untuk mendukung</p>
                   <p className="backers-time">17 menit yang lalu</p>
                 </li>
                 <li>
                   <div className="backers-title">
-                    <p><a href="/" target="_blank">@sunderi.pranata</a> telah mendaftar untuk mendukung</p>
+                    <p className="backers-title"><a href="/" target="_blank">@sunderi.pranata</a> telah mendaftar untuk mendukung</p>
                   </div>
                   <p className="backers-time">30 menit yang lalu</p>
                 </li>
                 <li>
-                  <div className="backers-title">
-                    <p>Kata <a href="/" target="_blank">@devinryanriota</a>: "enak banget, wajib dipesan"</p>
-                    <div className="tooltip">
+                  <p className="backers-title">
+                    <span className="text">Kata <a href="/" target="_blank">@devinryanriota</a>: "enak banget, wajib dipesan"</span>
+                    <span className="tooltip">
                       <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
                       <span class="tooltiptext">
                         Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@devinryanriota</a> telah mempost di sosial media
                       </span>
-                    </div>
-                  </div>
+                    </span>
+                  </p>
                   <p className="backers-time">1 jam yang lalu</p>
                 </li>
                 <li>
-                  <div className="backers-title">
-                    <p><a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram</p>
-                    <div className="tooltip">
+                  <p className="backers-title">
+                    <span className="text"><a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram</span>
+                    <span className="tooltip">
                       <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
                       <span class="tooltiptext">
                         Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@nelsonwijaya</a> telah mempost di sosial media
                       </span>
-                    </div>
-                  </div>
+                    </span>
+                  </p>
                   <p className="backers-time">2 jam yang lalu</p>
                 </li>
                 <li>
-                  <div className="backers-title">
-                    <p>Anomim telah mempost di Instagram</p>
-                    <div className="tooltip">
+                  <p className="backers-title">
+                    <span className="text">Anomim telah mempost di Instagram</span>
+                    <span className="tooltip">
                       <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
                       <span class="tooltiptext">
                         Kami sudah melakukan pengecekan bahwa akun telah mempost di sosial media
                       </span>
-                    </div>
-                  </div>
+                    </span>
+                  </p>
                   <p className="backers-time">3 jam yang lalu</p>
+                </li>
+                <li>
+                  <Loader height={12} borderRadius={8} marginBottom={8} />
+                  <Loader width={200} height={12} borderRadius={8} />
                 </li>
               </ul>
               <a href="/" className="btn-load">Muat lebih banyak</a>
