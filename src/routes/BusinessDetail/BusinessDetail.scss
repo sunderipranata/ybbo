@@ -1,0 +1,263 @@
+@import "../../styles/static";
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 100px;
+
+  @media (min-width:$breakpoint-md-min) {
+    width: 700px;
+  }
+
+  @media (min-width:$breakpoint-lg-min) {
+    width: 970px;
+  }
+}
+
+.content__main {
+  width: 65%;
+  float: left;
+  margin-top: 140px;
+}
+
+.content__sidebar {
+  width: 35%;
+  float: left;
+  position: sticky;
+  top: 140px;
+  margin-top: 140px;
+}
+
+.bd-card {
+  box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+  border-radius: 8px;
+  margin-right: 40px;
+  margin-top: 32px;
+
+  &__content {
+    padding: 16px;
+  }
+}
+
+.bd-intro {
+  display: flex;
+
+  &__logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+    margin-right: 24px;
+  }
+
+  &__desc {
+    .title {
+      font-size: 28px;
+      margin: 0 0 8px;
+      color: $color-primary-text;
+    }
+
+    .location {
+      font-size: 12px;
+      color: $color-secondary-text;
+    }
+  }
+}
+
+.bd-content {
+  &__title {
+    font-size: 20px;
+    margin: 0 0 8px;
+    color: $color-primary-text;
+
+    &--padding {
+      padding: 16px 16px 0 16px;
+    }
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: $color-secondary-text;
+    margin: 0;
+  }
+
+  &__table {
+    width: 100%;
+    font-size: 14px;
+    color: $color-secondary-text;
+    border-spacing: 0;
+    border: 0;
+    margin: 12px 0px 8px;
+
+    .type {
+      width: 20%;
+      padding-bottom: 10px;
+    }
+
+    .value {
+      padding-bottom: 10px;
+    }
+  }
+
+  &__step {
+    list-style-type: none;
+    padding: 0;
+    margin: 16px;
+
+    .load-list {
+      width: 31%;
+      display: inline-block;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+
+    .step-list {
+      width: 33.33%;
+      display: inline-block;
+      vertical-align: top;
+
+      .step__card {
+        margin: 10px;
+        height: 134px;
+
+        &--title {
+          height: 40px;
+        }
+      }
+    }
+  }
+  
+  &__gallery {
+    list-style-type: none;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0px;
+      background: transparent; /* Chrome/Safari/Webkit */
+    }
+
+    li {
+      display: inline-block;
+      margin: 0 0 16px 16px;
+
+      &:last-child {
+        margin-right: 16px;
+      }
+
+      img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__backers {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+
+    li {
+      background: #F8F8F8;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+
+      .backers-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+
+        p {
+          font-size: 14px;
+          color: #828282;
+          margin: 0 8px 0 0;
+        }
+      }
+
+      .backers-time {
+        font-size: 12px;
+        color: #C0C0C0;
+        margin: 0;
+      }
+
+      .backers-verified {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    margin: 24px 0 32px;
+
+    .emoji {
+      font-size: 40px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      color: $color-primary-text;
+      margin: 0 0 8px;
+    }
+
+    .desc {
+      font-size: 12px;
+      color: $color-secondary-text;
+      margin: 0;
+    }
+  }
+
+  &__sidebar {
+    .desc {
+      font-size: 14px;
+      color: $color-primary-text;
+      margin: 0;
+    }
+
+    .form {
+      margin: 16px 0;
+
+      &__checkbox {
+        margin-top: 4px
+      }
+
+      &__btn {
+        margin-top: 24px
+      }
+    }
+  }
+}
+
+.btn-load {
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  color: $color-secondary-text;
+  border: 1px solid $color-grey;
+  background-color: $color-white;
+  margin: 16px auto 0;
+  width: 180px;
+  display: block;
+  text-align: center;
+
+  &:hover {
+    color: $color-secondary-text;
+  }
+}

@@ -5,11 +5,12 @@ import {
   Route
 } from 'react-router-dom'
 
-import { HOME_PATH } from './routes'
+import { HOME_PATH, BUSINESS_DETAIL_PATH } from './routes'
 import logo from './logo.svg';
 import './App.scss';
 
 import Home from './routes/Home'
+import BusinessDetail from './routes/BusinessDetail';
 
 class App extends React.Component {
   render = () => {
@@ -26,6 +27,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path={HOME_PATH} component={Home} />
+          <Route exact path={BUSINESS_DETAIL_PATH} component={BusinessDetail} />
         </Switch>
       </Router>
     )
