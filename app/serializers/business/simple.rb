@@ -5,6 +5,6 @@ class BusinessSimpleSerializer
 
   attributes :category, :location, :thumbnail_url
   attribute :backers_count do |object|
-    object.backers.count
+    object.backers_count rescue object.backers.count
   end
 end

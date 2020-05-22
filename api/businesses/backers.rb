@@ -38,5 +38,8 @@ Handler = Proc.new do |req, res|
   rescue ActiveModel::ValidationError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_VALIDATION, res.status)
+  rescue Mongo::Error::OperationFailure =>
+    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
+    res.body = JSON::Response.error('duplicate entry', ERROR_DUPLICATE_ENTRY, res.status)
   end
 end

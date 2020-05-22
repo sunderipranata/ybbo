@@ -28,6 +28,6 @@ class Business
   index({ location: 1, created_at: -1 }, { background: true })
   index({ category: 1, created_at: -1 }, { background: true })
 
-  validates :name, :location, :description, :instructions, :thumbnail_url, :assets_url, :pictures_url, presence: true
+  validates :name, :location, :description, :instructions, :category, :icon_url, :thumbnail_url, :assets_url, :pictures_url, presence: true
   validates :thumbnail_url, :assets_url, :pictures_url, format: { with: /https:\/\// }
 end
