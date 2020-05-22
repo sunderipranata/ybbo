@@ -81,6 +81,22 @@ class BusinessList extends Component {
     document.removeEventListener('click', this.hideDropdown)
   }
 
+  //TODO
+  handleMovePrevPage = () => {
+
+  }
+
+  //TODO
+  handleMoveNextPage = () => {
+
+  }
+
+  //TODO filter category
+
+  test = () => {
+    console.log('testing ajahhh')
+  }
+ 
   renderLoading = () => {
     return (
       <div className="business__content">
@@ -178,11 +194,11 @@ class BusinessList extends Component {
           }
 
         <div className="business__pagination">
-          <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev === false })}>
+          <a href="/" className={ClassNames('btn__prev', { 'hidden': hasPrev === false })} onClick = { this.test.bind(this) }>
             Sebelumnya
           </a>
           { page.at } / { page.total }
-          <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false })}>
+          <a href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false })} onClick = { this.test.bind(this) }>
             Selanjutnya
           </a>
         </div>
