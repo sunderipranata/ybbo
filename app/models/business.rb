@@ -26,7 +26,7 @@ class Business
 
   index({ created_at: -1 }, { background: true })
   index({ location: 1, created_at: -1 }, { background: true })
-  index({ category_cd: 1, created_at: -1 }, { background: true })
+  index({ category_cd: 1, created_at: -1 }, { background: true }) # _cd is because of SimpleEnum::Mongoid naming schemes
 
   validates :name, :location, :description, :instructions, :category, :icon_url, :thumbnail_url, :assets_url, :pictures_url, presence: true
   validates :thumbnail_url, :assets_url, :pictures_url, format: { with: /https:\/\// }
