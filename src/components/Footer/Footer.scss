@@ -1,0 +1,83 @@
+@import "../../styles/static.scss";
+
+.footer {
+  width: 100%;
+  padding: 40px 0;
+  background: $color-grey-light;
+
+  @media only screen and (max-width: $breakpoint-md-max) {
+    padding: 40px 0 32px;
+  }
+
+  &__main {
+    margin: 0 auto;
+    padding: 0 16px;
+    max-width: 970px;
+
+    @media (max-width:$breakpoint-md-max) {
+      max-width: 768px;
+    }
+
+    .footer-section {
+      margin-bottom: 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-auto-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      grid-column-gap: 16px;
+
+      @media only screen and (max-width: $breakpoint-md-max) {
+        display: block;
+      }
+    }
+
+    .footer-title {
+      font-size: 28px;
+      color: $color-primary-text;
+      margin: 0 0 20px;
+
+      @media only screen and (max-width:$breakpoint-lg-max) {
+        font-size: 24px;
+      }
+
+      @media only screen and (max-width: $breakpoint-md-max) {
+        margin-bottom: 16px;
+        line-height: 1.2;    
+      }
+    }
+
+    .footer-desc {
+      font-size: 16px;
+      color: $color-primary-text;
+      margin: 0;
+      line-height: 1.8;
+
+      @media only screen and (max-width:$breakpoint-lg-max) {
+        font-size: 14px;
+      }
+
+      @media only screen and (max-width: $breakpoint-md-max) {
+        font-size: 12px;
+      }
+    }
+
+    .social-media {
+      color: $color-primary-text;
+      margin-right: 24px;
+    }
+
+    .footer-notes {
+      font-size: 10px;
+      color: $color-primary-text;
+      margin-bottom: 0;
+      line-height: 1.8;
+
+      @media only screen and (max-width: $breakpoint-md-max) {
+        font-size: 8px;
+      }
+    }
+  }
+}

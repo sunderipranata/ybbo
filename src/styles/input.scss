@@ -1,0 +1,141 @@
+.select-dropdown {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  vertical-align: top;
+  align-items: flex-start;
+  cursor: pointer;
+  color: #828282;
+
+  &__container {
+    position: relative;
+    max-width: 100%;
+  }
+}
+
+.select-dropdown__content {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .label-wrapper {
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 18px 0px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 48px;
+    line-height: 1.6;
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  &.is-open .selected-label:after {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    margin-top: 9px;
+  }
+
+  .selected-label {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    &:after {
+      content:'';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      vertical-align: middle;
+      float: right;
+      margin-top: 4px;
+      border: 1px solid black;
+      border-width: 0 1px 1px 0;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      margin-right: 2px;
+    }
+  }
+
+  .box-positioner {
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  &.is-open .options-box {
+    display: block;
+  }
+  
+  .options-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    background-color: #fff;
+    display: none;
+  }
+
+  .scroll-area {
+    height: auto;
+    max-height: 180px;
+    overflow: auto;
+  }
+
+  .scroll-area * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .item {
+    padding: 12px 12px 12px 0px;
+    margin: 0 16px;
+    cursor: pointer;
+    align-items: center;
+    font-size: 14px;
+    color: #828282;
+    border-bottom: 1px solid #F2F2F2;
+
+    &--all {
+      background: #F2F2F2;
+      padding: 12px 16px 12px 16px;
+      margin: 0;
+      border-bottom: 0;
+      text-align: center;
+    }
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+    .notes {
+      color: #9FA6B0;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+  }
+
+  .dropdown-note {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.38);
+    text-align: center;
+    padding: 7px 0;
+    border-top: 1px solid #e0e0e0;
+  }
+}

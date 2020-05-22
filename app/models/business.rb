@@ -1,10 +1,8 @@
-require 'mongoid'
-require 'hanami/validations'
-require_relative '../initializers/mongoid'
-
 class Business
   include Mongoid::Document
   include Mongoid::Timestamps::Created
+  include Mongoid::Attributes::Dynamic
+  include SimpleEnum::Mongoid
 
   class ValidationError < StandardError
     def initialize(msg="no message")
@@ -12,21 +10,30 @@ class Business
     end
   end
 
+  CATEGORY = {
+    food_and_beverage: 10,
+    fashion: 40,
+    hobby: 50,
+    beauty: 60
+  }
+
   field :name,              type: String
-  field :ig_account,        type: String
   field :location,          type: String
-  field :category,          type: String
   field :description,       type: String
   field :instructions,      type: String
-  field :thumbnail_link,    type: String
-  field :assets_link,       type: String
-  field :anonymous_backers, type: Integer, default: 0
-  field :instagram_backers, type: Array
+  field :icon_url,          type: String
+  field :thumbnail_url,     type: String
+  field :assets_url,        type: String
+  field :pictures_url,      type: Array
 
-  index({ _id: -1 }, { background: true, unique: true })
-  index({ created_at: -1 }, { background: true, unique: true })
+  as_enum :category, CATEGORY
+  has_many :store_accounts, class_name: 'Business::StoreAccount'
+  has_many :backers, class_name: 'Business::Backer'
+
+  index({ created_at: -1 }, { background: true })
   index({ location: 1, created_at: -1 }, { background: true })
   index({ category: 1, created_at: -1 }, { background: true })
+
 
   validate :key_existence
 
