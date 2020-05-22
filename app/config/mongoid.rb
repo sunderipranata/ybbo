@@ -3,6 +3,7 @@ Mongoid.configure do |config|
     uri: "mongodb+srv://ybbo_app:Ynb6HcXHDlLgwzYU@cluster0-ffclo.gcp.mongodb.net/ybbo_test?retryWrites=true&w=majority",
   }
   config.log_level = :info
+  config.raise_not_found_error = false
 end
 Mongo::Logger.logger.level = Logger::INFO
 

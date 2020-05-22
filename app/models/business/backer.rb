@@ -14,5 +14,4 @@ class Business::Backer
 
   index({ username: 1 }, { unique: true, background: true })
   index({ category: 1, created_at: -1 }, { background: true })
-
 end

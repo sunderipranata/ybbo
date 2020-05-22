@@ -6,7 +6,7 @@ Handler = Proc.new do |req, res|
     case req.request_method
     when "GET"
       id = req.query['id'] || ""
-      limit = req.query['limit'].to_i || 10
+      limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
 
       # TODO: add filter location?
@@ -20,11 +20,11 @@ Handler = Proc.new do |req, res|
           business = Business.where(category: /#{category.downcase}/, :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         end
         res.status = HTTP_STATUS_OK
-        res.body = JSON::Response::Data.many(business, Serializer::Business::Simple, limit, res.status)
+        res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, limit, res.status)
       else
         business = Business.find_by(id: id)
         res.status = HTTP_STATUS_OK
-        res.body = JSON::Response::Data.one(business, Serializer::Business::Detail, res.status)
+        res.body = JSON::Response::Data.one(business, BusinessDetailSerializer, res.status)
       end
     when "POST"
       # do stuff authentication stuffs here
@@ -40,6 +40,6 @@ Handler = Proc.new do |req, res|
     end
   rescue Business::ValidationError => e
     res.status = 422
-    res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_VALIDATION, res.status)
   end
 end
