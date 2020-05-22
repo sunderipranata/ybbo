@@ -37,6 +37,6 @@ Handler = Proc.new do |req, res|
     res.body = JSON::Response.error("invalid business_id", INVALID_PARAMETER, res.status)
   rescue ActiveModel::ValidationError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, BUSINESS_VALIDATION_ERROR, res.status)
+    res.body = JSON::Response.error(e.message, ERROR_VALIDATION, res.status)
   end
 end
