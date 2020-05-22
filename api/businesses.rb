@@ -17,7 +17,7 @@ Handler = Proc.new do |req, res|
         if category.blank?
           business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         else
-          business = Business.where(category: /#{category.downcase}/, :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+          business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         end
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, limit, res.status)
@@ -38,7 +38,7 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("unimplemented", res.status)
     end
-  rescue Business::ValidationError => e
+  rescue ActiveModel::ValidationError => e
     res.status = 422
     res.body = JSON::Response.error(e.message, ERROR_VALIDATION, res.status)
   end
