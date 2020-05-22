@@ -1,5 +1,5 @@
 import React from 'react';
-import {withPageView} from './withPageView'
+import ReactGA from "react-ga";
 
 import {
   BrowserRouter as Router,
@@ -14,6 +14,15 @@ import './App.scss'
 import Home from './routes/Home'
 import BusinessDetail from './routes/BusinessDetail'
 import About from './routes/About/About'
+import withPageView from './utils/googleAnalytics/withPageView'
+
+import Home from './routes/Home'
+require('dotenv').config();
+
+ReactGA.initialize(process.env.ANALYTICS_TRACKING_ID, {
+  testMode: process.env.NODE_ENV === "test",
+  debug: true
+});
 
 class App extends React.Component {
 
