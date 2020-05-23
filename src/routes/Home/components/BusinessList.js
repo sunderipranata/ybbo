@@ -8,7 +8,7 @@ import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
-const PAGE_SIZE_DESKTOP = 6;
+const PAGE_SIZE_DESKTOP = 9;
 const PAGE_SIZE_MOBILE = 3;
 const categories = {
   all: 'Semua Kategori',
