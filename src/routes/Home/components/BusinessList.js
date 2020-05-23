@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
@@ -267,14 +268,17 @@ class BusinessList extends Component {
       const name = b.name
 
       return (
-        <a href="/" className="item" key = {id}>
+        <Link to={'/detail-bisnis/' + id} className="item" key = { id }>
           <BusinessCard 
             img = { thumbnailUrl } 
             title = { name }
             location = { location } 
             category = { category } 
             backers = { backersCount } />
-        </a>
+        </Link>
+        // <a href="/" className="item" key = {id}>
+          
+        // </a>
       )
     })
 
