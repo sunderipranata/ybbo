@@ -169,7 +169,6 @@ class BusinessList extends Component {
 
   checkPageUpdate = () => {
     const { page } = this.state
-    console.log('check page update', page)
 
     if(page.at === 1) {
       this.setState({
