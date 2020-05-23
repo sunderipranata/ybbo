@@ -1,0 +1,54 @@
+@import "../../styles/static";
+
+.navbar {
+  position: fixed;
+  height: 58px;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  color: $color-primary-text;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 3px 0px;
+  display: flex;
+  align-items: center;
+
+  &__back {
+    width: 52px;
+    height: 100%;
+    display: flex;
+    position: relative;
+
+    &:before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      background-size: 20px 20px;
+      background-image: url('./assets/ic-back.svg');
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      margin: auto;
+    }
+  }
+
+  &__title {
+    min-width: 0px;
+    padding-right: 16px;
+    flex: 1 1 0%;
+
+    .text {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 1.21429rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 0px;
+    }
+  }
+}
