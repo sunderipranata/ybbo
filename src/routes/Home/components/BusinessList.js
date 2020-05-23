@@ -10,12 +10,13 @@ const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 const PAGE_SIZE_DESKTOP = 6;
 const PAGE_SIZE_MOBILE = 3;
-// const categories = [
-//   'food_and_beverage',
-//   'fashion',
-//   'hobby',
-//   'beauty'
-// ]
+const categories = {
+  all: 'Semua Kategori',
+  food_and_beverage: 'Makanan dan Minuman',
+  fashion: 'Fashion',
+  hobby: 'Hobi',
+  beauty: 'Kecantikan'
+}
 
 class BusinessList extends Component {
   state = {
@@ -284,42 +285,50 @@ class BusinessList extends Component {
   }
 
   renderBusinessesCategoriesDesktop = () => {
+    const { category } = this.state
+    const baseClass = "category-item "
+    const classAll = category === 'all' ? baseClass + "active" : baseClass
+    const classFnB = category === 'food_and_beverage' ? baseClass + "active" : baseClass
+    const classFashion = category === 'fashion' ? baseClass + "active" : baseClass
+    const classHobby = category === 'hobby' ? baseClass + "active" : baseClass
+    const classBeauty = category === 'beauty' ? baseClass + "active" : baseClass
+
     return (
       <div className="business__filter">
         <ul className="filter__category">
           <li>
             <button 
-              className="category-item active"
+              className= { classAll }
               onClick = { this.handleCategoryChange.bind(this, 'all') }>
-              Semua Kategori
+              { categories['all'] } 
             </button>
           </li>
           <li>
             <button 
-              className="category-item"
+              className= { classFnB }
               onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
-              Makanan dan Minuman
+              { categories['food_and_beverage'] } 
             </button>
           </li>
           <li>
             <button 
-              className="category-item active"
+              className= { classFashion }
               onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
-              Fashion
+              { categories['fashion'] } 
             </button>
           </li>
           <li>
             <button 
-              className="category-item active"
+              className= { classBeauty }
               onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
-              Kecantikan
+              { categories['beauty'] } 
             </button>
           </li>
           <li>
             <button 
-              className="category-item active"
+              className= { classHobby }
               onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
-              Hobi
+              { categories['hobby'] } 
             </button>
           </li>
         </ul>
@@ -329,7 +338,7 @@ class BusinessList extends Component {
   }
 
   renderBusinessesCategoriesMobile = () => {
-    const { dropdownIsOpened } = this.state
+    const { dropdownIsOpened, category } = this.state
 
     return (
       <div className="select-dropdown" onClick={this.showDropdown}>
@@ -337,17 +346,27 @@ class BusinessList extends Component {
           <div className="select-dropdown__container">
             <div className="label-wrapper">
               <div className="selected-label">
-                Semua Kategori
+                { categories[category] }
               </div>
             </div>
             <div className="box-positioner">
               <div className="options-box">
                 <div className="scroll-area scrollbar">
-                  <div className="item">Semua Kategori</div>
-                  <div className="item">Makanan & Minuman</div>
-                  <div className="item">Fashion</div>
-                  <div className="item">Kecantikan</div>
-                  <div className="item">Hobi</div>
+                  <div className="item">
+                    { categories['all'] }
+                  </div>
+                  <div className="item">
+                    { categories['food_and_beverage'] }
+                  </div>
+                  <div className="item">
+                    { categories['fashion'] }
+                  </div>
+                  <div className="item">
+                    { categories['beauty'] }
+                  </div>
+                  <div className="item">
+                    { categories['hobby'] }
+                  </div>
                 </div>
               </div>
             </div>
