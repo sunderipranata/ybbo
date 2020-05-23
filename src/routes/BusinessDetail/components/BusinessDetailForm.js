@@ -53,7 +53,7 @@ class BusinessDetailForm extends Component {
               {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToBackers}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
               <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>200 Pendukung</button>. Yuk jadi salah satunya!</p>
               <form className="form">
-                <label className="label-input" for="account">Masukkan Instagram kamu</label>
+                <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
                 <input type="text" id="account" name="account" placeholder="Contoh: @instagram" />
                 { isError && <p className="label-error">error messsage</p>}
                 <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)

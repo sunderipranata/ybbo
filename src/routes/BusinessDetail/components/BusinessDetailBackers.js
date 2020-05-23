@@ -49,7 +49,7 @@ class BusinessDetailBackers extends Component {
             <div className="bd-content__empty">
               <span role="img" aria-label="Crying Face" className="emoji">😢</span>
               <p className="title">{title} belum ada pendukungnya nih.</p>
-              <p className="desc">Yuk jadi yang pertama dengan mendaftarkan akunmu.</p>
+              <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
             </div>
             :
             <Fragment>
