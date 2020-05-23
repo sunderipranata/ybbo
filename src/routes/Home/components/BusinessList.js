@@ -295,45 +295,47 @@ class BusinessList extends Component {
     const classBeauty = category === 'beauty' ? baseClass + "active" : baseClass
 
     return (
-      <div className="business__filter">
-        <ul className="filter__category">
-          <li>
-            <button 
-              className= { classAll }
-              onClick = { this.handleCategoryChange.bind(this, 'all') }>
-              { categories['all'] } 
-            </button>
-          </li>
-          <li>
-            <button 
-              className= { classFnB }
-              onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
-              { categories['food_and_beverage'] } 
-            </button>
-          </li>
-          <li>
-            <button 
-              className= { classFashion }
-              onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
-              { categories['fashion'] } 
-            </button>
-          </li>
-          <li>
-            <button 
-              className= { classBeauty }
-              onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
-              { categories['beauty'] } 
-            </button>
-          </li>
-          <li>
-            <button 
-              className= { classHobby }
-              onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
-              { categories['hobby'] } 
-            </button>
-          </li>
-        </ul>
-      </div>
+      <Desktop>
+        <div className="business__filter">
+          <ul className="filter__category">
+            <li>
+              <button 
+                className= { classAll }
+                onClick = { this.handleCategoryChange.bind(this, 'all') }>
+                { categories['all'] } 
+              </button>
+            </li>
+            <li>
+              <button 
+                className= { classFnB }
+                onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
+                { categories['food_and_beverage'] } 
+              </button>
+            </li>
+            <li>
+              <button 
+                className= { classFashion }
+                onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
+                { categories['fashion'] } 
+              </button>
+            </li>
+            <li>
+              <button 
+                className= { classBeauty }
+                onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
+                { categories['beauty'] } 
+              </button>
+            </li>
+            <li>
+              <button 
+                className= { classHobby }
+                onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
+                { categories['hobby'] } 
+              </button>
+            </li>
+          </ul>
+        </div>
+      </Desktop>
     )
   }
 
@@ -341,91 +343,94 @@ class BusinessList extends Component {
     const { dropdownIsOpened, category } = this.state
 
     return (
-      <div className="select-dropdown" onClick={this.showDropdown}>
-        <div className={ClassNames('select-dropdown__content', { 'is-open': dropdownIsOpened })}>
-          <div className="select-dropdown__container">
-            <div className="label-wrapper">
-              <div className="selected-label">
-                { categories[category] }
+      <Mobile>
+        <div className="select-dropdown" onClick={this.showDropdown}>
+          <div className={ClassNames('select-dropdown__content', { 'is-open': dropdownIsOpened })}>
+            <div className="select-dropdown__container">
+              <div className="label-wrapper">
+                <div className="selected-label">
+                  { categories[category] }
+                </div>
               </div>
-            </div>
-            <div className="box-positioner">
-              <div className="options-box">
-                <div className="scroll-area scrollbar">
-                  <div 
-                    className="item"
-                    onClick = { this.handleCategoryChange.bind(this, 'all') }>
-                    { categories['all'] }
-                  </div>
-                  <div 
-                    className="item"
-                    onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
-                    { categories['food_and_beverage'] }
-                  </div>
-                  <div 
-                    className="item"
-                    onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
-                    { categories['fashion'] }
-                  </div>
-                  <div 
-                    className="item"
-                    onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
-                    { categories['beauty'] }
-                  </div>
-                  <div 
-                    className="item"
-                    onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
-                    { categories['hobby'] }
+              <div className="box-positioner">
+                <div className="options-box">
+                  <div className="scroll-area scrollbar">
+                    <div 
+                      className="item"
+                      onClick = { this.handleCategoryChange.bind(this, 'all') }>
+                      { categories['all'] }
+                    </div>
+                    <div 
+                      className="item"
+                      onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
+                      { categories['food_and_beverage'] }
+                    </div>
+                    <div 
+                      className="item"
+                      onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
+                      { categories['fashion'] }
+                    </div>
+                    <div 
+                      className="item"
+                      onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
+                      { categories['beauty'] }
+                    </div>
+                    <div 
+                      className="item"
+                      onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
+                      { categories['hobby'] }
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </Mobile>
+      
+    )
+  }
+
+  renderPagination = () => {
+    const {
+      hasPrev,
+      hasNext,
+      page
+    } = this.state
+
+    return ( page.total > 1 &&
+      <div className="business__pagination">
+        <button 
+          className={ClassNames('btn__prev', { 'hidden': hasPrev === false })} 
+          onClick = { this.handleMovePrevPage.bind(this) }
+        >
+          Sebelumnya
+        </button>
+
+        { page.at } / { page.total }
+
+        <button 
+          className={ClassNames('btn__next', { 'hidden': hasNext === false })} 
+          onClick = { this.handleMoveNextPage.bind(this) }
+        >
+          Selanjutnya
+        </button>
       </div>
     )
   }
 
   render = () => {
-    const { 
-      hasPrev, 
-      hasNext, 
-      isLoading,
-      page
-    } = this.state
-
+    const { isLoading } = this.state
 
     return (
       <section className="home__business">
         <h2 className="business__title">Daftar Bisnis Online</h2>
-        <Desktop>
-          { this.renderBusinessesCategoriesDesktop() }
-        </Desktop>
-        <Mobile>
-          { this.renderBusinessesCategoriesMobile() }
-        </Mobile>
+
+        { this.renderBusinessesCategoriesDesktop() }
+        { this.renderBusinessesCategoriesMobile() }
+        { isLoading ? this.renderLoading() : this.renderBusinesses() }
+        { this.renderPagination() }
         
-          {
-            isLoading ? this.renderLoading() : this.renderBusinesses()
-          }
-
-        <div className="business__pagination">
-          <button 
-            className={ClassNames('btn__prev', { 'hidden': hasPrev === false })} 
-            onClick = { this.handleMovePrevPage.bind(this) }
-          >
-            Sebelumnya
-          </button>
-
-          { page.at } / { page.total }
-
-          <button 
-            className={ClassNames('btn__next', { 'hidden': hasNext === false })} 
-            onClick = { this.handleMoveNextPage.bind(this) }
-          >
-            Selanjutnya
-          </button>
-        </div>
       </section>
     )
   }
