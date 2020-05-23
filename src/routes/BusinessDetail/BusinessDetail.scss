@@ -76,7 +76,7 @@
 .bd-content {
   &__title {
     font-size: 20px;
-    margin: 0 0 8px;
+    margin: 0 0 16px;
     color: $color-primary-text;
 
     &--padding {
@@ -88,6 +88,7 @@
     font-size: 14px;
     color: $color-secondary-text;
     margin: 0;
+    line-height: 1.7;
   }
 
   &__table {
@@ -160,10 +161,14 @@
 
       .step__card {
         margin: 10px;
-        height: 210px;
+        height: 230px;
+
+        &--desc {
+          font-size: 12px;
+        }
 
         @media (max-width:$breakpoint-md-max) {
-          height: 148px;
+          height: 152px;
         }
 
         &--title {
@@ -309,6 +314,7 @@
       font-size: 14px;
       color: $color-primary-text;
       margin: 0;
+      line-height: 1.7;
     }
 
     .form {

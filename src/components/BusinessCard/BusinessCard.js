@@ -47,7 +47,7 @@ class BusinessCard extends Component {
               <div className="bc__content">
                 <p className="title">{title}</p>
                 {location != null && 
-                  <span className="desc" style={{ marginRight: "12px" }}>
+                  <span className="desc" style={{ marginRight: "16px" }}>
                     <FontAwesomeIcon icon={faMapMarkerAlt} style={{ marginRight: "4px" }} />
                     {location}
                   </span> 
