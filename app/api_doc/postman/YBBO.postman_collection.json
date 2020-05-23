@@ -131,7 +131,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{host}}/api/businesses?limit=10&category=food_and_beverage",
+							"raw": "https://{{host}}/api/businesses?limit=10&category=food_and_beverage&random=true&limit=2",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -148,6 +148,14 @@
 								{
 									"key": "category",
 									"value": "food_and_beverage"
+								},
+								{
+									"key": "random",
+									"value": "true"
+								},
+								{
+									"key": "limit",
+									"value": "2"
 								}
 							]
 						}
@@ -179,6 +187,17 @@
 									"value": "3"
 								}
 							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Randomized simple business list by category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []
