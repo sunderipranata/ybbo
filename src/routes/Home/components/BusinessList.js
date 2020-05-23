@@ -278,11 +278,19 @@ class BusinessList extends Component {
       )
     })
 
-    return (
-      <div className="business__content">
-        { display }
-      </div>
-    )
+    if(display.length > 0) {
+      return (
+        <div className="business__content">
+          { display }
+        </div>
+      )
+    } else {
+      return (
+        <div className="business__content">
+          "Ini kosongggg syll di update wkwk"
+        </div>
+      )
+    }    
   }
 
   renderBusinessesCategoriesDesktop = () => {
