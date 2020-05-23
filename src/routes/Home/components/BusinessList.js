@@ -92,7 +92,6 @@ class BusinessList extends Component {
     document.removeEventListener('click', this.hideDropdown)
   }
 
-  //TODO
   handleMovePrevPage = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     //loading
@@ -122,7 +121,6 @@ class BusinessList extends Component {
     })
   }
 
-  //TODO
   handleMoveNextPage = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     //loading

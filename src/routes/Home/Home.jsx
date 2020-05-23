@@ -19,7 +19,6 @@ class Home extends React.Component {
       }
 
       callback(null)
-      //TODO: error handling
     })
   }
 
