@@ -14,7 +14,7 @@ Handler = Proc.new do |req, res|
       backers = business.present? ? business.backers.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit) : nil
 
       res.status = HTTP_STATUS_OK
-      res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, limit, res.status)
+      res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, res.status, pagination_meta: true, limit: limit)
     when "POST"
       username = req.query['username']
       account_type = req.query['account_type'].to_sym
