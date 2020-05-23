@@ -10,6 +10,12 @@ const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 const PAGE_SIZE_DESKTOP = 6;
 const PAGE_SIZE_MOBILE = 3;
+// const categories = [
+//   'food_and_beverage',
+//   'fashion',
+//   'hobby',
+//   'beauty'
+// ]
 
 class BusinessList extends Component {
   state = {
@@ -25,7 +31,8 @@ class BusinessList extends Component {
       businesses: [],
       total: 1
     },
-    isLoading: true
+    isLoading: true,
+    category: 'all'
   }
 
   componentWillMount = () => {
@@ -37,8 +44,9 @@ class BusinessList extends Component {
   componentDidMount = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
+    const { category } = this.state
 
-    this.props.fetchData(limit, offset, (res) => {
+    this.props.fetchData(limit, offset, category, (res) => {
       if(res !== null) {
         const businessData = {
           businesses: res.businesses,
@@ -94,6 +102,8 @@ class BusinessList extends Component {
 
   handleMovePrevPage = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const { category } = this.state
+
     //loading
     this.toggleLoading(true)
 
@@ -108,7 +118,7 @@ class BusinessList extends Component {
       page: curPage
     })
 
-    this.props.fetchData(limit, offset, (res) => {
+    this.props.fetchData(limit, offset, category, (res) => {
       if(res !== null) {
         const businesses = res.businesses
         this.setState({
@@ -123,6 +133,7 @@ class BusinessList extends Component {
 
   handleMoveNextPage = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const { category } = this.state
     //loading
     this.toggleLoading(true)
     
@@ -133,7 +144,7 @@ class BusinessList extends Component {
     //get last offset
     const offset = curPage.lastIds[curPage.lastIds.length - 1]
     
-    this.props.fetchData(limit, offset, (res) => {
+    this.props.fetchData(limit, offset, category, (res) => {
       if(res !== null) {
         const businesses = res.businesses
         this.setState({
@@ -178,8 +189,52 @@ class BusinessList extends Component {
     }
   }
 
-  //TODO filter category
+  handleCategoryChange = (category) => {
+    this.toggleLoading(true)
+    this.handleResetPage()
+    this.setState({
+      category: category
+    })
 
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const offset = null
+    this.props.fetchData(limit, offset, category, (res) => {
+      if(res !== null) {
+        const businessData = {
+          businesses: res.businesses,
+          total: res.total
+        }
+        this.setState({
+          businessData: businessData
+        }, () => {
+          this.updateTotalPages()
+          this.toggleLoading(false)
+        })
+
+        //there are businesses, so update and push to lastIds
+        if(res.businesses.length > 0) {
+          const lastId = res.businesses[res.businesses.length - 1].id
+          const curPage = { ...this.state.page }
+          curPage.lastIds.push(lastId)
+          this.setState({
+            page: curPage
+          })
+        }
+      }
+    })
+  }
+
+  handleResetPage = () => {
+    const page = {
+      at: 1,
+      total: 1,
+      lastIds: []
+    }
+
+    this.setState({
+      page: page
+    })
+  }
  
   renderLoading = () => {
     const size = isMobile ? 3 : 6
@@ -228,52 +283,97 @@ class BusinessList extends Component {
     )
   }
 
+  renderBusinessesCategoriesDesktop = () => {
+    return (
+      <div className="business__filter">
+        <ul className="filter__category">
+          <li>
+            <button 
+              className="category-item active"
+              onClick = { this.handleCategoryChange.bind(this, 'all') }>
+              Semua Kategori
+            </button>
+          </li>
+          <li>
+            <button 
+              className="category-item"
+              onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
+              Makanan dan Minuman
+            </button>
+          </li>
+          <li>
+            <button 
+              className="category-item active"
+              onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
+              Fashion
+            </button>
+          </li>
+          <li>
+            <button 
+              className="category-item active"
+              onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
+              Kecantikan
+            </button>
+          </li>
+          <li>
+            <button 
+              className="category-item active"
+              onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
+              Hobi
+            </button>
+          </li>
+        </ul>
+      </div>
+    )
+
+  }
+
+  renderBusinessesCategoriesMobile = () => {
+    const { dropdownIsOpened } = this.state
+
+    return (
+      <div className="select-dropdown" onClick={this.showDropdown}>
+        <div className={ClassNames('select-dropdown__content', { 'is-open': dropdownIsOpened })}>
+          <div className="select-dropdown__container">
+            <div className="label-wrapper">
+              <div className="selected-label">
+                Semua Kategori
+              </div>
+            </div>
+            <div className="box-positioner">
+              <div className="options-box">
+                <div className="scroll-area scrollbar">
+                  <div className="item">Semua Kategori</div>
+                  <div className="item">Makanan & Minuman</div>
+                  <div className="item">Fashion</div>
+                  <div className="item">Kecantikan</div>
+                  <div className="item">Hobi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const { 
       hasPrev, 
       hasNext, 
-      dropdownIsOpened,
       isLoading,
       page
     } = this.state
+
 
     return (
       <section className="home__business">
         <h2 className="business__title">Daftar Bisnis Online</h2>
         <Desktop>
-          <div className="business__filter">
-            <ul className="filter__category">
-              <li><a href="/" className="category-item active">Semua</a></li>
-              <li><a href="/" className="category-item">Makanan & Minuman</a></li>
-              <li><a href="/" className="category-item">Fashion</a></li>
-              <li><a href="/" className="category-item">Kecantikan</a></li>
-              <li><a href="/" className="category-item">Hobi</a></li>
-            </ul>
-          </div>
+          { this.renderBusinessesCategoriesDesktop() }
         </Desktop>
         <Mobile>
-          <div className="select-dropdown" onClick={this.showDropdown}>
-            <div className={ClassNames('select-dropdown__content', { 'is-open': dropdownIsOpened })}>
-              <div className="select-dropdown__container">
-                <div className="label-wrapper">
-                  <div className="selected-label">
-                    Semua Kategori
-                  </div>
-                </div>
-                <div className="box-positioner">
-                  <div className="options-box">
-                    <div className="scroll-area scrollbar">
-                      <div className="item">Semua Kategori</div>
-                      <div className="item">Makanan & Minuman</div>
-                      <div className="item">Fashion</div>
-                      <div className="item">Kecantikan</div>
-                      <div className="item">Hobi</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          { this.renderBusinessesCategoriesMobile() }
         </Mobile>
         
           {
