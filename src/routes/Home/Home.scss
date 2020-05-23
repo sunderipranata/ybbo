@@ -67,6 +67,7 @@
 
     @media only screen and (max-width: $breakpoint-md-max) {
       font-size: 14px;
+      margin-top: 16px;
     }
   }
 }
@@ -74,22 +75,151 @@
 .home__steps {
   display: flex;
   justify-content: space-between;
-  margin: 56px auto;
+  margin: 56px auto 140px;
 
   @media (max-width:$breakpoint-md-max) {
     margin: 32px 0;
     display: block;
   }
 
-  .steps-section__title {
+  .steps-section__img {
     width: 35%;
+    position: relative;
+
+    @media (max-width:$breakpoint-md-max) {
+      width: 100%;
+      text-align: center;
+      margin-bottom: -18px;
+    }
+
+    .illustration__wrapper {
+      position: absolute;
+      left: 40px;
+
+      @media only screen and (max-width: $breakpoint-lg-max) {
+        left: 0;
+      }
+    }
+
+    .icon__phone {
+      height: 450px;
+
+      @media (max-width:$breakpoint-md-max) {
+        height: 300px;
+      }
+    }
+
+    .icon__steps {
+      position: absolute;
+
+      &--one {
+        width: 360px;
+        top: 14%;
+        left: -30%;
+
+        @media only screen and (max-width: $breakpoint-lg-max) {
+          width: 300px;
+          top: 20%;
+          left: -14%;
+        }
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 230px;
+          top: 15%;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+
+        @media (max-width: 350px) {
+          width: 180px;
+          top: 20%;
+        }
+      }
+
+      &--two {
+        width: 300px;
+        top: 20%;
+        left: -16%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 220px;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+
+        @media (max-width: 350px) {
+          width: 180px;
+          top: 25%;
+        }
+      }
+
+      &--three-caps {
+        width: 175px;
+        top: 25%;
+        left: 13%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 100px;
+          top: 23%;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+      }
+
+      &--three-tag1 {
+        width: 70px;
+        top: 60%;
+        left: 12%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 50px;
+          top: 58%;
+          left: 28%;
+        }
+      }
+
+      &--three-tag2 {
+        width: 126px;
+        top: 65%;
+        left: 13%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 96px;
+          top: 64%;
+          left: 28.5%;
+        }
+      }
+
+      &--four {
+        width: 300px;
+        top: 15%;
+        left: -16%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 200px;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+      }
+    }
   }
 
   .steps__title {
     font-size: 32px;
-    margin: 0;
-    position: sticky;
     top: 120px;
+    margin: 0 0 24px;
 
     @media (max-width:$breakpoint-lg-max) {
       position: initial;
@@ -104,7 +234,6 @@
 
   .steps-section__content {
     width: 60%;
-    padding-left: 32px;
   }
 
   .steps__list {
@@ -275,6 +404,13 @@
 
         .category-item {
           color: $color-secondary-text;
+          border: 0;
+          cursor: pointer;
+          font-size: 14px;
+          padding: 0;
+          outline: none;
+          background-color: transparent;
+          font-family: 'DM Sans', sans-serif;
     
           &:hover {
             color: $color-blue;
@@ -282,6 +418,10 @@
     
           &.active {
             font-weight: bold;
+
+            &:hover {
+              color: $color-secondary-text;
+            }
           }
         }
       }
@@ -305,6 +445,51 @@
     }
   }
 
+  .business__empty {
+    text-align: center;
+    margin: 72px 0 150px;
+
+    .emoji {
+      font-size: 40px;
+
+      @media (max-width:$breakpoint-md-max) {
+        font-size: 32px;
+      }
+    }
+
+    .title {
+      font-size: 24px;
+      margin: 16px 0 8px;
+      color: $color-primary-text;
+
+      @media (max-width:$breakpoint-md-max) {
+        font-size: 18px;
+      }
+
+      @media (max-width:350px) {
+        font-size: 14px;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: $color-secondary-text;
+
+      @media (max-width:$breakpoint-md-max) {
+        font-size: 14px;
+      }
+
+      @media (max-width:350px) {
+        font-size: 12px;
+      }
+    }
+
+    .button {
+      margin-top: 24px;
+    }
+  }
+
   .business__pagination {
     text-align: center;
     color: $color-secondary-text;
@@ -319,6 +504,8 @@
     }
 
     .btn__prev, .btn__next {
+      outline: none;
+      cursor: pointer;
       border-radius: 12px;
       padding: 12px;
       font-size: 14px;

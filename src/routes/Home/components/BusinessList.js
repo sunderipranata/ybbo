@@ -290,8 +290,11 @@ class BusinessList extends Component {
       )
     } else {
       return (
-        <div className="business__content">
-          "Ini kosongggg syll di update wkwk"
+        <div className="business__empty">
+          <span role="img" aria-label="Pensive Face" className="emoji">😔</span>
+          <h4 className="title">Belum ada bisnis di kategori ini nih.</h4>
+          <p>Kamu punya bisnis di kategori ini? Yuk Daftar!</p>
+          <a href="/" target="_blank" className="button button--main">Daftarkan Bisnis mu</a>
         </div>
       )
     }    
