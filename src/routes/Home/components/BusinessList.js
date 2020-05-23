@@ -19,7 +19,7 @@ class BusinessList extends Component {
     page: {
       at: 1,
       total: 1,
-      lastIds: []
+      lastIds: []   //to keep track last id offset when switching between pages
     },
     businessData: {
       businesses: [],
@@ -38,38 +38,26 @@ class BusinessList extends Component {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
 
-    this.fetch(limit, offset)
-  }
-
-  fetch = (limit, offset) => {
     this.props.fetchData(limit, offset, (res) => {
-      if (res !== null) {
+      if(res !== null) {
         const businessData = {
           businesses: res.businesses,
           total: res.total
         }
+        this.setState({
+          businessData: businessData
+        }, () => {
+          this.updateTotalPages()
+          this.toggleLoading(false)
+        })
 
+        //there are businesses, so update and push to lastIds
         if(res.businesses.length > 0) {
           const lastId = res.businesses[res.businesses.length - 1].id
-          console.log('lastId', lastId)
           const curPage = { ...this.state.page }
           curPage.lastIds.push(lastId)
-
-          console.log('curpage changes', curPage)
-
           this.setState({
-            businessData: businessData,
             page: curPage
-          }, () => {
-            this.updateTotalPages()
-            this.toggleLoading(false)
-          })
-        } else {
-          this.setState({
-            businessData: businessData
-          }, () => {
-            this.updateTotalPages()
-            this.toggleLoading(false)
           })
         }
       }
@@ -81,7 +69,7 @@ class BusinessList extends Component {
     const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const totalPage =  Math.ceil(total / size)
 
-    let curPage = { ...this.state.page }
+    const curPage = { ...this.state.page }
     curPage.total = totalPage
     this.setState({
       page: curPage
@@ -90,7 +78,7 @@ class BusinessList extends Component {
 
   toggleLoading = (loading) => {
     this.setState({
-      loading: loading
+      isLoading: loading
     })
   }
 
@@ -124,10 +112,10 @@ class BusinessList extends Component {
 
     console.log('curPage', curPage)
 
-    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    const offset = curPage.lastIds[curPage.lastIds.length - 1]
+    // const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    // const offset = curPage.lastIds[curPage.lastIds.length - 1]
 
-    this.fetch(limit, offset)
+    // this.fetch(limit, offset)
   }
 
   //TODO filter category
@@ -186,7 +174,7 @@ class BusinessList extends Component {
       hasPrev, 
       hasNext, 
       dropdownIsOpened,
-      loading,
+      isLoading,
       page
     } = this.state
 
@@ -230,7 +218,7 @@ class BusinessList extends Component {
         </Mobile>
         
           {
-            loading ? this.renderLoading() : this.renderBusinesses()
+            isLoading ? this.renderLoading() : this.renderBusinesses()
           }
 
         <div className="business__pagination">
