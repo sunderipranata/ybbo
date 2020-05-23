@@ -14,11 +14,14 @@ class BusinessDetailForm extends Component {
   }
 
   state = {
-    isError: false
+    isError: false,
+    isAnonymous: false
   }
 
+  handleCheckboxChange = event => this.setState({ isAnonymous: event.target.checked })
+
   render() {
-    const { isError } = this.state
+    const { isError, isAnonymous } = this.state
     const { isLoading } = this.props
 
     return (
@@ -43,11 +46,20 @@ class BusinessDetailForm extends Component {
             <input type="text" id="account" name="account" placeholder="Contoh: @instagram" />
             { isError && <p className="label-error">error messsage</p>}
             <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
-              <input type="checkbox" />
+              <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
               <span class="checkmark" />
             </label>
-            <input className="button button--disabled form__btn" type="submit" value="Download aset untuk dipost" />
-            {/* <input className="button button--main form__btn" type="submit" value="Download aset untuk dipost" /> */}
+            { isAnonymous ? 
+              <div className="notes form__notes">
+                Kontribusi kamu akan kami catat sebagai anonim di daftar pendukung [Nama Bisnis].
+              </div>
+            :
+              <div className="notes form__notes">
+                Akun sosial media mu akan tercantum di daftar pendukung [Nama Bisnis].
+              </div>
+            }
+            <input className="button button--disabled" type="submit" value="Download aset untuk dipost" />
+            {/* <input className="button button--main" type="submit" value="Download aset untuk dipost" /> */}
           </form>
         </Fragment>
         }
