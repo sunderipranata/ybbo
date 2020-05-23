@@ -21,6 +21,28 @@
 .home__hero {
   margin: 0 auto;
 
+  .title {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__logo {
+    width: 64px;
+    height: 64px;
+    margin-right: 8px;
+  
+    @media (max-width:$breakpoint-md-max) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: 350px) {
+      width: 32px;
+      height: 32px;
+      margin-right: 4px;
+    }
+  }
+
   .hero__title {
     font-size: 40px;
     margin-block-start: 0;
@@ -30,6 +52,10 @@
     @media only screen and (max-width: $breakpoint-md-max) {
       font-size: 24px;
       margin: 8px 0;
+    }
+
+    @media (max-width: 350px) {
+      font-size: 22px;
     }
   }
 

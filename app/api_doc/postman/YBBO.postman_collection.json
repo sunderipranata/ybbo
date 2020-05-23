@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "657cdbc1-6e99-46d1-b978-a827bf3e4958",
+		"name": "YBBO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Business",
+			"item": [
+				{
+					"name": "Get List of Business (Simple)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/api/businesses?limit=10&offset=",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": ""
+								}
+							]
+						},
+						"description": "possible query:\n?limit=,offset="
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Business Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/api/businesses/5ec7b3ea6ed167768dc93bda",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								"5ec7b3ea6ed167768dc93bda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Business' List of Backers ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/api/businesses/5ec7b3ea6ed167768dc93bda/backers?limit=1",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								"5ec7b3ea6ed167768dc93bda",
+								"backers"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post a Backer to a Business",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "business_id",
+									"value": "5ec7b3ea6ed167768dc93bda",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "asdfwkwkwef",
+									"type": "text"
+								},
+								{
+									"key": "account_type",
+									"value": "instagram",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{host}}/api/businesses/backers",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses",
+								"backers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a List of Businesses by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/api/businesses?limit=10&category=food_and_beverage",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "category",
+									"value": "food_and_beverage"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a List of Random Business",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/api/businesses?category=food_and_beverage&random=3",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "food_and_beverage"
+								},
+								{
+									"key": "random",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>Fill 1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="System-Icons/Navigation/Close" transform="translate(-4.000000, -4.000000)" fill="#333333">
+            <g id="Group">
+                <path d="M14,12 L19.544,6.456 C20.127,5.873 20.154,4.945 19.604,4.396 C19.055,3.846 18.127,3.873 17.544,4.456 L12,10 L6.456,4.456 C5.873,3.873 4.945,3.846 4.396,4.396 C3.846,4.945 3.873,5.873 4.456,6.456 L10,12 L4.456,17.544 C3.873,18.127 3.846,19.055 4.396,19.604 C4.945,20.154 5.873,20.127 6.456,19.544 L12,14 L17.544,19.544 C18.127,20.127 19.055,20.154 19.604,19.604 C20.154,19.055 20.127,18.127 19.544,17.544 L14,12 Z" id="Fill-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>
