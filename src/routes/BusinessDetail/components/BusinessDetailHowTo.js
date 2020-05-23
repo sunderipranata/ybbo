@@ -31,13 +31,13 @@ class BusinessDetailHowTo extends Component {
           :
           <ul className="bd-content__step">
             <li className="step-list">
-              <StepCard index="1" title="Download Aset" desc="Download gambar atau video dengan memasukkan akun sosial media mu." />
+              <StepCard index="1" title="Order atau Download" desc={"Order langsung produk dari " + title + "  atau download saja asetnya."} />
             </li>
             <li className="step-list">
-              <StepCard index="2" title="Promosikan di Sosial Media" desc="Post gambar atau video yang sudah kamu download dan tag kami @YukBantuBisnis.Online" />
+              <StepCard index="2" title="Post & Tag Kami di Instagram" desc="Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag @YukBantuBisnis.Online ya! :)" />
             </li>
             <li className="step-list">
-              <StepCard index="3" title="Selesai" desc={"Akun mu akan tercantum di daftar pendukung " + title  +". Terima kasih atas kotribusi mu."} />
+              <StepCard index="3" title="Jadi Pendukung Terverifikasi" desc={"Akun kamu akan tercatat sebagai akun terverifikasi dan testimoni kamu akan ditampilkan. Terima kasih atas kotribusi mu."} />
             </li>
           </ul>
       }

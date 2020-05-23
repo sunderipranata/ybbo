@@ -67,6 +67,7 @@
 
     @media only screen and (max-width: $breakpoint-md-max) {
       font-size: 14px;
+      margin-top: 16px;
     }
   }
 }
@@ -74,7 +75,7 @@
 .home__steps {
   display: flex;
   justify-content: space-between;
-  margin: 56px auto;
+  margin: 56px auto 140px;
 
   @media (max-width:$breakpoint-md-max) {
     margin: 32px 0;
@@ -83,12 +84,140 @@
 
   .steps-section__img {
     width: 35%;
+    position: relative;
+
+    @media (max-width:$breakpoint-md-max) {
+      width: 100%;
+      text-align: center;
+      margin-bottom: -18px;
+    }
+
+    .illustration__wrapper {
+      position: absolute;
+      left: 40px;
+
+      @media only screen and (max-width: $breakpoint-lg-max) {
+        left: 0;
+      }
+    }
+
+    .icon__phone {
+      height: 450px;
+
+      @media (max-width:$breakpoint-md-max) {
+        height: 300px;
+      }
+    }
+
+    .icon__steps {
+      position: absolute;
+
+      &--one {
+        width: 360px;
+        top: 14%;
+        left: -30%;
+
+        @media only screen and (max-width: $breakpoint-lg-max) {
+          width: 300px;
+          top: 20%;
+          left: -14%;
+        }
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 230px;
+          top: 15%;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+
+        @media (max-width: 350px) {
+          width: 180px;
+          top: 20%;
+        }
+      }
+
+      &--two {
+        width: 300px;
+        top: 20%;
+        left: -16%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 220px;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+
+        @media (max-width: 350px) {
+          width: 180px;
+          top: 25%;
+        }
+      }
+
+      &--three-caps {
+        width: 175px;
+        top: 25%;
+        left: 13%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 100px;
+          top: 23%;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+      }
+
+      &--three-tag1 {
+        width: 70px;
+        top: 60%;
+        left: 12%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 50px;
+          top: 58%;
+          left: 28%;
+        }
+      }
+
+      &--three-tag2 {
+        width: 126px;
+        top: 65%;
+        left: 13%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 96px;
+          top: 64%;
+          left: 28.5%;
+        }
+      }
+
+      &--four {
+        width: 300px;
+        top: 15%;
+        left: -16%;
+
+        @media (max-width:$breakpoint-md-max) {
+          width: 200px;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+      }
+    }
   }
 
   .steps__title {
     font-size: 32px;
-    // margin: 0;
-    // position: sticky;
     top: 120px;
     margin: 0 0 24px;
 
@@ -105,7 +234,6 @@
 
   .steps-section__content {
     width: 60%;
-    // padding-left: 32px;
   }
 
   .steps__list {

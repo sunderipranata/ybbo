@@ -160,14 +160,18 @@
 
       .step__card {
         margin: 10px;
-        height: 134px;
+        height: 210px;
 
         @media (max-width:$breakpoint-md-max) {
-          height: 120px;
+          height: 148px;
         }
 
         &--title {
-          height: 40px;
+          height: 68px;
+
+          @media (max-width:$breakpoint-md-max) {
+            height: 46px;
+          }
         }
       }
     }
