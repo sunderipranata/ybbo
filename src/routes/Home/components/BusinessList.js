@@ -82,6 +82,8 @@ class BusinessList extends Component {
     curPage.total = totalPage
     this.setState({
       page: curPage
+    }, function() {
+      this.checkPageUpdate()
     })
   }
 
@@ -167,6 +169,7 @@ class BusinessList extends Component {
 
   checkPageUpdate = () => {
     const { page } = this.state
+    console.log('check page update', page)
 
     if(page.at === 1) {
       this.setState({
@@ -182,8 +185,7 @@ class BusinessList extends Component {
       this.setState({
         hasNext: true
       })
-    }
-    if(page.at === page.total) {
+    } else if(page.at === page.total) {
       this.setState({
         hasNext: false
       })
@@ -334,7 +336,6 @@ class BusinessList extends Component {
         </ul>
       </div>
     )
-
   }
 
   renderBusinessesCategoriesMobile = () => {
@@ -386,7 +387,7 @@ class BusinessList extends Component {
     )
   }
 
-  render() {
+  render = () => {
     const { 
       hasPrev, 
       hasNext, 
