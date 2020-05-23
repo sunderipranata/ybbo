@@ -61,11 +61,11 @@
     }
 
     .bc__content {
-        padding: 8px 10px;
+        padding: 10px 12px;
 
         .title {
             color: $color-secondary-text;
-            margin: 0;
+            margin: 0 0 4px;
             font-size: 16px;
             white-space: nowrap;
             overflow: hidden;
@@ -76,6 +76,7 @@
             color: $color-secondary-text;
             font-size: 12px;
             margin: 0;
+            line-height: 2;
         }
     }
 }
