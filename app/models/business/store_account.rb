@@ -2,7 +2,19 @@ class Business::StoreAccount
   include Mongoid::Document
   include SimpleEnum::Mongoid
 
-  as_enum :account_type, instagram: 0, facebook: 1, twitter: 2, bukalapak: 3, tokopedia: 4, shopee: 5, gojek: 6, grab: 7
+  ACCOUNT_TYPE = {
+    instagram:   0,
+    facebook:    1,
+    twitter:     2,
+    bukalapak:   3,
+    tokopedia:   4,
+    shopee:      5,
+    gojek:       6,
+    grab:        7,
+    whatsapp:    8
+  }.freeze
+
+  as_enum :account_type, ACCOUNT_TYPE
 
   field :username, type: String
   field :name, type: String
@@ -10,5 +22,7 @@ class Business::StoreAccount
 
   belongs_to :business
 
-  index({ username: 1, account_type: -1 }, { unique: true, background: true })
+  index({ username: 1, account_type_cd: -1 }, { unique: true, background: true }) # _cd is because of SimpleEnum::Mongoid naming schemes
+
+  validates :name, :account_type, presence: true
 end

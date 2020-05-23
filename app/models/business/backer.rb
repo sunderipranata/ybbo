@@ -3,7 +3,13 @@ class Business::Backer
   include SimpleEnum::Mongoid
   include Mongoid::Timestamps::Created
 
-  as_enum :account_type, instagram: 0, facebook: 1, twitter: 2
+  ACCOUNT_TYPE = {
+    instagram: 0,
+    facebook:  1,
+    twitter:   2
+  }.freeze
+
+  as_enum :account_type, ACCOUNT_TYPE
 
   field :username, type: String
   field :comment,  type: String
@@ -11,7 +17,14 @@ class Business::Backer
   field :anonym,   type: Boolean, default: false
 
   belongs_to :business, counter_cache: true
+  # to reset counter, use business.reset_counters(:backers)
 
-  index({ username: 1 }, { unique: true, background: true })
-  index({ category: 1, created_at: -1 }, { background: true })
+  index({ username: 1, account_type_cd: 1 }, { unique: true, background: true }) # _cd is because of SimpleEnum::Mongoid naming schemes
+
+  validates :username, :account_type, presence: true
+  validate :username_regex
+
+  def username_regex
+    errors.add(:username, "instagram username validation failed") if  self.instagram? && self.username !~ /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/
+  end
 end
