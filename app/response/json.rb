@@ -11,7 +11,7 @@ module JSON
         serializer.new(object, options).serialized_json
       end
 
-      def many(object, serializer, limit, http_status, options={})
+      def many(object, serializer, http_status, options={})
         serializer_options = {}
         serializer_options[:meta] = {
           http_status: http_status
