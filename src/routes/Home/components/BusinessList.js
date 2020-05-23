@@ -260,7 +260,7 @@ class BusinessList extends Component {
     const { businessData } = this.state
     const display = businessData.businesses.map((b) => {
       const backersCount = b.backersCount
-      const category = b.category
+      const category = categories[b.category]
       const id = b.id
       const location = b.location
       const thumbnailUrl = b.thumbnailUrl
