@@ -94,28 +94,90 @@ class BusinessList extends Component {
 
   //TODO
   handleMovePrevPage = () => {
-    console.log('prev')
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    //loading
+    this.toggleLoading(true)
+
+    //decrement page
+    const curPage = { ...this.state.page }
+    curPage.at--
+
+    //pop
+    curPage.lastIds.pop()
+    const offset = curPage.lastIds.length > 1 ? curPage.lastIds[curPage.lastIds.length - 2] : null
+    this.setState({
+      page: curPage
+    })
+
+    this.props.fetchData(limit, offset, (res) => {
+      if(res !== null) {
+        const businesses = res.businesses
+        this.setState({
+          businessData: { ...this.state.businessData, businesses: businesses }
+        }, () => {
+          this.toggleLoading(false)
+          this.checkPageUpdate()
+        })
+      }
+    })
   }
 
   //TODO
   handleMoveNextPage = () => {
-    console.log('next')
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     //loading
     this.toggleLoading(true)
     
     //increment page
     const curPage = { ...this.state.page }
     curPage.at++
-    this.setState({
-      page: curPage
+    
+    //get last offset
+    const offset = curPage.lastIds[curPage.lastIds.length - 1]
+    
+    this.props.fetchData(limit, offset, (res) => {
+      if(res !== null) {
+        const businesses = res.businesses
+        this.setState({
+          businessData: { ...this.state.businessData, businesses: businesses }
+        }, () => {
+          //push current last id
+          const lastId = res.businesses[res.businesses.length - 1].id
+          curPage.lastIds.push(lastId)
+          this.setState({
+            page: curPage
+          }, () => {
+            this.toggleLoading(false)
+            this.checkPageUpdate()
+          })
+        })
+      }
     })
+  }
 
-    console.log('curPage', curPage)
+  checkPageUpdate = () => {
+    const { page } = this.state
 
-    // const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    // const offset = curPage.lastIds[curPage.lastIds.length - 1]
+    if(page.at === 1) {
+      this.setState({
+        hasPrev: false
+      })
+    } else if(page.at > 1) {
+      this.setState({
+        hasPrev: true
+      })
+    }
 
-    // this.fetch(limit, offset)
+    if(page.at < page.total) {
+      this.setState({
+        hasNext: true
+      })
+    }
+    if(page.at === page.total) {
+      this.setState({
+        hasNext: false
+      })
+    }
   }
 
   //TODO filter category
@@ -141,7 +203,6 @@ class BusinessList extends Component {
 
   renderBusinesses = () => {
     const { businessData } = this.state
-    console.log('business data', businessData)
     const display = businessData.businesses.map((b) => {
       const backersCount = b.backersCount
       const category = b.category
@@ -222,11 +283,19 @@ class BusinessList extends Component {
           }
 
         <div className="business__pagination">
-          <button className={ClassNames('btn__prev', { 'hidden': hasPrev === false })} onClick = { this.handleMovePrevPage.bind(this) }>
+          <button 
+            className={ClassNames('btn__prev', { 'hidden': hasPrev === false })} 
+            onClick = { this.handleMovePrevPage.bind(this) }
+          >
             Sebelumnya
           </button>
+
           { page.at } / { page.total }
-          <button href="/" className={ClassNames('btn__next', { 'hidden': hasNext === false })} onClick = { this.handleMoveNextPage.bind(this) }>
+
+          <button 
+            className={ClassNames('btn__next', { 'hidden': hasNext === false })} 
+            onClick = { this.handleMoveNextPage.bind(this) }
+          >
             Selanjutnya
           </button>
         </div>
