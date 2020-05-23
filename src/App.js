@@ -16,7 +16,6 @@ import BusinessDetail from './routes/BusinessDetail'
 import About from './routes/About/About'
 import withPageView from './utils/googleAnalytics/withPageView'
 
-import Home from './routes/Home'
 require('dotenv').config();
 
 ReactGA.initialize(process.env.ANALYTICS_TRACKING_ID, {
