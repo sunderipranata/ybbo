@@ -19,6 +19,8 @@ import BusinessDetailForm from './components/BusinessDetailForm'
 import './BusinessDetail.scss'
 import Recomendations from './components/Recomendations'
 
+import BusinessService from '../../services/BusinessService'
+
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
@@ -34,6 +36,7 @@ class BusinessDetail extends Component {
 
   componentDidMount() {
     window.scrollTo({top: 0})
+    this.fetchBusinessDetail('5ec8e9ef6ed16727ee5082cd', () => {})
   }
 
   toggleForm = () => {
@@ -41,6 +44,18 @@ class BusinessDetail extends Component {
   }
 
   scrollToBackers = () => window.scrollTo({behavior: 'smooth', top: this.backersRef.offsetTop - 100})
+
+  fetchBusinessDetail = (id, callback) => {
+    BusinessService.getDetail(id, (res) => {
+      console.log('resss', res)
+      if(res !== null && res.data.meta.http_status === 200) {
+        console.log('business detail', res)
+        callback(res)
+      }
+
+      callback(null)
+    })
+  }
 
   render() {
     const { isLoading, showForm } = this.state

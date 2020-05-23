@@ -3,6 +3,7 @@ import axios from 'axios'
 const BASE_URL = 'https://ybbo-nqyz55lkg.now.sh/api'
 // const BASE_URL = 'https://yukbantubisnis.online/api'
 const BUSINESS_SIMPLIFIED = '/businesses'
+const BUSINESS_DETAIL = '/businesses'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, callback) => {
@@ -18,6 +19,14 @@ BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, callbac
   .then((response) => {
     callback(response)
   })
+}
+
+BusinessService.getDetail = (id, callback) => {
+  const PATH = BASE_URL + BUSINESS_DETAIL + "/" + id
+  axios.get(PATH)
+    .then((response) => {
+      callback(response)
+    })
 }
 
 export default BusinessService;
