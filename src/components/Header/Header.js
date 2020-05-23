@@ -8,13 +8,13 @@ import './Header.scss'
 class Header extends Component {
     constructor(props) {
       super(props)
-  
+
       this.state = {
         active: false,
         pathLink : ''
       }
     }
-    
+
     componentDidMount() {
       this.setState({
         pathLink: window.location.pathname
@@ -35,7 +35,7 @@ class Header extends Component {
                 <Link className={ClassNames('nav__link', { 'active': pathLink === ABOUT_PATH })} to={ABOUT_PATH}>Tentang Kami</Link>
               </li>
               <li>
-                <Link className="button button--ghost" to={"#"}>Daftarkan Bisnis mu</Link>
+                <Link className="button button--ghost" to={"#"}>Daftarkan Bisnismu</Link>
               </li>
             </ul>
           </header>
