@@ -352,19 +352,29 @@ class BusinessList extends Component {
             <div className="box-positioner">
               <div className="options-box">
                 <div className="scroll-area scrollbar">
-                  <div className="item">
+                  <div 
+                    className="item"
+                    onClick = { this.handleCategoryChange.bind(this, 'all') }>
                     { categories['all'] }
                   </div>
-                  <div className="item">
+                  <div 
+                    className="item"
+                    onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
                     { categories['food_and_beverage'] }
                   </div>
-                  <div className="item">
+                  <div 
+                    className="item"
+                    onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
                     { categories['fashion'] }
                   </div>
-                  <div className="item">
+                  <div 
+                    className="item"
+                    onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
                     { categories['beauty'] }
                   </div>
-                  <div className="item">
+                  <div 
+                    className="item"
+                    onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
                     { categories['hobby'] }
                   </div>
                 </div>
