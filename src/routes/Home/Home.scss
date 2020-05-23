@@ -404,6 +404,13 @@
 
         .category-item {
           color: $color-secondary-text;
+          border: 0;
+          cursor: pointer;
+          font-size: 14px;
+          padding: 0;
+          outline: none;
+          background-color: transparent;
+          font-family: 'DM Sans', sans-serif;
     
           &:hover {
             color: $color-blue;
@@ -411,6 +418,10 @@
     
           &.active {
             font-weight: bold;
+
+            &:hover {
+              color: $color-secondary-text;
+            }
           }
         }
       }
@@ -434,6 +445,51 @@
     }
   }
 
+  .business__empty {
+    text-align: center;
+    margin: 72px 0 150px;
+
+    .emoji {
+      font-size: 40px;
+
+      @media (max-width:$breakpoint-md-max) {
+        font-size: 32px;
+      }
+    }
+
+    .title {
+      font-size: 24px;
+      margin: 16px 0 8px;
+      color: $color-primary-text;
+
+      @media (max-width:$breakpoint-md-max) {
+        font-size: 18px;
+      }
+
+      @media (max-width:350px) {
+        font-size: 14px;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: $color-secondary-text;
+
+      @media (max-width:$breakpoint-md-max) {
+        font-size: 14px;
+      }
+
+      @media (max-width:350px) {
+        font-size: 12px;
+      }
+    }
+
+    .button {
+      margin-top: 24px;
+    }
+  }
+
   .business__pagination {
     text-align: center;
     color: $color-secondary-text;
@@ -448,6 +504,8 @@
     }
 
     .btn__prev, .btn__next {
+      outline: none;
+      cursor: pointer;
       border-radius: 12px;
       padding: 12px;
       font-size: 14px;
