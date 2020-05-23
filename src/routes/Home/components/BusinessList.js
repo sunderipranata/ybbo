@@ -238,7 +238,7 @@ class BusinessList extends Component {
   }
  
   renderLoading = () => {
-    const size = isMobile ? 3 : 6
+    const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const display = []
     for(let i = 0; i < size; i++) {
       display.push(
