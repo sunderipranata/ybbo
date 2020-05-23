@@ -81,15 +81,16 @@
     display: block;
   }
 
-  .steps-section__title {
+  .steps-section__img {
     width: 35%;
   }
 
   .steps__title {
     font-size: 32px;
-    margin: 0;
-    position: sticky;
+    // margin: 0;
+    // position: sticky;
     top: 120px;
+    margin: 0 0 24px;
 
     @media (max-width:$breakpoint-lg-max) {
       position: initial;
@@ -104,7 +105,7 @@
 
   .steps-section__content {
     width: 60%;
-    padding-left: 32px;
+    // padding-left: 32px;
   }
 
   .steps__list {

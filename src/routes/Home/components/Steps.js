@@ -39,51 +39,55 @@ class Steps extends Component {
     const { detailShown, slideIndex } = this.state
 
     return (
-      <section className="home__steps clearfix">
+      <section className="home__steps">
         <Desktop>
-        <div className="steps-section__title">
-          <h2 className="steps__title">Langkah Mudah Bantu Bisnis Online</h2>
-        </div>
-        <div className="steps-section__content">
-          <ul className="steps__list">
-            <li className="steps__list--item" onClick={() => this.handleDetailShow(1)}>
-              <div className={ClassNames('list__number', {active: detailShown === 1})}>1</div>
-              <div className="list__desc">
-                <h3 className={ClassNames('desc__title', {active: detailShown === 1})}>Pilih Bisnis Online</h3>
-                <p className={ClassNames('desc__content', {active: detailShown === 1})}>
-                  Kamu bisa memilih bisnis yang ingin kamu bantu promosikan dari daftar bisnis yang kami punya
-                </p>
-              </div>
-            </li>
-            <li className="steps__list--item" onClick={() => this.handleDetailShow(2)}>
-              <div className={ClassNames('list__number', {active: detailShown === 2})}>2</div>
-              <div className="list__desc">
-                <h3 className={ClassNames('desc__title', {active: detailShown === 2})}>Download Aset</h3>
-                <p className={ClassNames('desc__content', {active: detailShown === 2})}>
-                  Download gambar atau video dari bisnis yang kamu pilih untuk dipromosikan di sosial media mu
-                </p>
-              </div>
-            </li>
-            <li className="steps__list--item" onClick={() => this.handleDetailShow(3)}>
-              <div className={ClassNames('list__number', {active: detailShown === 3})}>3</div>
-              <div className="list__desc">
-                <h3 className={ClassNames('desc__title', {active: detailShown === 3})}>Promosikan di Sosial Media</h3>
-                <p className={ClassNames('desc__content', {active: detailShown === 3})}>
-                  Post gambar atau video yang sudah kamu download dan tag kami <a href="/" target="_blank">@YukBantuBisnis.Online</a>
-                </p>
-              </div>
-            </li>
-            <li className="steps__list--item" onClick={() => this.handleDetailShow(4)}>
-              <div className={ClassNames('list__number', {active: this.state.detailShown === 4})}>4</div>
-              <div className="list__desc">
-                <h3 className={ClassNames('desc__title', {active: detailShown === 4})}>Selesai</h3>
-                <p className={ClassNames('desc__content', {active: detailShown === 4})}>
-                  Akun mu akan tercantum di daftar pendukung bisnis kami. Terima kasih atas kontribusi mu
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
+          {/* <div className="steps-section__title">
+          </div> */}
+          <div className="steps-section__content">
+            <h2 className="steps__title">Langkah Mudah Bantu Bisnis Online</h2>
+
+            <ul className="steps__list">
+              <li className="steps__list--item" onClick={() => this.handleDetailShow(1)}>
+                <div className={ClassNames('list__number', {active: detailShown === 1})}>1</div>
+                <div className="list__desc">
+                  <h3 className={ClassNames('desc__title', {active: detailShown === 1})}>Pilih Bisnis Online</h3>
+                  <p className={ClassNames('desc__content', {active: detailShown === 1})}>
+                    Kamu bisa memilih bisnis yang ingin kamu bantu promosikan dari daftar bisnis yang kami punya
+                  </p>
+                </div>
+              </li>
+              <li className="steps__list--item" onClick={() => this.handleDetailShow(2)}>
+                <div className={ClassNames('list__number', {active: detailShown === 2})}>2</div>
+                <div className="list__desc">
+                  <h3 className={ClassNames('desc__title', {active: detailShown === 2})}>Download Aset</h3>
+                  <p className={ClassNames('desc__content', {active: detailShown === 2})}>
+                    Download gambar atau video dari bisnis yang kamu pilih untuk dipromosikan di sosial media mu
+                  </p>
+                </div>
+              </li>
+              <li className="steps__list--item" onClick={() => this.handleDetailShow(3)}>
+                <div className={ClassNames('list__number', {active: detailShown === 3})}>3</div>
+                <div className="list__desc">
+                  <h3 className={ClassNames('desc__title', {active: detailShown === 3})}>Promosikan di Sosial Media</h3>
+                  <p className={ClassNames('desc__content', {active: detailShown === 3})}>
+                    Post gambar atau video yang sudah kamu download dan tag kami <a href="/" target="_blank">@YukBantuBisnis.Online</a>
+                  </p>
+                </div>
+              </li>
+              <li className="steps__list--item" onClick={() => this.handleDetailShow(4)}>
+                <div className={ClassNames('list__number', {active: this.state.detailShown === 4})}>4</div>
+                <div className="list__desc">
+                  <h3 className={ClassNames('desc__title', {active: detailShown === 4})}>Selesai</h3>
+                  <p className={ClassNames('desc__content', {active: detailShown === 4})}>
+                    Akun mu akan tercantum di daftar pendukung bisnis kami. Terima kasih atas kontribusi mu
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="steps-section__img">
+            hai
+          </div>
         </Desktop>
         <Mobile>
           <h2 className="steps__title">Langkah Mudah Bantu<br />Bisnis Online</h2>
