@@ -1,5 +1,7 @@
 
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+
 import PropTypes from 'prop-types'
 
 import './Navbar.scss'
@@ -13,7 +15,7 @@ class Navbar extends Component {
     const { title } = this.props
     return (
       <nav className="navbar">
-        <a href="javascript:history.go(-1)" className="navbar__back" />
+        <button onClick={this.props.history.goBack} className="navbar__back" />
         <div className="navbar__title">
           <p className="text">{title}</p>
         </div>
@@ -22,4 +24,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default withRouter(Navbar)

@@ -5,7 +5,6 @@ import Responsive from 'react-responsive'
 import Loader from '../../../components/Loader'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
-const Mobile = props => <Responsive {...props} maxWidth={767} />
 
 class BusinessDetailForm extends Component {
   static propTypes = {
