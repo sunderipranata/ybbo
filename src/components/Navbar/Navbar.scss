@@ -17,6 +17,9 @@
     height: 100%;
     display: flex;
     position: relative;
+    background: #ffffff;
+    outline: none;
+    border: 0;
 
     &:before {
       content: "";

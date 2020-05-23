@@ -298,6 +298,13 @@
   }
 
   &__sidebar {
+    .button {
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+      height: 48px;
+    }
+
     .desc {
       font-size: 14px;
       color: $color-primary-text;
@@ -330,7 +337,7 @@
 
   &__form {
     .button {
-      height: 40px;
+      height: 40px !important;
       border-radius: 8px;
     }
   }

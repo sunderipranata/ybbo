@@ -32,6 +32,10 @@ class BusinessDetail extends Component {
     }
   }
 
+  componentDidMount() {
+    window.scrollTo({top: 0})
+  }
+
   toggleForm = () => {
     this.setState({ showForm: !this.state.showForm })
   }

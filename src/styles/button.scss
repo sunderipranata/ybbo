@@ -1,3 +1,10 @@
+$loadingSpinnerDiameter: 28px;
+$loadingSpinnerStrokeWidth: 4px;
+$loadingSpinnerStrokeColor: #FFF;
+$loadingSpinnerOpacity: .8;
+$loadingSpinnerStrokeStyle: solid; // solid, dashed, dotted
+$loadingSpinnerSpeed: .7s;
+
 .button {
     border-radius: 40px;
     padding: 12px 24px;
@@ -5,6 +12,8 @@
     font-weight: bold;
     display: inline-block;
     transition: .3s ease;
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
   
     @media only screen and (max-width: $breakpoint-md-max) {
       font-size: 12px;
@@ -25,12 +34,20 @@
       border: none;
       background-color: $color-blue;
       color: #fff;
+
+      &:hover {
+        color: $color-white;
+      }
     }
 
     &--disabled {
       border: none;
       background-color: #C2C2C2;
       color: #fff;
+
+      &:hover {
+        color: $color-white;
+      }
     }
 }
 
@@ -49,4 +66,34 @@
       color: #96D5EB;
     }
   }
+}
+
+.loadingSpinner {
+  border: $loadingSpinnerStrokeWidth $loadingSpinnerStrokeStyle $loadingSpinnerStrokeColor;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-left-color: rgba(0, 0, 0, 0);
+  width: $loadingSpinnerDiameter - ($loadingSpinnerStrokeWidth * 2);
+  height: $loadingSpinnerDiameter - ($loadingSpinnerStrokeWidth * 2);
+  opacity: $loadingSpinnerOpacity;
+  border-radius: 50%;
+  animation: loadingSpinner $loadingSpinnerSpeed infinite linear;
+  -webkit-animation: loadingSpinner $loadingSpinnerSpeed infinite linear;
+}
+
+.button .loadingSpinner {
+  margin-top: -$loadingSpinnerDiameter / 2;
+  margin-left: -$loadingSpinnerDiameter / 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes loadingSpinner {
+    from { transform: rotate(0deg)   }
+    to   { transform: rotate(360deg) }
+}
+
+@-webkit-keyframes loadingSpinner {
+    from { -webkit-transform: rotate(0deg)   }
+    to   { -webkit-transform: rotate(360deg) }
 }
