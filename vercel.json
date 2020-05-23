@@ -9,6 +9,17 @@
             "destination": "/api/businesses/backers"
         }
     ],
+    "headers": [
+        {
+          "source": "/(.*)",
+          "headers": [
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            }
+            ]
+        }
+    ],
     "github": {
         "enabled": false
     }

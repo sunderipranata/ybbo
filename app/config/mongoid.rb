@@ -1,6 +1,6 @@
 Mongoid.configure do |config|
   config.clients.default = {
-    uri: "mongodb+srv://ybbo_app:Ynb6HcXHDlLgwzYU@cluster0-ffclo.gcp.mongodb.net/ybbo_test?retryWrites=true&w=majority",
+    uri: ENV['MONGOID_URI'],
   }
   config.log_level = :info
   config.raise_not_found_error = false

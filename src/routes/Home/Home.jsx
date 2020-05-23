@@ -12,11 +12,33 @@ import BusinessService from '../../services/BusinessService'
 
 class Home extends React.Component {
 
-  componentDidMount = () => {
-    const id = "1"
-    BusinessService.get(id, (result) => {
-      console.log('homeeee: ', result)
+  fetchSimplifiedBusiness = (limit, offset, category, callback) => {
+    BusinessService.getSimplifiedWithLimitOffset(limit, offset, category, (res) => {
+      if(res !== null && res.data.meta.http_status === 200) {
+        callback(this.parseBusinessResponse(res.data))
+      }
+
+      callback(null)
     })
+  }
+
+  parseBusinessResponse = (data) => {
+    const total = data.meta.total
+    const businesses = data.data.map((val, idx) => {
+      return {
+        id: val.id,
+        name: val.attributes.name,
+        category: val.attributes.category,
+        location: val.attributes.location,
+        thumbnailUrl: val.attributes.thumbnail_url,
+        backersCount: val.attributes.backers_count
+      }
+    })
+
+    return {
+      businesses: businesses,
+      total: total
+    }
   }
 
   render = () => {
@@ -26,7 +48,9 @@ class Home extends React.Component {
         <main className="container__home">
           <Hero />
           <Steps />
-          <BusinessList />
+          <BusinessList 
+            fetchData = { this.fetchSimplifiedBusiness }
+          />
         </main>
         <Footer />
       </Fragment>

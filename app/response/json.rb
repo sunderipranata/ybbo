@@ -11,15 +11,17 @@ module JSON
         serializer.new(object, options).serialized_json
       end
 
-      def many(object, serializer, limit, http_status)
-        options = {}
-        options[:meta] = {
-          http_status: http_status,
-          offset: object&.first&.id.to_s,
-          limit: limit,
-          total: object&.count || 0
+      def many(object, serializer, http_status, options={})
+        serializer_options = {}
+        serializer_options[:meta] = {
+          http_status: http_status
         }
-        serializer.new(object, options).serialized_json
+        if options[:pagination_meta] == true
+          serializer_options[:meta][:offset] = object&.first&.id.to_s
+          serializer_options[:meta][:limit] = options[:limit]
+          serializer_options[:meta][:total] = object&.count || 0
+        end
+        serializer.new(object, serializer_options).serialized_json
       end
     end
 
