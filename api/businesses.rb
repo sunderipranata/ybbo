@@ -14,18 +14,20 @@ Handler = Proc.new do |req, res|
       # TODO: add filter location?
       # location = req.query['location'].present? ? req.query['location'] : nil
 
+      pagination_meta = true
       if id.blank?
         if category.blank?
           business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
         else
           if random
-            business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lte => offset).order_by(:created_at.desc).sample(limit)
+            pagination_meta = false
+            business = Business.where(category_cd: Business::CATEGORY[category.to_sym]).sample(limit)
           else
             business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
           end
         end
         res.status = HTTP_STATUS_OK
-        res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, limit, res.status)
+        res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, res.status, pagination_meta: pagination_meta, limit: limit)
       else
         business = Business.find_by(id: id)
         res.status = HTTP_STATUS_OK
