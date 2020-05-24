@@ -4,6 +4,7 @@ const BASE_URL = 'https://ybbo-72ncg9nry.now.sh/api'
 // const BASE_URL = 'https://yukbantubisnis.online/api'
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
+const BACKERS = '/businesses'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, callback) => {
@@ -27,6 +28,16 @@ BusinessService.getDetail = (id, callback) => {
     .then((response) => {
       callback(response)
     })
+}
+
+BusinessService.getBackers = (id, limit, callback) => {
+  const PATH = BASE_URL + BACKERS + "/" + id + "/backers"
+  axios.get(PATH, {
+    limit: limit
+  })
+  .then((response) => {
+    callback(response)
+  })
 }
 
 export default BusinessService;
