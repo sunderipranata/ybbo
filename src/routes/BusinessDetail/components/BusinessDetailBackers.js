@@ -5,6 +5,8 @@ import IconVerified from '../assets/ic-verified.png'
 import Loader from '../../../components/Loader'
 
 const BACKER_SIZE = 5
+const DEFAULT_UNVERIFIED = "telah mendaftar untuk mendukung"
+const DEFAULT_VERIFIED = "telah mempost di Instagram"
 
 class BusinessDetailBackers extends Component {
   static propTypes = {
@@ -14,7 +16,7 @@ class BusinessDetailBackers extends Component {
 
   state = {
     isLoading: true,
-    isEmpty: false,
+    isBackersLoading: false,
     backers: []
   }
 
@@ -24,20 +26,38 @@ class BusinessDetailBackers extends Component {
     })
   }
 
-  componentDidMount = () => {
-    const { businessDetail } = this.props
+  componentWillReceiveProps = (nextProps) => {
+    const { backers } = this.state
+    const { businessDetail } = nextProps
 
-    console.log('business detail backers', businessDetail)
-
-    if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
-      const id = businessDetail.id
-
-      this.props.fetchData(id, BACKER_SIZE, (res) => {
-        if(res !== null) {
-          console.log('backers res', res)
-        }
-      })
+    if(backers.length === 0) {
+      if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
+        const id = businessDetail.id
+        
+        this.toggleLoadingState(true)
+        nextProps.fetchData(id, BACKER_SIZE, (res) => {
+          if(res !== null) {
+            this.setState({
+              backers: res
+            }, () => {
+              this.toggleLoadingState(false)
+            })
+          }
+        })
+      }
     }
+  }
+
+  toggleLoadingState = (loading) => {
+    this.setState({
+      isLoading: loading
+    })
+  }
+
+  toggleBackersLoading = (loading) => {
+    this.setState({
+      isBackersLoading: loading
+    })
   }
 
   renderLoading = () => {
@@ -72,9 +92,9 @@ class BusinessDetailBackers extends Component {
 
   renderBackers = () => {
     const { title } = this.props
-    const { isEmpty } = this.state
+    const { backers, isBackersLoading } = this.state
 
-    if(isEmpty) {
+    if(backers.length < 1) {
       return (
         <div className="bd-content__empty">
           <span role="img" aria-label="Crying Face" className="emoji">😢</span>
@@ -83,59 +103,61 @@ class BusinessDetailBackers extends Component {
         </div>
       )
     } else {
+      const display = backers.map((val, idx) => {
+        const name = val.username
+        const isVerified = val.isVerified
+        let comment = val.comment
+        const commentText = []
+
+        if(comment === null) {
+          if(isVerified) {
+            comment = DEFAULT_VERIFIED
+          } else {
+            comment = DEFAULT_UNVERIFIED  
+          }
+          
+          commentText.push(
+            <span className="text">{ name + " " + comment }</span>
+          )
+        } else {
+          commentText.push(
+            <span className="text">Kata { name }: "{ comment }"</span>
+          )
+        }
+
+        if(isVerified) {
+          commentText.push(
+            <span className="tooltip">
+              <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
+              <span class="tooltiptext">
+                Kami sudah melakukan pengecekan bahwa { name } telah mempost di Instagram
+              </span>
+            </span>
+          )
+        }
+
+        return (
+          <li>
+            <p className="backers-title">
+              { commentText }
+            </p>
+            {/* <p className="backers-time">17 menit yang lalu</p> */}
+          </li>
+        )
+      })
+
       return (
         <Fragment>
+          <h2 className="bd-content__title">Pendukung <small>({ backers.length })</small></h2>
           <ul className="bd-content__backers">
-            <li>
-              <p className="backers-title">Anonim telah mendaftar untuk mendukung</p>
-              <p className="backers-time">17 menit yang lalu</p>
-            </li>
-            <li>
-              <div className="backers-title">
-                <p className="backers-title"><a href="/" target="_blank">@sunderi.pranata</a> telah mendaftar untuk mendukung</p>
-              </div>
-              <p className="backers-time">30 menit yang lalu</p>
-            </li>
-            <li>
-              <p className="backers-title">
-                <span className="text">Kata <a href="/" target="_blank">@devinryanriota</a>: "enak banget, wajib dipesan"</span>
-                <span className="tooltip">
-                  <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
-                  <span class="tooltiptext">
-                    Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@devinryanriota</a> telah mempost di Instagram
-                  </span>
-                </span>
-              </p>
-              <p className="backers-time">1 jam yang lalu</p>
-            </li>
-            <li>
-              <p className="backers-title">
-                <span className="text"><a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram</span>
-                <span className="tooltip">
-                  <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
-                  <span class="tooltiptext">
-                    Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram
-                  </span>
-                </span>
-              </p>
-              <p className="backers-time">2 jam yang lalu</p>
-            </li>
-            <li>
-              <p className="backers-title">
-                <span className="text">Anomim telah mempost di Instagram</span>
-                <span className="tooltip">
-                  <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
-                  <span class="tooltiptext">
-                    Kami sudah melakukan pengecekan bahwa akun telah mempost di Instagram
-                  </span>
-                </span>
-              </p>
-              <p className="backers-time">3 jam yang lalu</p>
-            </li>
-            <li>
-              <Loader height={12} borderRadius={8} marginBottom={8} />
-              <Loader width={200} height={12} borderRadius={8} />
-            </li>
+            { display }
+            {
+              isBackersLoading &&
+              <li>
+                <Loader height={12} borderRadius={8} marginBottom={8} />
+                <Loader width={200} height={12} borderRadius={8} />
+              </li>
+            }
           </ul>
           <a href="/" className="btn-load">Muat lebih banyak</a>
         </Fragment>
@@ -148,7 +170,6 @@ class BusinessDetailBackers extends Component {
 
     return (
       <Fragment>
-        <h2 className="bd-content__title">Pendukung <small>(200)</small></h2>
         { isLoading ? this.renderLoading() : this.renderBackers() }
       </Fragment>
     )
