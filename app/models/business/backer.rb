@@ -19,6 +19,7 @@ class Business::Backer
   belongs_to :business, counter_cache: true
   # to reset counter, use business.reset_counters(:backers)
 
+  index({ created_at: -1 }, { background: true })
   index({ username: 1, account_type_cd: 1 }, { unique: true, background: true }) # _cd is because of SimpleEnum::Mongoid naming schemes
 
   validates :username, :account_type, presence: true
