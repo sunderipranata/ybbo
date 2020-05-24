@@ -91,29 +91,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "business_id",
-									"value": "5ec7b3ea6ed167768dc93bda",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "asdfwkwkwef",
-									"type": "text"
-								},
-								{
-									"key": "account_type",
-									"value": "instagram",
-									"type": "text"
-								},
-								{
-									"key": "anonym",
-									"value": "false",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\n\t\"business_id\": \"5ec8e9ef6ed16727ee5082cd\",\n\t\"username\": \"pendukung12\",\n\t\"account_type\":\"instagram\",\n\t\"anonym\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "https://{{host}}/api/businesses/backers",
