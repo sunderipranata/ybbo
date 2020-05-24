@@ -135,7 +135,8 @@ class BusinessDetailBackers extends Component {
 
   renderBackers = () => {
     const { title } = this.props
-    const { backers, isBackersLoading } = this.state
+    const { backers, isBackersLoading, total } = this.state
+    const hasMoreBackers = backers.length < total
     const now = moment()
 
     if(backers.length < 1) {
@@ -195,7 +196,7 @@ class BusinessDetailBackers extends Component {
 
       return (
         <Fragment>
-          <h2 className="bd-content__title">Pendukung <small>({ backers.length })</small></h2>
+          <h2 className="bd-content__title">Pendukung <small>({ total })</small></h2>
           <ul className="bd-content__backers">
             { display }
             {
@@ -206,10 +207,13 @@ class BusinessDetailBackers extends Component {
               </li>
             }
           </ul>
-          <button className="btn-load"
-            onClick = { this.loadMoreBackers.bind(this) }>
-            Muat lebih banyak
-          </button>
+          {
+            hasMoreBackers &&
+            <button className="btn-load"
+              onClick = { this.loadMoreBackers.bind(this) }>
+              Muat lebih banyak
+            </button>
+          }
         </Fragment>
       )
     }
