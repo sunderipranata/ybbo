@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-const environment = process.env.NODE_ENV
-let BASE_URL = ''
-if(environment === 'development') {
+const productionCheck = 'https://yukbantubisnis.online/'
+const url = window.location.href
+
+let BASE_URL = 'https://yukbantubisnis.online/api'
+
+if(!url.includes(productionCheck))  {
   BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
-} else {
-  BASE_URL = 'https://yukbantubisnis.online/api'
 }
 
 const BUSINESS_SIMPLIFIED = '/businesses'
