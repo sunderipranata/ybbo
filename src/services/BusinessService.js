@@ -63,10 +63,10 @@ BusinessService.getRandom = (category, limit, callback) => {
 
 BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callback ) => {
   const PATH = BASE_URL + BUSINESS_DETAIL + "/" + businessId
-  // axios.post(PATH, { businessId: businessId, socialMediaAccount: socialMediaAccount, isAnonymous: isAnonymous })
-  //   .then((response) => {
-  //     callback(response)
-  //   })
+  axios.post(PATH, { businessId: businessId, socialMediaAccount: socialMediaAccount, isAnonymous: isAnonymous })
+    .then((response) => {
+      callback(response)
+    })
 }
 
 export default BusinessService;
