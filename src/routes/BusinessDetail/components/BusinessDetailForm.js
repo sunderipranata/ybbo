@@ -45,7 +45,7 @@ class BusinessDetailForm extends Component {
                 Akun kamu telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }, Silakan tekan tombol di bawah untuk mendownload gambar/video.
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
-                Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
+                Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
               </p>
               <button onClick={()=> window.open("https://www.google.com/", "_blank")} className="button button--main">Download aset untuk dipost</button>
             </Fragment>

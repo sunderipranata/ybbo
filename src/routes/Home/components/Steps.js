@@ -106,7 +106,7 @@ class Steps extends Component {
                   <h3 className={ClassNames('desc__title', {active: detailShown === 3})}>Post & Tag Kami di Instagram</h3>
                   <p className={ClassNames('desc__content', {active: detailShown === 3})}>
                     Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag{' '}
-                    <a href={INSTAGRAM_PATH} target="_blank">@YukBantuBisnis.Online</a> ya! :)
+                    <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> ya! :)
                   </p>
                 </div>
               </li>
