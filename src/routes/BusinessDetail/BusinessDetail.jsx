@@ -74,7 +74,6 @@ class BusinessDetail extends Component {
   fetchBusinessDetail = (id, callback) => {
     BusinessService.getDetail(id, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('parse business detail', this.parseBusinessDetail(res.data))
         callback(this.parseBusinessDetail(res.data))
       } else {
         callback(null)
@@ -117,7 +116,6 @@ class BusinessDetail extends Component {
   fetchBackers = (id, limit, offset, callback) => {
     BusinessService.getBackers(id, limit, offset, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('parse backers data', this.parseBackers(res))
         callback(this.parseBackers(res))
       } else {
         callback(null)
@@ -126,7 +124,6 @@ class BusinessDetail extends Component {
   }
 
   parseBackers = (data) => {
-    console.log('data', data)
     const backers = data.data.data
     const meta = data.data.meta
     const total = meta.total
@@ -158,7 +155,6 @@ class BusinessDetail extends Component {
   fetchRandomBusiness = (category, random, callback) => {
     BusinessService.getRandom(category, random, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('parse random businesses', this.parseRandomBusiness(res.data))
         callback(this.parseRandomBusiness(res.data))
       } else {
         callback(null)
