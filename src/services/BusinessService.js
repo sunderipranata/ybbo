@@ -5,6 +5,7 @@ const BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
+const RANDOM_BUSINESS = '/businesses'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, callback) => {
@@ -36,6 +37,20 @@ BusinessService.getBackers = (id, limit, offset, callback) => {
     params: {
       limit: limit,
       offset: offset
+    }
+  })
+  .then((response) => {
+    callback(response)
+  })
+}
+
+BusinessService.getRandom = (category, limit, callback) => {
+  const PATH = BASE_URL + RANDOM_BUSINESS
+  axios.get(PATH, {
+    params: {
+      category: category,
+      random: true,
+      limit: limit
     }
   })
   .then((response) => {

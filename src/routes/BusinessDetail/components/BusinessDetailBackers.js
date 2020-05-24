@@ -6,7 +6,7 @@ import Loader from '../../../components/Loader'
 
 import moment from 'moment'
 
-const BACKER_SIZE = 10
+const BACKER_SIZE = 5
 const DEFAULT_UNVERIFIED = "telah mendaftar untuk mendukung"
 const DEFAULT_VERIFIED = "telah mempost di Instagram"
 const SECONDS_DIFF = "detik yang lalu"
