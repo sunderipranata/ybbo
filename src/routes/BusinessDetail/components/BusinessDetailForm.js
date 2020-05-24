@@ -30,7 +30,7 @@ class BusinessDetailForm extends Component {
   handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
 
   submitFormAndDownloadAsset = (businessId,socialMediaAccount,isAnonymous) => {
-    BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous.toString(), (res) => {
+    BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous, (res) => {
       setTimeout(() => {
         // window.location.href = res.data.download_url
         window.open("https://pbs.twimg.com/profile_images/835836749041524737/yvsGW3gf_400x400.jpg")
@@ -103,7 +103,7 @@ class BusinessDetailForm extends Component {
                   </div>
                 }
                 {/* if input name is not filled button--disabled, if input name is filled button--main, if post form loading state spinner */}
-                <input type="button" className={socialMediaAccount === "" ? "button button--disabled":"button button--main"} 
+                <input type="button" className={socialMediaAccount === "" ? "button button--disabled":"button button--main"}
                 disabled={socialMediaAccount === ""} value="Daftar untuk download aset" onClick={this.handleSubmitForm}></input>
                 {/* <button className="button button--main" type="submit">Daftar untuk download aset</button> */}
                 {/* <button className="button button--main" type="submit"> <span class="loadingSpinner" /></button> */}
