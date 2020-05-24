@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ybbo-8w9w1ubsq.now.sh/api'
+const BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
 // const BASE_URL = 'https://yukbantubisnis.online/api'
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
@@ -30,10 +30,13 @@ BusinessService.getDetail = (id, callback) => {
     })
 }
 
-BusinessService.getBackers = (id, limit, callback) => {
+BusinessService.getBackers = (id, limit, offset, callback) => {
   const PATH = BASE_URL + BACKERS + "/" + id + "/backers"
   axios.get(PATH, {
-    limit: limit
+    params: {
+      limit: limit,
+      offset: offset
+    }
   })
   .then((response) => {
     callback(response)

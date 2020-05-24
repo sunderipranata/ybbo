@@ -114,8 +114,8 @@ class BusinessDetail extends Component {
     }
   }
 
-  fetchBackers = (id, limit, callback) => {
-    BusinessService.getBackers(id, limit, (res) => {
+  fetchBackers = (id, limit, offset, callback) => {
+    BusinessService.getBackers(id, limit, offset, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
         console.log('parse backers data', this.parseBackers(res.data))
         callback(this.parseBackers(res.data))
@@ -127,20 +127,21 @@ class BusinessDetail extends Component {
 
   parseBackers = (data) => {
     const backers = data.data
-    const backerDetails = backers.map((val, idx) => {
+    const backerDetails = []
+    backers.forEach((val, idx) => {
       const id = val.id
       const accountType = val.attributes.account_type
       const comment = val.attributes.comment
       const username = val.attributes.username
       const isVerified = val.attributes.is_verified
 
-      return {
+      backerDetails.push({
         id: id,
         accountType: accountType,
         comment: comment,
         username: username,
         isVerified: isVerified
-      }
+      })
     })
 
     return backerDetails

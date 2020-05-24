@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import IconVerified from '../assets/ic-verified.png'
 import Loader from '../../../components/Loader'
 
-const BACKER_SIZE = 50
+import moment from 'moment'
+
+const BACKER_SIZE = 10
 const DEFAULT_UNVERIFIED = "telah mendaftar untuk mendukung"
 const DEFAULT_VERIFIED = "telah mempost di Instagram"
 
@@ -17,7 +19,8 @@ class BusinessDetailBackers extends Component {
   state = {
     isLoading: true,
     isBackersLoading: false,
-    backers: []
+    backers: [],
+    lastOffset: null
   }
 
   componentWillMount = () => {
@@ -27,18 +30,24 @@ class BusinessDetailBackers extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const { backers } = this.state
+    const { backers, lastOffset } = this.state
     const { businessDetail } = nextProps
 
     if(backers.length === 0) {
       if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
-        const id = businessDetail.id
-        
         this.toggleLoadingState(true)
-        nextProps.fetchData(id, BACKER_SIZE, (res) => {
+        this.setState({
+          businessDetail: businessDetail
+        })
+
+        const id = businessDetail.id
+        nextProps.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
           if(res !== null) {
+            const lastId = res[res.length-1].id
+
             this.setState({
-              backers: res
+              backers: res,
+              lastOffset: lastId
             }, () => {
               this.toggleLoadingState(false)
             })
@@ -58,7 +67,30 @@ class BusinessDetailBackers extends Component {
     this.setState({
       isBackersLoading: loading
     })
-  }
+  } 
+
+  loadMoreBackers = () => {
+    const { businessDetail, lastOffset } = this.state
+
+    if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
+      const id = businessDetail.id
+      
+      this.toggleBackersLoading(true)
+      this.props.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
+        const curBackers = [ ...this.state.backers ]
+        res.forEach((r) => {
+          curBackers.push(r)
+        })
+        if(res !== null) {
+          this.setState({
+            backers: curBackers
+          }, () => {
+            this.toggleBackersLoading(false)
+          })
+        }
+      })
+    }
+  } 
 
   renderLoading = () => {
     return (
@@ -159,7 +191,10 @@ class BusinessDetailBackers extends Component {
               </li>
             }
           </ul>
-          <a href="/" className="btn-load">Muat lebih banyak</a>
+          <button className="btn-load"
+            onClick = { this.loadMoreBackers.bind(this) }>
+            Muat lebih banyak
+          </button>
         </Fragment>
       )
     }
