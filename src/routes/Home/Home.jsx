@@ -16,9 +16,9 @@ class Home extends React.Component {
     BusinessService.getSimplifiedWithLimitOffset(limit, offset, category, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
         callback(this.parseBusinessResponse(res.data))
+      } else {
+        callback(null)
       }
-
-      callback(null)
     })
   }
 

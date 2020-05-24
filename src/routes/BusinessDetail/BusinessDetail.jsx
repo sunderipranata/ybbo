@@ -24,19 +24,33 @@ import BusinessService from '../../services/BusinessService'
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
+const categories = {
+  food_and_beverage: 'Makanan dan Minuman',
+  fashion: 'Fashion',
+  hobby: 'Hobi',
+  beauty: 'Kecantikan'
+}
+
 class BusinessDetail extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       isLoading: false,
-      showForm: false
+      showForm: false,
+      businessDetail: {}
     }
   }
 
   componentDidMount() {
     window.scrollTo({top: 0})
-    this.fetchBusinessDetail('5ec8e9ef6ed16727ee5082cd', () => {})
+
+    const id = this.props.match.params.id
+    this.fetchBusinessDetail(id, (response) => {
+      this.setState({
+        businessDetail: response
+      })
+    })
   }
 
   toggleForm = () => {
@@ -47,17 +61,17 @@ class BusinessDetail extends Component {
 
   fetchBusinessDetail = (id, callback) => {
     BusinessService.getDetail(id, (res) => {
-      console.log('resss', res)
       if(res !== null && res.data.meta.http_status === 200) {
         console.log('parse business detail', this.parseBusinessDetail(res.data))
         callback(this.parseBusinessDetail(res.data))
+      } else {
+        callback(null)
       }
-
-      callback(null)
     })
   }
 
   parseBusinessDetail = (data) => {
+    console.log('dataa', data)
     const detail = data.data
     const attributes = detail.attributes
 
@@ -138,24 +152,24 @@ class BusinessDetail extends Component {
   }
 
   renderDetailDesktop = () => {
+    const { businessDetail } = this.state
+
     return (
       <Fragment>
         <main className="container container__business clearfix">
           <div className="content__main">
             <section name="Pengantar Bisnis">
               <BusinessDetailIntro 
-                img="https://via.placeholder.com/120x120" 
-                title="Nama Bisnis" 
-                category="Kategori"
-                location="Lokasi" />
+                img = { businessDetail.iconUrl }
+                title = { businessDetail.name }
+                category = { categories[businessDetail.category] }
+                location = { businessDetail.location } />
             </section>
             <section name="Tentang Bisnis" className="bd-card">
               <div className="bd-card__content">
                 <BusinessDetailAbout
-                  title="Nama Bisnis" 
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                  when an unknown printer took a galley of type and scrambled it to make a type book."
+                  title = { businessDetail.name } 
+                  desc = { businessDetail.description } 
                   instagram="sylviestephanies"
                   tokopedia="houseoforganix"
                 />
@@ -171,7 +185,7 @@ class BusinessDetail extends Component {
             </section>
             <section ref={ (ref) => this.backersRef=ref } name="Pendukung" className="bd-card">
               <div className="bd-card__content">
-                <BusinessDetailBackers title="Nama Bisnis"  />
+                <BusinessDetailBackers title = { businessDetail.name }  />
               </div>
             </section>
           </div>
@@ -185,31 +199,29 @@ class BusinessDetail extends Component {
   }
 
   renderDetailMobile = () => {
-    const { showForm } = this.state
+    const { showForm, businessDetail } = this.state
 
     return (
       <Fragment>
         <main className="container--mobile">
           <section name="Pengantar Bisnis" className="bd-card__content">
             <BusinessDetailIntro 
-              img="https://via.placeholder.com/120x120" 
-              title="Nama Bisnis" 
-              category="Kategori"
-              location="Lokasi" />
+              img = { businessDetail.iconUrl } 
+              title= { businessDetail.name }
+              category= { categories[businessDetail.category] }
+              location= { businessDetail.location } />
           </section>
           <section name="Tentang Bisnis" className="bd-card__content">
             <BusinessDetailAbout
-              title="Nama Bisnis" 
-              desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type book."
+              title = { businessDetail.name } 
+              desc = { businessDetail.description }
               instagram="sylviestephanies"
               tokopedia="houseoforganix"
             />
           </section>
           <hr className="divider" />
           <section name="Cara Mendukung">
-            <BusinessDetailHowTo title="Nama Bisnis"  />
+            <BusinessDetailHowTo title = { businessDetail.name }  />
           </section>
           <hr className="divider" />
           <section name="Galeri">
@@ -219,7 +231,7 @@ class BusinessDetail extends Component {
           </section>
           <hr className="divider" />
           <section name="Pendukung" className="bd-card__content" style={{ marginBottom: '72px' }}>
-            <BusinessDetailBackers title="Nama Bisnis"  />
+            <BusinessDetailBackers title = { businessDetail.name }  />
           </section>
         </main>
         <div className="bd-bottom">
