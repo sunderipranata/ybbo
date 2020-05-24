@@ -114,6 +114,47 @@ class BusinessDetail extends Component {
     }
   }
 
+  fetchBackers = (id, limit, offset, callback) => {
+    BusinessService.getBackers(id, limit, offset, (res) => {
+      if(res !== null && res.data.meta.http_status === 200) {
+        console.log('parse backers data', this.parseBackers(res))
+        callback(this.parseBackers(res))
+      } else {
+        callback(null)
+      }
+    })
+  }
+
+  parseBackers = (data) => {
+    console.log('data', data)
+    const backers = data.data.data
+    const meta = data.data.meta
+    const total = meta.total
+    const backerDetails = []
+    backers.forEach((val, idx) => {
+      const id = val.id
+      const accountType = val.attributes.account_type
+      const comment = val.attributes.comment
+      const username = val.attributes.username
+      const isVerified = val.attributes.is_verified
+      const createdAt = val.attributes.created_at
+
+      backerDetails.push({
+        id: id,
+        accountType: accountType,
+        comment: comment,
+        username: username,
+        isVerified: isVerified,
+        createdAt: createdAt
+      })
+    })
+
+    return {
+      backerDetails: backerDetails,
+      total: total
+    }
+  }
+
   renderLoadingDesktop = () => {
     return (
       <Fragment>
@@ -135,7 +176,7 @@ class BusinessDetail extends Component {
             </section>
             <section name="Pendukung" className="bd-card">
               <div className="bd-card__content">
-                <BusinessDetailBackers isLoading  />
+                <BusinessDetailBackers isLoading/>
               </div>
             </section>
           </div>
@@ -210,7 +251,10 @@ class BusinessDetail extends Component {
             </section>
             <section ref={ (ref) => this.backersRef=ref } name="Pendukung" className="bd-card">
               <div className="bd-card__content">
-                <BusinessDetailBackers title = { businessDetail.name }  />
+                <BusinessDetailBackers
+                  businessDetail = { businessDetail }
+                  fetchData = { this.fetchBackers }
+                />
               </div>
             </section>
           </div>
@@ -257,7 +301,10 @@ class BusinessDetail extends Component {
           </section>
           <hr className="divider" />
           <section name="Pendukung" className="bd-card__content" style={{ marginBottom: '72px' }}>
-            <BusinessDetailBackers title = { businessDetail.name }  />
+              <BusinessDetailBackers
+                businessDetail = { businessDetail }
+                fetchData = { this.fetchBackers }
+              />
           </section>
         </main>
         <div className="bd-bottom">

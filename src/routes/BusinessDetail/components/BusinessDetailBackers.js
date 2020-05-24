@@ -4,110 +4,248 @@ import PropTypes from 'prop-types'
 import IconVerified from '../assets/ic-verified.png'
 import Loader from '../../../components/Loader'
 
+import moment from 'moment'
+
+const BACKER_SIZE = 10
+const DEFAULT_UNVERIFIED = "telah mendaftar untuk mendukung"
+const DEFAULT_VERIFIED = "telah mempost di Instagram"
+const SECONDS_DIFF = "detik yang lalu"
+const MINUTES_DIFF = "menit yang lalu"
+const HOUR_DIFF = "jam yang lalu"
+const DAYS_DIFF = "hari yang lalu"
+
 class BusinessDetailBackers extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
-    title: PropTypes.string
+    businessDetail: PropTypes.object
   }
 
   state = {
-    isEmpty: false
+    isLoading: true,
+    isBackersLoading: false,
+    backers: [],
+    lastOffset: null,
+    total: 0
   }
 
-  render() {
-    const { isLoading, title } = this.props
-    const { isEmpty } = this.state
+  componentWillMount = () => {
+    this.setState({
+      isLoading: this.props.isLoading
+    })
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    const { backers, lastOffset } = this.state
+    const { businessDetail } = nextProps
+
+    if(backers.length === 0) {
+      if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
+        this.toggleLoadingState(true)
+        this.setState({
+          businessDetail: businessDetail
+        })
+
+        const id = businessDetail.id
+        nextProps.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
+          if(res !== null) {
+            const backerDetails = res.backerDetails
+            const total = res.total
+            const lastId = backerDetails[backerDetails.length-1].id
+
+            this.setState({
+              backers: backerDetails,
+              lastOffset: lastId,
+              total: total
+            }, () => {
+              this.toggleLoadingState(false)
+            })
+          }
+        })
+      }
+    }
+  }
+
+  toggleLoadingState = (loading) => {
+    this.setState({
+      isLoading: loading
+    })
+  }
+
+  toggleBackersLoading = (loading) => {
+    this.setState({
+      isBackersLoading: loading
+    })
+  } 
+
+  loadMoreBackers = () => {
+    const { businessDetail, lastOffset } = this.state
+
+    if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
+      const id = businessDetail.id
+      
+      this.toggleBackersLoading(true)
+      this.props.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
+        if(res !== null) {
+          const curBackers = [ ...this.state.backers ]
+          const backerDetails = res.backerDetails
+          backerDetails.forEach((r) => {
+            curBackers.push(r)
+          })
+          const lastId = backerDetails[backerDetails.length-1].id
+          this.setState({
+            backers: curBackers,
+            lastOffset: lastId
+          }, () => {
+            this.toggleBackersLoading(false)
+          })
+        }
+      })
+    }
+  } 
+
+  renderLoading = () => {
+    return (
+      <div>
+        <h2 className="bd-content__title">Pendukung</h2>
+        <ul className="bd-content__backers">
+          <li>
+            <Loader height={12} borderRadius={8} marginBottom={8} />
+            <Loader width={200} height={12} borderRadius={8} />
+          </li>
+          <li>
+            <Loader height={12} borderRadius={8} marginBottom={8} />
+            <Loader width={200} height={12} borderRadius={8} />
+          </li>
+          <li>
+            <Loader height={12} borderRadius={8} marginBottom={8} />
+            <Loader width={200} height={12} borderRadius={8} />
+          </li>
+          <li>
+            <Loader height={12} borderRadius={8} marginBottom={8} />
+            <Loader width={200} height={12} borderRadius={8} />
+          </li>
+          <li>
+            <Loader height={12} borderRadius={8} marginBottom={8} />
+            <Loader width={200} height={12} borderRadius={8} />
+          </li>
+        </ul>
+      </div>
+    )
+  }
+
+  renderBackers = () => {
+    const { title } = this.props
+    const { backers, isBackersLoading, total } = this.state
+    const hasMoreBackers = backers.length < total
+    const now = moment()
+
+    if(backers.length < 1) {
+      return (
+        <div className="bd-content__empty">
+          <span role="img" aria-label="Crying Face" className="emoji">😢</span>
+          <p className="title">{title} belum ada pendukungnya nih.</p>
+          <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
+        </div>
+      )
+    } else {
+      const display = backers.map((val, idx) => {
+        const name = val.username
+        const isVerified = val.isVerified
+        let comment = val.comment
+        const commentText = []
+        const createdAt = moment(val.createdAt)
+
+        const timeDurationString = this.determineTimeDifferenceString(now, createdAt)
+
+        if(comment === null) {
+          if(isVerified) {
+            comment = DEFAULT_VERIFIED
+          } else {
+            comment = DEFAULT_UNVERIFIED  
+          }
+          
+          commentText.push(
+            <span className="text">{ name + " " + comment }</span>
+          )
+        } else {
+          commentText.push(
+            <span className="text">Kata { name }: "{ comment }"</span>
+          )
+        }
+
+        if(isVerified) {
+          commentText.push(
+            <span className="tooltip">
+              <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
+              <span class="tooltiptext">
+                Kami sudah melakukan pengecekan bahwa { name } telah mempost di Instagram
+              </span>
+            </span>
+          )
+        }
+
+        return (
+          <li>
+            <p className="backers-title">
+              { commentText }
+            </p>
+            <p className="backers-time">{ timeDurationString }</p>
+          </li>
+        )
+      })
+
+      return (
+        <Fragment>
+          <h2 className="bd-content__title">Pendukung <small>({ total })</small></h2>
+          <ul className="bd-content__backers">
+            { display }
+            {
+              isBackersLoading &&
+              <li>
+                <Loader height={12} borderRadius={8} marginBottom={8} />
+                <Loader width={200} height={12} borderRadius={8} />
+              </li>
+            }
+          </ul>
+          {
+            hasMoreBackers &&
+            <button className="btn-load"
+              onClick = { this.loadMoreBackers.bind(this) }>
+              Muat lebih banyak
+            </button>
+          }
+        </Fragment>
+      )
+    }
+  }
+
+  determineTimeDifferenceString = (timeNow, timeData) => {
+    const duration = moment.duration(timeNow.diff(timeData))
+    const days = duration.asDays().toFixed(0)
+    if(days >= 1) {
+      return days + " " + DAYS_DIFF
+    } else {
+      const hour = duration.asHours().toFixed(0)
+      if(hour >= 1) {
+        return hour + " " + HOUR_DIFF 
+      } else {
+        const minutes = duration.asMinutes().toFixed(0)
+        if(minutes >= 1) {
+          return minutes + " " + MINUTES_DIFF
+        } else {
+          const seconds = duration.asSeconds().toFixed(0)
+          return seconds + " " + SECONDS_DIFF
+        }
+      }
+    }
+  }
+
+  render = () => {
+    const { isLoading } = this.state
 
     return (
       <Fragment>
-        <h2 className="bd-content__title">Pendukung <small>(200)</small></h2>
-        { isLoading ?
-            <ul className="bd-content__backers">
-              <li>
-                <Loader height={12} borderRadius={8} marginBottom={8} />
-                <Loader width={200} height={12} borderRadius={8} />
-              </li>
-              <li>
-                <Loader height={12} borderRadius={8} marginBottom={8} />
-                <Loader width={200} height={12} borderRadius={8} />
-              </li>
-              <li>
-                <Loader height={12} borderRadius={8} marginBottom={8} />
-                <Loader width={200} height={12} borderRadius={8} />
-              </li>
-              <li>
-                <Loader height={12} borderRadius={8} marginBottom={8} />
-                <Loader width={200} height={12} borderRadius={8} />
-              </li>
-              <li>
-                <Loader height={12} borderRadius={8} marginBottom={8} />
-                <Loader width={200} height={12} borderRadius={8} />
-              </li>
-            </ul>
-          :
-          isEmpty ?
-            <div className="bd-content__empty">
-              <span role="img" aria-label="Crying Face" className="emoji">😢</span>
-              <p className="title">{title} belum ada pendukungnya nih.</p>
-              <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
-            </div>
-            :
-            <Fragment>
-              <ul className="bd-content__backers">
-                <li>
-                  <p className="backers-title">Anonim telah mendaftar untuk mendukung</p>
-                  <p className="backers-time">17 menit yang lalu</p>
-                </li>
-                <li>
-                  <div className="backers-title">
-                    <p className="backers-title"><a href="/" target="_blank">@sunderi.pranata</a> telah mendaftar untuk mendukung</p>
-                  </div>
-                  <p className="backers-time">30 menit yang lalu</p>
-                </li>
-                <li>
-                  <p className="backers-title">
-                    <span className="text">Kata <a href="/" target="_blank">@devinryanriota</a>: "enak banget, wajib dipesan"</span>
-                    <span className="tooltip">
-                      <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
-                      <span class="tooltiptext">
-                        Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@devinryanriota</a> telah mempost di Instagram
-                      </span>
-                    </span>
-                  </p>
-                  <p className="backers-time">1 jam yang lalu</p>
-                </li>
-                <li>
-                  <p className="backers-title">
-                    <span className="text"><a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram</span>
-                    <span className="tooltip">
-                      <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
-                      <span class="tooltiptext">
-                        Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram
-                      </span>
-                    </span>
-                  </p>
-                  <p className="backers-time">2 jam yang lalu</p>
-                </li>
-                <li>
-                  <p className="backers-title">
-                    <span className="text">Anomim telah mempost di Instagram</span>
-                    <span className="tooltip">
-                      <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
-                      <span class="tooltiptext">
-                        Kami sudah melakukan pengecekan bahwa akun telah mempost di Instagram
-                      </span>
-                    </span>
-                  </p>
-                  <p className="backers-time">3 jam yang lalu</p>
-                </li>
-                <li>
-                  <Loader height={12} borderRadius={8} marginBottom={8} />
-                  <Loader width={200} height={12} borderRadius={8} />
-                </li>
-              </ul>
-              <a href="/" className="btn-load">Muat lebih banyak</a>
-            </Fragment>
-        }
+        { isLoading ? this.renderLoading() : this.renderBackers() }
       </Fragment>
     )
   }
