@@ -1,7 +1,13 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
-// const BASE_URL = 'https://yukbantubisnis.online/api'
+const environment = process.env.NODE_ENV
+let BASE_URL = ''
+if(environment === 'development') {
+  BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
+} else {
+  BASE_URL = 'https://yukbantubisnis.online/api'
+}
+
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
