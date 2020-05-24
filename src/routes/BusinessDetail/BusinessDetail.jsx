@@ -36,25 +36,37 @@ class BusinessDetail extends Component {
     super(props)
 
     this.state = {
-      isLoading: false,
+      isLoading: true,
       showForm: false,
       businessDetail: {}
     }
   }
 
-  componentDidMount() {
+  componentWillMount = () => {
+    this.toggleLoading(true)
+  }
+
+  componentDidMount = () => {
     window.scrollTo({top: 0})
 
     const id = this.props.match.params.id
     this.fetchBusinessDetail(id, (response) => {
       this.setState({
         businessDetail: response
+      }, function() {
+        this.toggleLoading(false)
       })
     })
   }
 
   toggleForm = () => {
     this.setState({ showForm: !this.state.showForm })
+  }
+
+  toggleLoading = (loading) => {
+    this.setState({
+      isLoading: loading
+    })
   }
 
   scrollToBackers = () => window.scrollTo({behavior: 'smooth', top: this.backersRef.offsetTop - 100})
