@@ -28,10 +28,10 @@
             {
               "key": "Access-Control-Allow-Headers",
               "value": "content-type, authorization, content-length, x-requested-with, accept, origin"
-            },
+            }
           ]
         }
-    ], 
+    ],
     "github": {
         "enabled": false
     }
