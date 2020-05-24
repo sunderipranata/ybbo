@@ -199,11 +199,13 @@ class BusinessDetail extends Component {
               </div>
             </section>
             <section name="Cara Mendukung" className="bd-card clearfix">
-              <BusinessDetailHowTo title="Nama Bisnis"  />
+              <BusinessDetailHowTo title = { businessDetail.name }  />
             </section>
             <section name="Galeri" className="bd-card">
               <SimpleReactLightbox>
-                <BusinessDetailGallery />
+                <BusinessDetailGallery
+                  pictures = { businessDetail.picturesUrl }
+                />
               </SimpleReactLightbox>
             </section>
             <section ref={ (ref) => this.backersRef=ref } name="Pendukung" className="bd-card">
@@ -248,7 +250,9 @@ class BusinessDetail extends Component {
           <hr className="divider" />
           <section name="Galeri">
             <SimpleReactLightbox>
-              <BusinessDetailGallery />
+              <BusinessDetailGallery
+                pictures = { businessDetail.picturesUrl }
+              />
             </SimpleReactLightbox>
           </section>
           <hr className="divider" />
