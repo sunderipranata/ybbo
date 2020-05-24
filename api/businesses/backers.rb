@@ -11,7 +11,7 @@ Handler = Proc.new do |req, res|
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
       business = Business.find_by(id: business_id)
-      backers = business.present? ? business.backers.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit) : nil
+      backers = business.present? ? business.backers.where(:created_at.lt => offset).order_by(:created_at.desc).limit(limit) : nil
 
       res.status = HTTP_STATUS_OK
       res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, res.status, pagination_meta: true, limit: limit)

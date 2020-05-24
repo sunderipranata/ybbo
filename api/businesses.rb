@@ -17,13 +17,13 @@ Handler = Proc.new do |req, res|
       pagination_meta = true
       if id.blank?
         if category.blank?
-          business = Business.where(:created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+          business = Business.where(:created_at.lt => offset).order_by(:created_at.desc).limit(limit)
         else
           if random
             pagination_meta = false
             business = Business.where(category_cd: Business::CATEGORY[category.to_sym]).sample(limit)
           else
-            business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lte => offset).order_by(:created_at.desc).limit(limit)
+            business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lt => offset).order_by(:created_at.desc).limit(limit)
           end
         end
         res.status = HTTP_STATUS_OK
