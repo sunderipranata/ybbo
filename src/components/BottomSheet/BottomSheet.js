@@ -24,7 +24,7 @@ class BottomSheet extends Component {
         <div className={ClassNames('bottom-sheets', { 'bottom-sheets--show': this.props.display })}>
           <div className='bottom-sheets__title'>
             <div className='bottom-sheets__title-close' onClick={this.props.onClose} />
-            {this.props.title}
+            <div style={{ marginLeft: '16px' }}>{this.props.title}</div>
           </div>
           <div className='bottom-sheets__content'>{this.props.children}</div>
         </div>
