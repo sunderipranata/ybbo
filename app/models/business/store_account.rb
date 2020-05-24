@@ -15,14 +15,10 @@ class Business::StoreAccount
   }.freeze
 
   as_enum :account_type, ACCOUNT_TYPE
-
-  field :username, type: String
   field :name, type: String
   field :url, type: String
 
   belongs_to :business
-
-  index({ username: 1, account_type_cd: -1 }, { unique: true, background: true }) # _cd is because of SimpleEnum::Mongoid naming schemes
 
   validates :name, :account_type, presence: true
 end
