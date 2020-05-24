@@ -8,7 +8,6 @@ let BASE_URL = 'https://yukbantubisnis.online/api'
 if(!url.includes(productionCheck))  {
   BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
 }
-
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
