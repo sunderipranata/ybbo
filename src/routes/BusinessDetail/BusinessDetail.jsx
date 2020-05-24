@@ -155,6 +155,34 @@ class BusinessDetail extends Component {
     }
   }
 
+  fetchRandomBusiness = (category, random, callback) => {
+    BusinessService.getRandom(category, random, (res) => {
+      if(res !== null && res.data.meta.http_status === 200) {
+        console.log('parse random businesses', this.parseRandomBusiness(res.data))
+        callback(this.parseRandomBusiness(res.data))
+      } else {
+        callback(null)
+      }
+    })
+  }
+
+  parseRandomBusiness = (data) => {
+    const businesses = data.data
+    const randomBusinesses = []
+    businesses.forEach((val) => {
+      randomBusinesses.push({
+        id: val.id,
+        name: val.attributes.name,
+        category: val.attributes.category,
+        location: val.attributes.location,
+        thumbnailUrl: val.attributes.thumbnail_url,
+        backersCount: val.attributes.backers_count
+      })
+    })
+
+    return randomBusinesses
+  }
+
   renderLoadingDesktop = () => {
     return (
       <Fragment>
@@ -262,7 +290,10 @@ class BusinessDetail extends Component {
             <BusinessDetailForm scrollToBackers={this.scrollToBackers} />
           </div>
         </main>
-        <Recomendations />
+        <Recomendations 
+          businessDetail = { businessDetail }
+          fetchData = { this.fetchRandomBusiness }
+        />
       </Fragment>
     )
   }
