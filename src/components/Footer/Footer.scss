@@ -55,14 +55,17 @@
       margin: 0;
       line-height: 1.8;
 
+      .item {
+        width: 30%;
+      }
+
       @media only screen and (max-width:$breakpoint-lg-max) {
         font-size: 14px;
       }
-    }
 
-    .social-media {
-      color: $color-primary-text;
-      margin-right: 24px;
+      @media only screen and (max-width:350px) {
+        font-size: 12px;
+      }
     }
 
     .footer-notes {

@@ -11,6 +11,9 @@ import Footer from '../../components/Footer'
 import BusinessService from '../../services/BusinessService'
 
 class Home extends React.Component {
+  componentDidMount() {
+    window.scrollTo({top: 0})
+  }
 
   fetchSimplifiedBusiness = (limit, offset, category, callback) => {
     BusinessService.getSimplifiedWithLimitOffset(limit, offset, category, (res) => {
@@ -44,15 +47,17 @@ class Home extends React.Component {
   render = () => {
     return (
       <Fragment>
-        <Header />
-        <main className="container__home">
-          <Hero />
-          <Steps />
-          <BusinessList 
-            fetchData = { this.fetchSimplifiedBusiness }
-          />
-        </main>
-        <Footer />
+        <article>
+          <Header />
+            <main className="container__home">
+              <Hero />
+              <Steps />
+              <BusinessList 
+                fetchData = { this.fetchSimplifiedBusiness }
+              />
+            </main>
+          <Footer />
+        </article>
       </Fragment>
     )
   }

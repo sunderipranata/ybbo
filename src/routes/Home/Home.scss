@@ -4,17 +4,16 @@
     max-width: 970px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 140px;
+    margin-top: 120px;
   
     @media (max-width:$breakpoint-lg-max) {
+      margin-top: 96px;
       padding: 0 32px;
     }
   
     @media (max-width:$breakpoint-md-max) {
       max-width: 768px;
-      margin: initial;
       padding: 0 16px;
-      margin-top: 96px;
     }
 }
 
@@ -26,21 +25,16 @@
     align-items: center;
   }
 
-  .hero__logo {
-    width: 64px;
-    height: 64px;
-    margin-right: 8px;
-  
-    @media (max-width:$breakpoint-md-max) {
-      width: 40px;
-      height: 40px;
-    }
+  .hero__logo {	
+    width: 40px;	
+    height: 40px;	
+    margin-right: 8px;	
 
-    @media (max-width: 350px) {
-      width: 32px;
-      height: 32px;
-      margin-right: 4px;
-    }
+    @media (max-width: 350px) {	
+      width: 32px;	
+      height: 32px;	
+      margin-right: 4px;	
+    }	
   }
 
   .hero__title {
@@ -219,7 +213,6 @@
 
   .steps__title {
     font-size: 32px;
-    top: 120px;
     margin: 0 0 24px;
 
     @media (max-width:$breakpoint-lg-max) {
@@ -244,10 +237,6 @@
 
     &--mobile {
       overflow: auto;
-
-      .step__card {
-        padding: 16px 32px;
-      }
     }
 
     &--item {
@@ -504,10 +493,16 @@
 
     .btn__prev {
       margin-right: 16px;
+      border: 1px solid $color-grey;
+      background-color: $color-white;
+      color: $color-secondary-text;
     }
 
     .btn__next {
       margin-left: 16px;
+      background: $color-blue;
+      color: $color-white;
+      border: 0;
     }
 
     .btn__prev, .btn__next {
@@ -516,9 +511,6 @@
       border-radius: 12px;
       padding: 12px;
       font-size: 14px;
-      color: $color-secondary-text;
-      border: 1px solid $color-grey;
-      background-color: $color-white;
 
       @media only screen and (max-width: $breakpoint-md-max) {
         font-size: 12px;
