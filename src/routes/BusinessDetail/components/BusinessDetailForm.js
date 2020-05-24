@@ -42,7 +42,7 @@ class BusinessDetailForm extends Component {
               <h2 className="bd-content__title">Terima kasih telah mendaftar</h2>
               <p className="desc">
                 Akun kamu telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }, Silakan tekan tombol di bawah untuk mendownload gambar/video.
-                Jangan lupa tag kami <a href="/" target="_blank">@YukBantuBisnis.Online</a> agar akun mu terverifikasi.
+                Jangan lupa tag kami <a href="/" target="_blank">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
               </p>
               <button onClick={()=> window.open("https://www.google.com/", "_blank")} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
@@ -53,20 +53,20 @@ class BusinessDetailForm extends Component {
               {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToBackers}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
               <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>200 Pendukung</button>. Yuk jadi salah satunya!</p>
               <form className="form">
-                <label className="label-input" for="account">Masukkan Akun Sosial Media mu</label>
+                <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
                 <input type="text" id="account" name="account" placeholder="Contoh: @instagram" />
                 { isError && <p className="label-error">error messsage</p>}
                 <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
                   <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
                   <span class="checkmark" />
                 </label>
-                { isAnonymous ? 
+                { isAnonymous ?
                   <div className="notes form__notes">
                     Kontribusi kamu akan kami catat sebagai anonim di daftar pendukung [Nama Bisnis].
                   </div>
                 :
                   <div className="notes form__notes">
-                    Akun sosial media mu akan tercantum di daftar pendukung [Nama Bisnis].
+                    Akun Instagram kamu akan tercantum di daftar pendukung [Nama Bisnis].
                   </div>
                 }
                 {/* if input name is not filled button--disabled, if input name is filled button--main, if post form loading state spinner */}

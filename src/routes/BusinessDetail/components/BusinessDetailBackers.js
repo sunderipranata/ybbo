@@ -21,7 +21,7 @@ class BusinessDetailBackers extends Component {
     return (
       <Fragment>
         <h2 className="bd-content__title">Pendukung <small>(200)</small></h2>
-        { isLoading ? 
+        { isLoading ?
             <ul className="bd-content__backers">
               <li>
                 <Loader height={12} borderRadius={8} marginBottom={8} />
@@ -45,13 +45,13 @@ class BusinessDetailBackers extends Component {
               </li>
             </ul>
           :
-          isEmpty ? 
+          isEmpty ?
             <div className="bd-content__empty">
               <span role="img" aria-label="Crying Face" className="emoji">😢</span>
               <p className="title">{title} belum ada pendukungnya nih.</p>
-              <p className="desc">Yuk jadi yang pertama dengan mendaftarkan akun mu.</p>
+              <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
             </div>
-            : 
+            :
             <Fragment>
               <ul className="bd-content__backers">
                 <li>

@@ -140,14 +140,14 @@ class BusinessList extends Component {
     const { category } = this.state
     //loading
     this.toggleLoading(true)
-    
+
     //increment page
     const curPage = { ...this.state.page }
     curPage.at++
-    
+
     //get last offset
     const offset = curPage.lastIds[curPage.lastIds.length - 1]
-    
+
     this.props.fetchData(limit, offset, category, (res) => {
       if(res !== null) {
         const businesses = res.businesses
@@ -238,7 +238,7 @@ class BusinessList extends Component {
       page: page
     })
   }
- 
+
   renderLoading = () => {
     const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const display = []
@@ -269,15 +269,15 @@ class BusinessList extends Component {
 
       return (
         <Link to={'/detail-bisnis/' + id} className="item" key = { id }>
-          <BusinessCard 
-            img = { thumbnailUrl } 
+          <BusinessCard
+            img = { thumbnailUrl }
             title = { name }
-            location = { location } 
-            category = { category } 
+            location = { location }
+            category = { category }
             backers = { backersCount } />
         </Link>
         // <a href="/" className="item" key = {id}>
-          
+
         // </a>
       )
     })
@@ -294,10 +294,10 @@ class BusinessList extends Component {
           <span role="img" aria-label="Pensive Face" className="emoji">😔</span>
           <h4 className="title">Belum ada bisnis di kategori ini nih.</h4>
           <p>Kamu punya bisnis di kategori ini? Yuk Daftar!</p>
-          <a href="/" target="_blank" className="button button--main">Daftarkan Bisnis mu</a>
+          <a href="/" target="_blank" className="button button--main">Daftarkan Bisnismu</a>
         </div>
       )
-    }    
+    }
   }
 
   renderBusinessesCategoriesDesktop = () => {
@@ -314,38 +314,38 @@ class BusinessList extends Component {
         <div className="business__filter">
           <ul className="filter__category">
             <li>
-              <button 
+              <button
                 className= { classAll }
                 onClick = { this.handleCategoryChange.bind(this, 'all') }>
-                { categories['all'] } 
+                { categories['all'] }
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className= { classFnB }
                 onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
-                { categories['food_and_beverage'] } 
+                { categories['food_and_beverage'] }
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className= { classFashion }
                 onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
-                { categories['fashion'] } 
+                { categories['fashion'] }
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className= { classBeauty }
                 onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
-                { categories['beauty'] } 
+                { categories['beauty'] }
               </button>
             </li>
             <li>
-              <button 
+              <button
                 className= { classHobby }
                 onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
-                { categories['hobby'] } 
+                { categories['hobby'] }
               </button>
             </li>
           </ul>
@@ -370,27 +370,27 @@ class BusinessList extends Component {
               <div className="box-positioner">
                 <div className="options-box">
                   <div className="scroll-area scrollbar">
-                    <div 
+                    <div
                       className="item"
                       onClick = { this.handleCategoryChange.bind(this, 'all') }>
                       { categories['all'] }
                     </div>
-                    <div 
+                    <div
                       className="item"
                       onClick = { this.handleCategoryChange.bind(this, 'food_and_beverage') }>
                       { categories['food_and_beverage'] }
                     </div>
-                    <div 
+                    <div
                       className="item"
                       onClick = { this.handleCategoryChange.bind(this, 'fashion') }>
                       { categories['fashion'] }
                     </div>
-                    <div 
+                    <div
                       className="item"
                       onClick = { this.handleCategoryChange.bind(this, 'beauty') }>
                       { categories['beauty'] }
                     </div>
-                    <div 
+                    <div
                       className="item"
                       onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
                       { categories['hobby'] }
@@ -402,7 +402,7 @@ class BusinessList extends Component {
           </div>
         </div>
       </Mobile>
-      
+
     )
   }
 
@@ -415,8 +415,8 @@ class BusinessList extends Component {
 
     return ( page.total > 1 &&
       <div className="business__pagination">
-        <button 
-          className={ClassNames('btn__prev', { 'hidden': hasPrev === false })} 
+        <button
+          className={ClassNames('btn__prev', { 'hidden': hasPrev === false })}
           onClick = { this.handleMovePrevPage.bind(this) }
         >
           Sebelumnya
@@ -424,8 +424,8 @@ class BusinessList extends Component {
 
         { page.at } / { page.total }
 
-        <button 
-          className={ClassNames('btn__next', { 'hidden': hasNext === false })} 
+        <button
+          className={ClassNames('btn__next', { 'hidden': hasNext === false })}
           onClick = { this.handleMoveNextPage.bind(this) }
         >
           Selanjutnya
@@ -445,7 +445,7 @@ class BusinessList extends Component {
         { this.renderBusinessesCategoriesMobile() }
         { isLoading ? this.renderLoading() : this.renderBusinesses() }
         { this.renderPagination() }
-        
+
       </section>
     )
   }
