@@ -71,6 +71,7 @@ main {
   @media (max-width:$breakpoint-md-max) {
     max-width: 768px;
     margin: initial;
+    padding: 0 16px;
   }
 
   &--mobile {

@@ -5,7 +5,8 @@
   margin-bottom: 120px;
 
   @media (max-width:$breakpoint-md-max) {
-    margin: 96px 16px 56px;
+    margin-top: 96px;
+    margin-bottom: 56px;
   }
 
   .title {
