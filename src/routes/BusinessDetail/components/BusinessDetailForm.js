@@ -4,7 +4,7 @@ import Responsive from 'react-responsive'
 import { INSTAGRAM_PATH } from '../../../routes'
 
 import Loader from '../../../components/Loader'
-// import BusinessService from '../../../services/BusinessService'
+import BusinessService from '../../../services/BusinessService'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 
@@ -18,6 +18,7 @@ class BusinessDetailForm extends Component {
   }
 
   state = {
+    errorMessage : "Terjadi kesalahan pada sistem kami, mohon coba lagi dalam beberapa detik",
     isError: false,
     isAnonymous: false,
     socialMediaAccount: "",
@@ -29,12 +30,17 @@ class BusinessDetailForm extends Component {
   handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
 
   submitFormAndDownloadAsset = (businessId,socialMediaAccount,isAnonymous) => {
-    // BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous, (res) => {
-    //   setTimeout(() => {
-    //     window.location.href = res.data.download_url
-    //   },100);
-    // })
-    window.open("https://pbs.twimg.com/profile_images/835836749041524737/yvsGW3gf_400x400.jpg")
+    BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous.toString(), (res) => {
+      setTimeout(() => {
+        // window.location.href = res.data.download_url
+        window.open("https://pbs.twimg.com/profile_images/835836749041524737/yvsGW3gf_400x400.jpg")
+      },100);
+      this.setState({isSuccess: true})
+    },
+    (reason) => {
+      console.log(reason)
+      this.setState({isError: true})
+    })
   }
 
   handleSubmitForm = event => {
@@ -46,7 +52,7 @@ class BusinessDetailForm extends Component {
   }
 
   render() {
-    const { isError, isAnonymous, isSuccess,socialMediaAccount } = this.state
+    const { isError, isAnonymous, isSuccess,socialMediaAccount, errorMessage } = this.state
     const { isLoading, businessName ,numberOfBackers } = this.props
 
     return (
@@ -79,10 +85,10 @@ class BusinessDetailForm extends Component {
               {/* <p className="desc">Belum ada pendukung nih. Yuk jadi yang pertama!</p> */}
               {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToBackers}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
               <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>{numberOfBackers} Pendukung</button>. Yuk jadi salah satunya!</p>
-              <form className="form" onSubmit={this.handleSubmitForm}>
+              <form className="form">
                 <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
                 <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @instagram" />
-                { isError && <p className="label-error">error messsage</p>}
+          { isError && <p className="label-error">{errorMessage}</p>}
                 <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
                   <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
                   <span class="checkmark" />
@@ -97,8 +103,8 @@ class BusinessDetailForm extends Component {
                   </div>
                 }
                 {/* if input name is not filled button--disabled, if input name is filled button--main, if post form loading state spinner */}
-                <button className={socialMediaAccount === "" ? "button button--disabled":"button button--main"} 
-                disabled={socialMediaAccount === ""} type="submit">Daftar untuk download aset</button>
+                <input type="button" className={socialMediaAccount === "" ? "button button--disabled":"button button--main"} 
+                disabled={socialMediaAccount === ""} value="Daftar untuk download aset" onClick={this.handleSubmitForm}></input>
                 {/* <button className="button button--main" type="submit">Daftar untuk download aset</button> */}
                 {/* <button className="button button--main" type="submit"> <span class="loadingSpinner" /></button> */}
               </form>

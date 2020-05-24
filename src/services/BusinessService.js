@@ -64,11 +64,21 @@ BusinessService.getRandom = (category, limit, callback) => {
   })
 }
 
-BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callback ) => {
-  const PATH = BASE_URL + BUSINESS_DETAIL + "/" + businessId
-  axios.post(PATH, { businessId: businessId, socialMediaAccount: socialMediaAccount, isAnonymous: isAnonymous })
+BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
+  const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
+  axios.post(PATH, { 
+      business_id: businessId, 
+      username: socialMediaAccount, 
+      account_type:"instagram", 
+      anonym: isAnonymous 
+  })
     .then((response) => {
-      callback(response)
+      callbackOnSuccess(response)
+    },(reason) => {
+      callbackOnError(reason)
+    })
+    .catch((error) => {
+      console.log(error)
     })
 }
 
