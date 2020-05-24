@@ -17,7 +17,7 @@ class Business
   field :thumbnail_url,     type: String
   field :assets_url,        type: String
   field :pictures_url,      type: Array
-  field :backers_count,        type: Fixnum, default: 0
+  field :backers_count,     type: Integer, default: 0
 
   as_enum :category, CATEGORY
   has_many :store_accounts, class_name: 'Business::StoreAccount'
