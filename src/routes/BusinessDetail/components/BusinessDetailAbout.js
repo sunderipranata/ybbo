@@ -3,54 +3,83 @@ import PropTypes from 'prop-types'
 
 import Loader from '../../../components/Loader'
 
+const storeAccounts = {
+  instagram: 'Instagram',
+  facebook: 'Facebook',
+  twitter: 'Twitter',
+  bukalapak: 'Bukalapak',
+  tokopedia: 'Tokopedia',
+  shopee: 'Shopee',
+  gojek: 'Gojek',
+  grab: 'Grab',
+  whatsapp: 'Whatsapp'
+}
+
 class BusinessDetailAbout extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
     title: PropTypes.string,
     desc: PropTypes.string,
-    instagram: PropTypes.string,
-    tokopedia: PropTypes.string
+    accounts: PropTypes.arrayOf(PropTypes.object)
   }
 
-  render() {
-    const { isLoading, title, desc, instagram, tokopedia } = this.props
+  renderLoading = () => {
+    return (
+      <Fragment>
+        <h2 className="bd-content__title">Tentang</h2>
+        <Loader width={200} height={12} borderRadius={8} marginBottom={16} />
+        <Loader width={200} height={12} borderRadius={8} marginBottom={16} />
+        <Loader height={12} borderRadius={8} marginBottom={16} />
+        <Loader height={12} borderRadius={8} />
+      </Fragment>
+    )
+  }
+
+  renderAbout = () => {
+    const { title, desc, accounts } = this.props
+    const display = []
+    
+    if(typeof accounts !== 'undefined' && accounts !== null) {
+      Object.keys(storeAccounts).forEach((key) => {
+        if(typeof accounts[key] !== 'undefined' && accounts[key] !== null) {
+          const accountDetail = accounts[key]
+          const hasUrl = accountDetail.url !== null
+
+          display.push(
+            <tr>
+              <td className="type">
+                { storeAccounts[key] }
+              </td>
+              <td className="value">
+                {
+                  !hasUrl ? 
+                  accountDetail.name :
+                  <a href= {accountDetail.url} target="_blank" rel="noopener noreferrer"> {accountDetail.name} </a>
+                }
+              </td>
+            </tr>
+          )
+        }
+      })
+    }
 
     return (
       <Fragment>
-        { isLoading ? 
-          <Fragment>
-            <h2 className="bd-content__title">Tentang</h2>
-            <Loader width={200} height={12} borderRadius={8} marginBottom={16} />
-            <Loader width={200} height={12} borderRadius={8} marginBottom={16} />
-            <Loader height={12} borderRadius={8} marginBottom={16} />
-            <Loader height={12} borderRadius={8} />
-          </Fragment>
-          :
-          <Fragment>
             <h2 className="bd-content__title">Tentang {title}</h2>
             <table className="bd-content__table">
-              { instagram != null &&
-                <tr>
-                  <td className="type">Instagram</td>
-                  <td className="value"><a href={"https://www.instagram.com/" + instagram} target="_blank" rel="noopener noreferrer">@{instagram}</a></td>
-                </tr>
-              }
-              <tr>
-                <td className="type">Bukalapak</td>
-                <td className="value">@bukalapak</td>
-              </tr>
-              <tr>
-                <td className="type">Shopee</td>
-                <td className="value">@shopee</td>
-              </tr>
-              <tr>
-                <td className="type">Tokopedia</td>
-                <td className="value"><a href={"https://www.tokopedia.com/" + tokopedia} target="_blank" rel="noopener noreferrer">@{tokopedia}</a></td>
-              </tr>
+              { display }
             </table>
             <p className="bd-content__desc">{desc}</p>
           </Fragment>
-          }
+    )
+  }
+
+  render = () => {
+    const { isLoading } = this.props
+
+    return (
+      <Fragment>
+        { isLoading ? this.renderLoading() : this.renderAbout() }
       </Fragment>
     )
   }

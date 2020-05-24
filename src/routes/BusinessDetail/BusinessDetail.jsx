@@ -62,7 +62,7 @@ class BusinessDetail extends Component {
   fetchBusinessDetail = (id, callback) => {
     BusinessService.getDetail(id, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        // console.log('parse business detail', this.parseBusinessDetail(res.data))
+        console.log('parse business detail', this.parseBusinessDetail(res.data))
         callback(this.parseBusinessDetail(res.data))
       } else {
         callback(null)
@@ -74,7 +74,7 @@ class BusinessDetail extends Component {
     const detail = data.data
     const attributes = detail.attributes
     const storeAccountsData = attributes.store_accounts.data
-    const storeAccounts = []
+    const storeAccounts = {}
     storeAccountsData.forEach((acc) => {
       const type = acc.attributes.account_type
       const name = acc.attributes.name
@@ -182,8 +182,7 @@ class BusinessDetail extends Component {
                 <BusinessDetailAbout
                   title = { businessDetail.name } 
                   desc = { businessDetail.description } 
-                  instagram="sylviestephanies"
-                  tokopedia="houseoforganix"
+                  accounts = { businessDetail.storeAccounts }
                 />
               </div>
             </section>
@@ -227,8 +226,7 @@ class BusinessDetail extends Component {
             <BusinessDetailAbout
               title = { businessDetail.name } 
               desc = { businessDetail.description }
-              instagram="sylviestephanies"
-              tokopedia="houseoforganix"
+              accounts = { businessDetail.storeAccounts }
             />
           </section>
           <hr className="divider" />
