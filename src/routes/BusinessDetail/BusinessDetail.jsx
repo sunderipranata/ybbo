@@ -49,12 +49,31 @@ class BusinessDetail extends Component {
     BusinessService.getDetail(id, (res) => {
       console.log('resss', res)
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('business detail', res)
-        callback(res)
+        console.log('parse business detail', this.parseBusinessDetail(res.data))
+        callback(this.parseBusinessDetail(res.data))
       }
 
       callback(null)
     })
+  }
+
+  parseBusinessDetail = (data) => {
+    const detail = data.data
+    const attributes = detail.attributes
+
+    return {
+      id: detail.id,
+      name: attributes.name,
+      location: attributes.location,
+      category: attributes.category,
+      description: attributes.description,
+      instructions: attributes.instructions,
+      iconUrl: attributes.icon_url,
+      thumbnailUrl: attributes.thumbnail_url,
+      assetsUrl: attributes.assets_url,
+      picturesUrl: attributes.pictures_rl,
+      backersCount: attributes.backers_count
+    }
   }
 
   render() {
