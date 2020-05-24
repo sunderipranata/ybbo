@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import IconVerified from '../assets/ic-verified.png'
 import Loader from '../../../components/Loader'
 
-const BACKER_SIZE = 5
+const BACKER_SIZE = 50
 const DEFAULT_UNVERIFIED = "telah mendaftar untuk mendukung"
 const DEFAULT_VERIFIED = "telah mempost di Instagram"
 
