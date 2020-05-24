@@ -7,13 +7,13 @@ import {
   Route
 } from 'react-router-dom'
 
-import { HOME_PATH, BUSINESS_DETAIL_PATH } from './routes'
-import logo from './logo.svg';
-import './App.scss';
+import { HOME_PATH, BUSINESS_DETAIL_PATH, ABOUT_PATH } from './routes'
+import logo from './logo.svg'
+import './App.scss'
 
 import Home from './routes/Home'
-import BusinessDetail from './routes/BusinessDetail';
-
+import BusinessDetail from './routes/BusinessDetail'
+import About from './routes/About/About'
 
 class App extends React.Component {
 
@@ -32,6 +32,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path={HOME_PATH} component={withPageView(Home)} />
           <Route exact path={BUSINESS_DETAIL_PATH} component={BusinessDetail} />
+          <Route exact path={ABOUT_PATH} component={About} />
         </Switch>
       </Router>
     )
