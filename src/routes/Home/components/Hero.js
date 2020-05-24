@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import Logo from '../assets/logo-ybbo.png'
-
 class Hero extends Component {
   render() {
     return (
