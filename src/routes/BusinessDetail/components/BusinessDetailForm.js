@@ -4,26 +4,50 @@ import Responsive from 'react-responsive'
 import { INSTAGRAM_PATH } from '../../../routes'
 
 import Loader from '../../../components/Loader'
+import BusinessService from '../../../services/BusinessService'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 
 class BusinessDetailForm extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
-    scrollToBackers: PropTypes.func
+    scrollToBackers: PropTypes.func,
+    businessName: PropTypes.string,
+    businessId: PropTypes.string,
+    backersCount: PropTypes.number
   }
 
   state = {
     isError: false,
     isAnonymous: false,
+    socialMediaAccount: "",
     isSuccess: false
   }
 
   handleCheckboxChange = event => this.setState({ isAnonymous: event.target.checked })
 
+  handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
+
+  submitFormAndDownloadAsset = (businessId,socialMediaAccount,isAnonymous) => {
+    // BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous, (res) => {
+    //   setTimeout(() => {
+    //     window.location.href = res.data.download_url
+    //   },100);
+    // })
+    window.open("https://pbs.twimg.com/profile_images/835836749041524737/yvsGW3gf_400x400.jpg")
+  }
+
+  handleSubmitForm = event => {
+    this.submitFormAndDownloadAsset(
+      this.props.businessId,
+      this.state.socialMediaAccount,
+      this.state.isAnonymous
+    )
+  }
+
   render() {
-    const { isError, isAnonymous, isSuccess } = this.state
-    const { isLoading } = this.props
+    const { isError, isAnonymous, isSuccess,socialMediaAccount } = this.state
+    const { isLoading, businessName ,numberOfBackers } = this.props
 
     return (
       <div className="bd-content__sidebar">
@@ -51,13 +75,13 @@ class BusinessDetailForm extends Component {
             </Fragment>
             :
             <Fragment>
-              <Desktop><h2 className="bd-content__title">Dukung [Nama Bisnis]</h2></Desktop>
+              <Desktop><h2 className="bd-content__title">Dukung {businessName}</h2></Desktop>
               {/* <p className="desc">Belum ada pendukung nih. Yuk jadi yang pertama!</p> */}
               {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToBackers}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
-              <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>200 Pendukung</button>. Yuk jadi salah satunya!</p>
-              <form className="form">
+              <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>{numberOfBackers} Pendukung</button>. Yuk jadi salah satunya!</p>
+              <form className="form" onSubmit={this.handleSubmitForm}>
                 <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
-                <input type="text" id="account" name="account" placeholder="Contoh: @instagram" />
+                <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @instagram" />
                 { isError && <p className="label-error">error messsage</p>}
                 <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
                   <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
@@ -73,7 +97,8 @@ class BusinessDetailForm extends Component {
                   </div>
                 }
                 {/* if input name is not filled button--disabled, if input name is filled button--main, if post form loading state spinner */}
-                <button className="button button--disabled" type="submit">Daftar untuk download aset</button>
+                <button className={socialMediaAccount === "" ? "button button--disabled":"button button--main"} 
+                disabled={socialMediaAccount === ""} type="submit">Daftar untuk download aset</button>
                 {/* <button className="button button--main" type="submit">Daftar untuk download aset</button> */}
                 {/* <button className="button button--main" type="submit"> <span class="loadingSpinner" /></button> */}
               </form>
