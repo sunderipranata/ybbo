@@ -57,10 +57,6 @@ class BusinessDetail extends Component {
         this.toggleLoading(false)
       })
     })
-
-    this.fetchBackers(id, 5, (response) => {
-      console.log('backers responsee', response)
-    })
   }
 
   toggleForm = () => {
@@ -171,7 +167,7 @@ class BusinessDetail extends Component {
             </section>
             <section name="Pendukung" className="bd-card">
               <div className="bd-card__content">
-                <BusinessDetailBackers isLoading  />
+                <BusinessDetailBackers isLoading/>
               </div>
             </section>
           </div>
@@ -246,7 +242,10 @@ class BusinessDetail extends Component {
             </section>
             <section ref={ (ref) => this.backersRef=ref } name="Pendukung" className="bd-card">
               <div className="bd-card__content">
-                <BusinessDetailBackers title = { businessDetail.name }  />
+                <BusinessDetailBackers
+                  businessDetail = { businessDetail }
+                  fetchData = { this.fetchBackers }
+                />
               </div>
             </section>
           </div>
@@ -293,7 +292,10 @@ class BusinessDetail extends Component {
           </section>
           <hr className="divider" />
           <section name="Pendukung" className="bd-card__content" style={{ marginBottom: '72px' }}>
-            <BusinessDetailBackers title = { businessDetail.name }  />
+              <BusinessDetailBackers
+                businessDetail = { businessDetail }
+                fetchData = { this.fetchBackers }
+              />
           </section>
         </main>
         <div className="bd-bottom">
