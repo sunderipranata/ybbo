@@ -70,7 +70,7 @@ class BusinessDetailBackers extends Component {
                     <span className="tooltip">
                       <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
                       <span class="tooltiptext">
-                        Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@devinryanriota</a> telah mempost di sosial media
+                        Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@devinryanriota</a> telah mempost di Instagram
                       </span>
                     </span>
                   </p>
@@ -82,7 +82,7 @@ class BusinessDetailBackers extends Component {
                     <span className="tooltip">
                       <img src={IconVerified} alt="Terverfikasi" className="backers-verified" />
                       <span class="tooltiptext">
-                        Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@nelsonwijaya</a> telah mempost di sosial media
+                        Kami sudah melakukan pengecekan bahwa <a href="/" target="_blank">@nelsonwijaya</a> telah mempost di Instagram
                       </span>
                     </span>
                   </p>

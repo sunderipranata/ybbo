@@ -49,16 +49,28 @@ body {
   color: #060606;
 }
 
+article {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 .container {
+  max-width: 970px;
   margin-right: auto;
   margin-left: auto;
 
-  @media (min-width:$breakpoint-md-min) {
-    width: 700px;
+  @media (max-width:$breakpoint-lg-max) {
+    padding: 0 32px;
   }
-
-  @media (min-width:$breakpoint-lg-min) {
-    width: 970px;
+  
+  @media (max-width:$breakpoint-md-max) {
+    max-width: 768px;
+    margin: initial;
   }
 
   &--mobile {
@@ -93,6 +105,10 @@ a {
 
 .slider {
   outline: none;
+
+  &-control-centerleft, &-control-centerright {
+    top: 45% !important;
+  }
 
   &-dots {
     padding: 0;

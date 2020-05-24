@@ -219,7 +219,6 @@
 
   .steps__title {
     font-size: 32px;
-    top: 120px;
     margin: 0 0 24px;
 
     @media (max-width:$breakpoint-lg-max) {
@@ -244,10 +243,6 @@
 
     &--mobile {
       overflow: auto;
-
-      .step__card {
-        padding: 16px 32px;
-      }
     }
 
     &--item {

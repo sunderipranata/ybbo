@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import './Footer.scss'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
 import { INSTAGRAM_PATH, ABOUT_PATH } from '../../routes'
-
-library.add(fab)
 
 class Footer extends Component {
   render() {
