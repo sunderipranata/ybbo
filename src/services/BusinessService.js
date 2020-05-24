@@ -37,6 +37,24 @@ BusinessService.getDetail = (id, callback) => {
     })
 }
 
+BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
+  const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
+  axios.post(PATH, { 
+      business_id: businessId, 
+      username: socialMediaAccount, 
+      account_type:"instagram", 
+      anonym: isAnonymous 
+  })
+    .then((response) => {
+      callbackOnSuccess(response)
+    },(reason) => {
+      callbackOnError(reason)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+  
 BusinessService.getBackers = (id, limit, offset, callback) => {
   const PATH = BASE_URL + BACKERS + "/" + id + "/backers"
   axios.get(PATH, {
@@ -62,24 +80,6 @@ BusinessService.getRandom = (category, limit, callback) => {
   .then((response) => {
     callback(response)
   })
-}
-
-BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
-  const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
-  axios.post(PATH, { 
-      business_id: businessId, 
-      username: socialMediaAccount, 
-      account_type:"instagram", 
-      anonym: isAnonymous 
-  })
-    .then((response) => {
-      callbackOnSuccess(response)
-    },(reason) => {
-      callbackOnError(reason)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
 }
 
 export default BusinessService;
