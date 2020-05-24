@@ -4,7 +4,7 @@ import Responsive from 'react-responsive'
 import { INSTAGRAM_PATH } from '../../../routes'
 
 import Loader from '../../../components/Loader'
-import BusinessService from '../../../services/BusinessService'
+// import BusinessService from '../../../services/BusinessService'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 
