@@ -117,8 +117,8 @@ class BusinessDetail extends Component {
   fetchBackers = (id, limit, offset, callback) => {
     BusinessService.getBackers(id, limit, offset, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('parse backers data', this.parseBackers(res.data))
-        callback(this.parseBackers(res.data))
+        console.log('parse backers data', this.parseBackers(res))
+        callback(this.parseBackers(res))
       } else {
         callback(null)
       }
@@ -126,7 +126,10 @@ class BusinessDetail extends Component {
   }
 
   parseBackers = (data) => {
-    const backers = data.data
+    console.log('data', data)
+    const backers = data.data.data
+    const meta = data.data.meta
+    const total = meta.total
     const backerDetails = []
     backers.forEach((val, idx) => {
       const id = val.id
@@ -146,7 +149,10 @@ class BusinessDetail extends Component {
       })
     })
 
-    return backerDetails
+    return {
+      backerDetails: backerDetails,
+      total: total
+    }
   }
 
   renderLoadingDesktop = () => {

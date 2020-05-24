@@ -24,7 +24,8 @@ class BusinessDetailBackers extends Component {
     isLoading: true,
     isBackersLoading: false,
     backers: [],
-    lastOffset: null
+    lastOffset: null,
+    total: 0
   }
 
   componentWillMount = () => {
@@ -47,11 +48,14 @@ class BusinessDetailBackers extends Component {
         const id = businessDetail.id
         nextProps.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
           if(res !== null) {
-            const lastId = res[res.length-1].id
+            const backerDetails = res.backerDetails
+            const total = res.total
+            const lastId = backerDetails[backerDetails.length-1].id
 
             this.setState({
-              backers: res,
-              lastOffset: lastId
+              backers: backerDetails,
+              lastOffset: lastId,
+              total: total
             }, () => {
               this.toggleLoadingState(false)
             })
@@ -81,13 +85,16 @@ class BusinessDetailBackers extends Component {
       
       this.toggleBackersLoading(true)
       this.props.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
-        const curBackers = [ ...this.state.backers ]
-        res.forEach((r) => {
-          curBackers.push(r)
-        })
         if(res !== null) {
+          const curBackers = [ ...this.state.backers ]
+          const backerDetails = res.backerDetails
+          backerDetails.forEach((r) => {
+            curBackers.push(r)
+          })
+          const lastId = backerDetails[backerDetails.length-1].id
           this.setState({
-            backers: curBackers
+            backers: curBackers,
+            lastOffset: lastId
           }, () => {
             this.toggleBackersLoading(false)
           })
