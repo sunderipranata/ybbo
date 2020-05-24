@@ -12,6 +12,7 @@
     "headers": [
         {
           "source": "/(.*)",
+          "methods": ["GET","POST","OPTIONS"],
           "headers": [
             {
               "key": "access-control-allow-origin",
