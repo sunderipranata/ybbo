@@ -12,11 +12,14 @@
     "headers": [
         {
           "source": "/(.*)",
-          "methods": ["GET","POST","OPTIONS"],
           "headers": [
             {
               "key": "access-control-allow-origin",
               "value": "*"
+            },
+            {
+                "key": "access-control-allow-headers",
+                "value": "Origin, X-Requested-With, Content-Type, Accept"
             }
             ]
         }
