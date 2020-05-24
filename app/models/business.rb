@@ -13,7 +13,6 @@ class Business
   field :name,              type: String
   field :location,          type: String
   field :description,       type: String
-  field :instructions,      type: String
   field :icon_url,          type: String
   field :thumbnail_url,     type: String
   field :assets_url,        type: String
@@ -28,6 +27,6 @@ class Business
   index({ location: 1, created_at: -1 }, { background: true })
   index({ category_cd: 1, created_at: -1 }, { background: true }) # _cd is because of SimpleEnum::Mongoid naming schemes
 
-  validates :name, :location, :description, :instructions, :category, :icon_url, :thumbnail_url, :assets_url, :pictures_url, presence: true
+  validates :name, :location, :description, :category, :icon_url, :thumbnail_url, :assets_url, :pictures_url, presence: true
   validates :thumbnail_url, :assets_url, :pictures_url, format: { with: /https:\/\// }
 end

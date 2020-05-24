@@ -56,3 +56,5 @@ b.push(pictures_url: "https://youngmenshealthsite.org/wp-content/uploads/2015/05
 b.validate!
 b.save
 i+=1
+
+

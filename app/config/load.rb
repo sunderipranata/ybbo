@@ -6,6 +6,15 @@ require 'json'
 require 'time'
 require 'dotenv'
 
+
+Dotenv.load
+puts '
+==========================================
+==========================================
+WARNING, YOU ARE USING PRODUCTION DATABASE
+==========================================
+==========================================' if ENV['MONGOID_URI'] =~ /production/
+
 require_relative 'mongoid'
 
 # models
@@ -23,5 +32,3 @@ require_relative '../serializers/business/simple'
 require_relative '../response/json'
 require_relative '../response/error'
 require_relative '../response/http_status'
-
-Dotenv.load
