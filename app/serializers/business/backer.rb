@@ -1,7 +1,7 @@
 class BusinessBackerSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :account_type, :comment
+  attributes :created_at, :account_type, :comment
   attribute :username do |object|
     object.anonym? ? :@anonym : object.username
   end
