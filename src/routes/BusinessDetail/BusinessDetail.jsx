@@ -62,7 +62,7 @@ class BusinessDetail extends Component {
   fetchBusinessDetail = (id, callback) => {
     BusinessService.getDetail(id, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('parse business detail', this.parseBusinessDetail(res.data))
+        // console.log('parse business detail', this.parseBusinessDetail(res.data))
         callback(this.parseBusinessDetail(res.data))
       } else {
         callback(null)
@@ -71,9 +71,20 @@ class BusinessDetail extends Component {
   }
 
   parseBusinessDetail = (data) => {
-    console.log('dataa', data)
     const detail = data.data
     const attributes = detail.attributes
+    const storeAccountsData = attributes.store_accounts.data
+    const storeAccounts = []
+    storeAccountsData.forEach((acc) => {
+      const type = acc.attributes.account_type
+      const name = acc.attributes.name
+      const url = acc.attributes.url
+
+      storeAccounts[type] = {
+        name: name,
+        url: url
+      }
+    })
 
     return {
       id: detail.id,
@@ -85,8 +96,9 @@ class BusinessDetail extends Component {
       iconUrl: attributes.icon_url,
       thumbnailUrl: attributes.thumbnail_url,
       assetsUrl: attributes.assets_url,
-      picturesUrl: attributes.pictures_rl,
-      backersCount: attributes.backers_count
+      picturesUrl: attributes.pictures_url,
+      backersCount: attributes.backers_count,
+      storeAccounts: storeAccounts
     }
   }
 
