@@ -1,12 +1,16 @@
 @import "../../styles/static";
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   @media (min-width:$breakpoint-md-min) {
-    width: 750px
+    width: 750px;
   }
 
   @media (min-width:$breakpoint-lg-min) {
-    width: 970px
+    width: 970px;
   }
 
   @media (min-width:$breakpoint-xl) {
@@ -25,6 +29,24 @@ header {
 
   @media only screen and (max-width: $breakpoint-md-max) {
     padding: 0;
+  }
+
+
+  .header__title {
+    display: flex;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    align-items: center;
+
+    .logo {
+      width: 36px;
+    }
+
+    .name {
+      margin-left: 12px;
+      font-weight: bold;
+      color: $color-primary-text;
+    }
   }
 
 

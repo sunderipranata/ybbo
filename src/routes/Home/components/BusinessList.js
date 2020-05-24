@@ -7,6 +7,8 @@ import { isMobile } from 'react-device-detect'
 
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
+import { GOOGLE_FORM_PATH } from '../../../routes'
+
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
@@ -298,7 +300,7 @@ class BusinessList extends Component {
           <span role="img" aria-label="Pensive Face" className="emoji">😔</span>
           <h4 className="title">Belum ada bisnis di kategori {categories[this.state.category]} nih.</h4>
           <p>Kamu punya bisnis di kategori ini? Yuk Daftar!</p>
-          <a href="/" target="_blank" className="button button--main">Daftarkan Bisnismu</a>
+          <a href={GOOGLE_FORM_PATH} target="_blank" className="button button--main" rel="noopener noreferrer">Daftarkan Bisnismu</a>
         </div>
       )
     }

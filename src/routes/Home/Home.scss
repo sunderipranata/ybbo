@@ -4,9 +4,10 @@
     max-width: 970px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 140px;
+    margin-top: 120px;
   
     @media (max-width:$breakpoint-lg-max) {
+      margin-top: 96px;
       padding: 0 32px;
     }
   
@@ -14,7 +15,6 @@
       max-width: 768px;
       margin: initial;
       padding: 0 16px;
-      margin-top: 96px;
     }
 }
 
@@ -24,23 +24,6 @@
   .title {
     display: flex;
     align-items: center;
-  }
-
-  .hero__logo {
-    width: 64px;
-    height: 64px;
-    margin-right: 8px;
-  
-    @media (max-width:$breakpoint-md-max) {
-      width: 40px;
-      height: 40px;
-    }
-
-    @media (max-width: 350px) {
-      width: 32px;
-      height: 32px;
-      margin-right: 4px;
-    }
   }
 
   .hero__title {
