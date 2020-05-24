@@ -7,8 +7,11 @@ import { isMobile } from 'react-device-detect'
 
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
+import { GOOGLE_FORM_PATH } from '../../../routes'
+
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
+
 const PAGE_SIZE_DESKTOP = 9;
 const PAGE_SIZE_MOBILE = 3;
 const categories = {
@@ -110,6 +113,7 @@ class BusinessList extends Component {
 
     //loading
     this.toggleLoading(true)
+    window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
     //decrement page
     const curPage = { ...this.state.page }
@@ -140,6 +144,8 @@ class BusinessList extends Component {
     const { category } = this.state
     //loading
     this.toggleLoading(true)
+
+    window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
     //increment page
     const curPage = { ...this.state.page }
@@ -292,9 +298,9 @@ class BusinessList extends Component {
       return (
         <div className="business__empty">
           <span role="img" aria-label="Pensive Face" className="emoji">😔</span>
-          <h4 className="title">Belum ada bisnis di kategori ini nih.</h4>
+          <h4 className="title">Belum ada bisnis di kategori {categories[this.state.category]} nih.</h4>
           <p>Kamu punya bisnis di kategori ini? Yuk Daftar!</p>
-          <a href="/" target="_blank" className="button button--main">Daftarkan Bisnismu</a>
+          <a href={GOOGLE_FORM_PATH} target="_blank" className="button button--main" rel="noopener noreferrer">Daftarkan Bisnismu</a>
         </div>
       )
     }
@@ -438,7 +444,7 @@ class BusinessList extends Component {
     const { isLoading } = this.state
 
     return (
-      <section className="home__business">
+      <section className="home__business" ref={ (ref) => this.businessList=ref }>
         <h2 className="business__title">Daftar Bisnis Online</h2>
 
         { this.renderBusinessesCategoriesDesktop() }
