@@ -9,6 +9,10 @@ import moment from 'moment'
 const BACKER_SIZE = 10
 const DEFAULT_UNVERIFIED = "telah mendaftar untuk mendukung"
 const DEFAULT_VERIFIED = "telah mempost di Instagram"
+const SECONDS_DIFF = "detik yang lalu"
+const MINUTES_DIFF = "menit yang lalu"
+const HOUR_DIFF = "jam yang lalu"
+const DAYS_DIFF = "hari yang lalu"
 
 class BusinessDetailBackers extends Component {
   static propTypes = {
@@ -125,6 +129,7 @@ class BusinessDetailBackers extends Component {
   renderBackers = () => {
     const { title } = this.props
     const { backers, isBackersLoading } = this.state
+    const now = moment()
 
     if(backers.length < 1) {
       return (
@@ -140,6 +145,9 @@ class BusinessDetailBackers extends Component {
         const isVerified = val.isVerified
         let comment = val.comment
         const commentText = []
+        const createdAt = moment(val.createdAt)
+
+        const timeDurationString = this.determineTimeDifferenceString(now, createdAt)
 
         if(comment === null) {
           if(isVerified) {
@@ -173,7 +181,7 @@ class BusinessDetailBackers extends Component {
             <p className="backers-title">
               { commentText }
             </p>
-            {/* <p className="backers-time">17 menit yang lalu</p> */}
+            <p className="backers-time">{ timeDurationString }</p>
           </li>
         )
       })
@@ -197,6 +205,27 @@ class BusinessDetailBackers extends Component {
           </button>
         </Fragment>
       )
+    }
+  }
+
+  determineTimeDifferenceString = (timeNow, timeData) => {
+    const duration = moment.duration(timeNow.diff(timeData))
+    const days = duration.asDays().toFixed(0)
+    if(days > 1) {
+      return days + " " + DAYS_DIFF
+    } else {
+      const hour = duration.asHours().toFixed(0)
+      if(hour > 1) {
+        return hour + " " + HOUR_DIFF 
+      } else {
+        const minutes = duration.asMinutes().toFixed(0)
+        if(minutes > 1) {
+          return minutes + " " + MINUTES_DIFF
+        } else {
+          const seconds = duration.asSeconds().toFixed(0)
+          return seconds + " " + SECONDS_DIFF
+        }
+      }
     }
   }
 

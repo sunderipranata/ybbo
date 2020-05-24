@@ -134,13 +134,15 @@ class BusinessDetail extends Component {
       const comment = val.attributes.comment
       const username = val.attributes.username
       const isVerified = val.attributes.is_verified
+      const createdAt = val.attributes.created_at
 
       backerDetails.push({
         id: id,
         accountType: accountType,
         comment: comment,
         username: username,
-        isVerified: isVerified
+        isVerified: isVerified,
+        createdAt: createdAt
       })
     })
 
