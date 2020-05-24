@@ -4,6 +4,7 @@ import './Footer.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { INSTAGRAM_PATH, ABOUT_PATH } from '../../routes'
 
 library.add(fab)
 
@@ -17,17 +18,25 @@ class Footer extends Component {
               <h3 className="footer-title">
                 Kontak Kami
               </h3>
-              <p className="footer-desc">
-                <span style={{ marginRight: '24px' }}>Email</span>
-                <a href="mailto:YukBantuBisnis.Online@gmail.com">YukBantuBisnis.Online@gmail.com</a>
-              </p>
+              <table className="footer-desc">
+                <tr>
+                  <td className="item">Email</td>
+                  <td><a href="mailto:YukBantuBisnis.Online@gmail.com">YukBantuBisnis.Online@gmail.com</a></td>
+                </tr>
+                <tr>
+                  <td className="item">Instagram</td>
+                  <td><a href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a></td>
+                </tr>
+              </table>
             </div>
             <div className="footer-section">
               <h3 className="footer-title">
-                Follow <small>@YukBantuBisnis.Online</small>
+                Tentang Kami
               </h3>
-              <a href="/" className="social-media" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'instagram']}  size="lg" /></a>
-              <a href="/" className="social-media" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
+              <p className="footer-desc">
+                Kami adalah sekelompok software engineers dari Indonesia yang mencoba untuk membantu UMKM di tengah pandemi COVID-19.<br />
+                <a href={ABOUT_PATH}>Selengkapnya &rarr;</a>
+              </p>
             </div>
           </div>
           <p className="footer-notes">

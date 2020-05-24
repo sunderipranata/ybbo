@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Responsive from 'react-responsive'
+import { INSTAGRAM_PATH } from '../../../routes'
 
 import Loader from '../../../components/Loader'
 
@@ -42,7 +43,9 @@ class BusinessDetailForm extends Component {
               <h2 className="bd-content__title">Terima kasih telah mendaftar</h2>
               <p className="desc">
                 Akun kamu telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }, Silakan tekan tombol di bawah untuk mendownload gambar/video.
-                Jangan lupa tag kami <a href="/" target="_blank">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
+              </p>
+              <p className="desc" style={{marginTop: '8px'}}>
+                Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
               </p>
               <button onClick={()=> window.open("https://www.google.com/", "_blank")} className="button button--main">Download aset untuk dipost</button>
             </Fragment>

@@ -18,6 +18,8 @@ import Step3Tag1 from '../assets/step3Tag1.png'
 import Step3Tag2 from '../assets/step3Tag2.png'
 import Step4 from '../assets/step4.png'
 
+import { INSTAGRAM_PATH } from '../../../routes'
+
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
@@ -103,7 +105,8 @@ class Steps extends Component {
                 <div className="list__desc">
                   <h3 className={ClassNames('desc__title', {active: detailShown === 3})}>Post & Tag Kami di Instagram</h3>
                   <p className={ClassNames('desc__content', {active: detailShown === 3})}>
-                    Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag <a href="/" target="_blank">@YukBantuBisnis.Online</a> ya! :)
+                    Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag{' '}
+                    <a href={INSTAGRAM_PATH} target="_blank">@YukBantuBisnis.Online</a> ya! :)
                   </p>
                 </div>
               </li>
