@@ -18,11 +18,14 @@ Handler = Proc.new do |req, res|
     when "POST"
       username = req.query['username']
       account_type = req.query['account_type'].to_sym
+      anonym = req.query['anonym'] == 'true'
+
       business = Business.find_by(id: business_id)
       raise ResourceNotFoundError, 'business not found' if business.blank?
-      backer = business.backers.new(username: username, account_type: account_type)
+      backer = business.backers.new(username: username, account_type: account_type, anonym: anonym)
       backer.validate!
       business.backers << backer
+
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("backer successfully inserted", res.status)
     end

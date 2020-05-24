@@ -107,6 +107,11 @@
 									"key": "account_type",
 									"value": "instagram",
 									"type": "text"
+								},
+								{
+									"key": "anonym",
+									"value": "false",
+									"type": "text"
 								}
 							]
 						},
