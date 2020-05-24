@@ -4,7 +4,6 @@ let BASE_URL = `${window.location.origin.toString()}/api`
 if(window.location.href.includes('localhost'))  {
   BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
 }
-
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
