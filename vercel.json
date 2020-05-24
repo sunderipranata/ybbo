@@ -9,29 +9,6 @@
             "destination": "/api/businesses/backers"
         }
     ],
-    "headers": [
-        {
-          "source": "/(.*)",
-          "headers": [
-            {
-              "key": "access-control-allow-origin",
-              "value": "*"
-            },
-            {
-              "key": "Access-Control-Allow-Credentials",
-              "value": "true"
-            },
-            {
-              "key": "Access-Control-Allow-Methods",
-              "value": "POST, GET, OPTIONS"
-            },
-            {
-              "key": "Access-Control-Allow-Headers",
-              "value": "content-type, authorization, content-length, x-requested-with, accept, origin"
-            }
-          ]
-        }
-    ],
     "github": {
         "enabled": false
     }

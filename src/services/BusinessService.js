@@ -35,11 +35,11 @@ BusinessService.getDetail = (id, callback) => {
 
 BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
   const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
-  axios.post(PATH, { 
-      business_id: businessId, 
-      username: socialMediaAccount, 
-      account_type:"instagram", 
-      anonym: isAnonymous 
+  axios.post(PATH, {
+      business_id: businessId,
+      username: socialMediaAccount,
+      account_type:"instagram",
+      anonym: isAnonymous
   })
     .then((response) => {
       callbackOnSuccess(response)
@@ -50,7 +50,7 @@ BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAcc
       console.log(error)
     })
   }
-  
+
 BusinessService.getBackers = (id, limit, offset, callback) => {
   const PATH = BASE_URL + BACKERS + "/" + id + "/backers"
   axios.get(PATH, {
