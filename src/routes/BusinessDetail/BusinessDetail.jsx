@@ -57,6 +57,10 @@ class BusinessDetail extends Component {
         this.toggleLoading(false)
       })
     })
+
+    this.fetchBackers(id, 5, (response) => {
+      console.log('backers responsee', response)
+    })
   }
 
   toggleForm = () => {
@@ -112,6 +116,38 @@ class BusinessDetail extends Component {
       backersCount: attributes.backers_count,
       storeAccounts: storeAccounts
     }
+  }
+
+  fetchBackers = (id, limit, callback) => {
+    BusinessService.getBackers(id, limit, (res) => {
+      if(res !== null && res.data.meta.http_status === 200) {
+        console.log('parse backers data', this.parseBackers(res.data))
+        callback(this.parseBackers(res.data))
+      } else {
+        callback(null)
+      }
+    })
+  }
+
+  parseBackers = (data) => {
+    const backers = data.data
+    const backerDetails = backers.map((val, idx) => {
+      const id = val.id
+      const accountType = val.attributes.account_type
+      const comment = val.attributes.comment
+      const username = val.attributes.username
+      const isVerified = val.attributes.is_verified
+
+      return {
+        id: id,
+        accountType: accountType,
+        comment: comment,
+        username: username,
+        isVerified: isVerified
+      }
+    })
+
+    return backerDetails
   }
 
   renderLoadingDesktop = () => {
