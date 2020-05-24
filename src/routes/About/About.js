@@ -15,6 +15,10 @@ import Sylvie from './assets/sylvie.jpeg'
 library.add(fab)
 
 class About extends Component {
+  componentDidMount() {
+    window.scrollTo({top: 0})
+  }
+  
   render() {
     return (
       <Fragment>

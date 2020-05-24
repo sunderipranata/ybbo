@@ -59,6 +59,9 @@ header {
   
         &.active {
           font-weight: bold;
+          &:hover {
+            color: $color-secondary-text;
+          }
         }
   
         &:hover {
