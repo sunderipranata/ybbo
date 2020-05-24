@@ -222,18 +222,21 @@ class BusinessDetailBackers extends Component {
   determineTimeDifferenceString = (timeNow, timeData) => {
     const duration = moment.duration(timeNow.diff(timeData))
     const days = duration.asDays().toFixed(0)
-    if(days > 1) {
+    if(days >= 1) {
       return days + " " + DAYS_DIFF
     } else {
       const hour = duration.asHours().toFixed(0)
-      if(hour > 1) {
+      console.log('hourrr', hour)
+      if(hour >= 1) {
         return hour + " " + HOUR_DIFF 
       } else {
         const minutes = duration.asMinutes().toFixed(0)
-        if(minutes > 1) {
+        console.log('minutes', minutes)
+        if(minutes >= 1) {
           return minutes + " " + MINUTES_DIFF
         } else {
           const seconds = duration.asSeconds().toFixed(0)
+          console.log('seconds', seconds)
           return seconds + " " + SECONDS_DIFF
         }
       }
