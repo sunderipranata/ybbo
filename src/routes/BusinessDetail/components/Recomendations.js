@@ -98,6 +98,7 @@ class Recomendations extends Component {
 
     return (
       <Fragment>
+        <h2 className="bd-content__title">Rekomendasi Bisnis Lainnya</h2>
         { isLoading ? this.renderLoading() : this.renderRecommendations() }
       </Fragment>
     )
