@@ -21,6 +21,7 @@ Handler = Proc.new do |req, res|
       business_id = req_body['business_id'] || ""
       raise MissingParameterError, 'missing business_id' if business_id.blank?
       username = req_body['username']
+      username = username[1..-1] if username[0] == '@'
       account_type = req_body['account_type'].to_sym
       anonym = !!req_body['anonym']
 
