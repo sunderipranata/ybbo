@@ -87,7 +87,7 @@ class Recomendations extends Component {
     })
 
     return (
-      <div className="container container__recommendation">
+      <div className="container__recommendation">
         { display }
       </div>
     )
@@ -98,8 +98,10 @@ class Recomendations extends Component {
 
     return (
       <Fragment>
-        <h2 className="bd-content__title">Rekomendasi Bisnis Lainnya</h2>
-        { isLoading ? this.renderLoading() : this.renderRecommendations() }
+        <div className="container">
+          <h2 className="bd-content__title">Rekomendasi Bisnis Lainnya</h2>
+          { isLoading ? this.renderLoading() : this.renderRecommendations() }
+        </div>
       </Fragment>
     )
   }
