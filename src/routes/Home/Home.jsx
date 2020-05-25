@@ -34,7 +34,8 @@ class Home extends React.Component {
         category: val.attributes.category,
         location: val.attributes.location,
         thumbnailUrl: val.attributes.thumbnail_url,
-        backersCount: val.attributes.backers_count
+        backersCount: val.attributes.backers_count,
+        slug: val.attributes.slug
       }
     })
 

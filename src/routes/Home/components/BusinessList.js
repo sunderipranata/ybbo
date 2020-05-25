@@ -250,9 +250,9 @@ class BusinessList extends Component {
     const display = []
     for(let i = 0; i < size; i++) {
       display.push(
-        <a href="/" className="item" key = {100 + i}>
+        <div className="item" key = {100 + i}>
           <BusinessCard loading />
-        </a>
+        </div>
       )
     }
 
@@ -272,9 +272,10 @@ class BusinessList extends Component {
       const location = b.location
       const thumbnailUrl = b.thumbnailUrl
       const name = b.name
+      const slug = b.slug
 
       return (
-        <Link to={'/detail-bisnis/' + id} className="item" key = { id }>
+        <Link to={'/b/' + slug} className="item" key = { id }>
           <BusinessCard
             img = { thumbnailUrl }
             title = { name }

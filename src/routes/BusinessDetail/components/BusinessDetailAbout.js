@@ -20,7 +20,7 @@ class BusinessDetailAbout extends Component {
     isLoading: PropTypes.bool,
     title: PropTypes.string,
     desc: PropTypes.string,
-    accounts: PropTypes.arrayOf(PropTypes.object)
+    accounts: PropTypes.object
   }
 
   renderLoading = () => {

@@ -14,14 +14,16 @@ class Footer extends Component {
                 Kontak Kami
               </h3>
               <table className="footer-desc">
-                <tr>
-                  <td className="item">Email</td>
-                  <td><a href="mailto:YukBantuBisnis.Online@gmail.com">YukBantuBisnis.Online@gmail.com</a></td>
-                </tr>
-                <tr>
-                  <td className="item">Instagram</td>
-                  <td><a href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a></td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td className="item">Email</td>
+                    <td><a href="mailto:YukBantuBisnis.Online@gmail.com">YukBantuBisnis.Online@gmail.com</a></td>
+                  </tr>
+                  <tr>
+                    <td className="item">Instagram</td>
+                    <td><a href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a></td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div className="footer-section">
