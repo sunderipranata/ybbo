@@ -47,6 +47,7 @@ class BusinessDetailForm extends Component {
 
   handleErrorResponse = (errorResponse) => {
     try{
+      console.log(errorResponse)
       switch(errorResponse.meta.error_code){
         case 1003: this.setState({errorMessage:ERROR_MESSAGE_NOT_VALID});break;
         case 1004: this.setState({errorMessage:ERROR_MESSAGE_DUPLICATE_ENTRY(this.state.socialMediaAccount)});break;

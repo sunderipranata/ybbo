@@ -43,11 +43,10 @@ BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAn
   })
     .then((response) => {
       callbackOnSuccess(response)
-    },(reason) => {
-      callbackOnError(reason)
     })
     .catch((error) => {
       console.log(error)
+      callbackOnError(error.response)
     })
   }
 
