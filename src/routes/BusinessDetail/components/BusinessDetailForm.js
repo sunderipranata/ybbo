@@ -8,6 +8,10 @@ import BusinessService from '../../../services/BusinessService'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 
+const ERROR_MESSAGE_DUPLICATE_ENTRY = (id) => `Akun dengan id ${id} sudah mendukung bisnis ini. Hayoh salah ketik ya ?`
+const ERROR_MESSAGE_NOT_VALID = "Akun yang dimasukkan tidak valid, Hayoh coba dicek lagi !"
+const ERROR_MESSAGE_GENERAL = "Terjadi kesalahan pada sistem kami, mohon coba lagi dalam beberapa detik"
+
 class BusinessDetailForm extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
@@ -19,24 +23,39 @@ class BusinessDetailForm extends Component {
   }
 
   state = {
-    errorMessage : "Terjadi kesalahan pada sistem kami, mohon coba lagi dalam beberapa detik",
+    errorMessage : "",
     isError: false,
     isAnonymous: false,
     socialMediaAccount: "",
     isSuccess: false
   }
 
+
   handleCheckboxChange = event => this.setState({ isAnonymous: event.target.checked })
 
   handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
 
   submitFormAndDownloadAsset = (businessId,socialMediaAccount,isAnonymous) => {
-    BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous, (res) => {
+    BusinessService.submitBusinessDetailForm(businessId,socialMediaAccount,isAnonymous, (res) => {
       this.setState({isSuccess: true})
     },
-    (reason) => {
+    (errorResponse) => {
+      this.handleErrorResponse(errorResponse)
       this.setState({isError: true})
     })
+  }
+
+  handleErrorResponse = (errorResponse) => {
+    try{
+      switch(errorResponse.meta.error_code){
+        case 1003: this.setState({errorMessage:ERROR_MESSAGE_NOT_VALID});break;
+        case 1004: this.setState({errorMessage:ERROR_MESSAGE_DUPLICATE_ENTRY(this.state.socialMediaAccount)});break;
+        default: this.setState({errorMessage: ERROR_MESSAGE_GENERAL})
+      }
+    }
+    catch(reason){
+      this.setState({errorMessage: ERROR_MESSAGE_GENERAL})
+    }
   }
 
   handleSubmitForm = event => {
