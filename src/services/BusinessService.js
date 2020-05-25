@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let BASE_URL = window.location.href + "api"
+let BASE_URL = `${window.location.origin.toString()}/api`
 if(window.location.href.includes('localhost'))  {
   BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
 }
