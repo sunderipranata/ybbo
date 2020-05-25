@@ -79,6 +79,10 @@
     margin: 0 0 16px;
     color: $color-primary-text;
 
+    @media (max-width:$breakpoint-md-max) {
+      font-size: 18px;
+    }
+
     &--padding {
       padding: 16px 16px 0 16px;
     }
@@ -161,22 +165,25 @@
 
       .step__card {
         margin: 10px;
-        height: 230px;
-
-        &--desc {
-          font-size: 12px;
-        }
+        height: 220px;
+        background-color: $color-blue-light;
 
         @media (max-width:$breakpoint-md-max) {
           height: 152px;
+          background-color: $color-blue-lighter;
+        }
+
+        &--desc {
+          font-size: 12.5px;
+
+          @media (max-width:$breakpoint-md-max) {
+            font-size: 12px;
+          }
         }
 
         &--title {
-          height: 68px;
-
-          @media (max-width:$breakpoint-md-max) {
-            height: 46px;
-          }
+          font-size: 17px;
+          height: 42px;
         }
       }
     }
@@ -257,6 +264,7 @@
         font-size: 14px;
         color: #828282;
         margin: 0 8px 0 0;
+        line-height: 1.4;
 
         .text {
           margin-right: 8px;
@@ -270,7 +278,7 @@
       .backers-time {
         font-size: 12px;
         color: #C0C0C0;
-        margin: 0;
+        margin: 4px 0 0 0;
       }
 
       .backers-verified {
@@ -377,6 +385,8 @@
   width: 180px;
   display: block;
   text-align: center;
+  outline: none;
+  cursor: pointer;
 
   @media (max-width:$breakpoint-md-max) {
     border-radius: 8px;
