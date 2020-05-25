@@ -16,6 +16,9 @@ $loadingSpinnerSpeed: .7s;
     position: relative;
     outline: none;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     @media (max-width:$breakpoint-lg-max) {
       font-size: 14px;
