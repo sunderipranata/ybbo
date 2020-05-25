@@ -72,9 +72,10 @@ class Recomendations extends Component {
   renderRecommendations = () => {
     const { randomBusinesses } = this.state
     const display = []
-    randomBusinesses.forEach((b) => [
+    randomBusinesses.forEach((b) => {
+      const link = b.slug === null ? b.id : b.slug
       display.push(
-        <Link to={'/b/' + b.id} className="item" key = { b.id }>
+        <Link to={'/b/' + link} className="item" key = { b.id }>
           <BusinessCard
             img = { b.thumbnailUrl }
             title = { b.name }
@@ -83,7 +84,7 @@ class Recomendations extends Component {
             backers = { b.backersCount } />
         </Link>
       )
-    ])
+    })
 
     return (
       <div className="container container__recommendation">

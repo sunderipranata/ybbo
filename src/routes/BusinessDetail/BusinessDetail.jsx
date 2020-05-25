@@ -49,6 +49,7 @@ class BusinessDetail extends Component {
   componentDidMount = () => {
     window.scrollTo({top: 0})
 
+    //slug
     const id = this.props.match.params.id
     this.fetchBusinessDetail(id, (response) => {
       this.setState({
@@ -172,7 +173,8 @@ class BusinessDetail extends Component {
         category: val.attributes.category,
         location: val.attributes.location,
         thumbnailUrl: val.attributes.thumbnail_url,
-        backersCount: val.attributes.backers_count
+        backersCount: val.attributes.backers_count,
+        slug: val.attributes.slug
       })
     })
 
