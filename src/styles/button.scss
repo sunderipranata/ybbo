@@ -14,6 +14,8 @@ $loadingSpinnerSpeed: .7s;
     transition: .3s ease;
     font-family: 'DM Sans', sans-serif;
     position: relative;
+    outline: none;
+    cursor: pointer;
 
     @media (max-width:$breakpoint-lg-max) {
       font-size: 14px;

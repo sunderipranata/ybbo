@@ -37,24 +37,24 @@ class About extends Component {
           </p>
           <ul className="team-container">
             <li>
-              <div className="team-avatar" style={{ "backgroundImage": 'url(' + Devin + ')' }}  />
-              <p>Devin</p>
-              <a href="https://www.linkedin.com/in/devinryanriota/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
+              <a href="https://www.linkedin.com/in/devinryanriota/" target="_blank" rel="noopener noreferrer"><div className="team-avatar" style={{ "backgroundImage": 'url(' + Devin + ')' }}  /></a>
+              <p>Devin <a href="https://www.linkedin.com/in/devinryanriota/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a></p>
+              <p>Fullstack Engineer</p>
             </li>
             <li>
-              <div className="team-avatar" style={{ "backgroundImage": 'url(' + Nelson + ')' }}  />
-              <p>Nelson</p>
-              <a href="https://www.linkedin.com/in/nelson-wijaya/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
+              <a href="https://www.linkedin.com/in/nelson-wijaya/" target="_blank" rel="noopener noreferrer"><div className="team-avatar" style={{ "backgroundImage": 'url(' + Nelson + ')' }}  /></a>
+              <p>Nelson <a href="https://www.linkedin.com/in/nelson-wijaya/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a></p>
+              <p>Data & Front-end Engineer</p>
             </li>
             <li>
-              <div className="team-avatar" style={{ "backgroundImage": 'url(' + Sunderi + ')' }}  />
-              <p>Sunderi</p>
-              <a href="https://www.linkedin.com/in/sunderi-pranata/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
+              <a href="https://www.linkedin.com/in/sunderi-pranata/" target="_blank" rel="noopener noreferrer"><div className="team-avatar" style={{ "backgroundImage": 'url(' + Sunderi + ')' }}  /></a>
+              <p>Sunderi <a href="https://www.linkedin.com/in/sunderi-pranata/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a></p>
+              <p>Product & Software Engineer</p>
             </li>
             <li>
-              <div className="team-avatar" style={{ "backgroundImage": 'url(' + Sylvie + ')' }}  />
-              <p>Sylvie</p>
-              <a href="https://www.linkedin.com/in/sylviestephanie/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a>
+              <a href="https://www.sylviestephanie.com/" target="_blank" rel="noopener noreferrer"><div className="team-avatar" style={{ "backgroundImage": 'url(' + Sylvie + ')' }}  /></a>
+              <p>Sylvie <a href="https://www.linkedin.com/in/sylviestephanie/" className="linkedin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={['fab', 'linkedin']}  size="lg" /></a></p>
+              <p>UI/UX & Front-end Designer</p>
             </li>
           </ul>
         </main>

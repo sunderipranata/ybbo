@@ -52,13 +52,10 @@
     li {
       text-align: center;
       color: $color-secondary-text;
+      font-size: 16px;
 
       p {
-        margin: 0 0 16px;
-
-        @media (max-width:$breakpoint-md-max) {
-          margin-bottom: 8px;
-        }
+        margin: 0 0 8px;
       }
     }
   }
@@ -74,6 +71,7 @@
   }
 
   .linkedin {
+    margin-left: 6px;
     color: #0779B6;
 
     &:hover {
