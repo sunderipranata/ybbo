@@ -272,9 +272,10 @@ class BusinessList extends Component {
       const location = b.location
       const thumbnailUrl = b.thumbnailUrl
       const name = b.name
+      const slug = b.slug
 
       return (
-        <Link to={'/b/' + id} className="item" key = { id }>
+        <Link to={'/b/' + slug} className="item" key = { id }>
           <BusinessCard
             img = { thumbnailUrl }
             title = { name }
