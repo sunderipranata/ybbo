@@ -3,11 +3,12 @@ require_relative '../../app/config/load'
 Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
   begin
-    business_id = req.query['business_id'] || ""
-    raise MissingParameterError, 'missing business_id' if business_id.blank?
 
     case req.request_method
     when "GET"
+      business_id = req.query['business_id'] || ""
+      raise MissingParameterError, 'missing business_id' if business_id.blank?
+
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
       business = Business.find_by(id: business_id)
@@ -16,10 +17,12 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_OK
       res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, res.status, pagination_meta: true, limit: limit)
     when "POST"
-      username = req.query['username']
-      username = username[1..-1] if username[0] == '@'
-      account_type = req.query['account_type'].to_sym
-      anonym = req.query['anonym'] == 'true'
+      req_body = JSON.parse(req.body)
+      business_id = req_body['business_id'] || ""
+      raise MissingParameterError, 'missing business_id' if business_id.blank?
+      username = req_body['username']
+      account_type = req_body['account_type'].to_sym
+      anonym = !!req_body['anonym']
 
       business = Business.find_by(id: business_id)
       raise ResourceNotFoundError, 'business not found' if business.blank?
@@ -30,6 +33,9 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("backer successfully inserted", res.status)
     end
+  rescue JSON::ParserError => e
+    res.status = HTTP_STATUS_BAD_REQUEST
+    res.body = JSON::Response.error('expected json request body', ERROR_INVALID_REQUEST_BODY, res.status)
   rescue ResourceNotFoundError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_RESOURCE_NOT_FOUND, res.status)
