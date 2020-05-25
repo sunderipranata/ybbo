@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
+import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventCategory from "../../../utils/googleAnalytics/EventCategory"
+import EventLabel from "../../../utils/googleAnalytics/EventLabel"
+
 const RANDOM_SIZE = 3
 const categories = {
   food_and_beverage: 'Makanan dan Minuman',
@@ -12,7 +16,7 @@ const categories = {
   beauty: 'Kecantikan'
 }
 
-class Recomendations extends Component {
+class Recomendations extends BaseAnalyticsComponents {
   static propTypes = {
     isLoading: PropTypes.bool,
     businessDetail: PropTypes.object
@@ -53,6 +57,10 @@ class Recomendations extends Component {
     }
   }
 
+  onBusinessCardClick = (businessId) => {
+    this.trackClickWithValue(EventCategory.BUSINESS_DETAIL_PAGE, EventLabel.HELP_OTHER_BUSINESS_CARD,businessId)
+  }
+
   toggleLoading = (loading) => {
     this.setState({
       isLoading: loading
@@ -75,7 +83,7 @@ class Recomendations extends Component {
     randomBusinesses.forEach((b) => {
       const link = (typeof b.slug === 'undefined' || b.slug === null) ? b.id : b.slug
       display.push(
-        <Link to={'/b/' + link} className="item" key = { b.id }>
+        <Link onClick = {this.onBusinessCardClick.bind(this,b.id)} to={'/b/' + b.id} className="item" key = { b.id }>
           <BusinessCard
             img = { b.thumbnailUrl }
             title = { b.name }

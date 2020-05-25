@@ -22,8 +22,7 @@ class BaseAnalyticsComponent extends React.Component {
             ReactGA.event({
                 category: page,
                 action: "Click",
-                label: label,
-                value: value
+                label: label + " - " + value
             });
         }
     }

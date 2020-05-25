@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
 import { isMobile } from 'react-device-detect'
-
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
 import { GOOGLE_FORM_PATH } from '../../../routes'
+
+import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventCategory from "../../../utils/googleAnalytics/EventCategory"
+import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
@@ -22,7 +25,7 @@ const categories = {
   beauty: 'Kecantikan'
 }
 
-class BusinessList extends Component {
+class BusinessList extends BaseAnalyticsComponents {
   state = {
     hasPrev: false,
     hasNext: true,
@@ -205,6 +208,8 @@ class BusinessList extends Component {
       category: category
     })
 
+    this.trackClickWithValue(EventCategory.HOME_PAGE,EventLabel.CATEGORY_FILTER,category)
+
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
     this.props.fetchData(limit, offset, category, (res) => {
@@ -245,6 +250,10 @@ class BusinessList extends Component {
     })
   }
 
+  onBusinessCardClick = (businessId) => {
+    this.trackClickWithValue(EventCategory.HOME_PAGE, EventLabel.MERCHANT_CARD,businessId)
+  }
+
   renderLoading = () => {
     const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const display = []
@@ -277,7 +286,7 @@ class BusinessList extends Component {
       const link = (typeof slug === 'undefined' || slug === null) ? id : slug
 
       return (
-        <Link to={'/b/' + link} className="item" key = { id }>
+        <Link onClick={this.onBusinessCardClick.bind(this,id)} to={'/b/' + id} className="item" key = { id }>
           <BusinessCard
             img = { thumbnailUrl }
             title = { name }
