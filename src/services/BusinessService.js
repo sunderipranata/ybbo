@@ -33,7 +33,7 @@ BusinessService.getDetail = (id, callback) => {
     })
 }
 
-BusinessService.submitBusinessDetailAndReturnAsset = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
+BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
   const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
   axios.post(PATH, {
       business_id: businessId,

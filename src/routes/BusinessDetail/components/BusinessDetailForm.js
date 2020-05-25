@@ -35,7 +35,7 @@ class BusinessDetailForm extends Component {
 
   handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
 
-  submitFormAndDownloadAsset = (businessId,socialMediaAccount,isAnonymous) => {
+  submitBusinessDetailForm = (businessId,socialMediaAccount,isAnonymous) => {
     BusinessService.submitBusinessDetailForm(businessId,socialMediaAccount,isAnonymous, (res) => {
       this.setState({isSuccess: true})
     },
@@ -59,7 +59,7 @@ class BusinessDetailForm extends Component {
   }
 
   handleSubmitForm = event => {
-    this.submitFormAndDownloadAsset(
+    this.submitBusinessDetailForm(
       this.props.businessId,
       this.state.socialMediaAccount,
       this.state.isAnonymous
