@@ -50,7 +50,7 @@ class BusinessDetailBackers extends Component {
           if(res !== null) {
             const backerDetails = res.backerDetails
             const total = res.total
-            const lastId = backerDetails[backerDetails.length-1].id
+            const lastId = backerDetails.length > 0 ? backerDetails[backerDetails.length-1].id : null
 
             this.setState({
               backers: backerDetails,
@@ -82,7 +82,7 @@ class BusinessDetailBackers extends Component {
 
     if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
       const id = businessDetail.id
-      
+
       this.toggleBackersLoading(true)
       this.props.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
         if(res !== null) {
@@ -98,6 +98,8 @@ class BusinessDetailBackers extends Component {
           }, () => {
             this.toggleBackersLoading(false)
           })
+        } else {
+          this.toggleBackersLoading(false)
         }
       })
     }
