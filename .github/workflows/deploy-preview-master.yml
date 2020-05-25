@@ -1,21 +1,21 @@
-name: deploy website preview master
-on:
-  push:
-    branches: [master]
+# name: deploy website preview master
+# on:
+#   push:
+#     branches: [master]
 
-jobs:
-  deploy:
-    timeout-minutes: 5
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v19
-        id: vercel-deployment
-        with:
-          github-token: ${{ secrets.BOT_TOKEN }}
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-      - name: preview-url
-        run: |
-          echo ${{ steps.vercel-deployment.outputs.preview-url }}
+# jobs:
+#   deploy:
+#     timeout-minutes: 5
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: amondnet/vercel-action@v19
+#         id: vercel-deployment
+#         with:
+#           github-token: ${{ secrets.BOT_TOKEN }}
+#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+#           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+#           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+#       - name: preview-url
+#         run: |
+#           echo ${{ steps.vercel-deployment.outputs.preview-url }}
