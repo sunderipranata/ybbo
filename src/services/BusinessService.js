@@ -46,7 +46,7 @@ BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAn
     })
     .catch((error) => {
       console.log(error)
-      callbackOnError(error.response)
+      callbackOnError(error.response.data)
     })
   }
 
