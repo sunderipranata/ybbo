@@ -181,14 +181,13 @@ class BusinessDetailBackers extends Component {
             commentText.push(
               <span className="text">{ name + " " + comment }</span>
             )
-          }
-          
-          
+          } 
         } else {
           if(name !== ANONYMOUS_USER) {
             const instagramUrl = 'https://instagram.com/' + name
             commentText.push(
-              <span className="text">Kata
+              <span className="text">
+                Kata
                 <a href={ instagramUrl } target="_blank" rel="noopener noreferrer"> { name } </a>
                 { ": " + comment }
               </span>
