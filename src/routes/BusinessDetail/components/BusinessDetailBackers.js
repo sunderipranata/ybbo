@@ -136,7 +136,7 @@ class BusinessDetailBackers extends Component {
   }
 
   renderBackers = () => {
-    const { title } = this.props
+    const { businessDetail } = this.props
     const { backers, isBackersLoading, total } = this.state
     const hasMoreBackers = backers.length < total
     const now = moment()
@@ -147,7 +147,7 @@ class BusinessDetailBackers extends Component {
           <h2 className="bd-content__title">Pendukung</h2>
           <div className="bd-content__empty">
             <span role="img" aria-label="Crying Face" className="emoji">😢</span>
-            <p className="title">{title} Belum ada pendukungnya nih.</p>
+            <p className="title">{businessDetail.name} belum ada pendukungnya nih.</p>
             <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
           </div>
         </Fragment>
