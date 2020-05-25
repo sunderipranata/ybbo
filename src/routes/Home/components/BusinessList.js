@@ -285,7 +285,7 @@ class BusinessList extends BaseAnalyticsComponents {
       const link = (typeof slug === 'undefined' || slug === null) ? id : slug
 
       return (
-        <Link onClick={this.onBusinessCardClick.bind(this,id)} to={'/b/' + id} className="item" key = { id }>
+        <Link onClick={this.onBusinessCardClick.bind(this,id)} to={'/b/' + link} className="item" key = { id }>
           <BusinessCard
             img = { thumbnailUrl }
             title = { name }
