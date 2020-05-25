@@ -107,7 +107,7 @@ class BusinessDetailBackers extends Component {
 
   renderLoading = () => {
     return (
-      <div>
+      <Fragment>
         <h2 className="bd-content__title">Pendukung</h2>
         <ul className="bd-content__backers">
           <li>
@@ -131,23 +131,26 @@ class BusinessDetailBackers extends Component {
             <Loader width={200} height={12} borderRadius={8} />
           </li>
         </ul>
-      </div>
+      </Fragment>
     )
   }
 
   renderBackers = () => {
-    const { title } = this.props
+    const { businessDetail } = this.props
     const { backers, isBackersLoading, total } = this.state
     const hasMoreBackers = backers.length < total
     const now = moment()
 
     if(backers.length < 1) {
       return (
-        <div className="bd-content__empty">
-          <span role="img" aria-label="Crying Face" className="emoji">😢</span>
-          <p className="title">{title} belum ada pendukungnya nih.</p>
-          <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
-        </div>
+        <Fragment>
+          <h2 className="bd-content__title">Pendukung</h2>
+          <div className="bd-content__empty">
+            <span role="img" aria-label="Crying Face" className="emoji">😢</span>
+            <p className="title">{businessDetail.name} belum ada pendukungnya nih.</p>
+            <p className="desc">Yuk, jadi yang pertama dengan mendaftarkan Instagram kamu.</p>
+          </div>
+        </Fragment>
       )
     } else {
       const display = backers.map((val, idx) => {

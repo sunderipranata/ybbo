@@ -68,7 +68,7 @@ class BusinessDetailGallery extends Component {
       display = pictures.map((val, idx) => {
         const altText = "picture-" + idx
         return (
-          <li>
+          <li key = { altText }>
             <a href= { val } data-attribute="SRL">
               <img src= { val } alt= { altText } />
             </a>
