@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
 import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
-import EventCategory from "../../../utils/googleAnalytics/EventCategory"
 import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 
 const RANDOM_SIZE = 3
@@ -58,7 +57,7 @@ class Recomendations extends BaseAnalyticsComponents {
   }
 
   onBusinessCardClick = (businessId) => {
-    this.trackClickWithValue(EventCategory.BUSINESS_DETAIL_PAGE, EventLabel.HELP_OTHER_BUSINESS_CARD,businessId)
+    this.trackClickWithValue(EventLabel.HELP_OTHER_BUSINESS_CARD,businessId)
   }
 
   toggleLoading = (loading) => {

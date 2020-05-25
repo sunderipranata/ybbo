@@ -9,7 +9,6 @@ import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 import { GOOGLE_FORM_PATH } from '../../../routes'
 
 import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
-import EventCategory from "../../../utils/googleAnalytics/EventCategory"
 import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
@@ -208,7 +207,7 @@ class BusinessList extends BaseAnalyticsComponents {
       category: category
     })
 
-    this.trackClickWithValue(EventCategory.HOME_PAGE,EventLabel.CATEGORY_FILTER,category)
+    this.trackClickWithValue(EventLabel.CATEGORY_FILTER,category)
 
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
@@ -251,7 +250,7 @@ class BusinessList extends BaseAnalyticsComponents {
   }
 
   onBusinessCardClick = (businessId) => {
-    this.trackClickWithValue(EventCategory.HOME_PAGE, EventLabel.MERCHANT_CARD,businessId)
+    this.trackClickWithValue(EventLabel.MERCHANT_CARD,businessId)
   }
 
   renderLoading = () => {

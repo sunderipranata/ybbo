@@ -12,6 +12,8 @@ import Nelson from './assets/nelson.jpeg'
 import Sunderi from './assets/sunderi.jpeg'
 import Sylvie from './assets/sylvie.jpeg'
 
+import PageLabel from "../../utils/googleAnalytics/PageLabel"
+
 library.add(fab)
 
 class About extends Component {
@@ -23,7 +25,7 @@ class About extends Component {
     return (
       <Fragment>
         <article>
-        <Header />
+        <Header pageLabel={PageLabel.HEADER}/>
         <main className="container container__about clearfix">
           <h1 className="title">Hai! Salam Kenal <span role="img" aria-label="Waving Hand">👋</span> </h1>
           <p className="desc">
@@ -58,7 +60,7 @@ class About extends Component {
             </li>
           </ul>
         </main>
-        <Footer />
+        <Footer pageLabel={PageLabel.FOOTER} />
         </article>
       </Fragment>
     )

@@ -1,9 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Footer.scss'
 
 import { INSTAGRAM_PATH, ABOUT_PATH } from '../../routes'
 
-class Footer extends Component {
+import BaseAnalyticsComponents from "../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventLabel from "../../utils/googleAnalytics/EventLabel"
+
+class Footer extends BaseAnalyticsComponents {
+
+  onInstagramLinkClick=()=>{
+    this.trackClick(EventLabel.INSTAGRAM_LINK)
+  }
+
+  onEmailLinkClick=()=>{
+    this.trackClick(EventLabel.EMAIL_LINK)
+  }
+
   render() {
     return (
       <footer className="footer">
@@ -17,11 +29,11 @@ class Footer extends Component {
                 <tbody>
                   <tr>
                     <td className="item">Email</td>
-                    <td><a href="mailto:YukBantuBisnis.Online@gmail.com">YukBantuBisnis.Online@gmail.com</a></td>
+                    <td><a onClick={this.onEmailLinkClick} href="mailto:YukBantuBisnis.Online@gmail.com">YukBantuBisnis.Online@gmail.com</a></td>
                   </tr>
                   <tr>
                     <td className="item">Instagram</td>
-                    <td><a href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a></td>
+                    <td><a onClick={this.onInstagramLinkClick} href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a></td>
                   </tr>
                 </tbody>
               </table>
