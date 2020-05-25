@@ -17,6 +17,7 @@ Handler = Proc.new do |req, res|
       res.body = JSON::Response::Data.many(backers, BusinessBackerSerializer, res.status, pagination_meta: true, limit: limit)
     when "POST"
       username = req.query['username']
+      username = username[1..-1] if username[0] == '@'
       account_type = req.query['account_type'].to_sym
       anonym = req.query['anonym'] == 'true'
 
