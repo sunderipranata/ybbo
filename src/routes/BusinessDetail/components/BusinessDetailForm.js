@@ -14,7 +14,8 @@ class BusinessDetailForm extends Component {
     scrollToBackers: PropTypes.func,
     businessName: PropTypes.string,
     businessId: PropTypes.string,
-    backersCount: PropTypes.number
+    backersCount: PropTypes.number,
+    assetsUrl: PropTypes.string
   }
 
   state = {
@@ -31,14 +32,9 @@ class BusinessDetailForm extends Component {
 
   submitFormAndDownloadAsset = (businessId,socialMediaAccount,isAnonymous) => {
     BusinessService.submitBusinessDetailAndReturnAsset(businessId,socialMediaAccount,isAnonymous, (res) => {
-      setTimeout(() => {
-        // window.location.href = res.data.download_url
-        window.open("https://pbs.twimg.com/profile_images/835836749041524737/yvsGW3gf_400x400.jpg")
-      },100);
       this.setState({isSuccess: true})
     },
     (reason) => {
-      console.log(reason)
       this.setState({isError: true})
     })
   }
@@ -53,7 +49,7 @@ class BusinessDetailForm extends Component {
 
   render() {
     const { isError, isAnonymous, isSuccess,socialMediaAccount, errorMessage } = this.state
-    const { isLoading, businessName ,numberOfBackers } = this.props
+    const { isLoading, businessName ,numberOfBackers, assetsUrl } = this.props
 
     return (
       <div className="bd-content__sidebar">
@@ -77,7 +73,7 @@ class BusinessDetailForm extends Component {
               <p className="desc" style={{marginTop: '8px'}}>
                 Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
               </p>
-              <button onClick={()=> window.open("https://www.google.com/", "_blank")} className="button button--main">Download aset untuk dipost</button>
+              <button onClick={()=> window.open(assetsUrl, "_blank")} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
             :
             <Fragment>
@@ -95,11 +91,11 @@ class BusinessDetailForm extends Component {
                 </label>
                 { isAnonymous ?
                   <div className="notes form__notes">
-                    Kontribusi kamu akan kami catat sebagai anonim di daftar pendukung [Nama Bisnis].
+                    Kontribusi kamu akan kami catat sebagai anonim di daftar pendukung {businessName}.
                   </div>
                 :
                   <div className="notes form__notes">
-                    Akun Instagram kamu akan tercantum di daftar pendukung [Nama Bisnis].
+                    Akun Instagram kamu akan tercantum di daftar pendukung {businessName}.
                   </div>
                 }
                 {/* if input name is not filled button--disabled, if input name is filled button--main, if post form loading state spinner */}

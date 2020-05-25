@@ -286,7 +286,8 @@ class BusinessDetail extends Component {
             <BusinessDetailForm scrollToBackers={this.scrollToBackers} 
             businessId={this.props.match.params.id}
             businessName={businessDetail.name}
-            numberOfBackers={businessDetail.backersCount} />
+            numberOfBackers={businessDetail.backersCount} 
+            assetsUrl={businessDetail.assetsUrl}/>
           </div>
         </main>
         <Recomendations 
@@ -350,7 +351,8 @@ class BusinessDetail extends Component {
           <BusinessDetailForm scrollToBackers={this.scrollToBackers} 
             businessId={this.props.match.params.id}
             businessName={businessDetail.name}
-            numberOfBackers={businessDetail.backersCount} />
+            numberOfBackers={businessDetail.backersCount}
+            assetsUrl={businessDetail.assetsUrl} />
           </div>
         </BottomSheet>
       </Fragment>
