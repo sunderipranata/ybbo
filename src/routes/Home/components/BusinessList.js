@@ -274,7 +274,7 @@ class BusinessList extends Component {
       const name = b.name
       const slug = b.slug
 
-      const link = slug === null ? id : slug
+      const link = (typeof slug === 'undefined' || slug === null) ? id : slug
 
       return (
         <Link to={'/b/' + link} className="item" key = { id }>

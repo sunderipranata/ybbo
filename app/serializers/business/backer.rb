@@ -3,7 +3,7 @@ class BusinessBackerSerializer
 
   attributes :created_at, :account_type, :comment
   attribute :username do |object|
-    object.anonym? ? :@anonym : object.username
+    object.anonym? ? :anonim : object.username
   end
 
   attribute :is_verified do |object|
