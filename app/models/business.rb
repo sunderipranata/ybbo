@@ -30,7 +30,7 @@ class Business
   index({ slug: 1 }, {
     unique: true,
     background: true,
-    partial_filter_expression:{ slug: {:$ne => nil } }
+    partial_filter_expression:{ slug: {:$exists => true } }
   })
 
   validates :name, :location, :description, :category, :icon_url, :thumbnail_url, :assets_url, :pictures_url, presence: true
