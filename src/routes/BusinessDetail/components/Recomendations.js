@@ -62,15 +62,9 @@ class Recomendations extends Component {
   renderLoading = () => {
     return (
       <div className="container container__recommendation">
-        <a href="/">
-          <BusinessCard loading />
-        </a>
-        <a href="/">
-          <BusinessCard loading />
-        </a>
-        <a href="/">
-          <BusinessCard loading />
-        </a>
+        <BusinessCard loading />
+        <BusinessCard loading />
+        <BusinessCard loading />
       </div>
     )
   }
