@@ -274,7 +274,7 @@ class BusinessList extends Component {
       const name = b.name
 
       return (
-        <Link to={'/detail-bisnis/' + id} className="item" key = { id }>
+        <Link to={'/b/' + id} className="item" key = { id }>
           <BusinessCard
             img = { thumbnailUrl }
             title = { name }
