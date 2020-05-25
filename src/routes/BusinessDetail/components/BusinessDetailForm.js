@@ -7,6 +7,7 @@ import Loader from '../../../components/Loader'
 import BusinessService from '../../../services/BusinessService'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
+const Mobile = props => <Responsive {...props} maxWidth={767} />
 
 const ERROR_MESSAGE_DUPLICATE_ENTRY = (id) => `Akun dengan id ${id} sudah mendukung bisnis ini. Hayoh salah ketik ya ?`
 const ERROR_MESSAGE_NOT_VALID = "Akun yang dimasukkan tidak valid, Hayoh coba dicek lagi !"
@@ -97,9 +98,17 @@ class BusinessDetailForm extends Component {
             :
             <Fragment>
               <Desktop><h2 className="bd-content__title">Dukung {businessName}</h2></Desktop>
-              {/* <p className="desc">Belum ada pendukung nih. Yuk jadi yang pertama!</p> */}
-              {/* <p className="desc">Baru ada <button className="btn-link" onClick={this.props.scrollToBackers}>50 Pendukung</button> nih. Yuk dukung [nama bisnis]!</p> */}
-              <p className="desc">Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>{numberOfBackers} Pendukung</button>. Yuk jadi salah satunya!</p>
+              { numberOfBackers > 0 ?
+                <p className="desc">
+                  <Desktop>Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>{numberOfBackers} Pendukung</button>.</Desktop>{' '}
+                  <Mobile>Sudah ada {numberOfBackers} Pendukung.</Mobile>{' '}
+                  Yuk jadi salah satunya!
+                </p>
+              :
+                <p className="desc">
+                  Yuk dukung {businessName}
+                </p>
+              }
               <form className="form">
                 <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
                 <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @instagram" />
