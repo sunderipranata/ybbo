@@ -18,9 +18,9 @@ import withPageView from './utils/googleAnalytics/withPageView'
 
 require('dotenv').config();
 
-ReactGA.initialize(process.env.ANALYTICS_TRACKING_ID, {
+ReactGA.initialize("UA-78912543-2", {
   testMode: process.env.NODE_ENV === "test",
-  debug: true
+  debug: process.env.NODE_ENV !== "production",
 });
 
 class App extends React.Component {
