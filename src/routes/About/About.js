@@ -27,13 +27,17 @@ class About extends Component {
         <main className="container container__about clearfix">
           <h1 className="title">Hai! Salam Kenal <span role="img" aria-label="Waving Hand">👋</span> </h1>
           <p className="desc">
-            Tim software engineers dari Indonesia yang mencoba untuk membantu ekonomi Indonesia yang melambat karena pandemi COVID-19.
+            Kami tim Software Engineers yang mencoba untuk membantu UMKM Indonesia melalui teknologi.{' '}
+            Inovasi ini ditujukan untuk membantu ekonomi yang sedang melambat karena pandemi COVID-19.
           </p>
           <p className="desc">
-            Kami percaya bahwa promosi melalui koneksi sosial media itu lebih menarik perhatian karena lebih personal.{' '}
-            Harapan kami dengan adanya platform ini, bisnis online seperti penjual kue lapis, pemilik toko baju, maupun pengrajin kerajinan tangan{' '}
-            dapat mempromosikan produknya secara gratis sehingga bisnis mereka dapat bertahan dan menciptakan efek domino ke karyawan-karyawannya{' '}
-            dan ekonomi Indonesia.
+            Platform ini menyediakan layanan gratis bagi pebisnis untuk <b><i>crowd-endorsing</i></b>.{' '}
+            Berharap kepada pengguna yang baik hati untuk membantu mempromosikannya dengan mudah.{' '}
+          </p>
+          <p className="desc">
+            Melalui platform YukBantuBisnis.Online, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
+            Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.{' '}
+            Tim software engineers dari Indonesia yang mencoba untuk membantu ekonomi Indonesia yang melambat karena pandemi COVID-19.
           </p>
           <ul className="team-container">
             <li>
