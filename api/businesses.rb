@@ -29,7 +29,7 @@ Handler = Proc.new do |req, res|
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, res.status, pagination_meta: pagination_meta, limit: limit)
       else
-        business = Business.find_by(id: id)
+        business = Business.find_by_slug_or_id(id)
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.one(business, BusinessDetailSerializer, res.status)
       end
