@@ -286,7 +286,7 @@ class BusinessDetail extends Component {
           </div>
           <div className="content__sidebar">
             <BusinessDetailForm scrollToBackers={this.scrollToBackers} 
-            businessId={this.props.match.params.id}
+            businessId={businessDetail.id}
             businessName={businessDetail.name}
             numberOfBackers={businessDetail.backersCount} 
             assetsUrl={businessDetail.assetsUrl}/>
@@ -351,7 +351,7 @@ class BusinessDetail extends Component {
         >
           <div className="bd-bottom__form">
           <BusinessDetailForm scrollToBackers={this.scrollToBackers} 
-            businessId={this.props.match.params.id}
+            businessId={businessDetail.id}
             businessName={businessDetail.name}
             numberOfBackers={businessDetail.backersCount}
             assetsUrl={businessDetail.assetsUrl} />

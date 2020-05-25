@@ -13,6 +13,7 @@ const SECONDS_DIFF = "detik yang lalu"
 const MINUTES_DIFF = "menit yang lalu"
 const HOUR_DIFF = "jam yang lalu"
 const DAYS_DIFF = "hari yang lalu"
+const ANONYMOUS_USER = "anonim"
 
 class BusinessDetailBackers extends Component {
   static propTypes = {
@@ -161,7 +162,6 @@ class BusinessDetailBackers extends Component {
         const createdAt = moment(val.createdAt)
 
         const timeDurationString = this.determineTimeDifferenceString(now, createdAt)
-
         if(comment === null) {
           if(isVerified) {
             comment = DEFAULT_VERIFIED
@@ -169,13 +169,34 @@ class BusinessDetailBackers extends Component {
             comment = DEFAULT_UNVERIFIED  
           }
           
-          commentText.push(
-            <span className="text">{ name + " " + comment }</span>
-          )
+          if(name !== ANONYMOUS_USER) {
+            const instagramUrl = 'https://instagram.com/' + name
+            commentText.push(
+              <span className="text">
+                <a href={ instagramUrl } target="_blank" rel="noopener noreferrer"> { name } </a>
+                { " " + comment }
+              </span>
+            )
+          } else {
+            commentText.push(
+              <span className="text">{ name + " " + comment }</span>
+            )
+          } 
         } else {
-          commentText.push(
-            <span className="text">Kata { name }: "{ comment }"</span>
-          )
+          if(name !== ANONYMOUS_USER) {
+            const instagramUrl = 'https://instagram.com/' + name
+            commentText.push(
+              <span className="text">
+                Kata
+                <a href={ instagramUrl } target="_blank" rel="noopener noreferrer"> { name } </a>
+                { ": " + comment }
+              </span>
+            )
+          } else {
+            commentText.push(
+              <span className="text">Kata { name }: "{ comment }"</span>
+            )
+          }
         }
 
         if(isVerified) {
