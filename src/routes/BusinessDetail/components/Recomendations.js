@@ -73,7 +73,7 @@ class Recomendations extends Component {
     const { randomBusinesses } = this.state
     const display = []
     randomBusinesses.forEach((b) => {
-      const link = b.slug === null ? b.id : b.slug
+      const link = (typeof b.slug === 'undefined' || b.slug === null) ? b.id : b.slug
       display.push(
         <Link to={'/b/' + link} className="item" key = { b.id }>
           <BusinessCard
