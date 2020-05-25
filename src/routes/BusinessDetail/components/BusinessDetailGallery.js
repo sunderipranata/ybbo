@@ -1,8 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import Responsive from 'react-responsive'
 
 import { SRLWrapper } from 'simple-react-lightbox'
 import Loader from '../../../components/Loader'
+
+const Desktop = props => <Responsive {...props} minWidth={768} />
+const Mobile = props => <Responsive {...props} maxWidth={767} />
 
 const options = {
   buttons: {
@@ -26,17 +30,34 @@ class BusinessDetailGallery extends Component {
 
   renderLoading = () => {
     return (
-      <ul className="bd-content__gallery">
-        <li style={{ width: "30%"}}>
-          <Loader height={150} borderRadius={8} />
-        </li>
-        <li style={{ width: "30%"}}>
-          <Loader height={150} borderRadius={8} />
-        </li>
-        <li style={{ width: "30%"}}>
-          <Loader height={150} borderRadius={8} />
-        </li>
-      </ul>
+      <Fragment>
+        <Desktop>
+          <ul className="bd-content__gallery">
+            <li style={{ width: "30%"}}>
+              <Loader height={150} borderRadius={8} />
+            </li>
+            <li style={{ width: "30%"}}>
+              <Loader height={150} borderRadius={8} />
+            </li>
+            <li style={{ width: "30%"}}>
+              <Loader height={150} borderRadius={8} />
+            </li>
+          </ul>
+        </Desktop>
+        <Mobile>
+          <ul className="bd-content__gallery">
+            <li style={{ width: "40%"}}>
+              <Loader height={150} borderRadius={8} />
+            </li>
+            <li style={{ width: "40%"}}>
+              <Loader height={150} borderRadius={8} />
+            </li>
+            <li style={{ width: "40%"}}>
+              <Loader height={150} borderRadius={8} />
+            </li>
+          </ul>
+        </Mobile>
+      </Fragment>
     )
   }
 

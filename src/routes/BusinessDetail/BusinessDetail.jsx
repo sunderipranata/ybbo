@@ -336,10 +336,10 @@ class BusinessDetail extends Component {
         </main>
         <div className="bd-bottom">
           <div className="bd-bottom__content">
-            <button className={ClassNames('button button--main')} onClick={this.toggleForm}>Dukung Nama Bisnis</button>
+            <button className={ClassNames('button button--main')} onClick={this.toggleForm}>Dukung {businessDetail.name}</button>
           </div>
         </div>
-        <BottomSheet title="Dukung Nama Bisnis"
+        <BottomSheet title={ "Dukung " + businessDetail.name } 
           onClose={this.toggleForm}
           display={showForm}
         >
