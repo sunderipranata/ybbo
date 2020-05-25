@@ -87,7 +87,7 @@ class Steps extends Component {
                 <div className="list__desc">
                   <h3 className={ClassNames('desc__title', {active: detailShown === 1})}>Pilih Bisnis Online</h3>
                   <p className={ClassNames('desc__content', {active: detailShown === 1})}>
-                    Kamu bisa memilih bisnis yang ingin kamu bantu promosikan dari daftar bisnis yang kami miliki.
+                    Pilih bisnis yang ingin kamu bantu promosikan dari daftar bisnis yang kami miliki.
                   </p>
                 </div>
               </li>
@@ -96,7 +96,7 @@ class Steps extends Component {
                 <div className="list__desc">
                   <h3 className={ClassNames('desc__title', {active: detailShown === 2})}>Order atau Download</h3>
                   <p className={ClassNames('desc__content', {active: detailShown === 2})}>
-                    Kamu dapat mendukung dengan cara memesan langsung produk yang kamu suka atau cukup download gambar/video yang disediakan.
+                    Dukung dengan cara memesan langsung produk yang kamu suka atau cukup download gambar/video yang disediakan.
                   </p>
                 </div>
               </li>
@@ -195,7 +195,7 @@ class Steps extends Component {
                   <img src={MockUp} style={this.setIconPhoneMobileStyles(slideIndex === 0)} className="icon__phone" alt="Phone" />
                   <img src={Step1} style={this.setIconStepStyles(slideIndex === 0)} className="icon__steps icon__steps--one" alt="Langkah 1" />
                 </div>
-                Kamu bisa memilih bisnis yang ingin kamu bantu promosikan dari daftar bisnis yang kami miliki.
+                Pilih bisnis yang ingin kamu bantu promosikan dari daftar bisnis yang kami miliki.
               </StepCard>
             </div>
             <div className="steps__list--mobile" onLoad={this.handleFirstLoad}>
@@ -204,7 +204,7 @@ class Steps extends Component {
                   <img src={MockUp} style={this.setIconPhoneMobileStyles(slideIndex === 1)} className="icon__phone" alt="Phone" />
                   <img src={Step2} style={this.setIconStepStyles(slideIndex === 1)} className="icon__steps icon__steps--two" alt="Langkah 2" />
                 </div>
-                Kamu dapat mendukung dengan cara memesan langsung produk yang kamu suka atau cukup download gambar/video yang disediakan.
+                Dukung dengan cara memesan langsung produk yang kamu suka atau cukup download gambar/video yang disediakan.
               </StepCard>
             </div>
             <div className="steps__list--mobile" onLoad={this.handleFirstLoad}>
