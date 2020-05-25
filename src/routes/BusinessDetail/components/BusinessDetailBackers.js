@@ -1,8 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import IconVerified from '../assets/ic-verified.png'
 import Loader from '../../../components/Loader'
+
+import BaseAnalyticsComponent from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventLabel from "../../../utils/googleAnalytics/EventLabel"
+
 
 import moment from 'moment'
 
@@ -15,7 +19,7 @@ const HOUR_DIFF = "jam yang lalu"
 const DAYS_DIFF = "hari yang lalu"
 const ANONYMOUS_USER = "anonim"
 
-class BusinessDetailBackers extends Component {
+class BusinessDetailBackers extends BaseAnalyticsComponent {
   static propTypes = {
     isLoading: PropTypes.bool,
     businessDetail: PropTypes.object
@@ -83,7 +87,7 @@ class BusinessDetailBackers extends Component {
 
     if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
       const id = businessDetail.id
-
+      this.trackClickWithValue(EventLabel.LOAD_MORE_TESTIMONY,id)
       this.toggleBackersLoading(true)
       this.props.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
         if(res !== null) {

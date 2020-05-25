@@ -1,8 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
+
+import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 
 const RANDOM_SIZE = 3
 const categories = {
@@ -12,7 +15,7 @@ const categories = {
   beauty: 'Kecantikan'
 }
 
-class Recomendations extends Component {
+class Recomendations extends BaseAnalyticsComponents {
   static propTypes = {
     isLoading: PropTypes.bool,
     businessDetail: PropTypes.object
@@ -53,6 +56,10 @@ class Recomendations extends Component {
     }
   }
 
+  onBusinessCardClick = (businessId) => {
+    this.trackClickWithValue(EventLabel.HELP_OTHER_BUSINESS_CARD,businessId)
+  }
+
   toggleLoading = (loading) => {
     this.setState({
       isLoading: loading
@@ -75,7 +82,7 @@ class Recomendations extends Component {
     randomBusinesses.forEach((b) => {
       const link = (typeof b.slug === 'undefined' || b.slug === null) ? b.id : b.slug
       display.push(
-        <Link to={'/b/' + link} className="item" key = { b.id }>
+        <Link onClick = {this.onBusinessCardClick.bind(this,b.id)} to={'/b/' + link} className="item" key = { b.id }>
           <BusinessCard
             img = { b.thumbnailUrl }
             title = { b.name }

@@ -1,10 +1,13 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Responsive from 'react-responsive'
 import { INSTAGRAM_PATH } from '../../../routes'
 
 import Loader from '../../../components/Loader'
 import BusinessService from '../../../services/BusinessService'
+
+import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
@@ -13,7 +16,7 @@ const ERROR_MESSAGE_DUPLICATE_ENTRY = (id) => `Akun dengan id ${id} sudah menduk
 const ERROR_MESSAGE_NOT_VALID = "Akun yang dimasukkan tidak valid, Hayoh coba dicek lagi !"
 const ERROR_MESSAGE_GENERAL = "Terjadi kesalahan pada sistem kami, mohon coba lagi dalam beberapa detik"
 
-class BusinessDetailForm extends Component {
+class BusinessDetailForm extends BaseAnalyticsComponents {
   static propTypes = {
     isLoading: PropTypes.bool,
     scrollToBackers: PropTypes.func,
@@ -32,7 +35,10 @@ class BusinessDetailForm extends Component {
   }
 
 
-  handleCheckboxChange = event => this.setState({ isAnonymous: event.target.checked })
+  handleCheckboxChange = event => {
+    this.trackClickWithValue(EventLabel.MAKE_ME_ANONYMOUS_CHECKBOX,event.target.checked)
+    this.setState({ isAnonymous: event.target.checked })
+  }
 
   handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
 
@@ -60,6 +66,7 @@ class BusinessDetailForm extends Component {
   }
 
   handleSubmitForm = event => {
+    this.trackClickWithValue(EventLabel.BUSINESS_DETAIL_FORM_BUTTON,this.props.businessId)
     this.submitBusinessDetailForm(
       this.props.businessId,
       this.state.socialMediaAccount,
@@ -67,9 +74,14 @@ class BusinessDetailForm extends Component {
     )
   }
 
+  handleOnDownloadAssetButtonClick = () => {
+    this.trackClickWithValue(EventLabel.DOWNLOAD_ASSET_BUTTON,this.props.businessId)
+    window.open(this.props.assetsUrl, "_blank")
+  }
+
   render() {
     const { isError, isAnonymous, isSuccess,socialMediaAccount, errorMessage } = this.state
-    const { isLoading, businessName ,numberOfBackers, assetsUrl } = this.props
+    const { isLoading, businessName ,numberOfBackers} = this.props
 
     return (
       <div className="bd-content__sidebar">
@@ -93,7 +105,7 @@ class BusinessDetailForm extends Component {
               <p className="desc" style={{marginTop: '8px'}}>
                 Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
               </p>
-              <button onClick={()=> window.open(assetsUrl, "_blank")} className="button button--main">Download aset untuk dipost</button>
+              <button onClick={this.handleOnDownloadAssetButtonClick} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
             :
             <Fragment>

@@ -20,6 +20,7 @@ import './BusinessDetail.scss'
 import Recomendations from './components/Recomendations'
 
 import BusinessService from '../../services/BusinessService'
+import PageLabel from '../../utils/googleAnalytics/PageLabel'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
@@ -278,6 +279,7 @@ class BusinessDetail extends Component {
             <section ref={ (ref) => this.backersRef=ref } name="Pendukung" className="bd-card">
               <div className="bd-card__content">
                 <BusinessDetailBackers
+                  pageLabel = {PageLabel.BUSINESS_DETAIL_PAGE}
                   businessDetail = { businessDetail }
                   fetchData = { this.fetchBackers }
                 />
@@ -285,14 +287,17 @@ class BusinessDetail extends Component {
             </section>
           </div>
           <div className="content__sidebar">
-            <BusinessDetailForm scrollToBackers={this.scrollToBackers} 
+            <BusinessDetailForm 
             businessId={businessDetail.id}
+            pageLabel={PageLabel.BUSINESS_DETAIL_PAGE}
+            scrollToBackers={this.scrollToBackers} 
             businessName={businessDetail.name}
             numberOfBackers={businessDetail.backersCount} 
             assetsUrl={businessDetail.assetsUrl}/>
           </div>
         </main>
         <Recomendations 
+          pageLabel = {PageLabel.BUSINESS_DETAIL_PAGE}
           businessDetail = { businessDetail }
           fetchData = { this.fetchRandomBusiness }
         />
@@ -335,6 +340,7 @@ class BusinessDetail extends Component {
           <hr className="divider" />
           <section name="Pendukung" className="bd-card__content" style={{ marginBottom: '72px' }}>
               <BusinessDetailBackers
+                pageLabel = {PageLabel.BUSINESS_DETAIL_PAGE}
                 businessDetail = { businessDetail }
                 fetchData = { this.fetchBackers }
               />
@@ -350,8 +356,10 @@ class BusinessDetail extends Component {
           display={showForm}
         >
           <div className="bd-bottom__form">
-          <BusinessDetailForm scrollToBackers={this.scrollToBackers} 
+          <BusinessDetailForm
             businessId={businessDetail.id}
+            pageLabel={PageLabel.BUSINESS_DETAIL_PAGE}
+            scrollToBackers={this.scrollToBackers} 
             businessName={businessDetail.name}
             numberOfBackers={businessDetail.backersCount}
             assetsUrl={businessDetail.assetsUrl} />
@@ -367,9 +375,9 @@ class BusinessDetail extends Component {
     return (
       <Fragment>
         <Desktop>
-          <Header />
+          <Header pageLabel={PageLabel.HEADER}/>
           { isLoading ? this.renderLoadingDesktop() : this.renderDetailDesktop() }
-          <Footer />
+          <Footer pageLabel={PageLabel.FOOTER} />
         </Desktop>
         <Mobile>
           <Navbar title="Detail Bisnis" />

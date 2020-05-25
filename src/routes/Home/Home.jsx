@@ -9,6 +9,7 @@ import BusinessList from './components/BusinessList'
 import Footer from '../../components/Footer'
 
 import BusinessService from '../../services/BusinessService'
+import PageLabel from '../../utils/googleAnalytics/PageLabel'
 
 class Home extends React.Component {
   componentDidMount() {
@@ -49,15 +50,16 @@ class Home extends React.Component {
     return (
       <Fragment>
         <article>
-          <Header />
+          <Header pageLabel={PageLabel.HEADER}/>
             <main className="container__home">
               <Hero />
               <Steps />
               <BusinessList 
+                pageLabel = {PageLabel.HOME_PAGE}
                 fetchData = { this.fetchSimplifiedBusiness }
               />
             </main>
-          <Footer />
+          <Footer pageLabel={PageLabel.FOOTER}/>
         </article>
       </Fragment>
     )

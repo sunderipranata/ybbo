@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
@@ -8,9 +8,12 @@ import { HOME_PATH, ABOUT_PATH, GOOGLE_FORM_PATH } from '../../routes'
 import './Header.scss'
 import Logo from '../../assets/logo-ybbo.png'
 
+import BaseAnalyticsComponents from "../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventLabel from "../../utils/googleAnalytics/EventLabel"
+
 const Desktop = props => <Responsive {...props} minWidth={768} />
 
-class Header extends Component {
+class Header extends BaseAnalyticsComponents {
     constructor(props) {
       super(props)
 
@@ -24,6 +27,18 @@ class Header extends Component {
       this.setState({
         pathLink: window.location.pathname
       })
+    }
+
+    onOpenHomePage = () => {
+      this.trackClick(EventLabel.HOME_BUTTON)
+    }
+
+    onOpenAboutPage = () => {
+      this.trackClick(EventLabel.ABOUT_US_BUTTON)
+    }
+
+    onRegisterButtonClicked = () => {
+      this.trackClick(EventLabel.REGISTER_BUTTON)
     }
 
     render() {
@@ -40,13 +55,13 @@ class Header extends Component {
             </Desktop>
             <ul className={ClassNames('nav-list', { 'nav-list--active': active })}>
               <li>
-                <Link className={ClassNames('nav__link', { 'active': pathLink === HOME_PATH })} to={HOME_PATH}>Beranda</Link>
+                <Link onClick={this.onOpenHomePage} className={ClassNames('nav__link', { 'active': pathLink === HOME_PATH })} to={HOME_PATH}>Beranda</Link>
               </li>
               <li>
-                <Link className={ClassNames('nav__link', { 'active': pathLink === ABOUT_PATH })} to={ABOUT_PATH}>Tentang Kami</Link>
+                <Link onClick={this.onOpenAboutPage} className={ClassNames('nav__link', { 'active': pathLink === ABOUT_PATH })} to={ABOUT_PATH}>Tentang Kami</Link>
               </li>
               <li>
-                <a className="button button--ghost" href={GOOGLE_FORM_PATH} target="_blank" rel="noopener noreferrer">Daftarkan Bisnismu</a>
+                <a onClick={this.onRegisterButtonClicked} className="button button--ghost" href={GOOGLE_FORM_PATH} target="_blank" rel="noopener noreferrer">Daftarkan Bisnismu</a>
               </li>
             </ul>
           </header>

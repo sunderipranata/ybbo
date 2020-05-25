@@ -1,11 +1,7 @@
 import React from "react";
 import ReactGA from "react-ga";
 
-const trackingId = "UA-78912543-2";
-
-ReactGA.initialize(trackingId,{testMode: process.env.NODE_ENV === "test", debug: true });
-
-export const withPageView = (WrappedComponent, options = {}) => {
+const withPageView = (WrappedComponent, options = {}) => {
     const trackPageView = page => {
         ReactGA.set({
             page,
@@ -51,3 +47,5 @@ export const withPageView = (WrappedComponent, options = {}) => {
         }
     };
 };
+
+export default withPageView;
