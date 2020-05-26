@@ -39,7 +39,7 @@ CSV.foreach("#{filename}", headers: true) do |row|
   link_folder             = row[16]
   done               = row[17]
 
-  next if done == 'skip'
+  next if done == 'skip' || done == 'done'
 
   begin
     thumbnail_url = "https://drive.google.com/thumbnail?id=#{thumbnail_url.match(/[\w_-]{20,}+/)[0]}&sz=w500-h500"
