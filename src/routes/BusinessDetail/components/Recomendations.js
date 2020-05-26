@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
@@ -82,14 +81,14 @@ class Recomendations extends BaseAnalyticsComponents {
     randomBusinesses.forEach((b) => {
       const link = (typeof b.slug === 'undefined' || b.slug === null) ? b.id : b.slug
       display.push(
-        <Link onClick = {this.onBusinessCardClick.bind(this,b.id)} to={'/b/' + link} className="item" key = { b.id }>
+        <a href={'/b/' + link} onClick = {this.onBusinessCardClick.bind(this,b.id)}>
           <BusinessCard
             img = { b.thumbnailUrl }
             title = { b.name }
             location = { b.location }
             category = { categories[b.category] }
             backers = { b.backersCount } />
-        </Link>
+        </a>
       )
     })
 
