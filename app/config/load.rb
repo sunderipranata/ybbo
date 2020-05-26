@@ -5,7 +5,10 @@ require 'fast_jsonapi'
 require 'json'
 require 'time'
 require 'dotenv'
+require 'csv'
+require 'phonelib'
 
+Phonelib.default_country = 'ID'
 
 Dotenv.load
 puts '
