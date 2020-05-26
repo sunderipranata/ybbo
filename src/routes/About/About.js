@@ -38,8 +38,7 @@ class About extends Component {
           </p>
           <p className="desc">
             Melalui platform YukBantuBisnis.Online, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
-            Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.{' '}
-            Tim software engineers dari Indonesia yang mencoba untuk membantu ekonomi Indonesia yang melambat karena pandemi COVID-19.
+            Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.
           </p>
           <ul className="team-container">
             <li>
