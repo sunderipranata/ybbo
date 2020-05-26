@@ -163,14 +163,18 @@ class BusinessList extends BaseAnalyticsComponents {
           businessData: { ...this.state.businessData, businesses: businesses }
         }, () => {
           //push current last id
-          const lastId = res.businesses[res.businesses.length - 1].id
-          curPage.lastIds.push(lastId)
-          this.setState({
-            page: curPage
-          }, () => {
+          if(res.businesses.length > 0) {
+            const lastId = res.businesses[res.businesses.length - 1].id
+            curPage.lastIds.push(lastId)
+            this.setState({
+              page: curPage
+            }, () => {
+              this.toggleLoading(false)
+              this.checkPageUpdate()
+            })
+          } else {
             this.toggleLoading(false)
-            this.checkPageUpdate()
-          })
+          }
         })
       }
     })
