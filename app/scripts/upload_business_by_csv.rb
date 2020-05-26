@@ -135,6 +135,7 @@ CSV.foreach("#{filename}", headers: true) do |row|
       grab_store.save
     end
 
+    sleep(2.seconds)
   rescue => exception
     puts(exception)
   end
