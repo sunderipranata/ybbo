@@ -135,6 +135,10 @@ CSV.foreach("#{filename}", headers: true) do |row|
       grab_store.save
     end
 
+    ## There is a kind of "bug"
+    # We use created at as offset that is retrieved from BSON ObjectId.
+    # The created_at precision is until miliseconds while BSON ObjectId precision is only at seconds.
+    # If we search by created_at from id, it will return several results for the same second.
     sleep(2.seconds)
   rescue => exception
     puts(exception)
