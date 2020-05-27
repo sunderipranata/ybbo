@@ -34,7 +34,7 @@ class BusinessCard extends Component {
           : 
           <Fragment>
               { backers < 10 && <span className="ribbon">Bisnis ini butuh bantuanmu</span> }
-              <div className="bc__image"  style={{ background: "url(" + img + ") center center / cover no-repeat"}}>
+              <div className="bc__image"  style={{ backgroundImage: "url(" + img + ")"}}>
                   <div className="img__content">
                     {category != null && 
                       <span className="label-card" style={{ marginRight: "12px" }}>
