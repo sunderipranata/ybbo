@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import Responsive from 'react-responsive'
 import PropTypes from 'prop-types'
 
 import Loader from '../../../components/Loader'
+
+const Desktop = props => <Responsive {...props} minWidth={768} />
 
 const storeAccounts = {
   instagram: 'Instagram',
@@ -26,7 +29,7 @@ class BusinessDetailAbout extends Component {
   renderLoading = () => {
     return (
       <Fragment>
-        <h2 className="bd-content__title">Tentang</h2>
+        <Desktop><h2 className="bd-content__title">Tentang</h2></Desktop>
         <Loader width={200} height={12} borderRadius={8} marginBottom={16} />
         <Loader width={200} height={12} borderRadius={8} marginBottom={16} />
         <Loader height={12} borderRadius={8} marginBottom={16} />
@@ -65,12 +68,12 @@ class BusinessDetailAbout extends Component {
 
     return (
       <Fragment>
-            <h2 className="bd-content__title">Tentang {title}</h2>
-            <table className="bd-content__table">
-              { display }
-            </table>
-            <p className="bd-content__desc">{desc}</p>
-          </Fragment>
+        <Desktop><h2 className="bd-content__title">Tentang {title}</h2></Desktop>
+        <table className="bd-content__table">
+          { display }
+        </table>
+        <p className="bd-content__desc">{desc}</p>
+      </Fragment>
     )
   }
 
