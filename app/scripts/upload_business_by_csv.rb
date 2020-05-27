@@ -21,25 +21,28 @@ filename = "../responses/Business.csv"
 CSV.foreach("#{filename}", headers: true) do |row|
 
   timestamp          = row[0]
-  business_name      = row[1]
+  business_name      = row[1].present? ? row[1].strip : nil
   category           = row[2]
-  instagram_username = row[3]
-  link_tokopedia     = row[4]
-  link_bukalapak     = row[5]
-  link_shopee        = row[6]
-  wa_number          = row[7]
-  link_gojek         = row[8]
-  link_grab          = row[9]
+  instagram_username = row[3].present? ? row[3].strip : nil
+  link_tokopedia     = row[4].present? ? row[4].strip : nil
+  link_bukalapak     = row[5].present? ? row[5].strip : nil
+  link_shopee        = row[6].present? ? row[6].strip : nil
+  wa_number          = row[7].present? ? row[7].strip : nil
+  link_gojek         = row[8].present? ? row[8].strip : nil
+  link_grab          = row[9].present? ? row[9].strip : nil
   others             = row[10]
-  location           = row[11]
-  description        = row[12]
+  location           = row[11].present? ?row[11].strip : nil
+  description        = row[12].present? ?row[12].strip : nil
   assets_urls        = row[13]
-  thumbnail_url     = row[14]
+  thumbnail_url      = row[14]
   agreement          = row[15]
-  link_folder             = row[16]
+  link_folder        = row[16]
   done               = row[17]
 
-  next if done == 'skip' || done == 'done'
+  if done == 'skip' || done == 'done' || done == 'need update'
+    puts "skipping #{business_name}"
+    next
+  end
 
   begin
     thumbnail_url = "https://drive.google.com/thumbnail?id=#{thumbnail_url.match(/[\w_-]{20,}+/)[0]}&sz=w500-h500"
@@ -50,9 +53,15 @@ CSV.foreach("#{filename}", headers: true) do |row|
 
     wa_number = Phonelib.parse(wa_number).international(false)
 
+    link_tokopedia = "https://#{link_tokopedia}" if link_tokopedia.present? && link_tokopedia !~ /^https:\/\/.*/
+    link_bukalapak = "https://#{link_bukalapak}" if link_bukalapak.present? && link_bukalapak !~ /^https:\/\/.*/
+    link_shopee    = "https://#{link_shopee}"    if link_shopee.present?    && link_shopee !~ /^https:\/\/.*/
+    link_gojek     = "https://#{link_gojek}"     if link_gojek.present?     && link_gojek !~ /^https:\/\/.*/
+    link_grab      = "https://#{link_grab}"      if link_grab.present?      && link_grab !~ /^https:\/\/.*/
+
     instagram_username = instagram_username[1..-1] if instagram_username[0] == '@'
 
-    slug = business_name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+    slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
     slug_count = Business.where(slug: slug).count
     slug = slug + "-#{slug_count}" if slug_count > 0
 
@@ -70,7 +79,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       b.push(pictures_url: url)
     end
     b.validate!
-    b.save
 
     if link_tokopedia.present?
       toped_store = b.store_accounts.new
@@ -78,7 +86,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       toped_store.name = business_name
       toped_store.url = link_tokopedia
       toped_store.validate!
-      toped_store.save
     end
 
     if link_bukalapak.present?
@@ -87,7 +94,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       bukalapak_store.name = business_name
       bukalapak_store.url = link_bukalapak
       bukalapak_store.validate!
-      bukalapak_store.save
     end
 
     if wa_number.present?
@@ -96,7 +102,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       whatsapp_store.name = business_name
       whatsapp_store.url = "https://wa.me/#{wa_number}"
       whatsapp_store.validate!
-      whatsapp_store.save
     end
 
     if instagram_username.present?
@@ -105,7 +110,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       instagram_store.name = business_name
       instagram_store.url = "https://instagram.com/#{instagram_username}"
       instagram_store.validate!
-      instagram_store.save
     end
 
     if link_shopee.present?
@@ -114,7 +118,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       shopee_store.name = business_name
       shopee_store.url = link_shopee
       shopee_store.validate!
-      shopee_store.save
     end
 
     if link_gojek.present?
@@ -123,7 +126,6 @@ CSV.foreach("#{filename}", headers: true) do |row|
       gojek_store.name = business_name
       gojek_store.url = link_gojek
       gojek_store.validate!
-      gojek_store.save
     end
 
     if link_grab.present?
@@ -132,9 +134,18 @@ CSV.foreach("#{filename}", headers: true) do |row|
       grab_store.name = business_name
       grab_store.url = link_grab
       grab_store.validate!
-      grab_store.save
     end
 
+    b.save! if b.present?
+    toped_store.save! if toped_store.present?
+    bukalapak_store.save! if bukalapak_store.present?
+    whatsapp_store.save! if whatsapp_store.present?
+    instagram_store.save! if instagram_store.present?
+    shopee_store.save! if shopee_store.present?
+    gojek_store.save! if gojek_store.present?
+    grab_store.save! if grab_store.present?
+
+    puts("#{b.name} successfuly saved!")
     ## There is a kind of "bug"
     # We use created at as offset that is retrieved from BSON ObjectId.
     # The created_at precision is until miliseconds while BSON ObjectId precision is only at seconds.
