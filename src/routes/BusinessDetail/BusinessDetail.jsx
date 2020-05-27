@@ -21,6 +21,7 @@ import Recomendations from './components/Recomendations'
 
 import BusinessService from '../../services/BusinessService'
 import PageLabel from '../../utils/googleAnalytics/PageLabel'
+import { HOME_PATH } from '../../routes'
 
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
@@ -380,7 +381,7 @@ class BusinessDetail extends Component {
           <Footer pageLabel={PageLabel.FOOTER} />
         </Desktop>
         <Mobile>
-          <Navbar title="Detail Bisnis" />
+          <Navbar title="Detail Bisnis" prevPath={HOME_PATH} />
           { isLoading ? this.renderLoadingMobile() : this.renderDetailMobile() }
         </Mobile>
       </Fragment>

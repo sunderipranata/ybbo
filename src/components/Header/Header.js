@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
 
@@ -55,10 +54,10 @@ class Header extends BaseAnalyticsComponents {
             </Desktop>
             <ul className={ClassNames('nav-list', { 'nav-list--active': active })}>
               <li>
-                <Link onClick={this.onOpenHomePage} className={ClassNames('nav__link', { 'active': pathLink === HOME_PATH })} to={HOME_PATH}>Beranda</Link>
+                <a onClick={this.onOpenHomePage} className={ClassNames('nav__link', { 'active': pathLink === HOME_PATH })} href={HOME_PATH}>Beranda</a>
               </li>
               <li>
-                <Link onClick={this.onOpenAboutPage} className={ClassNames('nav__link', { 'active': pathLink === ABOUT_PATH })} to={ABOUT_PATH}>Tentang Kami</Link>
+                <a onClick={this.onOpenAboutPage} className={ClassNames('nav__link', { 'active': pathLink === ABOUT_PATH })} href={ABOUT_PATH}>Tentang Kami</a>
               </li>
               <li>
                 <a onClick={this.onRegisterButtonClicked} className="button button--ghost" href={GOOGLE_FORM_PATH} target="_blank" rel="noopener noreferrer">Daftarkan Bisnismu</a>

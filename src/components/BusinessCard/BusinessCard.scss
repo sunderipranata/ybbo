@@ -15,7 +15,10 @@
         height: 180px;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        background-color: #F2F2F2;
+        background-color: $color-grey-light;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
 
         .img__content {
             position: absolute;

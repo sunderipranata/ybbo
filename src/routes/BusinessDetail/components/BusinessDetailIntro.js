@@ -23,7 +23,7 @@ class BusinessDetailIntro extends Component {
         { isLoading ? 
           <div className="bd-intro__logo" style={{ background: "#F2F2F2"}} />
             :
-          <div className="bd-intro__logo" style={{ background: "url(" + img + ") center center / cover no-repeat"}} /> 
+          <div className="bd-intro__logo" style={{ backgroundImage: "url(" + img + ")"}} /> 
         }
         <div className="bd-intro__desc">
           { isLoading ? <Loader width={140} height={32} borderRadius={8} marginBottom={12} /> : <h1 className="title">{title}</h1>}

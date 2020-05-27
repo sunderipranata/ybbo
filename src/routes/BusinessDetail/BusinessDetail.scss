@@ -47,6 +47,10 @@
     box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
     margin-right: 24px;
     flex-shrink: 0;
+    background-color: $color-grey-light;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 
     @media (max-width:$breakpoint-md-max) {
       width: 90px;
