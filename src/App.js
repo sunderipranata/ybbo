@@ -39,8 +39,8 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path={HOME_PATH} component={withPageView(Home)} />
-          <Route exact path={BUSINESS_DETAIL_PATH} component={BusinessDetail} />
-          <Route exact path={ABOUT_PATH} component={About} />
+          <Route exact path={BUSINESS_DETAIL_PATH} component={withPageView(BusinessDetail)} />
+          <Route exact path={ABOUT_PATH} component={withPageView(About)} />
         </Switch>
       </Router>
     )
