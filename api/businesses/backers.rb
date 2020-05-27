@@ -20,7 +20,7 @@ Handler = Proc.new do |req, res|
       req_body = JSON.parse(req.body)
       business_id = req_body['business_id'] || ""
       raise MissingParameterError, 'missing business_id' if business_id.blank?
-      username = req_body['username']
+      username = req_body['username'].to_s.strip.downcase
       username = username[1..-1] if username[0] == '@'
       account_type = req_body['account_type'].to_sym
       anonym = !!req_body['anonym']
