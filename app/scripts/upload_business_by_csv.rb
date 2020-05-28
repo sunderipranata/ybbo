@@ -47,7 +47,7 @@ CSV.foreach("#{filename}", headers: true) do |row|
   begin
     thumb_url = thumb_url.match(/[\w_-]{20,}+/)[0]
     thumbnail_url = "https://drive.google.com/thumbnail?id=#{thumb_url}&sz=w300-h300"
-    icon_url = "https://drive.google.com/thumbnail?id=#{thumb_url}&sz=w120-h120"
+    icon_url = "https://drive.google.com/thumbnail?id=#{thumb_url}&sz=w200-h200"
     pictures_url = []
     assets_urls.split(',').each do |url|
       pictures_url << "https://drive.google.com/thumbnail?id=#{url.match(/[\w_-]{20,}+/)[0]}&sz=w500-h500"
