@@ -34,7 +34,7 @@ CSV.foreach("#{filename}", headers: true) do |row|
   location           = row[11].present? ? row[11].strip : nil
   description        = row[12].present? ? row[12].strip : nil
   assets_urls        = row[13]
-  thumbnail_url      = row[14]
+  thumb_url          = row[14]
   agreement          = row[15]
   link_folder        = row[16]
   done               = row[17]
@@ -45,7 +45,9 @@ CSV.foreach("#{filename}", headers: true) do |row|
   end
 
   begin
-    thumbnail_url = "https://drive.google.com/thumbnail?id=#{thumbnail_url.match(/[\w_-]{20,}+/)[0]}&sz=w500-h500"
+    thumb_url = thumb_url.match(/[\w_-]{20,}+/)[0]
+    thumbnail_url = "https://drive.google.com/thumbnail?id=#{thumb_url}&sz=w300-h300"
+    icon_url = "https://drive.google.com/thumbnail?id=#{thumb_url}&sz=w120-h120"
     pictures_url = []
     assets_urls.split(',').each do |url|
       pictures_url << "https://drive.google.com/thumbnail?id=#{url.match(/[\w_-]{20,}+/)[0]}&sz=w500-h500"
@@ -73,7 +75,7 @@ CSV.foreach("#{filename}", headers: true) do |row|
     b.description = description
     b.category = CATEGORY_MAP[category]
     b.assets_url = link_folder
-    b.icon_url = thumbnail_url
+    b.icon_url = icon_url
     b.thumbnail_url = thumbnail_url
     pictures_url.each do |url|
       b.push(pictures_url: url)
