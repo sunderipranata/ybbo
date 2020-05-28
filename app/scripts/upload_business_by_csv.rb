@@ -31,8 +31,8 @@ CSV.foreach("#{filename}", headers: true) do |row|
   link_gojek         = row[8].present? ? row[8].strip : nil
   link_grab          = row[9].present? ? row[9].strip : nil
   others             = row[10]
-  location           = row[11].present? ?row[11].strip : nil
-  description        = row[12].present? ?row[12].strip : nil
+  location           = row[11].present? ? row[11].strip : nil
+  description        = row[12].present? ? row[12].strip : nil
   assets_urls        = row[13]
   thumbnail_url      = row[14]
   agreement          = row[15]
