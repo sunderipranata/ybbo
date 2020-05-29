@@ -100,7 +100,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
             <Fragment>
               <h2 className="bd-content__title">Terima kasih telah mendaftar</h2>
               <p className="desc">
-                Akun kamu (@{socialMediaAccount}) telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }.{' '}
+                Akun kamu ({socialMediaAccount}) telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }.{' '}
                 Silakan tekan tombol di bawah untuk mendownload gambar/video.
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
@@ -113,7 +113,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
             <Fragment>
               <h2 className="bd-content__title">Kamu sudah pernah mendaftar</h2>
               <p className="desc">
-                Akun dengan id @{socialMediaAccount} sudah terdaftar. Terima kasih telah mendaftar!{' '}
+                Akun dengan id {socialMediaAccount} sudah terdaftar. Terima kasih telah mendaftar!{' '}
                 Silakan tekan tombol di bawah untuk mendownload gambar/video.
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
