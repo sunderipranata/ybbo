@@ -12,8 +12,7 @@ import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
-const ERROR_MESSAGE_DUPLICATE_ENTRY = (id) => `Akun dengan id ${id} sudah mendukung bisnis ini. Hayoh salah ketik ya ?`
-const ERROR_MESSAGE_NOT_VALID = "Akun yang dimasukkan tidak valid, Hayoh coba dicek lagi !"
+const ERROR_MESSAGE_NOT_VALID = "Akun yang dimasukkan tidak valid. Hayoh coba dicek lagi!"
 const ERROR_MESSAGE_GENERAL = "Terjadi kesalahan pada sistem kami, mohon coba lagi dalam beberapa detik"
 
 class BusinessDetailForm extends BaseAnalyticsComponents {
@@ -31,7 +30,8 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
     isError: false,
     isAnonymous: false,
     socialMediaAccount: "",
-    isSuccess: false
+    isSuccess: false,
+    isDuplicate: false
   }
 
 
@@ -56,7 +56,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
     try{
       switch(errorResponse.meta.error_code){
         case 1003: this.setState({errorMessage:ERROR_MESSAGE_NOT_VALID});break;
-        case 1004: this.setState({errorMessage:ERROR_MESSAGE_DUPLICATE_ENTRY(this.state.socialMediaAccount)});break;
+        case 1004: this.setState({isDuplicate: true});break;
         default: this.setState({errorMessage: ERROR_MESSAGE_GENERAL})
       }
     }
@@ -80,7 +80,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
   }
 
   render() {
-    const { isError, isAnonymous, isSuccess,socialMediaAccount, errorMessage } = this.state
+    const { isError, isAnonymous, isSuccess, socialMediaAccount, errorMessage, isDuplicate } = this.state
     const { isLoading, businessName ,numberOfBackers} = this.props
 
     return (
@@ -100,7 +100,21 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
             <Fragment>
               <h2 className="bd-content__title">Terima kasih telah mendaftar</h2>
               <p className="desc">
-                Akun kamu telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }, Silakan tekan tombol di bawah untuk mendownload gambar/video.
+                Akun kamu ({socialMediaAccount}) telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }.{' '}
+                Silakan tekan tombol di bawah untuk mendownload gambar/video.
+              </p>
+              <p className="desc" style={{marginTop: '8px'}}>
+                Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
+              </p>
+              <button onClick={this.handleOnDownloadAssetButtonClick} className="button button--main">Download aset untuk dipost</button>
+            </Fragment>
+            :
+            isDuplicate ?
+            <Fragment>
+              <h2 className="bd-content__title">Kamu sudah pernah mendaftar</h2>
+              <p className="desc">
+                Akun dengan id {socialMediaAccount} sudah terdaftar. Terima kasih telah mendaftar!{' '}
+                Silakan tekan tombol di bawah untuk mendownload gambar/video.
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
                 Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
@@ -124,7 +138,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
               <form className="form">
                 <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
                 <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @instagram" />
-          { isError && <p className="label-error">{errorMessage}</p>}
+                { isError && <p className="label-error">{errorMessage}</p>}
                 <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
                   <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
                   <span class="checkmark" />
