@@ -23,7 +23,8 @@
     "react-responsive": "^8.0.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "simple-react-lightbox": "^3.0.2"
+    "simple-react-lightbox": "^3.0.2",
+    "universal-cookie": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

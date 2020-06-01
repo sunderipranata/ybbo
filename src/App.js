@@ -7,20 +7,26 @@ import {
   Route
 } from 'react-router-dom'
 
-import { HOME_PATH, BUSINESS_DETAIL_PATH, ABOUT_PATH } from './routes'
+import { HOME_PATH, BUSINESS_DETAIL_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH } from './routes'
 import logo from './logo.svg'
 import './App.scss'
 
 import Home from './routes/Home'
+import InternalPage from './routes/InternalPage'
 import BusinessDetail from './routes/BusinessDetail'
 import About from './routes/About/About'
 import withPageView from './utils/googleAnalytics/withPageView'
+import Cookies from 'universal-cookie';
 
 require('dotenv').config();
 
-ReactGA.initialize(process.env.REACT_APP_ANALYTICS_TRACK_ID, {
+ReactGA.initialize("UA-78912543-2"  , {
   testMode: process.env.NODE_ENV === "test",
-  debug: process.env.NODE_ENV !== "production",
+  debug: process.env.NODE_ENV !== "production"
+});
+
+ReactGA.set({
+  dimension1: new Cookies().get("internalTraffic",{doNotParse:true})
 });
 
 class App extends React.Component {
@@ -41,6 +47,7 @@ class App extends React.Component {
           <Route exact path={HOME_PATH} component={withPageView(Home)} />
           <Route exact path={BUSINESS_DETAIL_PATH} component={withPageView(BusinessDetail)} />
           <Route exact path={ABOUT_PATH} component={withPageView(About)} />
+          <Route exact path={INTERNAL_COOKIE_PATH} component={withPageView(InternalPage)} />
         </Switch>
       </Router>
     )
