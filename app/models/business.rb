@@ -7,7 +7,8 @@ class Business
     food_and_beverage: 10,
     fashion: 40,
     hobby: 50,
-    beauty: 60
+    beauty: 60,
+    others: 1000
   }.freeze
 
   field :name,              type: String

@@ -13,7 +13,8 @@ CATEGORY_MAP ={
   'Makanan dan Minuman' => :food_and_beverage,
   'Fashion' => :fashion,
   'Hobi' => :hobby,
-  'Jasa Kecantikan' => :beauty
+  'Jasa Kecantikan' => :beauty,
+  'Lainnya' => :others
 }
 
 
