@@ -45,6 +45,13 @@ CSV.foreach("#{filename}", headers: true) do |row|
     next
   end
 
+  next unless business_name.present?
+
+  if !business_name.ascii_only? || !description.ascii_only?
+    puts "#{business_name} name or description is not ascii"
+    next
+  end
+
   begin
     thumb_url = thumb_url.match(/[\w_-]{20,}+/)[0]
     thumbnail_url = "https://drive.google.com/thumbnail?id=#{thumb_url}&sz=w300-h300"
