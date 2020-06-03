@@ -8,7 +8,7 @@ module JSON
         options[:meta] = {
           http_status: http_status
         }
-        serializer.new(object, options).serialized_json
+        serializer.new(object, options).serializable_hash.to_json
       end
 
       def many(object, serializer, http_status, options={})
@@ -21,7 +21,7 @@ module JSON
           serializer_options[:meta][:limit] = options[:limit]
           serializer_options[:meta][:total] = object&.count || 0
         end
-        serializer.new(object, serializer_options).serialized_json
+        serializer.new(object, serializer_options).serializable_hash.to_json
       end
     end
 

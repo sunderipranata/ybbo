@@ -28,10 +28,13 @@ Handler = Proc.new do |req, res|
         end
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, res.status, pagination_meta: pagination_meta, limit: limit)
+        res.body = res.body + {encoding: res.body.encoding.to_s}.to_json
+        #res.body.force_encoding()
       else
         business = Business.find_by_slug_or_id(id)
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.one(business, BusinessDetailSerializer, res.status)
+        res.body = res.body + {encoding: res.body.encoding.to_s}.to_json
       end
     when "POST"
       # do stuff authentication stuffs here
