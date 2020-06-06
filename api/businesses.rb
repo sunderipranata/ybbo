@@ -38,11 +38,12 @@ Handler = Proc.new do |req, res|
 
       req_body = JSON.parse(req.body)
       business_name      = req_body['business_name'].present? ? req_body['business_name'].strip : nil
+      category           = Business::CATEGORY_MAP[req_body['category']]
 
       raise MissingParameterError, 'missing business_name' if business_name.blank?
       raise InvalidEncodingError if !business_name.ascii_only? || !description.ascii_only?
+      raise InvalidInputError, 'category invalid' if category.blank?
 
-      category           = Business::CATEGORY_MAP[req_body['category']]
       location           = req_body['location'].present? ? req_body['location'].strip : nil
       description        = req_body['description'].present? ? req_body['description'].strip : nil
 
@@ -113,13 +114,18 @@ Handler = Proc.new do |req, res|
       res.status = HTTP_STATUS_CREATED
       res.body = JSON::Response.message("business successfully inserted", res.status)
     end
-
+  rescue JSON::ParserError => e
+    res.status = HTTP_STATUS_BAD_REQUEST
+    res.body = JSON::Response.error('expected json request body', ERROR_INVALID_REQUEST_BODY, res.status)
   rescue AuthenticationError => e
     res.status = HTTP_STATUS_UNAUTHORIZED
     res.body = JSON::Response.error(e.message, ERROR_ADMIN_AUTHENTICATION, res.status)
   rescue InvalidEncodingError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_ASCII_EXPECTED, res.status)
+  rescue InvalidInputError => e
+    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
+    res.body = JSON::Response.error(e.message, ERROR_UNKNOWN_CATEGORY, res.status)
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_MISSING_REQUIRED_PARAMETER, res.status)
