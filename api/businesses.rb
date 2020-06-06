@@ -60,7 +60,7 @@ Handler = Proc.new do |req, res|
       store_accounts     = req_body['store_accounts']
 
       slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-      slug_count = Business.where(slug: slug).count
+      slug_count = Business.where(slug: /^#{slug}/).count
       slug = slug + "-#{slug_count}" if slug_count > 0
 
 
