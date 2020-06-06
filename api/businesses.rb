@@ -84,7 +84,7 @@ Handler = Proc.new do |req, res|
         store_url = account['store_url']
         next if store_url.blank?
         store_type = account['store_type'].to_sym
-        store_name = account['store_name'].present? ? account['store_name'].strip : b.business_name
+        store_name = account['store_name'].present? ? account['store_name'].strip : business_name
 
         store_url = case store_type
                     when :whatsapp
