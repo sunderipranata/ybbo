@@ -6,6 +6,7 @@ ERROR_VALIDATION = 1003
 ERROR_DUPLICATE_ENTRY = 1004
 ERROR_INVALID_REQUEST_BODY = 1005
 ERROR_ASCII_EXPECTED = 1006
+ERROR_UNKNOWN_CATEGORY = 1007
 
 
 class AuthenticationError < StandardError
@@ -28,6 +29,12 @@ end
 
 class ResourceNotFoundError < StandardError
   def initialize(msg="resource not found")
+    super
+  end
+end
+
+class InvalidInputError < StandardError
+  def initialize(msg="input invalid")
     super
   end
 end
