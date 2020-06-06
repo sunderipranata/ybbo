@@ -49,10 +49,11 @@ Handler = Proc.new do |req, res|
       pictures_url = []
       assets_urls        = req_body['assets_urls']
       assets_urls.split(',').each do |url|
-        pictures_url << "https://drive.google.com/thumbnail?id=#{url.match(/[\w_-]{20,}+/)[0]}&sz=w500-h500"
+        url_id = url.match(/[\w_-]{20,}+/)[0] rescue nil
+        pictures_url << "https://drive.google.com/thumbnail?id=#{url_id}&sz=w500-h500"
       end
 
-      thumbnail_id       = req_body['thumbnail_url'].match(/[\w_-]{20,}+/)[0]
+      thumbnail_id       = req_body['thumbnail_url'].match(/[\w_-]{20,}+/)[0] rescue nil
       thumbnail_url      = "https://drive.google.com/thumbnail?id=#{thumbnail_id}&sz=w300-h300"
       icon_url           = "https://drive.google.com/thumbnail?id=#{thumbnail_id}&sz=w200-h200"
       folder_url         = req_body['folder_url']
