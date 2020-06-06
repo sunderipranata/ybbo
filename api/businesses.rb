@@ -39,13 +39,12 @@ Handler = Proc.new do |req, res|
       req_body = JSON.parse(req.body)
       business_name      = req_body['business_name'].present? ? req_body['business_name'].strip : nil
       category           = Business::CATEGORY_MAP[req_body['category']]
+      location           = req_body['location'].present? ? req_body['location'].strip : nil
+      description        = req_body['description'].present? ? req_body['description'].strip : nil
 
       raise MissingParameterError, 'missing business_name' if business_name.blank?
       raise InvalidEncodingError if !business_name.ascii_only? || !description.ascii_only?
       raise InvalidInputError, 'category invalid' if category.blank?
-
-      location           = req_body['location'].present? ? req_body['location'].strip : nil
-      description        = req_body['description'].present? ? req_body['description'].strip : nil
 
       pictures_url = []
       assets_urls        = req_body['assets_urls']
