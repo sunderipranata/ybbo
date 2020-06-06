@@ -94,7 +94,7 @@ Handler = Proc.new do |req, res|
                       instagram_username = (store_url[0] == '@') ? store_url[1..-1] : store_url
                       "https://instagram.com/#{instagram_username}"
                     else
-                      "https://#{store_url.strip}" if store_url.present? && store_url !~ /^https:\/\/.*/
+                      (store_url !~ /^https:\/\/.*/) ? "https://#{store_url.strip}" : store_url
                     end
 
         store = b.store_accounts.new
