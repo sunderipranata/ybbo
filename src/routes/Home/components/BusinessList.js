@@ -254,8 +254,8 @@ class BusinessList extends BaseAnalyticsComponents {
     })
   }
 
-  onBusinessCardClick = (businessId) => {
-    this.trackClickWithValue(EventLabel.MERCHANT_CARD,businessId)
+  onBusinessCardClick = (businessName) => {
+    this.trackClickWithValue(EventLabel.MERCHANT_CARD,businessName)
   }
 
   renderLoading = () => {
@@ -290,7 +290,7 @@ class BusinessList extends BaseAnalyticsComponents {
       const link = (typeof slug === 'undefined' || slug === null) ? id : slug
 
       return (
-        <Link onClick={this.onBusinessCardClick.bind(this,id)} to={'/b/' + link} className="item" key = { id }>
+        <Link onClick={this.onBusinessCardClick.bind(this,name)} to={'/b/' + link} className="item" key = { id }>
           <BusinessCard
             img = { thumbnailUrl }
             title = { name }
