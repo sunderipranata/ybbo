@@ -36,7 +36,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
 
 
   handleCheckboxChange = event => {
-    this.trackClickWithValue(EventLabel.MAKE_ME_ANONYMOUS_CHECKBOX,event.target.checked)
+    this.trackClickWithValue(EventLabel.MAKE_ME_ANONYMOUS_CHECKBOX,`${event.target.checked} - ${this.props.businessName}`)
     this.setState({ isAnonymous: event.target.checked })
   }
 
@@ -66,7 +66,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
   }
 
   handleSubmitForm = event => {
-    this.trackClickWithValue(EventLabel.BUSINESS_DETAIL_FORM_BUTTON,this.props.businessId)
+    this.trackClickWithValue(EventLabel.SUBMIT_BUSINESS_DETAIL_FORM_BUTTON,this.props.businessName)
     this.submitBusinessDetailForm(
       this.props.businessId,
       this.state.socialMediaAccount,
@@ -75,7 +75,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
   }
 
   handleOnDownloadAssetButtonClick = () => {
-    this.trackClickWithValue(EventLabel.DOWNLOAD_ASSET_BUTTON,this.props.businessId)
+    this.trackClickWithValue(EventLabel.DOWNLOAD_ASSET_BUTTON,this.props.businessName)
     window.open(this.props.assetsUrl, "_blank")
   }
 

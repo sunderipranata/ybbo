@@ -55,8 +55,8 @@ class Recomendations extends BaseAnalyticsComponents {
     }
   }
 
-  onBusinessCardClick = (businessId) => {
-    this.trackClickWithValue(EventLabel.HELP_OTHER_BUSINESS_CARD,businessId)
+  onBusinessCardClick = (businessName) => {
+    this.trackClickWithValue(EventLabel.HELP_OTHER_BUSINESS_CARD,businessName)
   }
 
   toggleLoading = (loading) => {
@@ -81,7 +81,7 @@ class Recomendations extends BaseAnalyticsComponents {
     randomBusinesses.forEach((b) => {
       const link = (typeof b.slug === 'undefined' || b.slug === null) ? b.id : b.slug
       display.push(
-        <a href={'/b/' + link} onClick = {this.onBusinessCardClick.bind(this,b.id)}>
+        <a href={'/b/' + link} onClick = {this.onBusinessCardClick.bind(this,b.name)}>
           <BusinessCard
             img = { b.thumbnailUrl }
             title = { b.name }
