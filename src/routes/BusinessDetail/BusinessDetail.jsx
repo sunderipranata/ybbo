@@ -30,7 +30,8 @@ const categories = {
   food_and_beverage: 'Makanan dan Minuman',
   fashion: 'Fashion',
   hobby: 'Hobi',
-  beauty: 'Kecantikan'
+  beauty: 'Kecantikan',
+  others: 'Lainnya'
 }
 
 class BusinessDetail extends Component {

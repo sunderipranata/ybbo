@@ -21,7 +21,8 @@ const categories = {
   food_and_beverage: 'Makanan dan Minuman',
   fashion: 'Fashion',
   hobby: 'Hobi',
-  beauty: 'Kecantikan'
+  beauty: 'Kecantikan',
+  others: 'Lainnya'
 }
 
 class BusinessList extends BaseAnalyticsComponents {
@@ -329,6 +330,7 @@ class BusinessList extends BaseAnalyticsComponents {
     const classFashion = category === 'fashion' ? baseClass + "active" : baseClass
     const classHobby = category === 'hobby' ? baseClass + "active" : baseClass
     const classBeauty = category === 'beauty' ? baseClass + "active" : baseClass
+    const classOthers = category === 'others' ? baseClass + "active" : baseClass
 
     return (
       <Desktop>
@@ -367,6 +369,13 @@ class BusinessList extends BaseAnalyticsComponents {
                 className= { classHobby }
                 onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
                 { categories['hobby'] }
+              </button>
+            </li>
+            <li>
+              <button
+                className= { classOthers }
+                onClick = { this.handleCategoryChange.bind(this, 'others') }>
+                { categories['others'] }
               </button>
             </li>
           </ul>
@@ -415,6 +424,11 @@ class BusinessList extends BaseAnalyticsComponents {
                       className="item"
                       onClick = { this.handleCategoryChange.bind(this, 'hobby') }>
                       { categories['hobby'] }
+                    </div>
+                    <div
+                      className="item"
+                      onClick = { this.handleCategoryChange.bind(this, 'others') }>
+                      { categories['others'] }
                     </div>
                   </div>
                 </div>
