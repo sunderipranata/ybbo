@@ -59,12 +59,19 @@ Handler = Proc.new do |req, res|
       folder_url         = req_body['folder_url']
       store_accounts     = req_body['store_accounts']
 
-      slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-      slug_count = Business.where(slug: /^#{slug}/).count
-      slug = slug + "-#{slug_count}" if slug_count > 0
+      action = req_body['action']
+      slug = req_body['slug'].strip
+      if req_body['action'] == 'update'
+        b = Business.find_by(slug: slug)
+        raise ResourceNotFoundError, 'business not found' if b.blank?
+      else
+        slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        slug_count = Business.where(slug: /^#{slug}/).count
+        slug = slug + "-#{slug_count}" if slug_count > 0
 
+        b = Business.new
+      end
 
-      b = Business.new
       b.name = business_name
       b.slug = slug
       b.category = category
@@ -126,6 +133,9 @@ Handler = Proc.new do |req, res|
   rescue InvalidInputError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_UNKNOWN_CATEGORY, res.status)
+  rescue ResourceNotFoundError => e
+    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
+    res.body = JSON::Response.error(e.message, ERROR_BUSINESS_NOT_FOUND, res.status)
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_MISSING_REQUIRED_PARAMETER, res.status)

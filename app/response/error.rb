@@ -7,7 +7,7 @@ ERROR_DUPLICATE_ENTRY = 1004
 ERROR_INVALID_REQUEST_BODY = 1005
 ERROR_ASCII_EXPECTED = 1006
 ERROR_UNKNOWN_CATEGORY = 1007
-
+ERROR_BUSINESS_NOT_FOUND = 1008
 
 class AuthenticationError < StandardError
   def initialize(msg="invalid token")
