@@ -3,9 +3,7 @@ import ReactGA from "react-ga";
 
 const withPageView = (WrappedComponent, options = {}) => {
     const trackPageView = page => {
-        ReactGA.set({
-            page,
-        });
+    
         ReactGA.pageview(page);
     };
 

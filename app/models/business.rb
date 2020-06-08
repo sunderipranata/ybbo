@@ -3,6 +3,14 @@ class Business
   include Mongoid::Timestamps::Created
   include SimpleEnum::Mongoid
 
+  CATEGORY_MAP ={
+    'Makanan dan Minuman' => :food_and_beverage,
+    'Fashion' => :fashion,
+    'Hobi' => :hobby,
+    'Kecantikan' => :beauty,
+    'Lainnya' => :others
+  }
+
   CATEGORY = {
     food_and_beverage: 10,
     fashion: 40,

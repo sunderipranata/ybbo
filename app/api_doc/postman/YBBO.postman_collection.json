@@ -181,12 +181,35 @@
 					"response": []
 				},
 				{
-					"name": "Get Randomized simple business list by category",
+					"name": "Post a Business",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "YBBO-Admin-Token",
+								"value": "yukbantubisnis.online",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"business_name\"  : \"toko kukis\",\n\t\"category\"       : \"Makanan dan Minuman\",\n\t\"location\"       : \"Jakarta\",\n\t\"description\"    : \"anydescription\",\n\t\"assets_urls\"    : \"url\",\n\t\"thumbnail_url\"  : \"url\",\n\t\"folder_url\"     : \"url\",\n\t\"store_accounts\" : [\n        {\n            \"store_url\"  : \"store url\",\n            \"store_type\" : \"tokopedia\",\n            \"store_name\" : \"tokokukis\"\n        },\n        {\n            \"store_url\"  : \"store url2\",\n            \"store_type\" : \"bukalapak\",\n            \"store_name\" : \"tokokukis2\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "https://{{host}}/api/businesses",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"businesses"
+							]
 						}
 					},
 					"response": []

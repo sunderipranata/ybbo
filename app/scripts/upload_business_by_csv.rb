@@ -69,7 +69,7 @@ CSV.foreach("#{filename}", headers: true) do |row|
     link_gojek     = "https://#{link_gojek}"     if link_gojek.present?     && link_gojek !~ /^https:\/\/.*/
     link_grab      = "https://#{link_grab}"      if link_grab.present?      && link_grab !~ /^https:\/\/.*/
 
-    instagram_username = instagram_username[1..-1] if instagram_username[0] == '@'
+    instagram_username = instagram_username[1..-1] if instagram_username.present? && instagram_username[0] == '@'
 
     slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
     slug_count = Business.where(slug: slug).count

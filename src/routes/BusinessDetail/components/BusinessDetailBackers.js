@@ -87,7 +87,7 @@ class BusinessDetailBackers extends BaseAnalyticsComponent {
 
     if(typeof businessDetail !== 'undefined' && businessDetail !== null) {
       const id = businessDetail.id
-      this.trackClickWithValue(EventLabel.LOAD_MORE_TESTIMONY,id)
+      this.trackClickWithValue(EventLabel.LOAD_MORE_TESTIMONY,businessDetail.name)
       this.toggleBackersLoading(true)
       this.props.fetchData(id, BACKER_SIZE, lastOffset, (res) => {
         if(res !== null) {
