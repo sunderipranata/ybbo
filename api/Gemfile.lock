@@ -68,6 +68,7 @@ GEM
     transproc (1.1.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    unidecoder (1.1.2)
     zeitwerk (2.3.0)
 
 PLATFORMS
@@ -82,6 +83,7 @@ DEPENDENCIES
   mongoid (~> 7.0.6)
   phonelib (~> 0.6.31)
   simple_enum (~> 2.3.0)
+  unidecoder
 
 BUNDLED WITH
    2.1.2

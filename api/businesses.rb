@@ -37,10 +37,10 @@ Handler = Proc.new do |req, res|
       raise AuthenticationError unless ENV['YBBO_ADMIN_TOKEN'] == req['YBBO-Admin-Token']
 
       req_body = JSON.parse(req.body)
-      business_name      = req_body['business_name'].present? ? req_body['business_name'].strip : nil
+      business_name      = req_body['business_name'].present? ? req_body['business_name'].strip.to_ascii.gsub('[?]', '') : nil
       category           = Business::CATEGORY_MAP[req_body['category']]
       location           = req_body['location'].present? ? req_body['location'].strip : nil
-      description        = req_body['description'].present? ? req_body['description'].strip : nil
+      description        = req_body['description'].present? ? req_body['description'].strip.to_ascii.gsub('[?]', '') : nil
 
       raise MissingParameterError, 'missing business_name' if business_name.blank?
       raise InvalidEncodingError if !business_name.ascii_only? || !description.ascii_only?

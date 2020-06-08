@@ -7,6 +7,7 @@ require 'time'
 require 'dotenv'
 require 'csv'
 require 'phonelib'
+require 'unidecoder'
 
 Phonelib.default_country = 'ID'
 
