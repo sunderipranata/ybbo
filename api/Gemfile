@@ -6,6 +6,7 @@ gem 'hanami-validations'
 gem 'simple_enum', '~> 2.3.0' , require: 'simple_enum/mongoid'
 gem 'fast_jsonapi'
 gem 'dotenv'
+gem 'unidecoder'
 
 gem 'phonelib', '~> 0.6.31'
 gem 'csv'
