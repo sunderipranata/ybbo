@@ -51,6 +51,7 @@ class Home extends React.Component {
     return (
       <Helmet>
         <title>Yuk Bantu Bisnis Online!</title>
+        <meta name = "title" content = "Yuk Bantu Bisnis Online!"/>
         <meta name = "description" 
           content = "Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia"
         />
