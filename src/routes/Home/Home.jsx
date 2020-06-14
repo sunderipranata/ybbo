@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import Header from '../../components/Header'
+import { Helmet } from 'react-helmet'
 
 import './Home.scss'
 import Hero from './components/Hero'
@@ -46,9 +47,21 @@ class Home extends React.Component {
     }
   }
 
+  renderHelmet = () => {
+    return (
+      <Helmet>
+        <title>Yuk Bantu Bisnis Online!</title>
+        <meta name = "description" 
+          content = "Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia"
+        />
+      </Helmet>
+    )
+  }
+
   render = () => {
     return (
       <Fragment>
+        { this.renderHelmet() }
         <article>
           <Header pageLabel={PageLabel.HEADER}/>
             <main className="container__home">
