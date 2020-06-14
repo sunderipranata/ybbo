@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import Responsive from 'react-responsive'
 import SimpleReactLightbox from 'simple-react-lightbox'
 import ClassNames from 'classnames'
+import { Helmet } from 'react-helmet'
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -371,11 +372,43 @@ class BusinessDetail extends Component {
     ) 
   }
 
+  renderHelmet = () => {
+    const { businessDetail } = this.state
+    let title = "Yuk Bantu Bisnis Online"
+    let description = ""
+    const url = window.location.href
+    if(typeof businessDetail.name !== 'undefined' && typeof businessDetail.description !== 'undefined') {
+      title = businessDetail.name + " | Yuk Bantu Bisnis Online"
+      description = businessDetail.description
+    }
+
+    return (
+      <Helmet>
+        <title>{ title }</title>
+        <meta name = "title" content = { title }/>
+        <meta name = "description" 
+          content = { description }
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content= { url } />
+        <meta property="og:title" content= { title } />
+        <meta property="og:description" content= { description } />
+        <meta property="og:image" content= { businessDetail.thumbnailUrl } />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content= { url } />
+        <meta property="twitter:title" content= { title } />
+        <meta property="twitter:description" content= { description } />
+        <meta property="twitter:image" content= { businessDetail.thumbnailUrl } />
+      </Helmet>
+    )
+  }
+
   render = () => {
     const { isLoading } = this.state
 
     return (
       <Fragment>
+        { this.renderHelmet() }
         <Desktop>
           <Header pageLabel={PageLabel.HEADER}/>
           { isLoading ? this.renderLoadingDesktop() : this.renderDetailDesktop() }
