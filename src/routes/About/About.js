@@ -34,6 +34,16 @@ class About extends Component {
         <meta name = "description" 
           content = { description }
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yukbantubisnis.online/" />
+        <meta property="og:title" content="Yuk Bantu Bisnis Online" />
+        <meta property="og:description" content="Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia." />
+        <meta property="og:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpg" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://yukbantubisnis.online/" />
+        <meta property="twitter:title" content="Yuk Bantu Bisnis Online" />
+        <meta property="twitter:description" content="Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia." />
+        <meta property="twitter:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpgg" />
       </Helmet>
     )
   }
