@@ -52,7 +52,7 @@ class BusinessCard extends Component {
                     {location}
                   </span> 
                 }
-                { backers >= 0 && 
+                { backers > 0 && 
                   <span className="desc">
                     <FontAwesomeIcon icon={faUserFriends} style={{ marginRight: "4px" }} />
                     { backers < 10 && backers + " " }
