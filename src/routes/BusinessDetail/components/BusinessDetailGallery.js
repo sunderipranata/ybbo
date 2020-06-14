@@ -91,7 +91,10 @@ class BusinessDetailGallery extends Component {
 
     return (
       <Fragment>
-        <h2 className="bd-content__title bd-content__title--padding">Galeri</h2>
+          <div className="bd-content__title bd-content__title--padding" style={{ display: "flex", justifyContent: "space-between"}}>
+           <h2>Galery</h2>
+           <button className="button button--ghost button--small">Download untuk dipost di IG Story</button>
+        </div>
         { isLoading ? this.renderLoading() : this.renderGallery() }
       </Fragment>
     )

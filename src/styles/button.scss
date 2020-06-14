@@ -20,6 +20,12 @@ $loadingSpinnerSpeed: .7s;
     overflow: hidden;
     text-overflow: ellipsis;
 
+    &--small {
+      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 8px;
+    }
+
     @media (max-width:$breakpoint-lg-max) {
       font-size: 14px;
     }

@@ -19,6 +19,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
   static propTypes = {
     isLoading: PropTypes.bool,
     scrollToBackers: PropTypes.func,
+    scrollToGallery: PropTypes.func,
     businessName: PropTypes.string,
     businessId: PropTypes.string,
     backersCount: PropTypes.number,
@@ -88,36 +89,44 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
         { isLoading ?
         <Fragment>
           <Loader height={16} borderRadius={8} marginBottom={8} />
+          <Loader height={12} borderRadius={8} marginBottom={8} />
           <Loader height={12} borderRadius={8} marginBottom={16} />
           <Loader width={150} height={12} borderRadius={8} marginBottom={8} />
           <Loader height={32} borderRadius={8} marginBottom={8} />
           <Loader height={12} borderRadius={8} marginBottom={16} />
+          <Loader width={150} height={12} borderRadius={8} marginBottom={8} />
+          <Loader height={80} borderRadius={8} marginBottom={8} />
+          <Loader height={32} borderRadius={8} marginBottom={8} />
           <Loader height={32} borderRadius={8} />
         </Fragment>
         :
         <Fragment>
           { isSuccess ?
             <Fragment>
-              <h2 className="bd-content__title">Terima kasih telah mendaftar</h2>
+              <h2 className="bd-content__title">Terima kasih telah membagikan pengalamanmu</h2>
               <p className="desc">
-                Akun kamu ({socialMediaAccount}) telah berhasil terdaftar{ isAnonymous && " dan akan ditampilkan sebagai anonim" }.{' '}
-                Silakan tekan tombol di bawah untuk mendownload gambar/video.
+                Akunmu ({socialMediaAccount}) dan komentarmu telah berhasil kami masukkan. { isAnonymous && " Akunmu akan ditampilkan sebagai anonim." }{' '}
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
-                Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
+                Kamu juga bisa share produk {businessName} di Instagram Story dengan klik tombol di bawah untuk download gambar/video.
+              </p>
+              <p className="desc" style={{marginTop: '8px'}}>
+                Jangan lupa tag instagram kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> ya!
               </p>
               <button onClick={this.handleOnDownloadAssetButtonClick} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
             :
             isDuplicate ?
             <Fragment>
-              <h2 className="bd-content__title">Kamu sudah pernah mendaftar</h2>
+              <h2 className="bd-content__title">Kamu sudah pernah membagikan pengalamanmu</h2>
               <p className="desc">
-                Akun dengan id {socialMediaAccount} sudah terdaftar. Terima kasih telah mendaftar!{' '}
-                Silakan tekan tombol di bawah untuk mendownload gambar/video.
+                Akun dengan id {socialMediaAccount} sudah pernah membagikan pengalaman. Terima kasih telah  membagikan pengalamanmu!{' '}
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
-                Jangan lupa tag kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> agar akun Instagram kamu terverifikasi.
+                Kamu juga bisa share produk {businessName} di Instagram Story dengan klik tombol di bawah untuk download gambar/video.
+              </p>
+              <p className="desc" style={{marginTop: '8px'}}>
+                Jangan lupa tag instagram kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> ya!
               </p>
               <button onClick={this.handleOnDownloadAssetButtonClick} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
@@ -128,34 +137,40 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
                 <p className="desc">
                   <Desktop>Sudah ada <button className="btn-link" onClick={this.props.scrollToBackers}>{numberOfBackers} Pendukung</button>.</Desktop>{' '}
                   <Mobile>Sudah ada {numberOfBackers} Pendukung.</Mobile>{' '}
-                  Yuk jadi salah satunya!
+                  Yuk jadi salah satunya dengan menceritakan pengalamanmu atau <button className="link link--button" onClick={this.handleOnDownloadAssetButtonClick}>download aset</button> untuk dipost di Instagram Story.
                 </p>
               :
                 <p className="desc">
-                  Yuk dukung {businessName}
+                  Yuk dukung {businessName} dengan menceritakan pengalamanmu atau <button className="link link--button" onClick={this.handleOnDownloadAssetButtonClick}>download aset</button> untuk dipost di Instagram Story.
                 </p>
               }
               <form className="form">
-                <label className="label-input" for="account">Masukkan akun Instagram kamu</label>
-                <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @instagram" />
-                { isError && <p className="label-error">{errorMessage}</p>}
-                <label class="checkbox-container form__checkbox">Sembunyikan akun saya (pendukung anonim)
-                  <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
-                  <span class="checkmark" />
-                </label>
+                <section className="form-section">
+                  <label className="label-input" for="account">Akun Instagram Kamu</label>
+                  <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @yukbantubisnis.online" />
+                  <label class="checkbox-container form__checkbox">Sembunyikan akun saya
+                    <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
+                    <span class="checkmark" />
+                  </label>
+                </section>
+                <section className="form-section">
+                  <label className="label-input" for="review">Ceritakan Pengalamanmu</label>
+                  <textarea style={{resize: "none"}} rows="4" id="review" name="review" placeholder="Contoh: suka banget sama produknya, next bakal pesan lagi" />
+                  { isError && <p className="label-error">{errorMessage}</p>}
+                </section>
                 { isAnonymous ?
                   <div className="notes form__notes">
-                    Kontribusi kamu akan kami catat sebagai anonim di daftar pendukung {businessName}.
+                    Komentarmu akan kami catat sebagai anonim di daftar pendukung {businessName}.
                   </div>
                 :
                   <div className="notes form__notes">
-                    Akun Instagram kamu akan tercantum di daftar pendukung {businessName}.
+                    Akun Instagram dan komentarmu akan tercantum di daftar pendukung {businessName}.
                   </div>
                 }
                 {/* if input name is not filled button--disabled, if input name is filled button--main, if post form loading state spinner */}
                 <input type="button" className={socialMediaAccount === "" ? "button button--disabled":"button button--main"}
-                disabled={socialMediaAccount === ""} value="Daftar untuk download aset" onClick={this.handleSubmitForm}></input>
-                {/* <button className="button button--main" type="submit">Daftar untuk download aset</button> */}
+                disabled={socialMediaAccount === ""} value="Kirim Ceritamu" onClick={this.handleSubmitForm}></input>
+                {/* <button className="button button--main" type="submit">Kirim Ceritamu</button> */}
                 {/* <button className="button button--main" type="submit"> <span class="loadingSpinner" /></button> */}
               </form>
             </Fragment>

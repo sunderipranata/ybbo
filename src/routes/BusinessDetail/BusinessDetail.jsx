@@ -350,7 +350,7 @@ class BusinessDetail extends Component {
         </main>
         <div className="bd-bottom">
           <div className="bd-bottom__content">
-            <button className={ClassNames('button button--main')} onClick={this.toggleForm}>Dukung {businessDetail.name}</button>
+            <button className={ClassNames('button button--main')} onClick={this.toggleForm}>Ceritakan Pengalamanmu</button>
           </div>
         </div>
         <BottomSheet title={ "Dukung " + businessDetail.name } 
