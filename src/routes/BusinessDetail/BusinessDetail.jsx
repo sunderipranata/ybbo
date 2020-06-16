@@ -275,6 +275,7 @@ class BusinessDetail extends Component {
               <SimpleReactLightbox>
                 <BusinessDetailGallery
                   pictures = { businessDetail.picturesUrl }
+                  assetsUrl = { businessDetail.assetsUrl }
                 />
               </SimpleReactLightbox>
             </section>
@@ -336,6 +337,7 @@ class BusinessDetail extends Component {
             <SimpleReactLightbox>
               <BusinessDetailGallery
                 pictures = { businessDetail.picturesUrl }
+                assetsUrl = { businessDetail.assetsUrl }
               />
             </SimpleReactLightbox>
           </section>
