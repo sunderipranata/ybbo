@@ -33,20 +33,21 @@ BusinessService.getDetail = (id, callback) => {
     })
 }
 
-BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
+BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAnonymous, comment, callbackOnSuccess, callbackOnError) => {
   const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
   axios.post(PATH, {
       business_id: businessId,
       username: socialMediaAccount,
       account_type:"instagram",
-      anonym: isAnonymous
+      anonym: isAnonymous,
+      comment: comment
   })
     .then((response) => {
       callbackOnSuccess(response)
     })
     .catch((error) => {
       console.log(error)
-      callbackOnError(error.response.data)
+      callbackOnError(error.response)
     })
   }
 
