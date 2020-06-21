@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import Header from '../../components/Header'
+import { Helmet } from 'react-helmet'
 
 import './Home.scss'
 import Hero from './components/Hero'
@@ -46,9 +47,32 @@ class Home extends React.Component {
     }
   }
 
+  renderHelmet = () => {
+    return (
+      <Helmet>
+        <title>Yuk Bantu Bisnis Online!</title>
+        <meta name = "title" content = "Yuk Bantu Bisnis Online!"/>
+        <meta name = "description" 
+          content = "Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yukbantubisnis.online/" />
+        <meta property="og:title" content="Yuk Bantu Bisnis Online" />
+        <meta property="og:description" content="Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia." />
+        <meta property="og:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpg" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://yukbantubisnis.online/" />
+        <meta property="twitter:title" content="Yuk Bantu Bisnis Online" />
+        <meta property="twitter:description" content="Bersama kita bantu ekonomi Indonesia dengan mempromosikan UMKM di tengah pandemi COVID-19. #BanggaBuatanIndonesia." />
+        <meta property="twitter:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpgg" />
+      </Helmet>
+    )
+  }
+
   render = () => {
     return (
       <Fragment>
+        { this.renderHelmet() }
         <article>
           <Header pageLabel={PageLabel.HEADER}/>
             <main className="container__home">
