@@ -32,7 +32,8 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
     isAnonymous: false,
     socialMediaAccount: "",
     isSuccess: false,
-    isDuplicate: false
+    isDuplicate: false,
+    comment: ""
   }
 
 
@@ -43,8 +44,10 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
 
   handleSocialMediaAccountInputChange = event => this.setState({socialMediaAccount: event.target.value})
 
-  submitBusinessDetailForm = (businessId,socialMediaAccount,isAnonymous) => {
-    BusinessService.submitBusinessDetailForm(businessId,socialMediaAccount,isAnonymous, (res) => {
+  handleReviewInputChange = event => this.setState({comment: event.target.value})
+
+  submitBusinessDetailForm = (businessId,socialMediaAccount,isAnonymous,comment) => {
+    BusinessService.submitBusinessDetailForm(businessId,socialMediaAccount,isAnonymous,comment, (res) => {
       this.setState({isSuccess: true})
     },
     (errorResponse) => {
@@ -71,7 +74,8 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
     this.submitBusinessDetailForm(
       this.props.businessId,
       this.state.socialMediaAccount,
-      this.state.isAnonymous
+      this.state.isAnonymous,
+      this.state.comment
     )
   }
 
@@ -81,7 +85,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
   }
 
   render() {
-    const { isError, isAnonymous, isSuccess, socialMediaAccount, errorMessage, isDuplicate } = this.state
+    const { isError, isAnonymous, isSuccess, socialMediaAccount, errorMessage, isDuplicate, comment } = this.state
     const { isLoading, businessName ,numberOfBackers} = this.props
 
     return (
@@ -155,7 +159,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
                 </section>
                 <section className="form-section">
                   <label className="label-input" for="review">Ceritakan Pengalamanmu</label>
-                  <textarea style={{resize: "none"}} rows="4" id="review" name="review" placeholder="Contoh: suka banget sama produknya, next bakal pesan lagi" />
+                  <textarea style={{resize: "none"}} rows="4" id="review" name="review" value={comment} onChange={this.handleReviewInputChange} placeholder="Contoh: suka banget sama produknya, next bakal pesan lagi" />
                   { isError && <p className="label-error">{errorMessage}</p>}
                 </section>
                 { isAnonymous ?
