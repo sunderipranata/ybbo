@@ -8,7 +8,7 @@ Handler = Proc.new do |req, res|
       id = req.query['id'] || ""
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
-      offset_num = req.query['skip'].present? ? req.query['skip'] : 0
+      skip = req.query['skip'].present? ? req.query['skip'] : 0
       category = req.query['category'].present? ? req.query['category'] : nil
       random = req.query['random'].to_s.downcase == 'true'
 
