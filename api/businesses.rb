@@ -8,6 +8,7 @@ Handler = Proc.new do |req, res|
       id = req.query['id'] || ""
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
+      offset_num = req.query['offset_num'].present? ? req.query['offset_num'] : 0
       category = req.query['category'].present? ? req.query['category'] : nil
       random = req.query['random'].to_s.downcase == 'true'
 
@@ -23,7 +24,7 @@ Handler = Proc.new do |req, res|
             pagination_meta = false
             business = Business.where(category_cd: Business::CATEGORY[category.to_sym]).sample(limit)
           else
-            business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lt => offset).order_by(:created_at.desc).limit(limit)
+            business = Business.where(category_cd: Business::CATEGORY[category.to_sym], :created_at.lt => offset).order_by(:created_at.desc).skip(offset_num).limit(limit)
           end
         end
         res.status = HTTP_STATUS_OK
