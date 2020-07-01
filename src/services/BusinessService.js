@@ -10,14 +10,15 @@ const BACKERS = '/businesses'
 const RANDOM_BUSINESS = '/businesses'
 let BusinessService = {};
 
-BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, callback) => {
+BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, skip, callback) => {
   const PATH = BASE_URL + BUSINESS_SIMPLIFIED
   const categoryOption = category === 'all' ? null : category
   axios.get(PATH, {
     params: {
       limit: limit,
       offset: offset,
-      category: categoryOption
+      category: categoryOption,
+      skip: skip
     }
   })
   .then((response) => {
