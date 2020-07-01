@@ -52,9 +52,10 @@ class BusinessList extends BaseAnalyticsComponents {
   componentDidMount = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
+    const skip = null
     const { category } = this.state
 
-    this.props.fetchData(limit, offset, category, (res) => {
+    this.props.fetchData(limit, offset, category, skip, (res) => {
       if(res !== null) {
         const businessData = {
           businesses: res.businesses,
@@ -113,6 +114,7 @@ class BusinessList extends BaseAnalyticsComponents {
   handleMovePrevPage = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const { category } = this.state
+    const skip = null
 
     //loading
     this.toggleLoading(true)
@@ -129,7 +131,7 @@ class BusinessList extends BaseAnalyticsComponents {
       page: curPage
     })
 
-    this.props.fetchData(limit, offset, category, (res) => {
+    this.props.fetchData(limit, offset, category, skip, (res) => {
       if(res !== null) {
         const businesses = res.businesses
         this.setState({
@@ -145,6 +147,7 @@ class BusinessList extends BaseAnalyticsComponents {
   handleMoveNextPage = () => {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const { category } = this.state
+    const skip = null
     //loading
     this.toggleLoading(true)
 
@@ -157,7 +160,7 @@ class BusinessList extends BaseAnalyticsComponents {
     //get last offset
     const offset = curPage.lastIds[curPage.lastIds.length - 1]
 
-    this.props.fetchData(limit, offset, category, (res) => {
+    this.props.fetchData(limit, offset, category, skip, (res) => {
       if(res !== null) {
         const businesses = res.businesses
         this.setState({
@@ -216,7 +219,8 @@ class BusinessList extends BaseAnalyticsComponents {
 
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
-    this.props.fetchData(limit, offset, category, (res) => {
+    const skip = null
+    this.props.fetchData(limit, offset, category, skip, (res) => {
       if(res !== null) {
         const businessData = {
           businesses: res.businesses,
