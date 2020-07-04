@@ -135,6 +135,7 @@ class BusinessList extends BaseAnalyticsComponents {
 
   checkPageUpdate = () => {
     const { page } = this.state
+    console.log('checkPageUpdate', page)
 
     if(page.at === 1) {
       this.setState({

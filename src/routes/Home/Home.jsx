@@ -100,7 +100,7 @@ class Home extends React.Component {
 
     return {
       category: category,
-      page: page
+      page: parseInt(page)
     }
   }
 
