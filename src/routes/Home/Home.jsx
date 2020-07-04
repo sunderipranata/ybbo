@@ -20,36 +20,40 @@ const PAGE_SIZE_MOBILE = 6;
 class Home extends React.Component {
 
   state = {
-    businessData = {
+    businessData: {
       businesses: [],
       total: 1
     },
-    isLoading = true,
-    category = null,
-    currentPage = 1
+    isLoading: true,
+    category: null,
+    currentPage: 1,
+    pageSize: 1
   }
 
   componentDidMount() {
-    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    const category = this.props.match.params.category
-    const page = this.props.match.params.page
+    const pageSize = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    let category = this.props.match.params.category
+    let page = this.props.match.params.page
     const offset = null
-    if(typeof page == 'undefined' || page == null) {
+
+    //GET PAGE & CATEGORY FROM ROUTES
+    if(typeof page === 'undefined' || page === null) {
       page = 1
     }
-    if(typeof category == 'undefined' || category == null) {
+    if(typeof category === 'undefined' || category === null) {
       category = 'all'
     }
 
-    const skip = page * limit
+    const skip = (page - 1) * pageSize
     
     this.setState({
       category: category,
       currentPage: page,
-      isLoading: true
+      isLoading: true,
+      pageSize: pageSize
     })
 
-    this.fetchSimplifiedBusiness(limit, offset, category, skip, (res) => {
+    this.fetchSimplifiedBusiness(pageSize, offset, category, skip, (res) => {
       if(res != null) {
         this.setState({
           businessData: res,

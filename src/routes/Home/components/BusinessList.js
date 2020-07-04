@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import ClassNames from 'classnames'
 import Responsive from 'react-responsive'
-import { isMobile } from 'react-device-detect'
 import BusinessCard from '../../../components/BusinessCard/BusinessCard'
 
 import { GOOGLE_FORM_PATH } from '../../../routes'
@@ -37,7 +36,8 @@ class BusinessList extends BaseAnalyticsComponents {
       total: 1
     },
     isLoading: true,
-    category: 'all'
+    category: 'all',
+    pageSize: 1
   }
 
   componentDidMount = () => {
@@ -46,7 +46,7 @@ class BusinessList extends BaseAnalyticsComponents {
 
   componentWillReceiveProps = (nextProps) => {
     //on change do something
-    const { businessData, isLoading, category, currentPage } = nextProps
+    const { businessData, isLoading, category, currentPage, pageSize } = nextProps
 
     if(typeof businessData !== 'undefined' && businessData !== null) {
       this.setState({
@@ -76,13 +76,20 @@ class BusinessList extends BaseAnalyticsComponents {
         category: category
       })
     }
+
+    if(typeof pageSize !== 'undefined' && pageSize !== null) {
+      this.setState({
+        pageSize: pageSize
+      })
+    }
   }
 
   updateTotalPages = () => {
-    const { businessData: { total } } = this.state
-    const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const { businessData: { total }, pageSize } = this.state
+    const size = pageSize
     const totalPage =  Math.ceil(total / size)
     const curPage = { ...this.state.page }
+    console.log('updateTotalPages', total, pageSize, totalPage)
     curPage.total = totalPage
     this.setState({
       page: curPage
@@ -160,9 +167,9 @@ class BusinessList extends BaseAnalyticsComponents {
 
     this.trackClickWithValue(EventLabel.CATEGORY_FILTER,category)
 
-    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    const offset = null
-    const skip = null
+    // const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    // const offset = null
+    // const skip = null
     // this.props.fetchData(limit, offset, category, skip, (res) => {
     //   if(res !== null) {
     //     const businessData = {
@@ -206,7 +213,8 @@ class BusinessList extends BaseAnalyticsComponents {
   }
 
   renderLoading = () => {
-    const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const { pageSize } = this.state
+    const size = pageSize
     const display = []
     for(let i = 0; i < size; i++) {
       display.push(
