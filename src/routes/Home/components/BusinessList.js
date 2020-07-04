@@ -167,33 +167,9 @@ class BusinessList extends BaseAnalyticsComponents {
 
     this.trackClickWithValue(EventLabel.CATEGORY_FILTER,category)
 
-    // const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    // const offset = null
-    // const skip = null
-    // this.props.fetchData(limit, offset, category, skip, (res) => {
-    //   if(res !== null) {
-    //     const businessData = {
-    //       businesses: res.businesses,
-    //       total: res.total
-    //     }
-    //     this.setState({
-    //       businessData: businessData
-    //     }, () => {
-    //       this.updateTotalPages()
-    //       this.toggleLoading(false)
-    //     })
-
-    //     //there are businesses, so update and push to lastIds
-    //     if(res.businesses.length > 0) {
-    //       const lastId = res.businesses[res.businesses.length - 1].id
-    //       const curPage = { ...this.state.page }
-    //       curPage.lastIds.push(lastId)
-    //       this.setState({
-    //         page: curPage
-    //       })
-    //     }
-    //   }
-    // })
+    const page = 1
+    const path = `/${ category }/${ page }`
+    this.props.moveToPath(path)
   }
 
   handleResetPage = () => {
