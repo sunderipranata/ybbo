@@ -118,20 +118,19 @@ class BusinessList extends BaseAnalyticsComponents {
     const { category, page } = this.state
     window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
-    const prevPage = page.at - 1
-    this.props.history.push({
-      pathname: `/${ category }/${ prevPage }`
-    })
+    const prevPage = parseInt(page.at) - 1
+
+    const path = `/${ category }/${ prevPage }` 
+    this.props.moveToPath(path)
   }
 
   handleMoveNextPage = () => {
     const { category, page } = this.state
     window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
-    const nextPage = page.at + 1
-    this.props.history.push({
-      pathname: `/${ category }/${ nextPage }`
-    })
+    const nextPage = parseInt(page.at) + 1
+    const path = `/${ category }/${ nextPage }`
+    this.props.moveToPath(path)
   }
 
   checkPageUpdate = () => {

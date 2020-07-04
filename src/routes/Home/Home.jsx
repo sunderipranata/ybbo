@@ -31,6 +31,11 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    this.handleFetchData()
+    window.scrollTo({top: 0})
+  }
+
+  handleFetchData = () => {
     const pageSize = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     let category = this.props.match.params.category
     let page = this.props.match.params.page
@@ -61,7 +66,6 @@ class Home extends React.Component {
         })
       }
     })
-    window.scrollTo({top: 0})
   }
 
   fetchSimplifiedBusiness = (limit, offset, category, skip, callback) => {
@@ -93,6 +97,12 @@ class Home extends React.Component {
       businesses: businesses,
       total: total
     }
+  }
+
+  moveToPath = (path) => {
+    this.props.history.push({
+      pathname: path
+    })
   }
 
   renderHelmet = () => {
@@ -134,6 +144,7 @@ class Home extends React.Component {
                 category = { category }
                 currentPage = { currentPage }
                 pageSize = { pageSize }
+                moveToPath = { this.moveToPath }
               />
             </main>
           <Footer pageLabel={PageLabel.FOOTER}/>
