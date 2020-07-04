@@ -118,7 +118,7 @@ class Home extends React.Component {
   }
 
   render = () => {
-    const { businessData, isLoading, category, currentPage } = this.state
+    const { businessData, isLoading, category, currentPage, pageSize } = this.state
     return (
       <Fragment>
         { this.renderHelmet() }
@@ -133,6 +133,7 @@ class Home extends React.Component {
                 businessData = { businessData }
                 category = { category }
                 currentPage = { currentPage }
+                pageSize = { pageSize }
               />
             </main>
           <Footer pageLabel={PageLabel.FOOTER}/>
