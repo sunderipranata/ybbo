@@ -30,24 +30,44 @@ class Home extends React.Component {
     pageSize: 1
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.handleFetchData()
     window.scrollTo({top: 0})
   }
 
+  componentDidUpdate = (prevProps) => {
+    const currentRouteInfo = this.getCategoryAndPageFromRouteProps(this.props)
+    const prevRouteInfo = this.getCategoryAndPageFromRouteProps(prevProps)
+
+    const curCategory = currentRouteInfo.category
+    const curPage = currentRouteInfo.page
+    const prevCategory = prevRouteInfo.category
+    const prevPage = prevRouteInfo.page
+
+    if(curCategory !== prevCategory || curPage !== prevPage) {
+      this.handleFetchData()
+    }
+
+    console.log('prevProps')
+  }
+
   handleFetchData = () => {
     const pageSize = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    let category = this.props.match.params.category
-    let page = this.props.match.params.page
+    const routeInfo = this.getCategoryAndPageFromRouteProps(this.props)
+    const category = routeInfo.category
+    const page = routeInfo.page
+    // let category = this.props.match.params.category
+    // let page = this.props.match.params.page
     const offset = null
 
+    console.log('proppssssss', this.props)
     //GET PAGE & CATEGORY FROM ROUTES
-    if(typeof page === 'undefined' || page === null) {
-      page = 1
-    }
-    if(typeof category === 'undefined' || category === null) {
-      category = 'all'
-    }
+    // if(typeof page === 'undefined' || page === null) {
+    //   page = 1
+    // }
+    // if(typeof category === 'undefined' || category === null) {
+    //   category = 'all'
+    // }
 
     const skip = (page - 1) * pageSize
     
@@ -66,6 +86,24 @@ class Home extends React.Component {
         })
       }
     })
+  }
+
+  getCategoryAndPageFromRouteProps = (props) => {
+    let category = props.match.params.category
+    let page = props.match.params.page
+
+    //GET PAGE & CATEGORY FROM ROUTES
+    if(typeof page === 'undefined' || page === null) {
+      page = 1
+    }
+    if(typeof category === 'undefined' || category === null) {
+      category = 'all'
+    }
+
+    return {
+      category: category,
+      page: page
+    }
   }
 
   fetchSimplifiedBusiness = (limit, offset, category, skip, callback) => {
