@@ -47,8 +47,6 @@ class Home extends React.Component {
     if(curCategory !== prevCategory || curPage !== prevPage) {
       this.handleFetchData()
     }
-
-    console.log('prevProps')
   }
 
   handleFetchData = () => {

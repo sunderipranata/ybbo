@@ -93,7 +93,7 @@ class BusinessList extends BaseAnalyticsComponents {
     curPage.total = totalPage
     this.setState({
       page: curPage
-    }, function() {
+    }, () => {
       this.checkPageUpdate()
     })
   }
