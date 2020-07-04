@@ -12,51 +12,8 @@ import Footer from '../../components/Footer'
 import BusinessService from '../../services/BusinessService'
 import PageLabel from '../../utils/googleAnalytics/PageLabel'
 
-import { isMobile } from 'react-device-detect'
-
-const PAGE_SIZE_DESKTOP = 9;
-const PAGE_SIZE_MOBILE = 6;
-
 class Home extends React.Component {
-
-  state = {
-    businessData = {
-      businesses: [],
-      total: 1
-    },
-    isLoading = true,
-    category = null,
-    currentPage = 1
-  }
-
   componentDidMount() {
-    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    const category = this.props.match.params.category
-    const page = this.props.match.params.page
-    const offset = null
-    if(typeof page == 'undefined' || page == null) {
-      page = 1
-    }
-    if(typeof category == 'undefined' || category == null) {
-      category = 'all'
-    }
-
-    const skip = page * limit
-    
-    this.setState({
-      category: category,
-      currentPage: page,
-      isLoading: true
-    })
-
-    this.fetchSimplifiedBusiness(limit, offset, category, skip, (res) => {
-      if(res != null) {
-        this.setState({
-          businessData: res,
-          isLoading: false
-        })
-      }
-    })
     window.scrollTo({top: 0})
   }
 
@@ -114,7 +71,6 @@ class Home extends React.Component {
   }
 
   render = () => {
-    const { businessData, isLoading, category, currentPage } = this.state
     return (
       <Fragment>
         { this.renderHelmet() }
@@ -125,10 +81,7 @@ class Home extends React.Component {
               <Steps />
               <BusinessList 
                 pageLabel = {PageLabel.HOME_PAGE}
-                isLoading = { isLoading }
-                businessData = { businessData }
-                category = { category }
-                currentPage = { currentPage }
+                fetchData = { this.fetchSimplifiedBusiness }
               />
             </main>
           <Footer pageLabel={PageLabel.FOOTER}/>

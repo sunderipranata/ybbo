@@ -1,5 +1,6 @@
 export const HOME_PATH = '/'
 export const BUSINESS_DETAIL_PATH = '/b/:id'
+export const HOME_PAGINATED_PATH = '/:category/:page'
 export const ABOUT_PATH = '/tentang-kami'
 export const INTERNAL_COOKIE_PATH = '/internal/get-da-cookie'
 export const INSTAGRAM_PATH = 'https://www.instagram.com/yukbantubisnis.online/'

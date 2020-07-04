@@ -14,6 +14,8 @@ import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 const Desktop = props => <Responsive {...props} minWidth={768} />
 const Mobile = props => <Responsive {...props} maxWidth={767} />
 
+const PAGE_SIZE_DESKTOP = 9;
+const PAGE_SIZE_MOBILE = 6;
 const categories = {
   all: 'Semua Kategori',
   food_and_beverage: 'Makanan dan Minuman',
@@ -30,7 +32,8 @@ class BusinessList extends BaseAnalyticsComponents {
     dropdownIsOpened: false,
     page: {
       at: 1,
-      total: 1
+      total: 1,
+      lastIds: []   //to keep track last id offset when switching between pages
     },
     businessData: {
       businesses: [],
@@ -40,48 +43,49 @@ class BusinessList extends BaseAnalyticsComponents {
     category: 'all'
   }
 
-  componentDidMount = () => {
-
+  componentWillMount = () => {
+    this.setState({
+      isLoading: true
+    })
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    //on change do something
-    const { businessData, isLoading, category, currentPage } = nextProps
+  componentDidMount = () => {
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const offset = null
+    const skip = null
+    const { category } = this.state
 
-    if(typeof businessData !== 'undefined' && businessData !== null) {
-      this.setState({
-        businessData: businessData
-      }, () => {
-        if(typeof currentPage !== 'undefined' && currentPage !== null) {
+    this.props.fetchData(limit, offset, category, skip, (res) => {
+      if(res !== null) {
+        const businessData = {
+          businesses: res.businesses,
+          total: res.total
+        }
+        this.setState({
+          businessData: businessData
+        }, () => {
+          this.updateTotalPages()
+          this.toggleLoading(false)
+        })
+
+        //there are businesses, so update and push to lastIds
+        if(res.businesses.length > 0) {
+          const lastId = res.businesses[res.businesses.length - 1].id
           const curPage = { ...this.state.page }
-          curPage.at = currentPage
-
+          curPage.lastIds.push(lastId)
           this.setState({
             page: curPage
-          }, () => {
-            this.updateTotalPages()
           })
         }
-      })
-    }
-
-    if(typeof isLoading !== 'undefined' && isLoading !== null) {
-      this.setState({
-        isLoading: isLoading
-      })
-    }
-
-    if(typeof category !== 'undefined' && category !== null) {
-      this.setState({
-        category: category
-      })
-    }
+      }
+    })
   }
 
   updateTotalPages = () => {
     const { businessData: { total } } = this.state
     const size = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const totalPage =  Math.ceil(total / size)
+
     const curPage = { ...this.state.page }
     curPage.total = totalPage
     this.setState({
@@ -108,22 +112,75 @@ class BusinessList extends BaseAnalyticsComponents {
   }
 
   handleMovePrevPage = () => {
-    const { category, page } = this.state
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const { category } = this.state
+    const skip = null
+
+    //loading
+    this.toggleLoading(true)
     window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
-    const prevPage = page.at - 1
-    this.props.history.push({
-      pathname: `/${ category }/${ prevPage }`
+    //decrement page
+    const curPage = { ...this.state.page }
+    curPage.at--
+
+    //pop
+    curPage.lastIds.pop()
+    const offset = curPage.lastIds.length > 1 ? curPage.lastIds[curPage.lastIds.length - 2] : null
+    this.setState({
+      page: curPage
+    })
+
+    this.props.fetchData(limit, offset, category, skip, (res) => {
+      if(res !== null) {
+        const businesses = res.businesses
+        this.setState({
+          businessData: { ...this.state.businessData, businesses: businesses }
+        }, () => {
+          this.toggleLoading(false)
+          this.checkPageUpdate()
+        })
+      }
     })
   }
 
   handleMoveNextPage = () => {
-    const { category, page } = this.state
+    const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
+    const { category } = this.state
+    const skip = null
+    //loading
+    this.toggleLoading(true)
+
     window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
-    const nextPage = page.at + 1
-    this.props.history.push({
-      pathname: `/${ category }/${ nextPage }`
+    //increment page
+    const curPage = { ...this.state.page }
+    curPage.at++
+
+    //get last offset
+    const offset = curPage.lastIds[curPage.lastIds.length - 1]
+
+    this.props.fetchData(limit, offset, category, skip, (res) => {
+      if(res !== null) {
+        const businesses = res.businesses
+        this.setState({
+          businessData: { ...this.state.businessData, businesses: businesses }
+        }, () => {
+          //push current last id
+          if(res.businesses.length > 0) {
+            const lastId = res.businesses[res.businesses.length - 1].id
+            curPage.lastIds.push(lastId)
+            this.setState({
+              page: curPage
+            }, () => {
+              this.toggleLoading(false)
+              this.checkPageUpdate()
+            })
+          } else {
+            this.toggleLoading(false)
+          }
+        })
+      }
     })
   }
 
@@ -163,30 +220,30 @@ class BusinessList extends BaseAnalyticsComponents {
     const limit = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
     const offset = null
     const skip = null
-    // this.props.fetchData(limit, offset, category, skip, (res) => {
-    //   if(res !== null) {
-    //     const businessData = {
-    //       businesses: res.businesses,
-    //       total: res.total
-    //     }
-    //     this.setState({
-    //       businessData: businessData
-    //     }, () => {
-    //       this.updateTotalPages()
-    //       this.toggleLoading(false)
-    //     })
+    this.props.fetchData(limit, offset, category, skip, (res) => {
+      if(res !== null) {
+        const businessData = {
+          businesses: res.businesses,
+          total: res.total
+        }
+        this.setState({
+          businessData: businessData
+        }, () => {
+          this.updateTotalPages()
+          this.toggleLoading(false)
+        })
 
-    //     //there are businesses, so update and push to lastIds
-    //     if(res.businesses.length > 0) {
-    //       const lastId = res.businesses[res.businesses.length - 1].id
-    //       const curPage = { ...this.state.page }
-    //       curPage.lastIds.push(lastId)
-    //       this.setState({
-    //         page: curPage
-    //       })
-    //     }
-    //   }
-    // })
+        //there are businesses, so update and push to lastIds
+        if(res.businesses.length > 0) {
+          const lastId = res.businesses[res.businesses.length - 1].id
+          const curPage = { ...this.state.page }
+          curPage.lastIds.push(lastId)
+          this.setState({
+            page: curPage
+          })
+        }
+      }
+    })
   }
 
   handleResetPage = () => {
