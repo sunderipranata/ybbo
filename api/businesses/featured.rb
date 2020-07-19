@@ -1,4 +1,4 @@
-require_relative '../app/config/load'
+require_relative '../../app/config/load'
 
 FEATURED_BUSINESS_COUNT = 9
 
