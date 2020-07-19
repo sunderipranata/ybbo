@@ -6,7 +6,7 @@ Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json'
   case req.request_method
   when "GET"
-    business = $zache.get(:featured_business, lifetime: 1) {
+    business = $zache.get(:featured_business, lifetime: 60*60) {
       Business.all.sample(FEATURED_BUSINESS_COUNT)
     }
     res.status = HTTP_STATUS_OK
