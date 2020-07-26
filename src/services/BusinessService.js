@@ -8,6 +8,7 @@ const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
 const RANDOM_BUSINESS = '/businesses'
+const FEATURED_BUSINESS = '/businesses/featured'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, skip, callback) => {
@@ -74,6 +75,14 @@ BusinessService.getRandom = (category, limit, callback) => {
       limit: limit
     }
   })
+  .then((response) => {
+    callback(response)
+  })
+}
+
+BusinessService.getFeatured = (callback) => {
+  const PATH = BASE_URL + FEATURED_BUSINESS
+  axios.get(PATH)
   .then((response) => {
     callback(response)
   })
