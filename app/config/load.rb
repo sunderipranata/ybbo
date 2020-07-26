@@ -8,6 +8,9 @@ require 'dotenv'
 require 'csv'
 require 'phonelib'
 require 'unidecoder'
+require 'zache'
+
+$zache = Zache.new
 
 Phonelib.default_country = 'ID'
 
