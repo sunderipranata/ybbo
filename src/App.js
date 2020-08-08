@@ -7,7 +7,7 @@ import {
   Route
 } from 'react-router-dom'
 
-import { HOME_PATH, BUSINESS_DETAIL_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH } from './routes'
+import { HOME_PATH, BUSINESS_DETAIL_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH, SITEMAP_PATH } from './routes'
 import logo from './logo.svg'
 import './App.scss'
 
@@ -17,6 +17,7 @@ import BusinessDetail from './routes/BusinessDetail'
 import About from './routes/About/About'
 import withPageView from './utils/googleAnalytics/withPageView'
 import Cookies from 'universal-cookie';
+import Sitemap from './routes/Sitemap'
 
 require('dotenv').config();
 
@@ -48,6 +49,7 @@ class App extends React.Component {
           <Route exact path={BUSINESS_DETAIL_PATH} component={withPageView(BusinessDetail)} />
           <Route exact path={ABOUT_PATH} component={withPageView(About)} />
           <Route exact path={INTERNAL_COOKIE_PATH} component={withPageView(InternalPage)} />
+          <Route exact path={SITEMAP_PATH} component={withPageView(Sitemap)} />
         </Switch>
       </Router>
     )
