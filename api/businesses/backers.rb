@@ -24,10 +24,11 @@ Handler = Proc.new do |req, res|
       username = username[1..-1] if username[0] == '@'
       account_type = req_body['account_type'].to_sym
       anonym = !!req_body['anonym']
+      comment = req_body['comment'].present? ? req_body['comment'].to_ascii.gsub('[?]', '').strip : nil
 
       business = Business.find_by(id: business_id)
       raise ResourceNotFoundError, 'business not found' if business.blank?
-      backer = business.backers.new(username: username, account_type: account_type, anonym: anonym)
+      backer = business.backers.new(username: username, account_type: account_type, anonym: anonym, comment: comment)
       backer.validate!
       business.backers << backer
 

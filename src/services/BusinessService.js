@@ -8,16 +8,18 @@ const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
 const RANDOM_BUSINESS = '/businesses'
+const FEATURED_BUSINESS = '/businesses/featured'
 let BusinessService = {};
 
-BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, callback) => {
+BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, skip, callback) => {
   const PATH = BASE_URL + BUSINESS_SIMPLIFIED
   const categoryOption = category === 'all' ? null : category
   axios.get(PATH, {
     params: {
       limit: limit,
       offset: offset,
-      category: categoryOption
+      category: categoryOption,
+      skip: skip
     }
   })
   .then((response) => {
@@ -33,20 +35,21 @@ BusinessService.getDetail = (id, callback) => {
     })
 }
 
-BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAnonymous, callbackOnSuccess, callbackOnError ) => {
+BusinessService.submitBusinessDetailForm = (businessId, socialMediaAccount, isAnonymous, comment, callbackOnSuccess, callbackOnError) => {
   const PATH = BASE_URL + BUSINESS_DETAIL + "/backers"
   axios.post(PATH, {
       business_id: businessId,
       username: socialMediaAccount,
       account_type:"instagram",
-      anonym: isAnonymous
+      anonym: isAnonymous,
+      comment: comment
   })
     .then((response) => {
       callbackOnSuccess(response)
     })
     .catch((error) => {
       console.log(error)
-      callbackOnError(error.response.data)
+      callbackOnError(error.response)
     })
   }
 
@@ -72,6 +75,14 @@ BusinessService.getRandom = (category, limit, callback) => {
       limit: limit
     }
   })
+  .then((response) => {
+    callback(response)
+  })
+}
+
+BusinessService.getFeatured = (callback) => {
+  const PATH = BASE_URL + FEATURED_BUSINESS
+  axios.get(PATH)
   .then((response) => {
     callback(response)
   })

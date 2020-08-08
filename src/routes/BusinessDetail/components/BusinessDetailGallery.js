@@ -25,7 +25,8 @@ const options = {
 class BusinessDetailGallery extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
-    pictures: PropTypes.arrayOf(PropTypes.string)
+    pictures: PropTypes.arrayOf(PropTypes.string),
+    assetsUrl: PropTypes.string
   }
 
   renderLoading = () => {
@@ -87,11 +88,14 @@ class BusinessDetailGallery extends Component {
   }
 
   render = () => {
-    const { isLoading } = this.props
+    const { isLoading, assetsUrl } = this.props
 
     return (
       <Fragment>
-        <h2 className="bd-content__title bd-content__title--padding">Galeri</h2>
+          <div className="bd-content__title bd-content__title--padding" style={{ display: "flex", justifyContent: "space-between"}}>
+           <h2>Galery</h2>
+           <a rel="noopener noreferrer" href = { assetsUrl } target="_blank"><button className="button button--ghost button--small">Download untuk dipost di IG Story</button></a>
+        </div>
         { isLoading ? this.renderLoading() : this.renderGallery() }
       </Fragment>
     )

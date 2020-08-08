@@ -4,6 +4,7 @@ import Footer from '../../components/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { Helmet } from 'react-helmet'
 
 import './About.scss'
 
@@ -20,10 +21,37 @@ class About extends Component {
   componentDidMount() {
     window.scrollTo({top: 0})
   }
+
+  renderHelmet = () => {
+    const title = "About Us | Yuk Bantu Bisnis Online"
+    const description = "Kami tim Software Engineers yang mencoba untuk membantu UMKM Indonesia melalui teknologi. Inovasi ini ditujukan untuk membantu ekonomi yang sedang melambat karena pandemi COVID-19." + 
+    "Platform ini menyediakan layanan gratis bagi pebisnis untuk crowd-endorsing. Berharap kepada pengguna yang baik hati untuk membantu mempromosikannya dengan mudah."
+
+    return (
+      <Helmet>
+        <title>{ title }</title>
+        <meta name = "title" content = { title }/>
+        <meta name = "description" 
+          content = { description }
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yukbantubisnis.online/tentang-kami" />
+        <meta property="og:title" content="Yuk Bantu Bisnis Online" />
+        <meta property="og:description" content= { description } />
+        <meta property="og:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpg" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://yukbantubisnis.online/tentang-kami" />
+        <meta property="twitter:title" content="Yuk Bantu Bisnis Online" />
+        <meta property="twitter:description" content= { description } />
+        <meta property="twitter:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpgg" />
+      </Helmet>
+    )
+  }
   
   render() {
     return (
       <Fragment>
+        { this.renderHelmet() }
         <article>
         <Header pageLabel={PageLabel.HEADER}/>
         <main className="container container__about clearfix">
