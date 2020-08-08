@@ -91,14 +91,19 @@ class Sitemap extends Component {
     const { data } = this.state
     let display = []
 
+    const baseUrl = '/b/'
+
     data.forEach(d => {
-
-
+      display.push(
+        <a href = { baseUrl }> baseUrl </a>
+      )
     })
 
     return (
       <div>
-        { display }
+        <ul>
+          { display }
+        </ul>
       </div>
     )
 
