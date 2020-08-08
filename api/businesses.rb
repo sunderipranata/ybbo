@@ -10,10 +10,14 @@ Handler = Proc.new do |req, res|
       offset = req.query['offset'].present? ? BSON::ObjectId(req.query['offset']).to_time : Time.now
       skip = req.query['skip'].present? ? req.query['skip'] : 0
       category = req.query['category'].present? ? req.query['category'] : nil
+
       random = req.query['random'].to_s.downcase == 'true'
+      site_map = req.query['site_map'].to_s.downcase == 'true'
 
       # TODO: add filter location?
       # location = req.query['location'].present? ? req.query['location'] : nil
+
+      serializer = site_map ? BusinessSiteMapSerializer : BusinessSimpleSerializer
 
       pagination_meta = true
       if id.blank?
@@ -28,7 +32,7 @@ Handler = Proc.new do |req, res|
           end
         end
         res.status = HTTP_STATUS_OK
-        res.body = JSON::Response::Data.many(business, BusinessSimpleSerializer, res.status, pagination_meta: pagination_meta, limit: limit)
+        res.body = JSON::Response::Data.many(business, serializer, res.status, pagination_meta: pagination_meta, limit: limit)
       else
         business = Business.find_by_slug_or_id(id)
         res.status = HTTP_STATUS_OK
