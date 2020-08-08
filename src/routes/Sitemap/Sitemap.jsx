@@ -113,7 +113,8 @@ class Sitemap extends Component {
         <main className="container container__sitemap clearfix">
           <h1 className="title">Sitemap</h1>
           { this.renderDirectory() }
-          <p className="desc">
+          { this.renderData() }
+          {/* <p className="desc">
             Kami tim Software Engineers yang mencoba untuk membantu UMKM Indonesia melalui teknologi.{' '}
             Inovasi ini ditujukan untuk membantu ekonomi yang sedang melambat karena pandemi COVID-19.
           </p>
@@ -124,7 +125,7 @@ class Sitemap extends Component {
           <p className="desc">
             Melalui platform YukBantuBisnis.Online, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
             Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.
-          </p>
+          </p> */}
         </main>
         <Footer pageLabel={PageLabel.FOOTER} />
         </article>
