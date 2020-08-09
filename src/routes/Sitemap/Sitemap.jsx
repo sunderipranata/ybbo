@@ -1,16 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
 import { Helmet } from 'react-helmet'
 
 import './Sitemap.scss'
+import BusinessService from '../../services/BusinessService'
 
-import PageLabel from "../../utils/googleAnalytics/PageLabel"
-
-library.add(fab)
+const LIMIT = 40
 
 class Sitemap extends Component {
 
@@ -18,7 +14,9 @@ class Sitemap extends Component {
     super(props)
     this.state = {
       page: 0,
-      data: []
+      data: [],
+      totalData: 0,
+      totalPage: 0
     }
   }
 
@@ -36,6 +34,55 @@ class Sitemap extends Component {
 
   componentDidMount = () => {
     window.scrollTo({top: 0})
+
+    let page = this.props.match.params.page
+    //calculate skip
+    const skip = parseInt(page - 1) * LIMIT
+    this.fetchSitemapBusiness(LIMIT, skip, (response) => {
+      if(response !== null) {
+        this.setState({
+          data: response
+        })
+      }
+    })
+  }
+
+  fetchSitemapBusiness = (limit, skip, callback) => {
+    BusinessService.getSitemap(limit, skip, (res) => {
+      if(res !== null && res.data.meta.http_status === 200) {
+        this.setTotalPage(res.data)
+        callback(this.parseBusinesses(res.data))
+      } else {
+        callback(null)
+      }
+    })
+  }
+
+  parseBusinesses = (data) => {
+    const businesses = data.data
+    const result = []
+
+    businesses.forEach((b) => {
+      result.push({
+        id: b.id,
+        type: b.type,
+        name: b.attributes.name,
+        slug: b.attributes.slug
+      })
+    })
+
+    return result
+  }
+
+  setTotalPage = (data) => {
+    const meta = data.meta
+
+    const totalPage = Math.ceil(meta.total / LIMIT)
+
+    this.setState({
+      totalData: meta.total,
+      totalPage: totalPage
+    })
   }
 
   renderHelmet = () => {
@@ -53,10 +100,9 @@ class Sitemap extends Component {
   }
 
   renderDirectory = () => {
-    const { page, data } = this.state
+    const { page, totalPage } = this.state
     let display = []
 
-    let totalPage = 2
     const baseUrl = '/sitemap/'
     const activeClassName = 'active'
     const defaultClassName = ''
@@ -94,8 +140,9 @@ class Sitemap extends Component {
     const baseUrl = '/b/'
 
     data.forEach(d => {
+      const bUrl = baseUrl + d.slug
       display.push(
-        <a href = { baseUrl }> baseUrl </a>
+        <a href = { bUrl }> d.name </a>
       )
     })
 
@@ -114,7 +161,7 @@ class Sitemap extends Component {
       <Fragment>
         { this.renderHelmet() }
         <article>
-        <Header pageLabel={PageLabel.HEADER}/>
+        <Header/>
         <main className="container container__sitemap clearfix">
           <h1 className="title">Sitemap</h1>
           { this.renderDirectory() }
@@ -132,7 +179,7 @@ class Sitemap extends Component {
             Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.
           </p> */}
         </main>
-        <Footer pageLabel={PageLabel.FOOTER} />
+        <Footer/>
         </article>
       </Fragment>
     )
