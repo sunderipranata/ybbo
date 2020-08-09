@@ -9,13 +9,15 @@ jobs:
     if: "contains(github.event.head_commit.message, '[preview]')"
     steps:
       - uses: actions/checkout@v2
-      - uses: sunderipranata/vercel-action@v.19-patch-sunderi
+      - uses: amondnet/vercel-action@v19
         id: vercel-deployment
         with:
           github-token: ${{ secrets.BOT_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          alias-domains: |
+            pr-{{PR_NUMBER}}.ybbo.now.sh
       - name: preview-url
         run: |
           echo ${{ steps.vercel-deployment.outputs.preview-url }}
