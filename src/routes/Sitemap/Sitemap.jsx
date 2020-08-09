@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import './Sitemap.scss'
 import BusinessService from '../../services/BusinessService'
 
-const LIMIT = 40
+const LIMIT = 15
 
 class Sitemap extends Component {
 
