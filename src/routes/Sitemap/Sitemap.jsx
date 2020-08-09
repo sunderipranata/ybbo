@@ -142,7 +142,9 @@ class Sitemap extends Component {
     data.forEach(d => {
       const bUrl = baseUrl + d.slug
       display.push(
-        <a href = { bUrl }> d.name </a>
+        <div>
+          <a href = { bUrl } target = "_blank" rel="noopener noreferrer"> { d.name } </a>
+        </div>
       )
     })
 
