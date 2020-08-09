@@ -73,10 +73,16 @@
       color: $color-primary-text;
       margin-bottom: 0;
       line-height: 1.8;
+      width: 50%;
 
       @media only screen and (max-width: $breakpoint-md-max) {
         font-size: 10px;
       }
+    }
+
+    .footer-bottom-row {
+      display: inline-block;
+      width: 100%;
     }
   }
 }

@@ -48,10 +48,15 @@ class Footer extends BaseAnalyticsComponents {
               </p>
             </div>
           </div>
-          <p className="footer-notes">
-            © 2020 All Rights Reserved -{' '}
-            YukBantuBisnis.Online
-          </p>
+          <div className = "footer-bottom-row">
+            <p className="footer-notes" style = {{ float: 'left' }}>
+              © 2020 All Rights Reserved -{' '}
+              YukBantuBisnis.Online
+            </p>
+            <p className="footer-notes" style = {{ float: 'right' }}>
+              <a href = "/sitemap" target = "_blank">Sitemap</a>
+            </p>
+          </div>
         </div>
       </footer>
     )

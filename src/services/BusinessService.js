@@ -2,13 +2,14 @@ import axios from 'axios'
 
 let BASE_URL = `${window.location.origin.toString()}/api`
 if(window.location.href.includes('localhost'))  {
-  BASE_URL = 'https://ybbo-8tr5rizl2.now.sh/api'
+  BASE_URL = 'https://ybbo-git-refs-headssitemap.sunderipranata.now.sh/api'
 }
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'
 const BACKERS = '/businesses'
 const RANDOM_BUSINESS = '/businesses'
 const FEATURED_BUSINESS = '/businesses/featured'
+const SITEMAP = '/businesses'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, skip, callback) => {
@@ -83,6 +84,20 @@ BusinessService.getRandom = (category, limit, callback) => {
 BusinessService.getFeatured = (callback) => {
   const PATH = BASE_URL + FEATURED_BUSINESS
   axios.get(PATH)
+  .then((response) => {
+    callback(response)
+  })
+}
+
+BusinessService.getSitemap = (limit, skip, callback) => {
+  const PATH = BASE_URL + SITEMAP
+  axios.get(PATH, {
+    params: {
+      limit: limit,
+      skip: skip,
+      site_map: true
+    }
+  })
   .then((response) => {
     callback(response)
   })
