@@ -36,6 +36,9 @@ class Sitemap extends Component {
     window.scrollTo({top: 0})
 
     let page = this.props.match.params.page
+    if(typeof page === 'undefined' || page === null) {
+      page = 1
+    }
     //calculate skip
     const skip = parseInt(page - 1) * LIMIT
     this.fetchSitemapBusiness(LIMIT, skip, (response) => {
