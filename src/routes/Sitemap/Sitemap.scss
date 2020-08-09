@@ -40,10 +40,13 @@
   ul > li {
     display: inline;
     margin: 5px;
-    padding-inline-start: 0px;
 
     &.active {
       font-weight: bold;
     }
+  }
+
+  li {
+    padding-inline-start: 0px;
   }
 }
