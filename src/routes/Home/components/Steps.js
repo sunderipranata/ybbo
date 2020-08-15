@@ -29,6 +29,10 @@ class Steps extends Component {
     slideIndex: 0
   }
 
+  componentDidMount = () => {
+    setInterval(this.autoScroll, 5000)
+  }
+
   getButtonStyles(disabled) {
     return {
       opacity: disabled ? 0 : 1,
@@ -68,6 +72,28 @@ class Steps extends Component {
       transition: 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out',
       transitionDelay: activeStep ? '0.5s' : '0s'
     }
+  }
+
+  autoScroll = () => {
+    const { detailShown, slideIndex } = this.state
+    let newDetailShown = detailShown
+    let newSlideIndex = slideIndex
+    if(parseInt(detailShown) === 4) {
+      newDetailShown = 1
+    } else {
+      newDetailShown++
+    }
+
+    if(parseInt(slideIndex) === 3) {
+      newSlideIndex = 0
+    } else {
+      newSlideIndex++
+    }
+
+    this.setState({
+      detailShown: newDetailShown,
+      slideIndex: newSlideIndex
+    })
   }
 
   render() {
