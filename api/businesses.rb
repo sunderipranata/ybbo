@@ -38,7 +38,7 @@ Handler = Proc.new do |req, res|
         res.status = HTTP_STATUS_OK
         res.body = JSON::Response::Data.one(business, BusinessDetailSerializer, res.status)
       end
-    when "POST"
+    when "POST", "PATCH"
       raise AuthenticationError unless ENV['YBBO_ADMIN_TOKEN'] == req['YBBO-Admin-Token']
 
       req_body = JSON.parse(req.body)
@@ -64,59 +64,23 @@ Handler = Proc.new do |req, res|
       folder_url         = req_body['folder_url']
       store_accounts     = req_body['store_accounts']
 
-      action = req_body['action']
-      slug = req_body['slug'].strip
-      if req_body['action'] == 'update'
-        b = Business.find_by(slug: slug)
-        raise ResourceNotFoundError, 'business not found' if b.blank?
-      else
-        slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-        slug_count = Business.where(slug: /^#{slug}/).count
-        slug = slug + "-#{slug_count}" if slug_count > 0
+      slug = business_name.downcase.to_s.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+      slug_count = Business.where(slug: /^#{slug}/).count
+      slug = slug + "-#{slug_count}" if slug_count > 0
 
-        b = Business.new
-      end
-
-      b.name = business_name
-      b.slug = slug
-      b.category = category
-      b.location = location
-      b.description = description
-      b.category = category
-      b.assets_url = folder_url
-      b.icon_url = icon_url
-      b.thumbnail_url = thumbnail_url
-      pictures_url.each do |url|
-        b.push(pictures_url: url)
-      end
-      b.validate!
-
-      stores = []
-      store_accounts.each do |account|
-        store_url = account['store_url']
-        next if store_url.blank?
-        store_type = account['store_type'].to_sym
-        store_name = account['store_name'].present? ? account['store_name'].strip : business_name
-
-        store_url = case store_type
-                    when :whatsapp
-                      wa_number = Phonelib.parse(store_url).international(false)
-                      "https://wa.me/#{wa_number}"
-                    when :instagram
-                      instagram_username = (store_url[0] == '@') ? store_url[1..-1] : store_url
-                      "https://instagram.com/#{instagram_username}"
-                    else
-                      (store_url !~ /^https:\/\/.*/) ? "https://#{store_url.strip}" : store_url
-                    end
-
-        store = b.store_accounts.new
-
-        store.account_type = store_type
-        store.name = store_name
-        store.url = store_url
-        store.validate!
-        stores << store
-      end
+      business_params = {
+        business_name: business_name,
+        category: category,
+        location: location,
+        description: description,
+        pictures_url: pictures_url,
+        assets_urls: assets_urls,
+        thumbnail_url: thumbnail_url,
+        icon_url: icon_url,
+        folder_url: folder_url,
+        store_accounts: store_accounts
+        slug: slug
+      }
 
       b.save!
       stores.each do |store|
@@ -138,9 +102,6 @@ Handler = Proc.new do |req, res|
   rescue InvalidInputError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_UNKNOWN_CATEGORY, res.status)
-  rescue ResourceNotFoundError => e
-    res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
-    res.body = JSON::Response.error(e.message, ERROR_BUSINESS_NOT_FOUND, res.status)
   rescue MissingParameterError => e
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_MISSING_REQUIRED_PARAMETER, res.status)
@@ -148,4 +109,50 @@ Handler = Proc.new do |req, res|
     res.status = HTTP_STATUS_UNPROCESSABLE_ENTITY
     res.body = JSON::Response.error(e.message, ERROR_VALIDATION, res.status)
   end
+end
+
+def create_business()
+  b = Business.new
+  b.name = business_name
+  b.slug = slug
+  b.category = category
+  b.location = location
+  b.description = description
+  b.category = category
+  b.assets_url = folder_url
+  b.icon_url = icon_url
+  b.thumbnail_url = thumbnail_url
+  pictures_url.each do |url|
+    b.push(pictures_url: url)
+  end
+  b.validate!
+
+  stores = []
+  store_accounts.each do |account|
+    store_url = account['store_url']
+    next if store_url.blank?
+    store_type = account['store_type'].to_sym
+    store_name = account['store_name'].present? ? account['store_name'].strip : business_name
+
+    store_url = case store_type
+                when :whatsapp
+                  wa_number = Phonelib.parse(store_url).international(false)
+                  "https://wa.me/#{wa_number}"
+                when :instagram
+                  instagram_username = (store_url[0] == '@') ? store_url[1..-1] : store_url
+                  "https://instagram.com/#{instagram_username}"
+                else
+                  (store_url !~ /^https:\/\/.*/) ? "https://#{store_url.strip}" : store_url
+                end
+
+    store = b.store_accounts.new
+
+    store.account_type = store_type
+    store.name = store_name
+    store.url = store_url
+    store.validate!
+    stores << store
+  end
+
+  return b
 end

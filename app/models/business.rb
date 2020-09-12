@@ -28,6 +28,7 @@ class Business
   field :slug,              type: String
   field :pictures_url,      type: Array
   field :backers_count,     type: Integer, default: 0
+  field :click,             type: Integer, default: 0
 
   as_enum :category, CATEGORY
   has_many :store_accounts, class_name: 'Business::StoreAccount'
@@ -47,5 +48,19 @@ class Business
 
   def self.find_by_slug_or_id(slug_or_id)
     Business.find_by(slug: slug_or_id) || Business.find_by(id: slug_or_id)
+  end
+
+  HIGH_MAX = 3
+  LOW_MAX  = 1
+  LIST_MAX = HIGH_MAX + LOW_MAX
+
+  CLICK_THRESHOLD = 10
+  def self.feed(category, offset, limit)
+    list = $zache.get("business_feed_#{category}".to_sym, lifetime: 60*60) {
+      high = Business.where(category_cd: CATEGORY[category.to_sym], :click.gte => CLICK_THRESHOLD).sample(HIGH_MAX)
+      low  = Business.where(category_cd: CATEGORY[category.to_sym], :click.lt => CLICK_THRESHOLD).sample(LIST_MAX - high.count)
+      high + low
+    }
+    list [offset..offset+limit-1]
   end
 end
