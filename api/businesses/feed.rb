@@ -7,7 +7,7 @@ Handler = Proc.new do |req, res|
     when "GET"
       id = req.query['id'] || ""
       limit = req.query['limit'].present? ? req.query['limit'].to_i : 10
-      offset = req.query['skip'].present? ? req.query['skip'] : 0
+      skip = req.query['skip'].present? ? req.query['skip'] : 0
       category = req.query['category'].present? ? req.query['category'] : nil
 
       business = Business.feed(category, skip, limit)
