@@ -8,6 +8,9 @@ require 'dotenv'
 require 'csv'
 require 'phonelib'
 require 'unidecoder'
+require 'zache'
+
+$zache = Zache.new
 
 Phonelib.default_country = 'ID'
 
@@ -31,6 +34,7 @@ require_relative '../serializers/business/store_account'
 require_relative '../serializers/business/backer'
 require_relative '../serializers/business/detail'
 require_relative '../serializers/business/simple'
+require_relative '../serializers/business/site_map'
 
 # response
 require_relative '../response/json'

@@ -1,0 +1,52 @@
+@import "../../styles/static";
+
+.container__sitemap {
+  margin-top: 140px;
+  margin-bottom: 120px;
+
+  @media (max-width:$breakpoint-md-max) {
+    margin-top: 96px;
+    margin-bottom: 56px;
+  }
+
+  .title {
+    font-size: 32px;
+    color: $color-primary-text;
+    margin: 0 0 32px;
+
+    @media (max-width:$breakpoint-md-max) {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .desc {
+    font-size: 16px;
+    color: $color-secondary-text;
+    line-height: 1.5;
+    margin: 0 0 16px;
+    text-align: justify;
+    text-justify: inter-word;
+
+    @media (max-width:$breakpoint-md-max) {
+      font-size: 14px;
+    }
+  }
+
+  .directory-list {
+    display: inline-block;
+  }
+
+  ul > li {
+    display: inline;
+    margin: 5px;
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+
+  li {
+    padding-inline-start: 0px;
+  }
+}
