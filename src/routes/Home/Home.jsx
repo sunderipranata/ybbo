@@ -6,29 +6,23 @@ import { Helmet } from 'react-helmet'
 import './Home.scss'
 import Hero from './components/Hero'
 import Steps from './components/Steps'
-import BusinessList from './components/BusinessList'
 import Footer from '../../components/Footer'
 
 import BusinessService from '../../services/BusinessService'
 import PageLabel from '../../utils/googleAnalytics/PageLabel'
 
-import { isMobile } from 'react-device-detect'
 import BusinessFeatured from './components/BusinessFeatured'
 
 const PAGE_SIZE_DESKTOP = 9;
-const PAGE_SIZE_MOBILE = 6;
 
 class Home extends React.Component {
 
   state = {
     businessData: {
-      businesses: [],
-      total: 1
+      businesses: []
     },
     isLoading: true,
-    category: null,
-    currentPage: 1,
-    pageSize: 1
+    pageSize: PAGE_SIZE_DESKTOP
   }
 
   componentDidMount = () => {
@@ -36,48 +30,12 @@ class Home extends React.Component {
     window.scrollTo({top: 0})
   }
 
-  componentDidUpdate = (prevProps) => {
-    const currentRouteInfo = this.getCategoryAndPageFromRouteProps(this.props)
-    const prevRouteInfo = this.getCategoryAndPageFromRouteProps(prevProps)
-
-    const curCategory = currentRouteInfo.category
-    const curPage = currentRouteInfo.page
-    const prevCategory = prevRouteInfo.category
-    const prevPage = prevRouteInfo.page
-
-    if(curCategory !== prevCategory || curPage !== prevPage) {
-      this.handleFetchData()
-    }
-  }
-
   handleFetchData = () => {
-    const pageSize = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP
-    const routeInfo = this.getCategoryAndPageFromRouteProps(this.props)
-    const category = routeInfo.category
-    const page = routeInfo.page
-    // let category = this.props.match.params.category
-    // let page = this.props.match.params.page
-    const offset = null
-
-    console.log('proppssssss', this.props)
-    //GET PAGE & CATEGORY FROM ROUTES
-    // if(typeof page === 'undefined' || page === null) {
-    //   page = 1
-    // }
-    // if(typeof category === 'undefined' || category === null) {
-    //   category = 'all'
-    // }
-
-    const skip = (page - 1) * pageSize
-    
     this.setState({
-      category: category,
-      currentPage: page,
       isLoading: true,
-      pageSize: pageSize
     })
 
-    this.fetchSimplifiedBusiness(pageSize, offset, category, skip, (res) => {
+    this.fetchFeatured((res) => {
       if(res != null) {
         this.setState({
           businessData: res,
@@ -87,26 +45,8 @@ class Home extends React.Component {
     })
   }
 
-  getCategoryAndPageFromRouteProps = (props) => {
-    let category = props.match.params.category
-    let page = props.match.params.page
-
-    //GET PAGE & CATEGORY FROM ROUTES
-    if(typeof page === 'undefined' || page === null) {
-      page = 1
-    }
-    if(typeof category === 'undefined' || category === null) {
-      category = 'all'
-    }
-
-    return {
-      category: category,
-      page: parseInt(page)
-    }
-  }
-
-  fetchSimplifiedBusiness = (limit, offset, category, skip, callback) => {
-    BusinessService.getSimplifiedWithLimitOffset(limit, offset, category, skip, (res) => {
+  fetchFeatured = (callback) => {
+    BusinessService.getFeatured((res) => {
       if(res !== null && res.data.meta.http_status === 200) {
         console.log('res', res)
         callback(this.parseBusinessResponse(res.data))
@@ -136,12 +76,6 @@ class Home extends React.Component {
     }
   }
 
-  moveToPath = (path) => {
-    this.props.history.push({
-      pathname: path
-    })
-  }
-
   renderHelmet = () => {
     return (
       <Helmet>
@@ -165,7 +99,7 @@ class Home extends React.Component {
   }
 
   render = () => {
-    const { businessData, isLoading, category, currentPage, pageSize } = this.state
+    const { businessData, isLoading, pageSize } = this.state
     return (
       <Fragment>
         { this.renderHelmet() }
@@ -174,16 +108,11 @@ class Home extends React.Component {
             <main className="container__home">
               <Hero />
               <Steps />
-              <BusinessFeatured />
-              {/* <BusinessList 
-                pageLabel = {PageLabel.HOME_PAGE}
+              <BusinessFeatured 
                 isLoading = { isLoading }
-                businessData = { businessData }
-                category = { category }
-                currentPage = { currentPage }
                 pageSize = { pageSize }
-                moveToPath = { this.moveToPath }
-              /> */}
+                businessData = { businessData }
+              />
             </main>
           <Footer pageLabel={PageLabel.FOOTER}/>
         </article>
