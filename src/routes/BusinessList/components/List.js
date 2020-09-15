@@ -168,7 +168,7 @@ class List extends BaseAnalyticsComponents {
     this.trackClickWithValue(EventLabel.CATEGORY_FILTER,category)
 
     const page = 1
-    const path = `/${ category }/${ page }`
+    const path = `/c/${ category }/${ page }`
     this.props.moveToPath(path)
   }
 
