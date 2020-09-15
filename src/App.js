@@ -7,7 +7,7 @@ import {
   Route
 } from 'react-router-dom'
 
-import { HOME_PATH, BUSINESS_DETAIL_PATH, BUSINESS_LIST_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH, HOME_PAGINATED_PATH, SITEMAP_PATH, SITEMAP_PAGE_PATH } from './routes'
+import { HOME_PATH, BUSINESS_DETAIL_PATH, BUSINESS_LIST_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH, SITEMAP_PATH, SITEMAP_PAGE_PATH } from './routes'
 import logo from './logo.svg'
 import './App.scss'
 

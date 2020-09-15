@@ -2,7 +2,7 @@ import React from 'react';
 import BusinessCard from '../../../components/BusinessCard'
 import { Link } from 'react-router-dom'
 
-import { BUSINESS_LIST_PATH } from '../../../routes'
+// import { BUSINESS_LIST_PATH } from '../../../routes'
 
 import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
 import EventLabel from "../../../utils/googleAnalytics/EventLabel"
@@ -98,7 +98,7 @@ class BusinessFeatured extends BaseAnalyticsComponents {
           { display }
         </div>
         <div className="business__load">
-          <a className="button button--main" href={BUSINESS_LIST_PATH}>
+          <a className="button button--main" href="/c/all/1">
             Lihat Semua
           </a>
         </div>

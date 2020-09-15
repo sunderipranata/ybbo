@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import BusinessList2 from '../Home/components/BusinessList'
+import List from './components/List'
 
 import BusinessService from '../../services/BusinessService'
 import PageLabel from '../../utils/googleAnalytics/PageLabel'
@@ -143,7 +143,7 @@ class BusinessList extends React.Component {
         <article>
           <Header />
             <main className="container__blist">
-              <BusinessList2
+              <List
                 pageLabel = {PageLabel.HOME_PAGE}
                 isLoading = { isLoading }
                 businessData = { businessData }
