@@ -12,7 +12,7 @@ const categories = {
   beauty: 'Kecantikan',
   others: 'Lainnya'
 }
-class BusinessFeatured extends Component {
+class BusinessFeatured extends BaseAnalyticsComponent {
 
   state = {
     businesses: [],
@@ -58,6 +58,10 @@ class BusinessFeatured extends Component {
         { display }
       </div>
     )
+  }
+
+  onBusinessCardClick = (businessName) => {
+    this.trackClickWithValue(EventLabel.MERCHANT_CARD,businessName)
   }
 
   renderBusinesses = () => {
