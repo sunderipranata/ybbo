@@ -47,6 +47,7 @@ class Home extends React.Component {
 
   fetchFeatured = (callback) => {
     BusinessService.getFeatured((res) => {
+      console.log('response', res)
       if(res !== null && res.data.meta.http_status === 200) {
         console.log('res', res)
         callback(this.parseBusinessResponse(res.data))

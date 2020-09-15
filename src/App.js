@@ -47,7 +47,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path={HOME_PATH} component={withPageView(Home)} />
-          <Route exact path={HOME_PAGINATED_PATH} component={withPageView(Home)} />
+          {/* <Route exact path={HOME_PAGINATED_PATH} component={withPageView(Home)} /> */}
           <Route exact path={BUSINESS_DETAIL_PATH} component={withPageView(BusinessDetail)} />
           <Route exact path={BUSINESS_LIST_PATH} component={withPageView(BusinessList)} />
           <Route exact path={ABOUT_PATH} component={withPageView(About)} />

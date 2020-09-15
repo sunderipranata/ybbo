@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BusinessCard from '../../../components/BusinessCard'
 import { Link } from 'react-router-dom'
 
 import { BUSINESS_LIST_PATH } from '../../../routes'
+
+import BaseAnalyticsComponents from "../../../utils/googleAnalytics/BaseAnalyticsComponent"
+import EventLabel from "../../../utils/googleAnalytics/EventLabel"
 
 const categories = {
   all: 'Semua Kategori',
@@ -12,7 +15,7 @@ const categories = {
   beauty: 'Kecantikan',
   others: 'Lainnya'
 }
-class BusinessFeatured extends BaseAnalyticsComponent {
+class BusinessFeatured extends BaseAnalyticsComponents {
 
   state = {
     businesses: [],
