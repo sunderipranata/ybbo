@@ -1,6 +1,6 @@
 export const HOME_PATH = '/'
 export const BUSINESS_DETAIL_PATH = '/b/:id'
-export const BUSINESS_LIST_PATH = '/c/:category/:page'
+export const BUSINESS_LIST_PATH = '/:category/:page'
 // export const HOME_PAGINATED_PATH = '/:category/:page'
 export const ABOUT_PATH = '/tentang-kami'
 export const INTERNAL_COOKIE_PATH = '/internal/get-da-cookie'

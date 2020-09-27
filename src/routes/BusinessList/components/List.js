@@ -120,7 +120,7 @@ class List extends BaseAnalyticsComponents {
 
     const prevPage = parseInt(page.at) - 1
 
-    const path = `/c/${ category }/${ prevPage }` 
+    const path = `/${ category }/${ prevPage }` 
     this.props.moveToPath(path)
   }
 
@@ -129,7 +129,7 @@ class List extends BaseAnalyticsComponents {
     window.scrollTo({behavior: 'smooth', top: this.businessList.offsetTop - 100})
 
     const nextPage = parseInt(page.at) + 1
-    const path = `/c/${ category }/${ nextPage }`
+    const path = `/${ category }/${ nextPage }`
     this.props.moveToPath(path)
   }
 
@@ -168,7 +168,7 @@ class List extends BaseAnalyticsComponents {
     this.trackClickWithValue(EventLabel.CATEGORY_FILTER,category)
 
     const page = 1
-    const path = `/c/${ category }/${ page }`
+    const path = `/${ category }/${ page }`
     this.props.moveToPath(path)
   }
 

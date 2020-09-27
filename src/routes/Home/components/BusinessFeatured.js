@@ -98,7 +98,7 @@ class BusinessFeatured extends BaseAnalyticsComponents {
           { display }
         </div>
         <div className="business__load">
-          <a className="button button--main" href="/c/all/1">
+          <a className="button button--main" href="/all/1">
             Lihat Semua
           </a>
         </div>
