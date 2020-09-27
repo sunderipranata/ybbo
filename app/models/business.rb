@@ -58,8 +58,8 @@ class Business
   def self.feed(category, skip, limit)
     list = $zache.get("business_feed_#{category}".to_sym, lifetime: 60*60) {
       if category.present?
-        high = Business.where(category_cd: Business::CATEGORY[category.to_sym], :click.gte => CLICK_THRESHOLD).sample(HIGH_MAX)
-        low  = Business.where(category_cd: Business::CATEGORY[category.to_sym], :click.lt => CLICK_THRESHOLD).sample(LIST_MAX - high.count)
+        high = Business.where(category_cd: CATEGORY[category.to_sym], :click.gte => CLICK_THRESHOLD).sample(HIGH_MAX)
+        low  = Business.where(category_cd: CATEGORY[category.to_sym], :click.lt => CLICK_THRESHOLD).sample(LIST_MAX - high.count)
       else
         high = Business.where(:click.gte => CLICK_THRESHOLD).sample(HIGH_MAX)
         low  = Business.where(:click.lt => CLICK_THRESHOLD).sample(LIST_MAX - high.count)
