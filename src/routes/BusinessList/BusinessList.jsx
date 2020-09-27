@@ -49,18 +49,6 @@ class BusinessList extends React.Component {
     const routeInfo = this.getCategoryAndPageFromRouteProps(this.props)
     const category = routeInfo.category
     const page = routeInfo.page
-    // let category = this.props.match.params.category
-    // let page = this.props.match.params.page
-    const offset = null
-
-    console.log('proppssssss', this.props)
-    //GET PAGE & CATEGORY FROM ROUTES
-    // if(typeof page === 'undefined' || page === null) {
-    //   page = 1
-    // }
-    // if(typeof category === 'undefined' || category === null) {
-    //   category = 'all'
-    // }
 
     const skip = (page - 1) * pageSize
     
@@ -71,7 +59,7 @@ class BusinessList extends React.Component {
       pageSize: pageSize
     })
 
-    this.fetchSimplifiedBusiness(pageSize, offset, category, skip, (res) => {
+    this.fetchBusinessFeed(pageSize, skip, category, (res) => {
       if(res != null) {
         this.setState({
           businessData: res,
@@ -99,8 +87,8 @@ class BusinessList extends React.Component {
     }
   }
 
-  fetchSimplifiedBusiness = (limit, offset, category, skip, callback) => {
-    BusinessService.getSimplifiedWithLimitOffset(limit, offset, category, skip, (res) => {
+  fetchBusinessFeed = (limit, skip, category, callback) => {
+    BusinessService.getFeed(limit, skip, category, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
         console.log('res', res)
         callback(this.parseBusinessResponse(res.data))
@@ -112,7 +100,7 @@ class BusinessList extends React.Component {
 
   parseBusinessResponse = (data) => {
     const total = data.meta.total
-    const businesses = data.data.map((val, idx) => {
+    const businesses = data.data.map((val) => {
       return {
         id: val.id,
         name: val.attributes.name,

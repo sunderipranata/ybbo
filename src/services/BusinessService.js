@@ -11,6 +11,7 @@ const BACKERS = '/businesses'
 const RANDOM_BUSINESS = '/businesses'
 const FEATURED_BUSINESS = '/businesses/featured'
 const SITEMAP = '/businesses'
+const BUSINESS_FEED = '/businesses/feed'
 let BusinessService = {};
 
 BusinessService.getSimplifiedWithLimitOffset = (limit, offset, category, skip, callback) => {
@@ -97,6 +98,21 @@ BusinessService.getSitemap = (limit, skip, callback) => {
       limit: limit,
       skip: skip,
       site_map: true
+    }
+  })
+  .then((response) => {
+    callback(response)
+  })
+}
+
+BusinessService.getFeed = (limit, skip, category, callback) => {
+  const PATH = BASE_URL + BUSINESS_FEED
+  const categoryOption = category === 'all' ? null : category
+  axios.get(PATH, {
+    params: {
+      limit: limit,
+      category: categoryOption,
+      skip: skip
     }
   })
   .then((response) => {
