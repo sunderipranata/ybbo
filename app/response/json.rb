@@ -19,7 +19,7 @@ module JSON
         if options[:pagination_meta] == true
           serializer_options[:meta][:offset] = object&.first&.id.to_s
           serializer_options[:meta][:limit] = options[:limit]
-          serializer_options[:meta][:total] = object&.count || 0
+          serializer_options[:meta][:total] = options[:total] || object&.count || 0
         end
         serializer.new(object, serializer_options).serializable_hash.to_json
       end

@@ -50,8 +50,8 @@ class Business
     Business.find_by(slug: slug_or_id) || Business.find_by(id: slug_or_id)
   end
 
-  HIGH_MAX = 3
-  LOW_MAX  = 1
+  HIGH_MAX = 10
+  LOW_MAX  = 50
   LIST_MAX = HIGH_MAX + LOW_MAX
 
   CLICK_THRESHOLD = 10
@@ -64,8 +64,8 @@ class Business
         high = Business.where(:click.gte => CLICK_THRESHOLD).sample(HIGH_MAX)
         low  = Business.where(:click.lt => CLICK_THRESHOLD).sample(LIST_MAX - high.count)
       end
-      high + low
+      (high + low).shuffle
     }
-    list[skip..skip+limit-1]
+    [list[skip..skip+limit-1], list.count]
   end
 end
