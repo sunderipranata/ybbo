@@ -22,7 +22,7 @@ const categories = {
   others: 'Lainnya'
 }
 
-class BusinessList extends BaseAnalyticsComponents {
+class List extends BaseAnalyticsComponents {
   state = {
     hasPrev: false,
     hasNext: true,
@@ -417,4 +417,4 @@ class BusinessList extends BaseAnalyticsComponents {
   }
 }
 
-export default BusinessList
+export default List

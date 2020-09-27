@@ -6,47 +6,19 @@ import { Helmet } from 'react-helmet'
 import './Home.scss'
 import Hero from './components/Hero'
 import Steps from './components/Steps'
+import BusinessList from './components/BusinessList'
 import Footer from '../../components/Footer'
 
 import BusinessService from '../../services/BusinessService'
 import PageLabel from '../../utils/googleAnalytics/PageLabel'
 
-import BusinessFeatured from './components/BusinessFeatured'
-
-const PAGE_SIZE_DESKTOP = 9;
-
 class Home extends React.Component {
-
-  state = {
-    businessData: {
-      businesses: []
-    },
-    isLoading: true,
-    pageSize: PAGE_SIZE_DESKTOP
-  }
-
-  componentDidMount = () => {
-    this.handleFetchData()
+  componentDidMount() {
     window.scrollTo({top: 0})
   }
 
-  handleFetchData = () => {
-    this.setState({
-      isLoading: true,
-    })
-
-    this.fetchFeatured((res) => {
-      if(res != null) {
-        this.setState({
-          businessData: res,
-          isLoading: false
-        })
-      }
-    })
-  }
-
-  fetchFeatured = (callback) => {
-    BusinessService.getFeatured((res) => {
+  fetchSimplifiedBusiness = (limit, offset, category, skip, callback) => {
+    BusinessService.getSimplifiedWithLimitOffset(limit, offset, category, skip, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
         callback(this.parseBusinessResponse(res.data))
       } else {
@@ -98,7 +70,6 @@ class Home extends React.Component {
   }
 
   render = () => {
-    const { businessData, isLoading, pageSize } = this.state
     return (
       <Fragment>
         { this.renderHelmet() }
@@ -107,10 +78,9 @@ class Home extends React.Component {
             <main className="container__home">
               <Hero />
               <Steps />
-              <BusinessFeatured 
-                isLoading = { isLoading }
-                pageSize = { pageSize }
-                businessData = { businessData }
+              <BusinessList 
+                pageLabel = {PageLabel.HOME_PAGE}
+                fetchData = { this.fetchSimplifiedBusiness }
               />
             </main>
           <Footer pageLabel={PageLabel.FOOTER}/>

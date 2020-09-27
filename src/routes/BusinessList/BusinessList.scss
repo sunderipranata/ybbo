@@ -1,0 +1,11 @@
+@import "../../styles/static";
+
+.container__blist {
+    max-width: 970px;
+    margin: 40px 16px 0;
+  
+    @media (min-width:$breakpoint-md-max) {
+        margin: 120px auto 0;
+        max-width: 970px;
+    }
+}

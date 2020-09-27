@@ -7,13 +7,14 @@ import {
   Route
 } from 'react-router-dom'
 
-import { HOME_PATH, BUSINESS_DETAIL_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH, SITEMAP_PATH, SITEMAP_PAGE_PATH } from './routes'
+import { HOME_PATH, BUSINESS_DETAIL_PATH, BUSINESS_LIST_PATH, ABOUT_PATH, INTERNAL_COOKIE_PATH, SITEMAP_PATH, SITEMAP_PAGE_PATH } from './routes'
 import logo from './logo.svg'
 import './App.scss'
 
 import Home from './routes/Home'
 import InternalPage from './routes/InternalPage'
 import BusinessDetail from './routes/BusinessDetail'
+import BusinessList from './routes/BusinessList'
 import About from './routes/About/About'
 import withPageView from './utils/googleAnalytics/withPageView'
 import Cookies from 'universal-cookie';
@@ -46,7 +47,9 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path={HOME_PATH} component={withPageView(Home)} />
+          {/* <Route exact path={HOME_PAGINATED_PATH} component={withPageView(Home)} /> */}
           <Route exact path={BUSINESS_DETAIL_PATH} component={withPageView(BusinessDetail)} />
+          <Route exact path={BUSINESS_LIST_PATH} component={withPageView(BusinessList)} />
           <Route exact path={ABOUT_PATH} component={withPageView(About)} />
           <Route exact path={INTERNAL_COOKIE_PATH} component={withPageView(InternalPage)} />
           <Route exact path={SITEMAP_PAGE_PATH} component={withPageView(Sitemap)} />
