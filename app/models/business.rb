@@ -56,11 +56,11 @@ class Business
 
   CLICK_THRESHOLD = 10
   def self.feed(category, skip, limit)
-    list = $zache.get("business_feed_#{category}".to_sym, lifetime: 60*60) {
+    #list = $zache.get("business_feed_#{category}".to_sym, lifetime: 60*60) {
       high = Business.where(category_cd: CATEGORY[category.to_sym], :click.gte => CLICK_THRESHOLD).sample(HIGH_MAX)
       low  = Business.where(category_cd: CATEGORY[category.to_sym], :click.lt => CLICK_THRESHOLD).sample(LIST_MAX - high.count)
-      high + low
-    }
+      list = high + low
+    #}
     list [skip..skip+limit-1]
   end
 end
