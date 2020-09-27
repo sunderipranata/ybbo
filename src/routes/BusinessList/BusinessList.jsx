@@ -90,7 +90,6 @@ class BusinessList extends React.Component {
   fetchBusinessFeed = (limit, skip, category, callback) => {
     BusinessService.getFeed(limit, skip, category, (res) => {
       if(res !== null && res.data.meta.http_status === 200) {
-        console.log('res', res)
         callback(this.parseBusinessResponse(res.data))
       } else {
         callback(null)
