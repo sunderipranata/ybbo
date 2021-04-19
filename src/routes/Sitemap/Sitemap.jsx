@@ -180,7 +180,7 @@ class Sitemap extends Component {
             Berharap kepada pengguna yang baik hati untuk membantu mempromosikannya dengan mudah.{' '}
           </p>
           <p className="desc">
-            Melalui platform YukBantuBisnis.Online, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
+            Melalui platform YukBantuBisnisOnline, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
             Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.
           </p> */}
         </main>

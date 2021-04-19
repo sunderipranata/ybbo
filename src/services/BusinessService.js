@@ -3,7 +3,7 @@ import axios from 'axios'
 let BASE_URL = `${window.location.origin.toString()}/api`
 if(window.location.href.includes('localhost'))  {
   BASE_URL = 'https://ybbo-1jn59cl5h.vercel.app/api'
-  // BASE_URL = 'https://yukbantubisnis.online/api'
+  // BASE_URL = 'https://yukbantubisnisonline.com/api'
 }
 const BUSINESS_SIMPLIFIED = '/businesses'
 const BUSINESS_DETAIL = '/businesses'

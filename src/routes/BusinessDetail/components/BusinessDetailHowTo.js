@@ -55,7 +55,7 @@ class BusinessDetailHowTo extends Component {
               <StepCard index="1" title="Order atau Download" desc={"Order langsung produk dari " + title + "  atau download saja asetnya."} />
             </li>
             <li className="step-list">
-              <StepCard index="2" title="Post & Tag Kami di Instagram" desc="Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag @YukBantuBisnis.Online ya! :)" />
+              <StepCard index="2" title="Post & Tag Kami di Instagram" desc="Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag @YukBantuBisnisOnline ya! :)" />
             </li>
             <li className="step-list">
               <StepCard index="3" title="Jadi Pendukung Terverifikasi" desc={"Akun kamu akan tercatat sebagai akun terverifikasi dan testimoni kamu akan ditampilkan. Terima kasih atas kotribusimu."} />

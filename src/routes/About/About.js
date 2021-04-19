@@ -35,12 +35,12 @@ class About extends Component {
           content = { description }
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yukbantubisnis.online/tentang-kami" />
+        <meta property="og:url" content="https://yukbantubisnisonline.com/tentang-kami" />
         <meta property="og:title" content="Yuk Bantu Bisnis Online" />
         <meta property="og:description" content= { description } />
         <meta property="og:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpg" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://yukbantubisnis.online/tentang-kami" />
+        <meta property="twitter:url" content="https://yukbantubisnisonline.com/tentang-kami" />
         <meta property="twitter:title" content="Yuk Bantu Bisnis Online" />
         <meta property="twitter:description" content= { description } />
         <meta property="twitter:image" content="https://i.ibb.co/1Lp3TXp/og-ybbo.jpgg" />
@@ -65,7 +65,7 @@ class About extends Component {
             Berharap kepada pengguna yang baik hati untuk membantu mempromosikannya dengan mudah.{' '}
           </p>
           <p className="desc">
-            Melalui platform YukBantuBisnis.Online, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
+            Melalui platform YukBantuBisnisOnline, siapapun dapat membantu UMKM secara cuma-cuma dan tidak memakan biaya.{' '}
             Harapannya, bisnis-bisnis dapat bertahan dan menciptakan efek domino yang baik bagi karyawan serta ekonomi Indonesia.
           </p>
           <ul className="team-container">

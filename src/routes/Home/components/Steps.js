@@ -132,7 +132,7 @@ class Steps extends Component {
                   <h3 className={ClassNames('desc__title', {active: detailShown === 3})}>Post & Tag Kami di Instagram</h3>
                   <p className={ClassNames('desc__content', {active: detailShown === 3})}>
                     Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag{' '}
-                    <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> ya! :)
+                    <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnisOnline</a> ya! :)
                   </p>
                 </div>
               </li>
@@ -160,7 +160,7 @@ class Steps extends Component {
               <img src={MockupStep3} style={this.setIconPhoneStyles(detailShown === 3)} className="icon__phone" alt="Phone" />
               <img src={Step3Desc} style={this.setIconStepStyles(detailShown === 3)} className="icon__steps icon__steps--three-caps" alt="Langkah 3" />
               <img src={Step3Tag1} style={this.setIconStepStyles(detailShown === 3)} className="icon__steps icon__steps--three-tag1" alt="Tag Instagram Bisnis Online" />
-              <img src={Step3Tag2} style={this.setIconStepStyles(detailShown === 3)} className="icon__steps icon__steps--three-tag2" alt="Tag Instagram @YukBantuBisnis.Online" />
+              <img src={Step3Tag2} style={this.setIconStepStyles(detailShown === 3)} className="icon__steps icon__steps--three-tag2" alt="Tag Instagram @YukBantuBisnisOnline" />
             </div>
             <div className="illustration__wrapper">
               <img src={MockUp} style={this.setIconPhoneStyles(detailShown === 4)} className="icon__phone" alt="Phone" />
@@ -239,9 +239,9 @@ class Steps extends Component {
                   <img src={MockupStep3} style={this.setIconPhoneMobileStyles(slideIndex === 2)} className="icon__phone" alt="Phone" />
                   <img src={Step3Desc} style={this.setIconStepStyles(slideIndex === 2)} className="icon__steps icon__steps--three-caps" alt="Langkah 3" />
                   <img src={Step3Tag1} style={this.setIconStepStyles(slideIndex === 2)} className="icon__steps icon__steps--three-tag1" alt="Tag Instagram Bisnis Online" />
-                  <img src={Step3Tag2} style={this.setIconStepStyles(slideIndex === 2)} className="icon__steps icon__steps--three-tag2" alt="Tag Instagram @YukBantuBisnis.Online" />
+                  <img src={Step3Tag2} style={this.setIconStepStyles(slideIndex === 2)} className="icon__steps icon__steps--three-tag2" alt="Tag Instagram @YukBantuBisnisOnline" />
                 </div>
-                Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag @YukBantuBisnis.Online ya! :)
+                Post gambar/video hasil orderan kamu atau media yang telah kamu download. Jangan lupa tambahkan testimoni dan tag @YukBantuBisnisOnline ya! :)
               </StepCard>
             </div>
             <div className="steps__list--mobile"  onLoad={this.handleFirstLoad}>

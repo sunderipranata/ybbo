@@ -49,7 +49,7 @@ class Header extends BaseAnalyticsComponents {
             <Desktop>
               <a href={HOME_PATH} className="header__title">
                 <img src={Logo} className="logo" alt="Logo Yuk Bantu Bisnis Online" />
-                <p className="name">YukBantuBisnis.Online</p>
+                <p className="name">YukBantuBisnisOnline</p>
               </a>
             </Desktop>
             <ul className={ClassNames('nav-list', { 'nav-list--active': active })}>

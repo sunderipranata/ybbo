@@ -115,7 +115,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
                 Kamu juga bisa share produk {businessName} di Instagram Story dengan klik tombol di bawah untuk download gambar/video.
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
-                Jangan lupa tag instagram kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> ya!
+                Jangan lupa tag instagram kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnisOnline</a> ya!
               </p>
               <button onClick={this.handleOnDownloadAssetButtonClick} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
@@ -130,7 +130,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
                 Kamu juga bisa share produk {businessName} di Instagram Story dengan klik tombol di bawah untuk download gambar/video.
               </p>
               <p className="desc" style={{marginTop: '8px'}}>
-                Jangan lupa tag instagram kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a> ya!
+                Jangan lupa tag instagram kami <a href={INSTAGRAM_PATH} target="_blank" rel="noopener noreferrer">@YukBantuBisnisOnline</a> ya!
               </p>
               <button onClick={this.handleOnDownloadAssetButtonClick} className="button button--main">Download aset untuk dipost</button>
             </Fragment>
@@ -151,7 +151,7 @@ class BusinessDetailForm extends BaseAnalyticsComponents {
               <form className="form">
                 <section className="form-section">
                   <label className="label-input" for="account">Akun Instagram Kamu</label>
-                  <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @yukbantubisnis.online" />
+                  <input type="text" id="account" name="account" value={socialMediaAccount} onChange={this.handleSocialMediaAccountInputChange} placeholder="Contoh: @yukbantubisnisonline" />
                   <label class="checkbox-container form__checkbox">Sembunyikan akun saya
                     <input type="checkbox" checked={isAnonymous}  onChange={this.handleCheckboxChange} />
                     <span class="checkmark" />

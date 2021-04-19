@@ -33,7 +33,7 @@ class Footer extends BaseAnalyticsComponents {
                   </tr>
                   <tr>
                     <td className="item">Instagram</td>
-                    <td><a onClick={this.onInstagramLinkClick} href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnis.Online</a></td>
+                    <td><a onClick={this.onInstagramLinkClick} href={INSTAGRAM_PATH}  target="_blank" rel="noopener noreferrer">@YukBantuBisnisOnline</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -51,7 +51,7 @@ class Footer extends BaseAnalyticsComponents {
           <div className = "footer-bottom-row">
             <p className="footer-notes" style = {{ float: 'left' }}>
               © 2020 All Rights Reserved -{' '}
-              YukBantuBisnis.Online
+              YukBantuBisnisOnline
             </p>
             <p className="footer-notes" style = {{ float: 'right' }}>
               <a href = "/sitemap" target = "_blank">Sitemap</a>
