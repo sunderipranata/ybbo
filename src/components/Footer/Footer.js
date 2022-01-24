@@ -43,7 +43,7 @@ class Footer extends BaseAnalyticsComponents {
                 Tentang Kami
               </h3>
               <p className="footer-desc">
-                Kami adalah sekelompok Software Engineers dari Indonesia yang mencoba untuk membantu UMKM di tengah pandemi COVID-19.<br />
+                Sebuah project kecil untuk membantu UMKM di tengah pandemi COVID-19.<br />
                 <a href={ABOUT_PATH}>Selengkapnya &rarr;</a>
               </p>
             </div>
