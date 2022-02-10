@@ -14,7 +14,7 @@
     "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
     "moment": "^2.26.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "nuka-carousel": "^4.6.7",
     "react": "^16.13.1",
     "react-device-detect": "^1.12.1",
